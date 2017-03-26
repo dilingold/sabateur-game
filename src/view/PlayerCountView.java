@@ -54,7 +54,7 @@ public class PlayerCountView {
 		createContent.MenuItem players3 = new createContent.MenuItem("3 PLAYERS");
 		players3.setOnMouseClicked(event -> {
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.changeScene(stage);
+			addPlayerListener.playerCount(3, stage);
 		});
 
 		createContent.MenuItem returnMenu = new createContent.MenuItem("BACK");

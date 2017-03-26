@@ -31,7 +31,7 @@ public class AddPlayerView {
 		
 	}
 	
-	public void displayView() {
+	public void displayView(int numPlayers2) {
 		
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER);
@@ -45,7 +45,7 @@ public class AddPlayerView {
 
 		createContent.Title title = new createContent.Title("S A B A T E U R");
 
-		createContent.subTitle subTitle = new createContent.subTitle("Add Players");
+		createContent.subTitle subTitle = new createContent.subTitle("Player Name's");
 		root.add(title, 0, 0, 2, 1);
 		root.add(subTitle, 0, 1, 2, 1);
 
