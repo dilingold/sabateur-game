@@ -1,5 +1,6 @@
 package view;
 
+import controller.PlayerCountListener;
 import controller.createContent;
 import controller.AddPlayerListener;
 import controller.ExitListener;
@@ -77,8 +78,8 @@ public class WelcomeView {
 		startGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				AddPlayerListener addPlayerListener = new AddPlayerListener();
-				addPlayerListener.changeScene(stage);
+				PlayerCountListener playerCountListener = new PlayerCountListener();
+				playerCountListener.changeScene(stage);
 			}
 		});
 

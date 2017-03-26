@@ -34,7 +34,7 @@ public class AddPlayerView {
 	public void displayView() {
 		
 		GridPane root = new GridPane();
-		root.setAlignment(Pos.CENTER_LEFT);
+		root.setAlignment(Pos.CENTER);
 		root.setHgap(10);
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
@@ -43,23 +43,23 @@ public class AddPlayerView {
 
 		stage.setTitle("G2 Sabateur");
 
-		createContent.Title title = new createContent.Title("test");
-		Text sceneTitle = new Text("Add Players");
-		sceneTitle.setId("title-text");
-		root.add(sceneTitle, 0, 0, 2, 1);
-		
+		createContent.Title title = new createContent.Title("S A B A T E U R");
+
+		createContent.subTitle subTitle = new createContent.subTitle("Add Players");
+		root.add(title, 0, 0, 2, 1);
+		root.add(subTitle, 0, 1, 2, 1);
+
 		numPlayers = 3;
-		
+		int k = 1;
 		for (int i = 0; i < numPlayers; i++) {
-			
-			
-			
+
+
 			Label name = new Label(i+1 + ". Player Name");
-			root.add(name, 0, i+1);
+			root.add(name, 0, k+1);
 			
 			TextField nameTextField = new TextField();
-			root.add(nameTextField, 1, i+1);
-			
+			root.add(nameTextField, 1, k+1);
+			k++;
 		}
 		
 		Button addPlayerBtn = new Button("+");
@@ -69,21 +69,20 @@ public class AddPlayerView {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
+				int k = numPlayers + 1;
 				if (numPlayers < 6) {
 					
 					numPlayers++;
+					k++;
 										
 					Label name = new Label(numPlayers + ". Player Name");
-					root.add(name, 0, numPlayers);
+					root.add(name, 0, k);
 					
 					TextField nameTextField = new TextField();
-					root.add(nameTextField, 1, numPlayers);
+					root.add(nameTextField, 1, k);
 					
 				}
-				
-			}		
-			
+			}
 		});
 		
 		Button backBtn = new Button("Back");
@@ -126,6 +125,7 @@ public class AddPlayerView {
 		vBox.getChildren().add(hbButtons);
 		
 		Scene scene = new Scene(vBox, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
+
 		
 		stage.setScene(scene);
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());

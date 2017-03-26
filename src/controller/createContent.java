@@ -34,6 +34,18 @@ public class createContent {
         }
     }
 
+    public static class subTitle extends GridPane {
+        public subTitle(String name) {
+            // This is the main heading title box
+            Text text = new Text(name);
+            text.setFill(Color.WHITE);
+            text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD, 20));
+
+            setAlignment(Pos.CENTER);
+            getChildren().add(text);
+        }
+    }
+
     public static class MenuBox extends VBox {
         public MenuBox(createContent.MenuItem... items) {
             getChildren().add(createSeparator());
