@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import controller.createContent;
 
 public class AddPlayerView {
 	
@@ -32,18 +33,20 @@ public class AddPlayerView {
 	
 	public void displayView() {
 		
-		stage.setTitle("Add Player");
-		
-		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.TOP_CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
-		//grid.setGridLinesVisible(true);
-		
+		GridPane root = new GridPane();
+		root.setAlignment(Pos.CENTER_LEFT);
+		root.setHgap(10);
+		root.setVgap(10);
+		root.setPadding(new Insets(25, 25, 25, 85));
+		root.setPrefSize(860, 600);
+		root.setGridLinesVisible(true);
+
+		stage.setTitle("G2 Sabateur");
+
+		createContent.Title title = new createContent.Title("test");
 		Text sceneTitle = new Text("Add Players");
 		sceneTitle.setId("title-text");
-		grid.add(sceneTitle, 0, 0, 2, 1);
+		root.add(sceneTitle, 0, 0, 2, 1);
 		
 		numPlayers = 3;
 		
@@ -52,15 +55,15 @@ public class AddPlayerView {
 			
 			
 			Label name = new Label(i+1 + ". Player Name");
-			grid.add(name, 0, i+1);
+			root.add(name, 0, i+1);
 			
 			TextField nameTextField = new TextField();
-			grid.add(nameTextField, 1, i+1);
+			root.add(nameTextField, 1, i+1);
 			
 		}
 		
 		Button addPlayerBtn = new Button("+");
-		grid.add(addPlayerBtn, 2, 0);
+		root.add(addPlayerBtn, 2, 0);
 		
 		addPlayerBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -72,10 +75,10 @@ public class AddPlayerView {
 					numPlayers++;
 										
 					Label name = new Label(numPlayers + ". Player Name");
-					grid.add(name, 0, numPlayers);
+					root.add(name, 0, numPlayers);
 					
 					TextField nameTextField = new TextField();
-					grid.add(nameTextField, 1, numPlayers);
+					root.add(nameTextField, 1, numPlayers);
 					
 				}
 				
@@ -119,7 +122,7 @@ public class AddPlayerView {
 		hbButtons.setSpacing(300);
 		
 		VBox vBox = new VBox();
-		vBox.getChildren().add(grid);
+		vBox.getChildren().add(root);
 		vBox.getChildren().add(hbButtons);
 		
 		Scene scene = new Scene(vBox, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);

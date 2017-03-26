@@ -26,8 +26,8 @@ import javafx.stage.Stage;
 
 public class MainView extends Application {
 	
-	public static int SCENE_WIDTH = 750;
-	public static int SCENE_HEIGHT = 550;
+	public static int SCENE_WIDTH = 860;
+	public static int SCENE_HEIGHT = 600;
 
 	public static void main(String[] args) {
 		
