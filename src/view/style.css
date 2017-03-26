@@ -1,5 +1,6 @@
 .root {
-	-fx-background-image: url("background.jpg");
+	-fx-background-image: url("../../assets/images/above-adventure-aerial-air.jpg");
+	-fx-background-size: cover;
 }
 	
 .label {
