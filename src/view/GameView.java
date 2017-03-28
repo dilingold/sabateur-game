@@ -23,7 +23,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class GameView {
+public class  GameView {
 	
 	private Stage stage;
 	

@@ -22,6 +22,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Board;
+import model.Board.*;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
@@ -42,7 +44,19 @@ public class MainView extends Application {
 		welcomeView.displayView();
 		
 		stage.show();
-		
+		Board aBoard = new Board();
+		aBoard.initBoard();
+
+		aBoard.getGameBoard();
+		//System.out.println(aBoard.getGameBoard()[0][0]);
+
+		aBoard.setGameBoard(1, 1, 'W');
+
+		aBoard.printBoard();
+
+
+
+
 	}
 
 }
