@@ -8,7 +8,25 @@ public class Player {
     private String name;
     private boolean role;
 
-    public void Player (String PlayerName) {
+    // Constructor
+    public Player (String PlayerName) {
+
         name = PlayerName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
     }
 }
