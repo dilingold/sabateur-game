@@ -1,9 +1,9 @@
 package model;
-
+import model.Treasure;
 /**
  * Created by johnny on 3/27/17.
  */
-public class Board {
+public class Board{
 
     private char[][] gameBoard;
     private int numCols = 7;
@@ -23,7 +23,11 @@ public class Board {
             }
             System.out.println("");
         }
+            this.gameBoard[0][1] = 'G';
+            this.gameBoard[0][3] = 'C';
+            this.gameBoard[0][5] = 'C';
     }
+
     //Getters
     public char[][] getGameBoard() {
         return gameBoard;
