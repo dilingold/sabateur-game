@@ -38,14 +38,14 @@ public class GameView {
 		stage.setTitle("Play Game");
 		
 		GridPane gameGrid = new GridPane();
-		gameGrid.setAlignment(Pos.TOP_CENTER);
+		gameGrid.setAlignment(Pos.CENTER);
 		gameGrid.setHgap(10);
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
-		//gameGrid.setGridLinesVisible(true);
+		gameGrid.setGridLinesVisible(true);
 		
-		final int numCols = 9;
-		final int numRows = 5;
+		final int numCols = 7;
+		final int numRows = 7;
 		
 		VBox vbBoard = new VBox(10);
 		

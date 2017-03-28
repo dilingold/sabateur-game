@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /** NOTE: Perhaps Instead of constantly changing stages have one stage for the menu navigation
- * have them all in one stage and switch scenes. Changing stages will resize the window
- * regardless if they changed it previously. JavaFX has a section on scene switching.
+ * have them all in the single stage and switch scenes. Changing stages will resize the window
+ * regardless if they changed it previously. JavaFX has a section on scene switching instead of stage switching.
  */
 
 public class WelcomeView {
@@ -41,8 +42,8 @@ public class WelcomeView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		
-		root.setGridLinesVisible(true);
+
+		//root.setGridLinesVisible(true);
 
 		try (InputStream is = Files.newInputStream(Paths.get("assets/images/above-adventure-aerial-air.jpg"))) {
 			ImageView img = new ImageView(new Image(is));
@@ -55,7 +56,6 @@ public class WelcomeView {
 		stage.setTitle("G2 Sabateur");
 
 		createContent.Title title = new createContent.Title("S A B A T E U R");
-		title.setId("title-text");
 
 		createContent.MenuItem startGame = new createContent.MenuItem("START GAME");
 		startGame.setOnMouseClicked(event -> {

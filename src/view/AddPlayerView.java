@@ -39,7 +39,7 @@ public class AddPlayerView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		root.setGridLinesVisible(true);
+		//root.setGridLinesVisible(true);
 
 		stage.setTitle("G2 Sabateur");
 
@@ -63,8 +63,11 @@ public class AddPlayerView {
 		}
 		
 		Button addPlayerBtn = new Button("+");
-		root.add(addPlayerBtn, 2, 0);
-		
+		root.add(addPlayerBtn, 4, 4);
+		Button removePlayerBtn = new Button("-");
+
+
+		// Need to save / store player names for when gameview starts...
 		addPlayerBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -80,8 +83,18 @@ public class AddPlayerView {
 					
 					TextField nameTextField = new TextField();
 					root.add(nameTextField, 1, k);
-					
+					root.getChildren().remove(addPlayerBtn);
+					root.getChildren().remove(removePlayerBtn);
+					root.add(removePlayerBtn, 3, k);
+					root.add(addPlayerBtn, 4, k);
 				}
+			}
+		});
+		// Removeing players from the list can be difficult with current setup. Not able to pop generic
+		// name && nameTextField
+		removePlayerBtn.setOnMouseClicked(event -> {
+			if (numPlayers > 3) {
+				numPlayers--;
 			}
 		});
 		

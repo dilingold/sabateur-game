@@ -41,7 +41,7 @@ public class PlayerCountView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		root.setGridLinesVisible(true);
+		//root.setGridLinesVisible(true);
 		
 		stage.setTitle("G2 Sabateur");
 
