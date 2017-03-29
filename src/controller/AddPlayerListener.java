@@ -10,11 +10,14 @@ import java.util.ArrayList;
 
 public class AddPlayerListener {
 
-	public void playerCount(int numPlayers, Stage stage) {
+	// Need to access totalPlayers when PlayGameListener is called. / Load Game.
+
+	public int playerCount(int numPlayers, Stage stage) {
 		totalPlayers totalPlayers = new totalPlayers(numPlayers);
 		totalPlayers.setNumPlayers(numPlayers);
 		System.out.println(totalPlayers.getNumPlayers());
 		changeScene(totalPlayers.getNumPlayers(), stage);
+		return totalPlayers.getNumPlayers();
 	}
 
 	public void createPlayer(String[] players) {
@@ -25,7 +28,6 @@ public class AddPlayerListener {
 			playArr.add(player);
 			System.out.println(player.getName());
 		}
-		String aname = "test";
 
 		System.out.println(playArr.size());
 		for(Player pN : playArr) {

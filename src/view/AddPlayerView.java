@@ -34,7 +34,7 @@ public class AddPlayerView {
 		
 	}
 	
-	public void displayView(int numPlayers2) {
+	public void displayView(int totalPlayers) {
 		
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER);
@@ -53,7 +53,7 @@ public class AddPlayerView {
 		root.add(subTitle, 0, 1, 2, 1);
 
 		ArrayList<TextField> nameList = new ArrayList<TextField>();
-		String[] pName = new String[numPlayers2];
+		String[] pName = new String[totalPlayers];
 		numPlayers = 3;
 		int k = 1;
 		for (int i = 0; i < numPlayers; i++) {
@@ -116,7 +116,7 @@ public class AddPlayerView {
 			public void handle(ActionEvent event) {
 				
 				PlayGameListener playGameListener = new PlayGameListener();
-				playGameListener.changeScene(stage);
+
 
 				int i = 0;
 				for (TextField field : nameList) {
@@ -126,6 +126,8 @@ public class AddPlayerView {
 				}
 				AddPlayerListener addPlayerListener = new AddPlayerListener();
 				addPlayerListener.createPlayer(pName);
+
+				playGameListener.changeScene(totalPlayers, pName, stage);
 				
 			}		
 			

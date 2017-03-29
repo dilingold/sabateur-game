@@ -2,14 +2,14 @@ package controller;
 
 import javafx.stage.Stage;
 import view.GameView;
+import model.totalPlayers;
 
 public class PlayGameListener {
 	
-	public void changeScene(Stage stage) {
+	public void changeScene(int totalPlayers, String[] pName, Stage stage) {
 		
 		GameView gameView = new GameView(stage);
-		gameView.displayView();
-		
+		gameView.displayView(totalPlayers, pName);
 	}
 
 }
