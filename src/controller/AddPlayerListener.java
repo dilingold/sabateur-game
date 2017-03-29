@@ -1,9 +1,8 @@
 package controller;
 
 import javafx.stage.Stage;
-import model.Player;
+import model.*;
 import view.AddPlayerView;
-import model.totalPlayers;
 import model.Player;
 
 import java.util.ArrayList;
@@ -18,22 +17,11 @@ public class AddPlayerListener {
 		System.out.println(totalPlayers.getNumPlayers());
 		changeScene(totalPlayers.getNumPlayers(), stage);
 		return totalPlayers.getNumPlayers();
+		//return PlayerInformation.getInstance().playerCount();
 	}
 
 	public void createPlayer(String[] players) {
-		ArrayList<Player> playArr = new ArrayList<>();
-		for(String pNames: players) {
-			//System.out.println(pNames);
-			Player player = new Player(pNames);
-			playArr.add(player);
-			System.out.println(player.getName());
-		}
-
-		System.out.println(playArr.size());
-		for(Player pN : playArr) {
-			System.out.println(pN.getName());
-		}
-		System.out.println(playArr.get(1).getName());
+		PlayerInformation.getInstance().createPlayers(players);
 
 
 	}

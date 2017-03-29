@@ -1,8 +1,6 @@
 package view;
 
-import controller.AddPlayerListener;
-import controller.BackToWelcomeListener;
-import controller.PlayGameListener;
+import controller.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import controller.createContent;
 
 import java.util.ArrayList;
 
@@ -37,7 +34,7 @@ public class AddPlayerView {
 	public void displayView(int totalPlayers) {
 		
 		GridPane root = new GridPane();
-		root.setAlignment(Pos.CENTER);
+		root.setAlignment(Pos.CENTER_LEFT);
 		root.setHgap(10);
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
@@ -54,9 +51,9 @@ public class AddPlayerView {
 
 		ArrayList<TextField> nameList = new ArrayList<TextField>();
 		String[] pName = new String[totalPlayers];
-		numPlayers = 3;
+		//numPlayers = 3;
 		int k = 1;
-		for (int i = 0; i < numPlayers; i++) {
+		for (int i = 0; i < totalPlayers; i++) {
 
 
 			Label name = new Label(i+1 + ". Player Name");
@@ -68,7 +65,7 @@ public class AddPlayerView {
 			k++;
 		}
 
-		Button addPlayerBtn = new Button("+");
+		/*Button addPlayerBtn = new Button("+");
 		root.add(addPlayerBtn, 4, 4);
 		Button removePlayerBtn = new Button("-");
 
@@ -104,7 +101,7 @@ public class AddPlayerView {
 			if (numPlayers > 3) {
 				numPlayers--;
 			}
-		});
+		});*/
 		
 		Button backBtn = new Button("Back");
 		
@@ -127,7 +124,7 @@ public class AddPlayerView {
 				AddPlayerListener addPlayerListener = new AddPlayerListener();
 				addPlayerListener.createPlayer(pName);
 
-				playGameListener.changeScene(totalPlayers, pName, stage);
+				playGameListener.changeScene(pName, stage);
 				
 			}		
 			
@@ -138,8 +135,10 @@ public class AddPlayerView {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				BackToWelcomeListener backListener = new BackToWelcomeListener();
-				backListener.backToWelcome(stage);
+				//BackToWelcomeListener backListener = new BackToWelcomeListener();
+				//backListener.backToWelcome(stage);
+				PlayerCountListener playerCountListener = new PlayerCountListener();
+				playerCountListener.changeScene(stage);
 				
 			}		
 			

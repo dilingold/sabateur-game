@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.PlayerInformation;
 
 public class GameView {
 	
@@ -72,9 +73,10 @@ public class GameView {
 		
 		vbBoard.getChildren().add(boardGrid);
 		
+		// Call Controller on Player ones Hand.
 		Text playerText = new Text("Player 1 Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		
+
 		VBox vbCards = new VBox(10);
 		vbCards.setAlignment(Pos.BOTTOM_CENTER);
 		vbCards.getChildren().add(playerText);
