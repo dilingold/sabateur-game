@@ -6,37 +6,15 @@ import java.util.Random;
  */
 public class Treasure{
 
-    private boolean TRUE;
-    private boolean FALSE;
-    private String gold;
-    private String coal;
+    public static final int GOLD = 1;
+    public static final int COAL = 2;
+    public static final int NUM_OF_TREASURE = 3;
 
-    public Treasure(){
+    public static final int NUM_TREASURE_POS = 3;
+    public static final int ROW_POSITION = 0;
+    public static final int TREASURE_COL_POS_1 = 1;
+    public static final int TREASURE_COL_POS_2 = 3;
+    public static final int TREASURE_COL_POS_3 = 5;
 
-        Board newBoard = new Board();
-        newBoard.setGameBoard(7,7,'G');
 
-    }
-
-    /**
-     * Returns a psuedo-random number between min and max, inclusive.
-     * The difference between min and max can be at most
-     * <code>Integer.MAX_VALUE - 1</code>.
-     *
-     * @param min Minimim value
-     * @param max Maximim value.  Must be greater than min.
-     * @return Integer between min and max, inclusive.
-     * @see java.util.Random#nextInt(int)
-     */
-    public int randInt(int min, int max) {
-
-        // Usually this can be a field rather than a method variable
-        Random rand = new Random();
-
-        // nextInt is normally exclusive of the top value,
-        // so add 1 to make it inclusive
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-
-        return randomNum;
-    }
 }

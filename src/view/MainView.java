@@ -44,15 +44,16 @@ public class MainView extends Application {
 		welcomeView.displayView();
 		
 		stage.show();
-		Board aBoard = new Board();
-		aBoard.initBoard();
+		//Board aBoard = new Board.getInstance();
+		Board.getInstance().initBoard();
+		//aBoard.initBoard();
 
-		aBoard.getGameBoard();
+		Board.getInstance().getGameBoard();
 		//System.out.println(aBoard.getGameBoard()[0][0]);
 
-		aBoard.setGameBoard(1, 1, 'W');
+		//Board.getInstance().setGameBoard(1, 1, 5);
 
-		aBoard.printBoard();
+		Board.getInstance().printBoard();
 
 
 

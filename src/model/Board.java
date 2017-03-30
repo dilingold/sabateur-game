@@ -1,46 +1,83 @@
 package model;
+//import com.sun.java.util.jar.pack.Instruction;
+import model.Squares;
 import model.Treasure;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 /**
- * Created by johnny on 3/27/17.
+ * Created by johnny on 3/29/17.
  */
-public class Board{
+public class Board {
+    private static Board ourInstance = new Board();
 
-    private char[][] gameBoard;
-    private int numCols = 7;
-    private int numRows = 7;
+    public static Board getInstance() {
+        return ourInstance;
+    }
+
+    private int[][] gameBoard;
+
     //Constructor for the game board
-    public Board(){
 
-        this.gameBoard = new char[numCols][numRows];
+    private Board() {
+
+        this.gameBoard = new int[Squares.NUM_COLS][Squares.NUM_ROWS];
 
     }
+
     //Initializes the game board
     public void initBoard() {
-        for (int cols=0; cols<numCols; cols++) {
-            for (int rows=0; rows<numRows; rows++) {
-                this.gameBoard[cols][rows] = 'X';
+        for (int cols=0; cols < Squares.NUM_COLS; cols++) {
+            for (int rows=0; rows<Squares.NUM_ROWS; rows++) {
+                this.gameBoard[cols][rows] = Squares.EMPTY_SQUARE;
                 System.out.print(gameBoard[cols][rows]);
             }
             System.out.println("");
         }
-            this.gameBoard[0][1] = 'G';
-            this.gameBoard[0][3] = 'C';
-            this.gameBoard[0][5] = 'C';
+        setTreasure();
+    }
+    //Sets the treasure on the board
+    public void setTreasure(){
+
+        int[] treasureArr = {Treasure.GOLD, Treasure.COAL, Treasure.COAL};
+
+        int[] boardCoordinates = {Treasure.TREASURE_COL_POS_1, Treasure.TREASURE_COL_POS_2,
+                Treasure.TREASURE_COL_POS_3};
+
+        List<Integer> treasure = new ArrayList<>();
+
+        List<Integer> coordinates = new ArrayList<>();
+
+        for(int i: treasureArr)
+                treasure.add(i);
+
+        for(int i: boardCoordinates)
+                coordinates.add(i);
+
+        Collections.shuffle(treasure);
+        Collections.shuffle(coordinates);
+
+        for (int i = 0; i < 3; i++){
+
+            this.gameBoard[Treasure.ROW_POSITION][coordinates.get(i)] = treasure.get(i);
+        }
     }
 
     //Getters
-    public char[][] getGameBoard() {
+    public int[][] getGameBoard() {
         return gameBoard;
     }
     //Setters
-    public void setGameBoard(int column, int row, char cardType) {
+    public void setGameBoard(int column, int row, int cardType) {
         this.gameBoard[column][row] = cardType;
     }
+
     //Prints updated board
     public void printBoard(){
         System.out.println("Updated Board");
-        for (int cols=0; cols<numCols; cols++) {
-            for (int rows=0; rows<numRows; rows++) {
+        for (int cols=0; cols<Squares.NUM_COLS; cols++) {
+            for (int rows=0; rows<Squares.NUM_ROWS; rows++) {
 
                 System.out.print(gameBoard[cols][rows]);
             }
@@ -48,7 +85,4 @@ public class Board{
         }
 
     }
-
-
 }
-
