@@ -46,6 +46,10 @@ public class PlayerInformation {
         return null;
     }
 
+    public String getPlayerByPosition(int position){
+        return players.get(position).getName();
+    }
+
     public int playerCount()
     {
         return players.size();

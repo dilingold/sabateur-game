@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 public class  GameView {
 	
 	private Stage stage;
+	int testTurn = 1;
+    Text playerText = null;
 	
 	public GameView(Stage stage) {
 		
@@ -111,7 +113,7 @@ public class  GameView {
         vbBoard.getChildren().add(boardGrid);
 		
 		// Call Controller on Player ones Hand.
-		Text playerText = new Text("Player 1 Hand");
+		playerText = new Text(playGameListener.PlayerName(0) + " Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
 		VBox vbCards = new VBox(10);
@@ -262,10 +264,18 @@ public class  GameView {
 				if (event.getGestureSource() != target) {
 					
 					//target.setText("curse");
+
+
+                    PlayGameListener playGameListener = new PlayGameListener();
+
 					
 					String imageName = "images/players/a" + index + "-curse.jpg";
 					Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 					target.setGraphic(new ImageView(image));
+
+                    // Temp change players turn to test
+					playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+                    testTurn++;
 					
 				}
 				

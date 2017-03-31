@@ -2,6 +2,7 @@ package controller;
 
 import javafx.stage.Stage;
 import model.Board;
+import model.Player;
 import model.PlayerInformation;
 import view.GameView;
 import model.totalPlayers;
@@ -15,15 +16,22 @@ public class PlayGameListener {
 	}
 
 	// Incomplete. The current players name
-	public String PlayerName(int i) {
-		String playerName = null;
-		PlayerInformation.getInstance().getPlayerByName("John");
+	public String PlayerName(int position) {
+		return PlayerInformation.getInstance().getPlayerByPosition(position);
 
-		return playerName;
 	}
 
 	public int[][] getCurrentBoard() {
 		return Board.getInstance().currentBoard();
+	}
+
+	public String nextTurn(int position) {
+		if(position < PlayerInformation.getInstance().playerCount())
+			return PlayerName(position);
+		else {
+			position = 0;
+			return PlayerName(position);
+		}
 	}
 
 }
