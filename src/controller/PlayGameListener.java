@@ -29,7 +29,6 @@ public class PlayGameListener {
 		if(position < PlayerInformation.getInstance().playerCount()) {
 			PlayerInformation.getInstance().getPlayerByName(PlayerName(position)).setIsTurn(true);
 			//PlayerInformation.getInstance().getPlayerByName(PlayerName(position-1)).setIsTurn(false);
-
 			return PlayerName(position);
 		}
 		else {
