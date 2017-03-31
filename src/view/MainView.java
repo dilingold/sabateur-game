@@ -53,7 +53,7 @@ public class MainView extends Application {
 		//Board.getInstance().getGameBoard();
 		//System.out.println(aBoard.getGameBoard()[0][0]);
 
-		Board.getInstance().setGameBoard(1, 1, 5);
+		Board.getInstance().setGameBoard(6, 3, 5);
 
 		Board.getInstance().printBoard();
 

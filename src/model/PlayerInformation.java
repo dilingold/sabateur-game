@@ -32,6 +32,8 @@ public class PlayerInformation {
             System.out.println(player.getName());
         }
 
+        players.get(0).setIsTurn(true);
+
         return true;
     }
 
@@ -46,9 +48,27 @@ public class PlayerInformation {
         return null;
     }
 
+    public String getPlayerByPosition(int position){
+        return players.get(position).getName();
+    }
+
     public int playerCount()
     {
         return players.size();
+    }
+
+    public void playersTurn() {
+
+    }
+
+    // test check whos turn
+    public String checkTurn() {
+        for(Player p: players) {
+            if(p.getisTurn() == true){
+                return p.getName();
+            }
+        }
+        return null;
     }
 
 

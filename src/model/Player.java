@@ -8,6 +8,7 @@ public class Player {
     private String name;
     private boolean role;
     private String status = null;
+    private boolean isTurn = false;
 
     // Constructor
     public Player (String PlayerName) {
@@ -30,5 +31,13 @@ public class Player {
 
     public void setRole(boolean role) {
         this.role = role;
+    }
+
+    public void setIsTurn(boolean myTurn) {
+        this.isTurn = myTurn;
+    }
+
+    public boolean getisTurn() {
+        return isTurn;
     }
 }
