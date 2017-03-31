@@ -26,12 +26,21 @@ public class PlayGameListener {
 	}
 
 	public String nextTurn(int position) {
-		if(position < PlayerInformation.getInstance().playerCount())
-			return PlayerName(position);
-		else {
-			position = 0;
+		if(position < PlayerInformation.getInstance().playerCount()) {
+			PlayerInformation.getInstance().getPlayerByName(PlayerName(position)).setIsTurn(true);
+			PlayerInformation.getInstance().getPlayerByName(PlayerName(position-1)).setIsTurn(false);
 			return PlayerName(position);
 		}
+		else {
+			position = 0;
+			PlayerInformation.getInstance().getPlayerByName(PlayerName(position)).setIsTurn(true);
+			PlayerInformation.getInstance().getPlayerByName(PlayerName(PlayerInformation.getInstance().playerCount()-1)).setIsTurn(false);
+			return PlayerName(position);
+		}
+	}
+
+	public String getTurn() {
+		return PlayerInformation.getInstance().checkTurn();
 	}
 
 }

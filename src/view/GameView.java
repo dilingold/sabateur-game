@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -71,7 +72,7 @@ public class  GameView {
 			}
 			
 		}*/
-		//boardGrid.setGridLinesVisible(true);
+		boardGrid.setGridLinesVisible(true);
 
         // Call the controller for the current gameboard to layout gameboard TEST
         PlayGameListener playGameListener = new PlayGameListener();
@@ -87,6 +88,7 @@ public class  GameView {
                         pic.setFitWidth(60);
                         pic.setFitHeight(60);
                         pic.setImage(image);
+                        makeDroppableBoard(pic);
                         boardGrid.add(pic, i, k);
                         break;
                     case 1:
@@ -240,48 +242,93 @@ public class  GameView {
 	}
 	
 	public void makeDroppable(Label target, int index) {
-		
-		target.setOnDragOver(new EventHandler<DragEvent>() {
-			
-			public void handle(DragEvent event) {
-				
-				if (event.getGestureSource() != target) {
-					
-					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-					
-				}
-				
-				event.consume();
-				
-			}
-			
-		});
-		
-		target.setOnDragDropped(new EventHandler<DragEvent>() {
-			
-			public void handle(DragEvent event) {
-				
-				if (event.getGestureSource() != target) {
-					
-					//target.setText("curse");
+
+        target.setOnDragOver(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                }
+
+                event.consume();
+
+            }
+
+        });
+
+        target.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target) {
+
+                    //target.setText("curse");
 
 
                     PlayGameListener playGameListener = new PlayGameListener();
 
-					
-					String imageName = "images/players/a" + index + "-curse.jpg";
-					Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-					target.setGraphic(new ImageView(image));
+
+                    String imageName = "images/players/a" + index + "-curse.jpg";
+                    Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+                    target.setGraphic(new ImageView(image));
 
                     // Temp change players turn to test
-					playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+                    playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+                    System.out.println(playGameListener.getTurn());
                     testTurn++;
-					
-				}
-				
-			}
-			
-		});
+
+                }
+
+            }
+
+        });
+    };
+    public void makeDroppableBoard(ImageView target2) {
+        target2.setOnDragOver(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target2) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                }
+
+                event.consume();
+
+            }
+
+        });
+
+        target2.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target2) {
+
+                    //target.setText("curse");
+
+
+                    PlayGameListener playGameListener = new PlayGameListener();
+
+
+                    String imageName = "images/players/a" + 1 + "-curse.jpg";
+                    Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+                    target2.setImage(image);
+
+                    // Temp change players turn to test
+                    playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+                    System.out.println(playGameListener.getTurn());
+                    testTurn++;
+
+                }
+
+            }
+
+        });
 		
 	}
 
