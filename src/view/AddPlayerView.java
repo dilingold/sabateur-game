@@ -1,7 +1,6 @@
 package view;
 
-import controller.BackToWelcomeListener;
-import controller.PlayGameListener;
+import controller.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class AddPlayerView {
 	
 	private int numPlayers;
@@ -30,58 +31,77 @@ public class AddPlayerView {
 		
 	}
 	
-	public void displayView() {
+	public void displayView(int totalPlayers) {
 		
-		stage.setTitle("Add Player");
-		
-		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.TOP_CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
-		//grid.setGridLinesVisible(true);
-		
-		Text sceneTitle = new Text("Add Players");
-		sceneTitle.setId("title-text");
-		grid.add(sceneTitle, 0, 0, 2, 1);
-		
-		numPlayers = 3;
-		
-		for (int i = 0; i < numPlayers; i++) {
-			
-			
-			
+		GridPane root = new GridPane();
+		root.setAlignment(Pos.CENTER_LEFT);
+		root.setHgap(10);
+		root.setVgap(10);
+		root.setPadding(new Insets(25, 25, 25, 85));
+		root.setPrefSize(860, 600);
+		//root.setGridLinesVisible(true);
+
+		stage.setTitle("G2 Sabateur");
+
+		createContent.Title title = new createContent.Title("S A B A T E U R");
+
+		createContent.subTitle subTitle = new createContent.subTitle("Player Name's");
+		root.add(title, 0, 0, 2, 1);
+		root.add(subTitle, 0, 1, 2, 1);
+
+		ArrayList<TextField> nameList = new ArrayList<TextField>();
+		String[] pName = new String[totalPlayers];
+		//numPlayers = 3;
+		int k = 1;
+		for (int i = 0; i < totalPlayers; i++) {
+
+
 			Label name = new Label(i+1 + ". Player Name");
-			grid.add(name, 0, i+1);
+			root.add(name, 0, k+1);
 			
 			TextField nameTextField = new TextField();
-			grid.add(nameTextField, 1, i+1);
-			
+			nameList.add(nameTextField);
+			root.add(nameTextField, 1, k+1);
+			k++;
 		}
-		
-		Button addPlayerBtn = new Button("+");
-		grid.add(addPlayerBtn, 2, 0);
-		
+
+		/*Button addPlayerBtn = new Button("+");
+		root.add(addPlayerBtn, 4, 4);
+		Button removePlayerBtn = new Button("-");
+
+
+
+
+		// Need to save / store player names for when gameview starts...
 		addPlayerBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
+				int k = numPlayers + 1;
 				if (numPlayers < 6) {
 					
 					numPlayers++;
+					k++;
 										
 					Label name = new Label(numPlayers + ". Player Name");
-					grid.add(name, 0, numPlayers);
+					root.add(name, 0, k);
 					
 					TextField nameTextField = new TextField();
-					grid.add(nameTextField, 1, numPlayers);
-					
+					root.add(nameTextField, 1, k);
+					root.getChildren().remove(addPlayerBtn);
+					root.getChildren().remove(removePlayerBtn);
+					root.add(removePlayerBtn, 3, k);
+					root.add(addPlayerBtn, 4, k);
 				}
-				
-			}		
-			
+			}
 		});
+		// Removeing players from the list can be difficult with current setup. Not able to pop generic
+		// name && nameTextField
+		removePlayerBtn.setOnMouseClicked(event -> {
+			if (numPlayers > 3) {
+				numPlayers--;
+			}
+		});*/
 		
 		Button backBtn = new Button("Back");
 		
@@ -93,7 +113,18 @@ public class AddPlayerView {
 			public void handle(ActionEvent event) {
 				
 				PlayGameListener playGameListener = new PlayGameListener();
-				playGameListener.changeScene(stage);
+
+
+				int i = 0;
+				for (TextField field : nameList) {
+					pName[i] = field.getText();
+					//System.out.println(pName[i]);
+					i++;
+				}
+				AddPlayerListener addPlayerListener = new AddPlayerListener();
+				addPlayerListener.createPlayer(pName);
+
+				playGameListener.changeScene(pName, stage);
 				
 			}		
 			
@@ -104,8 +135,10 @@ public class AddPlayerView {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				BackToWelcomeListener backListener = new BackToWelcomeListener();
-				backListener.backToWelcome(stage);
+				//BackToWelcomeListener backListener = new BackToWelcomeListener();
+				//backListener.backToWelcome(stage);
+				PlayerCountListener playerCountListener = new PlayerCountListener();
+				playerCountListener.changeScene(stage);
 				
 			}		
 			
@@ -119,10 +152,11 @@ public class AddPlayerView {
 		hbButtons.setSpacing(300);
 		
 		VBox vBox = new VBox();
-		vBox.getChildren().add(grid);
+		vBox.getChildren().add(root);
 		vBox.getChildren().add(hbButtons);
 		
 		Scene scene = new Scene(vBox, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
+
 		
 		stage.setScene(scene);
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());

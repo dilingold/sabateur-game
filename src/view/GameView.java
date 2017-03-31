@@ -22,8 +22,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.PlayerInformation;
 
-public class GameView {
+public class  GameView {
 	
 	private Stage stage;
 	
@@ -33,19 +34,19 @@ public class GameView {
 		
 	}
 	
-	public void displayView() {
+	public void displayView(int totalPlayers, String[] playerNames) {
 		
 		stage.setTitle("Play Game");
 		
 		GridPane gameGrid = new GridPane();
-		gameGrid.setAlignment(Pos.TOP_CENTER);
+		gameGrid.setAlignment(Pos.CENTER);
 		gameGrid.setHgap(10);
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
-		//gameGrid.setGridLinesVisible(true);
+		gameGrid.setGridLinesVisible(true);
 		
-		final int numCols = 9;
-		final int numRows = 5;
+		final int numCols = 7;
+		final int numRows = 7;
 		
 		VBox vbBoard = new VBox(10);
 		
@@ -72,9 +73,10 @@ public class GameView {
 		
 		vbBoard.getChildren().add(boardGrid);
 		
+		// Call Controller on Player ones Hand.
 		Text playerText = new Text("Player 1 Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		
+
 		VBox vbCards = new VBox(10);
 		vbCards.setAlignment(Pos.BOTTOM_CENTER);
 		vbCards.getChildren().add(playerText);
@@ -129,17 +131,31 @@ public class GameView {
 		vbPlayers.getChildren().add(playersText);
 		
 		int numPlayers = 6;
-		
-		for (int i = 0; i < numPlayers; i++) {
+
+		// No need to do for loop, Use for each player
+		/*for (int i = 0; i < totalPlayers; i++) {
 			
 			String imageName = "a" + (i+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
-			
+
+
 			Label player = new Label("Player " + (i+1));
 			makeDroppable(player, i+1);
 			player.setGraphic(new ImageView(image));
 			vbPlayers.getChildren().add(player);
 			
+		}*/
+
+		int k = 0;
+		for(String player: playerNames) {
+			String imageName = "a" + (k+1) + ".jpg";
+			Image image = new Image(getClass().getResourceAsStream(imageName));
+			Label pLabel = new Label(player);
+			makeDroppable(pLabel, k+1);
+			pLabel.setMinWidth(150.0);
+			pLabel.setGraphic(new ImageView(image));
+			vbPlayers.getChildren().add(pLabel);
+			k++;
 		}
 		
 		Text deckText = new Text("Deck");

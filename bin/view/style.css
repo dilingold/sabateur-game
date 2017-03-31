@@ -1,11 +1,17 @@
+@font-face {
+	font-family: 'TCCEB';
+	src: url('../../assets/fonts/TCCEB.TTF');
+}
+
 .root {
-	-fx-background-image: url("background.jpg");
+	-fx-background-image: url("../../assets/images/above-adventure-aerial-air.jpg");
+	-fx-background-size: cover;
 }
 	
 .label {
 	-fx-font-size: 12px;
 	-fx-font-weight: bold;
-	-fx-text-fill: #333333;
+	-fx-text-fill: #ffffff;
 	-fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 0, 0, 0, 1);
 }
 
@@ -32,4 +38,9 @@
 
 .button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+#title-test {
+	-fx-font-family: "TCCEB";
+	-fx-font-size: 30px;
 }
