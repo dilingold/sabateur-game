@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.stage.Stage;
+import model.Board;
 import model.PlayerInformation;
 import view.GameView;
 import model.totalPlayers;
@@ -19,6 +20,10 @@ public class PlayGameListener {
 		PlayerInformation.getInstance().getPlayerByName("John");
 
 		return playerName;
+	}
+
+	public int[][] getCurrentBoard() {
+		return Board.getInstance().currentBoard();
 	}
 
 }

@@ -87,4 +87,8 @@ public class Board {
         }
 
     }
+
+    public int[][] currentBoard(){
+        return this.gameBoard;
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.PlayGameListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -56,7 +57,7 @@ public class  GameView {
 		
 		GridPane boardGrid = new GridPane();
 		
-		for (int i = 0; i < numCols; i++) {
+		/*for (int i = 0; i < numCols; i++) {
 			
 			for (int j = 0; j < numRows; j++) {
 				
@@ -67,10 +68,47 @@ public class  GameView {
 				
 			}
 			
-		}
+		}*/
 		//boardGrid.setGridLinesVisible(true);
-		
-		vbBoard.getChildren().add(boardGrid);
+
+        // Call the controller for the current gameboard to layout gameboard TEST
+        PlayGameListener playGameListener = new PlayGameListener();
+        int[][] currentBoard = playGameListener.getCurrentBoard();
+        for(int i = 0; i < 7; i++) {
+            for(int k = 0; k < 7; k++) {
+                System.out.println(currentBoard[i][k]);
+                switch (currentBoard[k][i]) {
+                    case 0:
+                        System.out.println("Empty");
+                        Image image = new Image("/images/board/empty.png");
+                        ImageView pic = new ImageView();
+                        pic.setFitWidth(60);
+                        pic.setFitHeight(60);
+                        pic.setImage(image);
+                        boardGrid.add(pic, i, k);
+                        break;
+                    case 1:
+                        Image goldImage = new Image("/images/board/gold.png");
+                        ImageView goldPic = new ImageView();
+                        goldPic.setFitWidth(60);
+                        goldPic.setFitHeight(60);
+                        goldPic.setImage(goldImage);
+                        boardGrid.add(goldPic, i, k);
+                        break;
+
+                    case 2:
+                        Image coalimage = new Image("/images/board/coal.png");
+                        ImageView coalPic = new ImageView();
+                        coalPic.setFitWidth(60);
+                        coalPic.setFitHeight(60);
+                        coalPic.setImage(coalimage);
+                        boardGrid.add(coalPic, i, k);
+                        break;
+                }
+            }
+        }
+        boardGrid.setAlignment(Pos.BOTTOM_CENTER);
+        vbBoard.getChildren().add(boardGrid);
 		
 		// Call Controller on Player ones Hand.
 		Text playerText = new Text("Player 1 Hand");
@@ -225,8 +263,8 @@ public class  GameView {
 					
 					//target.setText("curse");
 					
-					String imageName = "../../../assets/images/players/a" + index + "-curse.jpg";
-					Image image = new Image(getClass().getResourceAsStream(imageName));
+					String imageName = "images/players/a" + index + "-curse.jpg";
+					Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 					target.setGraphic(new ImageView(image));
 					
 				}
