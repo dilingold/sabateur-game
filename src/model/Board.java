@@ -68,11 +68,6 @@ public class Board {
 
     //Getters
     public int getGameBoard(int row, int column) {
-
-        boolean occupied = false;
-        if(gameBoard[row][column] != 0 ){
-            return occupied;
-        }
         return gameBoard[row][column];
     }
     //Setters

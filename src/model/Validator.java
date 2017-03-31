@@ -13,7 +13,7 @@ public class Validator {
 
         public boolean checkMove(int cardType, int row, int column ){
 
-        int  = Board.getInstance().getGameBoard(row,column);
+        //int  = Board.getInstance().getGameBoard(row,column);
 
         //takes in a location
         //takes in a card
