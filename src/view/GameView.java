@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.PlayerInformation;
 
-public class GameView {
+public class  GameView {
 	
 	private Stage stage;
 	
