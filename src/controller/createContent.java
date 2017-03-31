@@ -27,8 +27,8 @@ public class createContent {
 
             Text text = new Text(name);
             text.setFill(Color.WHITE);
-            text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD, 50));
-
+            //text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD, 50));
+            text.setId("title-test");
             setHalignment(text, HPos.CENTER);
             getChildren().addAll(bg, text);
         }

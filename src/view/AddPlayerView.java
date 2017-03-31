@@ -1,7 +1,6 @@
 package view;
 
-import controller.BackToWelcomeListener;
-import controller.PlayGameListener;
+import controller.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,7 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import controller.createContent;
+
+import java.util.ArrayList;
 
 public class AddPlayerView {
 	
@@ -31,15 +31,15 @@ public class AddPlayerView {
 		
 	}
 	
-	public void displayView(int numPlayers2) {
+	public void displayView(int totalPlayers) {
 		
 		GridPane root = new GridPane();
-		root.setAlignment(Pos.CENTER);
+		root.setAlignment(Pos.CENTER_LEFT);
 		root.setHgap(10);
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		root.setGridLinesVisible(true);
+		//root.setGridLinesVisible(true);
 
 		stage.setTitle("G2 Sabateur");
 
@@ -49,22 +49,30 @@ public class AddPlayerView {
 		root.add(title, 0, 0, 2, 1);
 		root.add(subTitle, 0, 1, 2, 1);
 
-		numPlayers = 3;
+		ArrayList<TextField> nameList = new ArrayList<TextField>();
+		String[] pName = new String[totalPlayers];
+		//numPlayers = 3;
 		int k = 1;
-		for (int i = 0; i < numPlayers; i++) {
+		for (int i = 0; i < totalPlayers; i++) {
 
 
 			Label name = new Label(i+1 + ". Player Name");
 			root.add(name, 0, k+1);
 			
 			TextField nameTextField = new TextField();
+			nameList.add(nameTextField);
 			root.add(nameTextField, 1, k+1);
 			k++;
 		}
-		
-		Button addPlayerBtn = new Button("+");
-		root.add(addPlayerBtn, 2, 0);
-		
+
+		/*Button addPlayerBtn = new Button("+");
+		root.add(addPlayerBtn, 4, 4);
+		Button removePlayerBtn = new Button("-");
+
+
+
+
+		// Need to save / store player names for when gameview starts...
 		addPlayerBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -80,10 +88,20 @@ public class AddPlayerView {
 					
 					TextField nameTextField = new TextField();
 					root.add(nameTextField, 1, k);
-					
+					root.getChildren().remove(addPlayerBtn);
+					root.getChildren().remove(removePlayerBtn);
+					root.add(removePlayerBtn, 3, k);
+					root.add(addPlayerBtn, 4, k);
 				}
 			}
 		});
+		// Removeing players from the list can be difficult with current setup. Not able to pop generic
+		// name && nameTextField
+		removePlayerBtn.setOnMouseClicked(event -> {
+			if (numPlayers > 3) {
+				numPlayers--;
+			}
+		});*/
 		
 		Button backBtn = new Button("Back");
 		
@@ -95,7 +113,18 @@ public class AddPlayerView {
 			public void handle(ActionEvent event) {
 				
 				PlayGameListener playGameListener = new PlayGameListener();
-				playGameListener.changeScene(stage);
+
+
+				int i = 0;
+				for (TextField field : nameList) {
+					pName[i] = field.getText();
+					//System.out.println(pName[i]);
+					i++;
+				}
+				AddPlayerListener addPlayerListener = new AddPlayerListener();
+				addPlayerListener.createPlayer(pName);
+
+				playGameListener.changeScene(pName, stage);
 				
 			}		
 			
@@ -106,8 +135,10 @@ public class AddPlayerView {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				BackToWelcomeListener backListener = new BackToWelcomeListener();
-				backListener.backToWelcome(stage);
+				//BackToWelcomeListener backListener = new BackToWelcomeListener();
+				//backListener.backToWelcome(stage);
+				PlayerCountListener playerCountListener = new PlayerCountListener();
+				playerCountListener.changeScene(stage);
 				
 			}		
 			
