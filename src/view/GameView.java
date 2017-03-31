@@ -286,12 +286,12 @@ public class  GameView {
 
         });
     };
-    public void makeDroppableBoard(ImageView target2) {
-        target2.setOnDragOver(new EventHandler<DragEvent>() {
+    public void makeDroppableBoard(ImageView target) {
+        target.setOnDragOver(new EventHandler<DragEvent>() {
 
             public void handle(DragEvent event) {
 
-                if (event.getGestureSource() != target2) {
+                if (event.getGestureSource() != target) {
 
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 
@@ -303,11 +303,11 @@ public class  GameView {
 
         });
 
-        target2.setOnDragDropped(new EventHandler<DragEvent>() {
+        target.setOnDragDropped(new EventHandler<DragEvent>() {
 
             public void handle(DragEvent event) {
 
-                if (event.getGestureSource() != target2) {
+                if (event.getGestureSource() != target) {
 
                     //target.setText("curse");
 
@@ -317,7 +317,7 @@ public class  GameView {
 
                     String imageName = "images/players/a" + 1 + "-curse.jpg";
                     Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-                    target2.setImage(image);
+                    target.setImage(image);
 
                     // Temp change players turn to test
                     playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
