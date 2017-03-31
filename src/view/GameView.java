@@ -22,7 +22,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.PlayerInformation;
 
 public class  GameView {
 	
@@ -148,8 +147,9 @@ public class  GameView {
 
 		int k = 0;
 		for(String player: playerNames) {
-			String imageName = "a" + (k+1) + ".jpg";
-			Image image = new Image(getClass().getResourceAsStream(imageName));
+			String imageName = "images/players/a" + (k+1) + ".jpg";
+			//Image image = new Image(getClass().getResourceAsStream(imageName));
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			Label pLabel = new Label(player);
 			makeDroppable(pLabel, k+1);
 			pLabel.setMinWidth(150.0);
@@ -225,7 +225,7 @@ public class  GameView {
 					
 					//target.setText("curse");
 					
-					String imageName = "a" + index + "-curse.jpg";
+					String imageName = "../../../assets/images/players/a" + index + "-curse.jpg";
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setGraphic(new ImageView(image));
 					

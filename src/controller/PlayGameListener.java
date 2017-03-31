@@ -13,6 +13,7 @@ public class PlayGameListener {
 		gameView.displayView(PlayerInformation.getInstance().playerCount(), pName);
 	}
 
+	// Incomplete. The current players name
 	public String PlayerName(int i) {
 		String playerName = null;
 		PlayerInformation.getInstance().getPlayerByName("John");
