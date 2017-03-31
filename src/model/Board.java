@@ -39,7 +39,9 @@ public class Board {
     }
     //Sets the treasure on the board
     public void setTreasure(){
-
+        //should the two array be in treasure class?????
+        // or should this methoud be in treasure class
+        //tutor said it was fine!!!! but still dunno
         int[] treasureArr = {Treasure.GOLD, Treasure.COAL, Treasure.COAL};
 
         int[] boardCoordinates = {Treasure.TREASURE_COL_POS_1, Treasure.TREASURE_COL_POS_2,
@@ -65,8 +67,13 @@ public class Board {
     }
 
     //Getters
-    public int[][] getGameBoard() {
-        return gameBoard;
+    public int getGameBoard(int row, int column) {
+
+        boolean occupied = false;
+        if(gameBoard[row][column] != 0 ){
+            return occupied;
+        }
+        return gameBoard[row][column];
     }
     //Setters
     public void setGameBoard(int column, int row, int cardType) {

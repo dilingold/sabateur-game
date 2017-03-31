@@ -24,6 +24,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Board;
 import model.Board.*;
+import model.Validator;
+import model.Validator.*;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
@@ -48,14 +50,14 @@ public class MainView extends Application {
 		Board.getInstance().initBoard();
 		//aBoard.initBoard();
 
-		Board.getInstance().getGameBoard();
+		//Board.getInstance().getGameBoard();
 		//System.out.println(aBoard.getGameBoard()[0][0]);
 
-		//Board.getInstance().setGameBoard(1, 1, 5);
+		Board.getInstance().setGameBoard(1, 1, 5);
 
 		Board.getInstance().printBoard();
 
-
+		System.out.println(Board.getInstance().getGameBoard(1, 1));
 
 
 	}

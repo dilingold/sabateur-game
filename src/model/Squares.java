@@ -10,5 +10,4 @@ public class Squares {
 
     public static final int EMPTY_SQUARE = 0;
 
-
 }
