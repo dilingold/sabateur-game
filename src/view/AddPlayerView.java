@@ -103,18 +103,14 @@ public class AddPlayerView {
 			}
 		});*/
 		
-		Button backBtn = new Button("Back");
+		//Button backBtn = new Button("Back");
+		createContent.MenuItem playBtn = new createContent.MenuItem("PLAY");
+		//Button playBtn = new Button("Play");
+		createContent.MenuItem backBtn = new createContent.MenuItem("BACK");
 		
-		Button playBtn = new Button("Play");
-		
-		playBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+		playBtn.setOnMouseClicked(event ->  {
 				
 				PlayGameListener playGameListener = new PlayGameListener();
-
-
 				int i = 0;
 				for (TextField field : nameList) {
 					pName[i] = field.getText();
@@ -125,35 +121,28 @@ public class AddPlayerView {
 				addPlayerListener.createPlayer(pName);
 
 				playGameListener.changeScene(pName, stage);
-				
-			}		
 			
 		});
 		
-		backBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				
-				//BackToWelcomeListener backListener = new BackToWelcomeListener();
-				//backListener.backToWelcome(stage);
-				PlayerCountListener playerCountListener = new PlayerCountListener();
-				playerCountListener.changeScene(stage);
-				
-			}		
-			
+		backBtn.setOnMouseClicked(event ->  {
+			//BackToWelcomeListener backListener = new BackToWelcomeListener();
+			//backListener.backToWelcome(stage);
+			PlayerCountListener playerCountListener = new PlayerCountListener();
+			playerCountListener.changeScene(stage);
 		});
 		
 		HBox hbButtons = new HBox();
 		hbButtons.getChildren().add(backBtn);
 		hbButtons.getChildren().add(playBtn);
-		hbButtons.setPadding(new Insets(25, 0, 0, 0));
-		hbButtons.setAlignment(Pos.CENTER);
-		hbButtons.setSpacing(300);
+		hbButtons.setPadding(new Insets(0, 0, 0, 0));
+		hbButtons.setAlignment(Pos.CENTER_LEFT);
+		hbButtons.setSpacing(50);
+		root.add(backBtn, 0, 5, 1, 1);
+		root.add(playBtn, 1, 5, 1, 1);
 		
 		VBox vBox = new VBox();
 		vBox.getChildren().add(root);
-		vBox.getChildren().add(hbButtons);
+		//vBox.getChildren().add(hbButtons);
 		
 		Scene scene = new Scene(vBox, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 

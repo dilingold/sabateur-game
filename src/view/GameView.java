@@ -20,6 +20,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -56,6 +57,7 @@ public class  GameView {
 		Text boardText = new Text("Board");
 		vbBoard.setAlignment(Pos.CENTER);
 		boardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		boardText.setFill(Color.WHITE);
 		vbBoard.getChildren().add(boardText);
 		
 		GridPane boardGrid = new GridPane();
@@ -108,6 +110,14 @@ public class  GameView {
                         coalPic.setImage(coalimage);
                         boardGrid.add(coalPic, i, k);
                         break;
+
+					case 5:
+						Image startImage = new Image("/images/cards/tcard.png");
+						ImageView startPic = new ImageView();
+						startPic.setFitWidth(60);
+						startPic.setFitHeight(60);
+						startPic.setImage(startImage);
+						boardGrid.add(startPic, i, k);
                 }
             }
         }
@@ -117,6 +127,7 @@ public class  GameView {
 		// Call Controller on Player ones Hand.
 		playerText = new Text(playGameListener.PlayerName(0) + " Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		playerText.setFill(Color.WHITE);
 
 		VBox vbCards = new VBox(10);
 		vbCards.setAlignment(Pos.BOTTOM_CENTER);
@@ -168,6 +179,7 @@ public class  GameView {
 		
 		Text playersText = new Text("Players");
 		GridPane.setHalignment(playersText, HPos.CENTER);
+		playersText.setFill(Color.WHITE);
 		playersText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		vbPlayers.getChildren().add(playersText);
 		
@@ -202,6 +214,7 @@ public class  GameView {
 		
 		Text deckText = new Text("Deck");
 		GridPane.setHalignment(deckText, HPos.CENTER);
+		deckText.setFill(Color.WHITE);
 		deckText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		
 		Button deckButton = new Button("Deck");
@@ -214,6 +227,8 @@ public class  GameView {
 		gameGrid.add(vbBoard, 0, 0);
 		gameGrid.add(vbCards, 0, 1);
 		gameGrid.add(vbPlayers, 2, 0, 1, 2);
+		gameGrid.add(deckText, 2, 1, 1, 2);
+		gameGrid.add(deckButton, 2, 1, 1, 2);
 		
 		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 		
@@ -314,7 +329,7 @@ public class  GameView {
                     PlayGameListener playGameListener = new PlayGameListener();
 
 
-                    String imageName = "images/players/a" + 1 + "-curse.jpg";
+                    String imageName = "images/cards/cross.png";
                     Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
                     target.setImage(image);
 
