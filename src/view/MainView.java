@@ -22,12 +22,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Board;
+import model.Board.*;
+import model.Validator;
+import model.Validator.*;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
 	
-	public static int SCENE_WIDTH = 750;
-	public static int SCENE_HEIGHT = 550;
+	public static int SCENE_WIDTH = 860;
+	public static int SCENE_HEIGHT = 600;
 
 	public static void main(String[] args) {
 		
@@ -42,7 +46,20 @@ public class MainView extends Application {
 		welcomeView.displayView();
 		
 		stage.show();
-		
+		//Board aBoard = new Board.getInstance();
+		Board.getInstance().initBoard();
+		//aBoard.initBoard();
+
+		//Board.getInstance().getGameBoard();
+		//System.out.println(aBoard.getGameBoard()[0][0]);
+
+		Board.getInstance().setGameBoard(6, 3, 5);
+
+		Board.getInstance().printBoard();
+
+		System.out.println(Board.getInstance().getGameBoard(1, 1));
+
+
 	}
 
 }
