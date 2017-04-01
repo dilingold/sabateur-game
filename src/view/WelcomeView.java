@@ -45,14 +45,6 @@ public class WelcomeView {
 
 		//root.setGridLinesVisible(true);
 
-		try (InputStream is = Files.newInputStream(Paths.get("assets/images/above-adventure-aerial-air.jpg"))) {
-			ImageView img = new ImageView(new Image(is));
-
-		}
-		catch (IOException e) {
-			System.out.println("Couldnt Load Image");
-		}
-
 		stage.setTitle("G2 Sabateur");
 
 		createContent.Title title = new createContent.Title("S A B A T E U R");
@@ -63,7 +55,6 @@ public class WelcomeView {
 		});
 
 		createContent.MenuItem itemExit = new createContent.MenuItem("EXIT");
-		//itemExit.setOnMouseClicked(event -> System.exit(0));
 
 		createContent.MenuBox vbox = new createContent.MenuBox(
 				startGame,

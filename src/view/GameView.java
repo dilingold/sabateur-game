@@ -49,9 +49,6 @@ public class  GameView {
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
 		gameGrid.setGridLinesVisible(true);
 		
-		final int numCols = 7;
-		final int numRows = 7;
-		
 		VBox vbBoard = new VBox(10);
 		
 		Text boardText = new Text("Board");
@@ -61,19 +58,7 @@ public class  GameView {
 		vbBoard.getChildren().add(boardText);
 		
 		GridPane boardGrid = new GridPane();
-		
-		/*for (int i = 0; i < numCols; i++) {
-			
-			for (int j = 0; j < numRows; j++) {
-				
-				Button btn = new Button();
-				btn.setPrefHeight(60);
-				btn.setPrefWidth(60);
-				boardGrid.add(btn, i, j);
-				
-			}
-			
-		}*/
+
 		boardGrid.setGridLinesVisible(true);
 
         // Call the controller for the current gameboard to layout gameboard TEST
@@ -286,7 +271,7 @@ public class  GameView {
 
 
                     String imageName = "/resources/images/players/a" + index + "-curse.jpg";
-                    Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+                    Image image = new Image(getClass().getResourceAsStream(imageName));
                     target.setGraphic(new ImageView(image));
 
                     // Temp change players turn to test
