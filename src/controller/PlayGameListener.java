@@ -6,6 +6,7 @@ import model.Player;
 import model.PlayerInformation;
 import view.GameView;
 import model.totalPlayers;
+import java.util.Collections;
 
 public class PlayGameListener {
 	
@@ -27,20 +28,13 @@ public class PlayGameListener {
 
 	public String nextTurn(int position) {
 		if(position < PlayerInformation.getInstance().playerCount()) {
-			PlayerInformation.getInstance().getPlayerByName(PlayerName(position)).setIsTurn(true);
-			//PlayerInformation.getInstance().getPlayerByName(PlayerName(position-1)).setIsTurn(false);
+			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
 			return PlayerName(position);
 		}
 		else {
-			position = 0;
-			PlayerInformation.getInstance().getPlayerByName(PlayerName(position)).setIsTurn(true);
-			PlayerInformation.getInstance().getPlayerByName(PlayerName(PlayerInformation.getInstance().playerCount()-1)).setIsTurn(false);
+			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
 			return PlayerName(position);
 		}
-	}
-
-	public String getTurn() {
-		return PlayerInformation.getInstance().checkTurn();
 	}
 
 }

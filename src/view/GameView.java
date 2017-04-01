@@ -277,8 +277,7 @@ public class  GameView {
 
                     // Temp change players turn to test
                     playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
-                    System.out.println(playGameListener.getTurn());
-                    testTurn++;
+
 
                 }
 
@@ -320,9 +319,9 @@ public class  GameView {
                     target.setImage(image);
 
                     // Temp change players turn to test
-                    playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
-                    System.out.println(playGameListener.getTurn());
-                    testTurn++;
+                    playerText.setText(playGameListener.nextTurn(0) + " Hand");
+
+
 
                 }
 

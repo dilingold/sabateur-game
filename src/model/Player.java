@@ -9,6 +9,7 @@ public class Player {
     private boolean role;
     private String status = null;
     private boolean isTurn = false;
+    private int UID;
 
     // Constructor
     public Player (String PlayerName) {
@@ -16,6 +17,9 @@ public class Player {
         name = PlayerName;
     }
 
+    public int getUID(){return UID;}
+
+    public void setUID(int UID) {this.UID = UID;}
 
     public String getName() {
         return name;
@@ -31,10 +35,6 @@ public class Player {
 
     public void setRole(boolean role) {
         this.role = role;
-    }
-
-    public void setIsTurn(boolean myTurn) {
-        this.isTurn = myTurn;
     }
 
     public boolean getisTurn() {
