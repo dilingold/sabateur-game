@@ -1,10 +1,10 @@
 package model;
 
-public class totalPlayers {
+public class TotalPlayers {
 
     private int numPlayers;
 
-    public totalPlayers(int count) {
+    public TotalPlayers(int count) {
         numPlayers = count;
     }
 

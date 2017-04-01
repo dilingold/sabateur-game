@@ -12,7 +12,7 @@ public class AddPlayerListener {
 	// Need to access totalPlayers when PlayGameListener is called. / Load Game.
 
 	public int playerCount(int numPlayers, Stage stage) {
-		totalPlayers totalPlayers = new totalPlayers(numPlayers);
+		TotalPlayers totalPlayers = new TotalPlayers(numPlayers);
 		totalPlayers.setNumPlayers(numPlayers);
 		System.out.println(totalPlayers.getNumPlayers());
 		changeScene(totalPlayers.getNumPlayers(), stage);

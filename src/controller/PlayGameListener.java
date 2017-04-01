@@ -5,7 +5,7 @@ import model.Board;
 import model.Player;
 import model.PlayerInformation;
 import view.GameView;
-import model.totalPlayers;
+import model.TotalPlayers;
 import java.util.Collections;
 
 public class PlayGameListener {
