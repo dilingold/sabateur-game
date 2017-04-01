@@ -17,22 +17,17 @@ public class PlayerInformation {
     }
 
     public boolean createPlayers(String[] playerNames) {
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
 
-        // Old Code
-        /*for(int i = 0; i < playerNames.length; i++)
-        {
-            Player player = new Player(playerNames[i]);
-            players.add(player);
-        }*/
+        int i = 0;
         for(String pNames: playerNames) {
-            //System.out.println(pNames);
+
             Player player = new Player(pNames);
             players.add(player);
+            player.setUID(i);
             System.out.println(player.getName());
+            i++;
         }
-
-        players.get(0).setIsTurn(true);
 
         return true;
     }
@@ -57,19 +52,8 @@ public class PlayerInformation {
         return players.size();
     }
 
-    public void playersTurn() {
-
+    public ArrayList<Player> getPlayerList(){
+        return players;
     }
-
-    // test check whos turn
-    public String checkTurn() {
-        for(Player p: players) {
-            if(p.getisTurn() == true){
-                return p.getName();
-            }
-        }
-        return null;
-    }
-
 
 }
