@@ -1,6 +1,6 @@
-package model;
+package model.cards;
 
-public class EndPathCard extends PathCard{
+public class BlockPathCard extends PathCard {
 	
 	/*
 	 * For exits:
@@ -11,13 +11,14 @@ public class EndPathCard extends PathCard{
 	 */
 	
 	
-	public EndPathCard(int rotation){
+	public BlockPathCard(int rotation){
 		this.rotation = rotation;
 		
-		this.exits[0] = true;
+		this.exits[0] = false;
 		this.exits[1] = false;
 		this.exits[2] = false;
 		this.exits[3] = false;
 	}
-	
+
+
 }

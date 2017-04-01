@@ -1,4 +1,4 @@
-package model;
+package model.cards;
 
 public abstract class Card {
 	private int quantity;

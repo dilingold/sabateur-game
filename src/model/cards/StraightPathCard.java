@@ -1,6 +1,7 @@
-package model;
+package model.cards;
 
-public class LPathCard extends PathCard {
+public class StraightPathCard extends PathCard {
+	
 	/*
 	 * For exits:
 	 * exit 0 = left
@@ -10,12 +11,12 @@ public class LPathCard extends PathCard {
 	 */
 	
 	
-	public LPathCard(int rotation){
+	public StraightPathCard(int rotation){
 		this.rotation = rotation;
 		
 		this.exits[0] = true;
-		this.exits[1] = true;
-		this.exits[2] = false;
+		this.exits[1] = false;
+		this.exits[2] = true;
 		this.exits[3] = false;
 	}
 
