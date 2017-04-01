@@ -5,7 +5,7 @@
 
 .root {
 	/*-fx-background-image: url("../../assets/images/above-adventure-aerial-air.jpg");*/
-	-fx-background-image: url("/images/background/cave.png");
+	-fx-background-image: url("/resources/images/background/cave.png");
 	-fx-background-size: cover;
 }
 	
