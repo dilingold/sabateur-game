@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 /** Main class to store player name and all relevant details on each player.
  * Extend player hand here?
  */
@@ -8,13 +10,14 @@ public class Player {
     private String name;
     private boolean role;
     private String status = null;
-    private boolean isTurn = false;
     private int UID;
+    private Hand hand;
 
     // Constructor
-    public Player (String PlayerName) {
+    public Player (String PlayerName, Hand hand) {
 
         name = PlayerName;
+        this.hand = hand;
     }
 
     public int getUID(){return UID;}
@@ -37,7 +40,7 @@ public class Player {
         this.role = role;
     }
 
-    public boolean getisTurn() {
-        return isTurn;
-    }
+    public Hand getHand(){return hand;}
+
+    public void setHand(Hand hand){this.hand = hand;};
 }

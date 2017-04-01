@@ -24,6 +24,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Player;
+import model.PlayerInformation;
 
 public class  GameView {
 	
@@ -40,7 +42,8 @@ public class  GameView {
 	public void displayView(int totalPlayers, String[] playerNames) {
 		
 		stage.setTitle("Play Game");
-		
+		//PlayerInformation.getInstance().getPlayerByName("John").getHand().print();
+		PlayerInformation.getInstance().getPlayerByPosition().getHand().print();
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
 		gameGrid.setHgap(10);
