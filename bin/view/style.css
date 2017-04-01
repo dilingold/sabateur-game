@@ -5,7 +5,7 @@
 
 .root {
 	/*-fx-background-image: url("../../assets/images/above-adventure-aerial-air.jpg");*/
-	-fx-background-image: url("/images/background/above-adventure-aerial-air.jpg");
+	-fx-background-image: url("/images/background/cave.png");
 	-fx-background-size: cover;
 }
 	
@@ -44,4 +44,5 @@
 #title-test {
 	-fx-font-family: "TCCEB";
 	-fx-font-size: 30px;
+	-fx-background-color: white;
 }
