@@ -1,9 +1,13 @@
 package model;
 
+import model.cards.Card;
+
 /**
  * Created by johnny on 4/1/17.
  */
 public class Deal {
+
+    private int maxCards = 6;
 
 
 //    public void drawCard(Card card) {
@@ -11,11 +15,11 @@ public class Deal {
 //        hand.add(card);
 //    }
 
-    public void fillhand(Hand hand){
+    public void fillhand(Player player){
 
-        for(int i = 0; i<6; i++){
+        for(int i = 0; i<maxCards; i++){
 
-            //hand.addCard(i + 1);
+            player.getHand().addCard(Deck.getInstance().draw());
 
         }
 

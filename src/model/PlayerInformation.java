@@ -23,14 +23,14 @@ public class PlayerInformation {
         players = new ArrayList<>();
         //ArrayList<Card> hand  = new ArrayList<>();
         //Hand hand = new Hand();
-        //Deal deal = new Deal();
+        Deal deal = new Deal();
         int i = 0;
         for(String pNames: playerNames) {
             Hand hand = new Hand();
             Player player = new Player(pNames, hand);
             players.add(player);
             player.setUID(i);
-            player.getHand().addCard(Deck.getInstance().draw());
+            deal.fillhand(player);
             System.out.println(player.getName());
             player.getHand().print();
             i++;
