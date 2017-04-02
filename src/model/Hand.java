@@ -7,6 +7,8 @@ import java.util.List;
  * Created by johnny on 4/1/17.
  */
 import model.Deal;
+import model.cards.Card;
+
 public class Hand {
 
     //private List<Integer> hand;
@@ -15,14 +17,14 @@ public class Hand {
 
     }
 
-    List<Integer> hand  = new ArrayList<>();
+    ArrayList<Card> hand  = new ArrayList<>();
 
 
-    public List<Integer> getHand() {
+    public ArrayList<Card> getHand() {
         return hand;
     }
 
-    public void setHand(List<Integer> hand) {
+    public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
 
@@ -39,12 +41,12 @@ public class Hand {
         return hand.size();
     }
 
-    public void addCard(int cardType){
-        hand.add(cardType);
+    public void addCard(Card card){
+        hand.add(card);
     }
 
     public void print(){
-        for(int x : hand){
+        for(Card x : hand){
             System.out.println(x);
         }
     }

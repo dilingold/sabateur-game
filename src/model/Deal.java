@@ -15,7 +15,7 @@ public class Deal {
 
         for(int i = 0; i<6; i++){
 
-            hand.addCard(i + 1);
+            //hand.addCard(i + 1);
 
         }
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.cards.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +21,18 @@ public class PlayerInformation {
 
     public boolean createPlayers(String[] playerNames) {
         players = new ArrayList<>();
-        //List<Integer> hand  = new ArrayList<>();
-        Hand hand = new Hand();
-        Deal deal = new Deal();
+        //ArrayList<Card> hand  = new ArrayList<>();
+        //Hand hand = new Hand();
+        //Deal deal = new Deal();
         int i = 0;
         for(String pNames: playerNames) {
-
+            Hand hand = new Hand();
             Player player = new Player(pNames, hand);
             players.add(player);
             player.setUID(i);
-            deal.fillhand(player.getHand());
+            player.getHand().addCard(Deck.getInstance().draw());
             System.out.println(player.getName());
+            player.getHand().print();
             i++;
         }
 

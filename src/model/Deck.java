@@ -6,6 +6,11 @@ import java.util.Stack;
 import model.cards.*;
 
 public class Deck {
+	private static Deck ourInstance = new Deck();
+
+	public static Deck getInstance() {
+		return ourInstance;
+	}
 
 
 	private Stack<Card> deck = new Stack<Card>();

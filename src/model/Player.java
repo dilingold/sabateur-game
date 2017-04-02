@@ -11,7 +11,7 @@ public class Player {
     private boolean role;
     private String status = null;
     private int UID;
-    private Hand hand;
+    private Hand hand= null;
 
     // Constructor
     public Player (String PlayerName, Hand hand) {

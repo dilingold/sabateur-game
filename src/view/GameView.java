@@ -25,6 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Deck;
 import model.Player;
 import model.PlayerInformation;
 
@@ -41,6 +42,10 @@ public class  GameView {
 	}
 
 	public void displayView(int totalPlayers, String[] playerNames) {
+		System.out.println("PLAYER 2 HAND!!!");
+		PlayerInformation.getInstance().getPlayerList().get(1).getHand().print();
+
+		Deck.getInstance().printCards();
 
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
