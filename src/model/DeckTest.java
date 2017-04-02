@@ -8,9 +8,13 @@ public class DeckTest {
 		System.out.println("creating deck... ");
 		Deck myDeck = new Deck();
 		myDeck.printCards();
-		//myDeck.shuffle();
+		myDeck.shuffle();
 		System.out.println("shuffling... ");
-		System.out.println(myDeck);
+		myDeck.printCards();
+		System.out.println("Drawing all cards + 2 extra: ");
+		for(int i = 0; i<18; i ++){
+			System.out.println(myDeck.draw());
+		}
 		
 	}
 	
