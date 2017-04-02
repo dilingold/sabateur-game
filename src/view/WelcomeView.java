@@ -28,13 +28,13 @@ import java.nio.file.Paths;
 public class WelcomeView {
 
 	Stage stage;
-	
+
 	public WelcomeView(Stage stage) {
-		
+
 		this.stage = stage;
-		
+
 	}
-	
+
 	public void displayView() {
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER_LEFT);
@@ -44,14 +44,6 @@ public class WelcomeView {
 		root.setPrefSize(860, 600);
 
 		//root.setGridLinesVisible(true);
-
-		try (InputStream is = Files.newInputStream(Paths.get("assets/images/above-adventure-aerial-air.jpg"))) {
-			ImageView img = new ImageView(new Image(is));
-
-		}
-		catch (IOException e) {
-			System.out.println("Couldnt Load Image");
-		}
 
 		stage.setTitle("G2 Sabateur");
 
@@ -63,7 +55,6 @@ public class WelcomeView {
 		});
 
 		createContent.MenuItem itemExit = new createContent.MenuItem("EXIT");
-		//itemExit.setOnMouseClicked(event -> System.exit(0));
 
 		createContent.MenuBox vbox = new createContent.MenuBox(
 				startGame,
@@ -90,11 +81,11 @@ public class WelcomeView {
 				exitListener.closeWindow(stage);
 			}
 		});
-		
+
 		Scene scene = new Scene(root, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 		stage.setScene(scene);
 		scene.getStylesheets().add(MainView.class.getResource("style.css").toExternalForm());
-				
+
 	}
 
 }
