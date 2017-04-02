@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerInformation {
 
@@ -19,16 +18,13 @@ public class PlayerInformation {
 
     public boolean createPlayers(String[] playerNames) {
         players = new ArrayList<>();
-        //List<Integer> hand  = new ArrayList<>();
-        Hand hand = new Hand();
-        Deal deal = new Deal();
+
         int i = 0;
         for(String pNames: playerNames) {
 
-            Player player = new Player(pNames, hand);
+            Player player = new Player(pNames);
             players.add(player);
             player.setUID(i);
-            deal.fillhand(player.getHand());
             System.out.println(player.getName());
             i++;
         }
