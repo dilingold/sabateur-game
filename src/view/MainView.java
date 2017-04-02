@@ -24,8 +24,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Board;
 import model.Board.*;
+import model.PlayerInformation;
 import model.Validator;
 import model.Validator.*;
+import model.Hand;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
@@ -59,7 +61,7 @@ public class MainView extends Application {
 
 		System.out.println(Board.getInstance().getGameBoard(1, 1));
 
-
+		//PlayerInformation.getInstance().getPlayerByName().getHand().cardCount()
 	}
 
 }
