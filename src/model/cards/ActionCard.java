@@ -1,6 +1,6 @@
 package model.cards;
 
-public class ActionCard extends Card{
+public abstract class ActionCard extends Card{
 	
 	protected String effect;
 	

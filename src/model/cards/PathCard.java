@@ -1,6 +1,6 @@
 package model.cards;
 
-public class PathCard extends Card {
+public abstract class PathCard extends Card {
 	
 	protected int x;
 	protected int y;
