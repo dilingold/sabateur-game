@@ -97,7 +97,7 @@ public class AddPlayerView {
 		hbButtons.setPadding(new Insets(0, 0, 0, 0));
 		hbButtons.setAlignment(Pos.CENTER_LEFT);
 		hbButtons.setSpacing(50);
-		root.add(hbButtons, 0, 8, 2, 1);
+		root.add(hbButtons, 0, 8, 3, 1);
 		
 		VBox vBox = new VBox();
 		vBox.getChildren().add(root);
