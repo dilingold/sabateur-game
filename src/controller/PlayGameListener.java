@@ -27,14 +27,8 @@ public class PlayGameListener {
 	}
 
 	public String nextTurn(int position) {
-		if(position < PlayerInformation.getInstance().playerCount()) {
-			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
-			return PlayerName(position);
-		}
-		else {
-			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
-			return PlayerName(position);
-		}
+		Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
+		return PlayerName(position);
 	}
 
 }
