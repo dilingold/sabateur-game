@@ -43,8 +43,6 @@ public class  GameView {
 	public void displayView(int totalPlayers, String[] playerNames) {
 		
 		stage.setTitle("Play Game");
-		//PlayerInformation.getInstance().getPlayerByName("John").getHand().print();
-		PlayerInformation.getInstance().getPlayerByPosition().getHand().print();
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
 		gameGrid.setHgap(10);

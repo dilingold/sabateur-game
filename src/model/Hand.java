@@ -3,9 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by johnny on 4/1/17.
- */
 import model.Deal;
 public class Hand {
 
