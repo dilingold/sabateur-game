@@ -25,8 +25,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Player;
-import model.PlayerInformation;
 
 public class  GameView {
 	
@@ -43,6 +41,7 @@ public class  GameView {
 	public void displayView(int totalPlayers, String[] playerNames) {
 		
 		stage.setTitle("Play Game");
+		
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
 		gameGrid.setHgap(10);
@@ -142,13 +141,25 @@ public class  GameView {
 		roleBtn.setPrefWidth(70);
 		hbCards.getChildren().add(roleBtn);
 		
-		roleBtn.setOnAction(event ->  {
-			if (roleBtn.getText() == "Role") {
-				roleBtn.setText("Sabateur");
+		roleBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				if (roleBtn.getText() == "Role") {
+					
+					roleBtn.setText("Sabateur");
+					
+				}
+				
+				else {
+					
+					roleBtn.setText("Role");
+					
+				}
+				
 			}
-			else {
-				roleBtn.setText("Role");
-			}
+			
 		});
 		
 		for (int i = 0; i < 6; i++) {
@@ -158,6 +169,7 @@ public class  GameView {
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
 			hbCards.getChildren().add(btn);
+			
 		}
 		
 		vbCards.getChildren().add(hbCards);
@@ -170,12 +182,12 @@ public class  GameView {
 		playersText.setFill(Color.WHITE);
 		playersText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		vbPlayers.getChildren().add(playersText);
-
+		
 		int numPlayers = 6;
 
 		// No need to do for loop, Use for each player
 		/*for (int i = 0; i < totalPlayers; i++) {
-
+			
 			String imageName = "a" + (i+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 
@@ -184,7 +196,7 @@ public class  GameView {
 			makeDroppable(player, i+1);
 			player.setGraphic(new ImageView(image));
 			vbPlayers.getChildren().add(player);
-
+			
 		}*/
 
 		int k = 0;
@@ -200,26 +212,23 @@ public class  GameView {
 			k++;
 		}
 		
+		Text deckText = new Text("Deck");
+		GridPane.setHalignment(deckText, HPos.CENTER);
+		deckText.setFill(Color.WHITE);
+		deckText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		
 		Button deckButton = new Button("Deck");
 		deckButton.setPrefHeight(60);
 		deckButton.setPrefWidth(60);
-
-		Button discardButton = new Button("Discard");
-		//makeDroppable(discardButton, 1);
-		discardButton.setPrefHeight(60);
-		discardButton.setPrefWidth(60);
-
-		// Deck Area
-		HBox cardPile = new HBox();
-		cardPile.setSpacing(20);
-
-		cardPile.getChildren().addAll(discardButton, deckButton);
-		cardPile.setAlignment(Pos.CENTER);
-
+		
+		vbPlayers.getChildren().add(deckText);
+		vbPlayers.getChildren().add(deckButton);
+		
 		gameGrid.add(vbBoard, 0, 0);
 		gameGrid.add(vbCards, 0, 1);
 		gameGrid.add(vbPlayers, 2, 0, 1, 2);
-		gameGrid.add(cardPile, 2, 1, 1, 2);
+		gameGrid.add(deckText, 2, 1, 1, 2);
+		gameGrid.add(deckButton, 2, 1, 1, 2);
 		
 		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 		
@@ -229,62 +238,110 @@ public class  GameView {
 	}
 	
 	public void makeDraggable(Button btn) {
-		btn.setOnDragDetected(event -> {
-			Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
-			ClipboardContent content = new ClipboardContent();
-			content.putString(btn.getText());
-			db.setContent(content);
-			event.consume();
+		
+		btn.setOnDragDetected(new EventHandler<MouseEvent>() {
+			
+			public void handle(MouseEvent event) {
+				
+				Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
+				ClipboardContent content = new ClipboardContent();
+				content.putString(btn.getText());
+				db.setContent(content);
+				
+				event.consume();
+				
+			}
+			
 		});
 		
 	}
 	
 	public void makeDroppable(Label target, int index) {
 
-        target.setOnDragOver(event ->  {
-			if (event.getGestureSource() != target) {
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-			}
-			event.consume();
+        target.setOnDragOver(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                }
+
+                event.consume();
+
+            }
+
         });
 
-        target.setOnDragDropped(event ->  {
-			if (event.getGestureSource() != target) {
-				//target.setText("curse");
-				PlayGameListener playGameListener = new PlayGameListener();
+        target.setOnDragDropped(new EventHandler<DragEvent>() {
 
-				String imageName = "images/players/a" + index + "-curse.jpg";
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-				target.setGraphic(new ImageView(image));
+            public void handle(DragEvent event) {
 
-				// Temp change players turn to test
-				playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+                if (event.getGestureSource() != target) {
 
-			}
+                    //target.setText("curse");
+
+
+                    PlayGameListener playGameListener = new PlayGameListener();
+
+
+                    String imageName = "images/players/a" + index + "-curse.jpg";
+                    Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+                    target.setGraphic(new ImageView(image));
+
+                    // Temp change players turn to test
+                    playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+
+
+                }
+
+            }
 
         });
     };
     public void makeDroppableBoard(ImageView target) {
-        target.setOnDragOver(event ->  {
-			if (event.getGestureSource() != target) {
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-			}
-			event.consume();
+        target.setOnDragOver(new EventHandler<DragEvent>() {
+
+            public void handle(DragEvent event) {
+
+                if (event.getGestureSource() != target) {
+
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                }
+
+                event.consume();
+
+            }
+
         });
-        target.setOnDragDropped(event ->  {
-			if (event.getGestureSource() != target) {
 
-				//target.setText("curse");
+        target.setOnDragDropped(new EventHandler<DragEvent>() {
 
-				PlayGameListener playGameListener = new PlayGameListener();
+            public void handle(DragEvent event) {
 
-				String imageName = "images/cards/cross.png";
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-				target.setImage(image);
+                if (event.getGestureSource() != target) {
 
-				// Temp change players turn to test
-				playerText.setText(playGameListener.nextTurn(0) + " Hand");
-			}
+                    //target.setText("curse");
+
+
+                    PlayGameListener playGameListener = new PlayGameListener();
+
+
+                    String imageName = "images/cards/cross.png";
+                    Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+                    target.setImage(image);
+
+                    // Temp change players turn to test
+                    playerText.setText(playGameListener.nextTurn(0) + " Hand");
+
+
+
+                }
+
+            }
+
         });
 		
 	}
