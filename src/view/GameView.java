@@ -263,7 +263,7 @@ public class  GameView {
 				target.setGraphic(new ImageView(image));
 
 				// Temp change players turn to test
-				playerText.setText(playGameListener.nextTurn(testTurn) + " Hand");
+				playerText.setText(playGameListener.nextTurn(0) + " Hand");
 
 			}
 
