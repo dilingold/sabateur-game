@@ -11,24 +11,20 @@ import model.Deal;
 import model.cards.Card;
 
 public class Hand {
-
-    //private List<Integer> hand;
-	private Stack<Card> hand = new Stack<Card>();
 	
-	
-
     public Hand(){
 
     }
 
-    //ArrayList<Card> hand  = new ArrayList<>();
+    ArrayList<Card> hand  = new ArrayList<>();
 
 
-    /*
     public ArrayList<Card> getHand() {
         return hand;
     }
-
+    //removed - does not appear necessary for project
+    //left in in case we need in future.
+    /*
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
@@ -49,6 +45,7 @@ public class Hand {
     public void addCard(Card card){
         hand.add(card);
     }
+   
 
     public void print(){
         for(Card x : hand){
