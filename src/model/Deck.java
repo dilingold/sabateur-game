@@ -6,11 +6,6 @@ import java.util.Stack;
 import model.cards.*;
 
 public class Deck {
-	private static Deck ourInstance = new Deck();
-
-	public static Deck getInstance() {
-		return ourInstance;
-	}
 
 
 	private Stack<Card> deck = new Stack<Card>();
@@ -23,8 +18,6 @@ public class Deck {
 		addXPathCards(4);
 		addStraightPathCards(4);
 		addBlockPathCards(4);
-		addTPathCards(4);
-
 
 	}
 	public void shuffle(){
@@ -75,14 +68,6 @@ public class Deck {
 		for(int i = 0; i<totalCards; i++){
 			StraightPathCard straightCard = new StraightPathCard(0);
 			deck.push(straightCard);
-		}
-	}
-	private void addTPathCards(int totalCards){
-		System.out.println("addingTPC...");
-		for(int i = 0; i<totalCards; i++){
-			System.out.println("TPC added");
-			TPathCard tPathCard = new TPathCard(0);
-			deck.push(tPathCard);
 		}
 	}
 
