@@ -74,7 +74,7 @@ public class AddPlayerView {
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
 			addPlayerListener.createPlayers(playerNames);
 
-			playGameListener.changeScene(playerNames, stage);
+			playGameListener.changeScene(stage);
 
 		});
 

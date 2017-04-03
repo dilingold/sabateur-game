@@ -7,10 +7,11 @@ import java.util.Collections;
 
 public class PlayGameListener {
 	
-	public void changeScene(String[] pName, Stage stage) {
+	public void changeScene(Stage stage) {
 		
+		PlayerInformation players = PlayerInformation.getInstance();
 		GameView gameView = new GameView(stage);
-		gameView.displayView(PlayerInformation.getInstance().playerCount(), pName);
+		gameView.displayView(players.playerCount(), players.getPlayerList());
 	}
 
 	// Incomplete. The current players name

@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import controller.PlayGameListener;
 import controller.PlayerInformation;
 import javafx.event.ActionEvent;
@@ -41,7 +43,7 @@ public class  GameView {
 
 	}
 
-	public void displayView(int totalPlayers, String[] playerNames) {
+	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 		System.out.println("PLAYER 2 HAND!!!");
 		PlayerInformation.getInstance().getPlayerList().get(1).getHand().print();
 
@@ -193,10 +195,10 @@ public class  GameView {
 		}*/
 
 		int k = 0;
-		for(String player: playerNames) {
+		for(Player player: playerNames) {
 			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
-			Label pLabel = new Label(player);
+			Label pLabel = new Label(player.getName());
 			makeDroppable(pLabel, k+1);
 			pLabel.setMinWidth(150.0);
 			pLabel.setGraphic(new ImageView(image));
