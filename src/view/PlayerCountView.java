@@ -35,54 +35,18 @@ public class PlayerCountView {
 		
 		root.add(title, 0, 0, 1, 1);
 		root.add(subTitle, 0, 1, 1, 1);
-
-		createContent.MenuItem players3 = new createContent.MenuItem("3 PLAYERS");
-		players3.setOnMouseClicked(event -> {
+		
+		createContent.MenuBox vbox = new createContent.MenuBox();
+		
+		int i = 3;
+		while (i <= 6) {
 			
-			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.playerCount(3, stage);
+			createContent.MenuItem playersMenuItem = createPlayersMenuItem(i);
+			vbox.getChildren().add(playersMenuItem);
 			
-		});
-
-		createContent.MenuItem players4 = new createContent.MenuItem("4 PLAYERS");
-		players4.setOnMouseClicked(event -> {
-			
-			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.playerCount(4, stage);
-			
-		});
-
-		createContent.MenuItem players5 = new createContent.MenuItem("5 PLAYERS");
-		players5.setOnMouseClicked(event -> {
-			
-			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.playerCount(5, stage);
-			
-		});
-
-		createContent.MenuItem players6 = new createContent.MenuItem("6 PLAYERS");
-		players6.setOnMouseClicked(event -> {
-			
-			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.playerCount(6, stage);
-			
-		});
-
-		createContent.MenuItem returnMenu = new createContent.MenuItem("BACK");
-		returnMenu.setOnMouseClicked(event ->  {
-			
-				BackToWelcomeListener backListener = new BackToWelcomeListener();
-				backListener.backToWelcome(stage);
+			i++;
 				
-		});
-
-		createContent.MenuBox vbox = new createContent.MenuBox(
-				players3,
-				players4,
-				players5,
-				players6,
-				returnMenu
-		);
+		}
 
 		root.add(vbox, 0, 2);
 
@@ -91,6 +55,20 @@ public class PlayerCountView {
 		
 		stage.setScene(scene);
 		scene.getStylesheets().add(PlayerCountView.class.getResource("style.css").toExternalForm());
+		
+	}
+	
+	public createContent.MenuItem createPlayersMenuItem(int i) {
+		
+		createContent.MenuItem playersMenuItem = new createContent.MenuItem(i + " PLAYERS");
+		playersMenuItem.setOnMouseClicked(event -> {
+			
+			AddPlayerListener addPlayerListener = new AddPlayerListener();
+			addPlayerListener.playerCount(i, stage);
+			
+		});
+		
+		return playersMenuItem;
 		
 	}
 
