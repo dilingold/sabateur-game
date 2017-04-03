@@ -1,6 +1,7 @@
 package view;
 
 import controller.PlayGameListener;
+import controller.PlayerInformation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -27,7 +28,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Deck;
 import model.Player;
-import model.PlayerInformation;
 
 public class  GameView {
 
@@ -45,7 +45,7 @@ public class  GameView {
 		System.out.println("PLAYER 2 HAND!!!");
 		PlayerInformation.getInstance().getPlayerList().get(1).getHand().print();
 
-		Deck.getInstance().printCards();
+		//Deck.getInstance().printCards();
 
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();

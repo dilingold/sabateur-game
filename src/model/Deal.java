@@ -1,5 +1,6 @@
 package model;
 
+import controller.GameEngineT;
 import model.cards.Card;
 
 /**
@@ -15,11 +16,11 @@ public class Deal {
 //        hand.add(card);
 //    }
 
-    public void fillhand(Player player){
+    public void deal(Player player){
 
         for(int i = 0; i<maxCards; i++){
-
-            player.getHand().addCard(Deck.getInstance().draw());
+        	player.getHand().addCard(GameEngineT.deck.draw());
+            //player.getHand().addCard(Deck.getInstance().draw());
 
         }
 

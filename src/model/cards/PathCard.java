@@ -6,7 +6,7 @@ public abstract class PathCard extends Card {
 	protected int y;
 	protected Boolean [] exits = new Boolean [4];
 	protected int rotation = 0;
-	
+	private String type = "path";
 	
 	
 	public Boolean[] getExits(){

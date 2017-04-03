@@ -2,6 +2,7 @@ package model.cards;
 
 public abstract class Card {
 	private int quantity;
+	protected String type;
 	
 
 	public Card(){
@@ -14,6 +15,10 @@ public abstract class Card {
 	
 	public int getQuantity(){
 		return quantity;
+	}
+
+	public String type() {
+		return type;
 	}
 	
 }

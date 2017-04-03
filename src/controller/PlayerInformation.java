@@ -1,5 +1,8 @@
-package model;
+package controller;
 
+import model.Deal;
+import model.Hand;
+import model.Player;
 import model.cards.Card;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class PlayerInformation {
             Player player = new Player(pNames, hand);
             players.add(player);
             player.setUID(i);
-            deal.fillhand(player);
+            deal.deal(player);
             System.out.println(player.getName());
             player.getHand().print();
             i++;
