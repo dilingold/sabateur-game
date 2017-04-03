@@ -2,27 +2,13 @@ package view;
 
 import controller.AddPlayerListener;
 import controller.BackToWelcomeListener;
-import controller.PlayGameListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
-
 public class PlayerCountView {
-
-	private int numPlayers;
 
 	private Stage stage;
 
@@ -40,44 +26,54 @@ public class PlayerCountView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		//root.setGridLinesVisible(true);
 		
 		stage.setTitle("G2 Sabateur");
 
 		createContent.Title title = new createContent.Title("S A B A T E U R");
 
 		createContent.subTitle subTitle= new createContent.subTitle("How Many Players");
+		
 		root.add(title, 0, 0, 1, 1);
 		root.add(subTitle, 0, 1, 1, 1);
 
 		createContent.MenuItem players3 = new createContent.MenuItem("3 PLAYERS");
 		players3.setOnMouseClicked(event -> {
+			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
 			addPlayerListener.playerCount(3, stage);
+			
 		});
 
 		createContent.MenuItem players4 = new createContent.MenuItem("4 PLAYERS");
 		players4.setOnMouseClicked(event -> {
+			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
 			addPlayerListener.playerCount(4, stage);
+			
 		});
 
 		createContent.MenuItem players5 = new createContent.MenuItem("5 PLAYERS");
 		players5.setOnMouseClicked(event -> {
+			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
 			addPlayerListener.playerCount(5, stage);
+			
 		});
 
 		createContent.MenuItem players6 = new createContent.MenuItem("6 PLAYERS");
 		players6.setOnMouseClicked(event -> {
+			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
 			addPlayerListener.playerCount(6, stage);
+			
 		});
 
 		createContent.MenuItem returnMenu = new createContent.MenuItem("BACK");
 		returnMenu.setOnMouseClicked(event ->  {
+			
 				BackToWelcomeListener backListener = new BackToWelcomeListener();
 				backListener.backToWelcome(stage);
+				
 		});
 
 		createContent.MenuBox vbox = new createContent.MenuBox(

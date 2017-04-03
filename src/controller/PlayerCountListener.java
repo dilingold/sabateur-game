@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.stage.Stage;
-import view.AddPlayerView;
 import view.PlayerCountView;
 
 public class PlayerCountListener {
