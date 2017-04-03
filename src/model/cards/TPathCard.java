@@ -12,6 +12,7 @@ public class TPathCard extends PathCard {
 	
 	
 	public TPathCard(int rotation){
+		this.name = "T Path";
 		this.rotation = rotation;
 		
 		this.exits[0] = true;

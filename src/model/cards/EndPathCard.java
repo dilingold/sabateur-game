@@ -12,6 +12,7 @@ public class EndPathCard extends PathCard{
 	
 	
 	public EndPathCard(int rotation){
+		this.name = "End Path";
 		this.rotation = rotation;
 		
 		this.exits[0] = true;

@@ -8,6 +8,7 @@ public class BombCard extends ActionCard {
 	
 	
 	public BombCard(){
+		this.name = "Bomb";
 		this.effect = "disable";
 	}
 	

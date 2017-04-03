@@ -12,6 +12,7 @@ public class XPathCard extends PathCard {
 	
 	
 	public XPathCard(int rotation){
+		this.name = "X Path";
 		this.rotation = rotation;
 		
 		this.exits[0] = true;
