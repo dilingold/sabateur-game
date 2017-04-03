@@ -24,6 +24,7 @@ public class Deck {
 		addStraightPathCards(10);
 		addBlockPathCards(10);
 		addTPathCards(10);
+		shuffle();
 
 
 	}
