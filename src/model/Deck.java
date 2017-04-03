@@ -19,11 +19,11 @@ public class Deck {
 
 		//add the following cards to the deck
 		//where the passed int is the number of cards
-		addLPathCards(4);
-		addXPathCards(4);
-		addStraightPathCards(4);
-		addBlockPathCards(4);
-		addTPathCards(4);
+		addLPathCards(10);
+		addXPathCards(10);
+		addStraightPathCards(10);
+		addBlockPathCards(10);
+		addTPathCards(10);
 
 
 	}

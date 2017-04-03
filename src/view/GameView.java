@@ -45,8 +45,6 @@ public class  GameView {
 		
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
-		currentPlayer.getHand().print();
-
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
@@ -78,7 +76,6 @@ public class  GameView {
 				switch (currentBoard[k][i]) {
 				
 					case 0:
-						System.out.println("Empty");
 						Image image = new Image("/resources/images/board/empty.png");
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
@@ -121,7 +118,7 @@ public class  GameView {
 		vbBoard.getChildren().add(boardGrid);
 
 		// Call Controller on Player ones Hand.
-		playerText = new Text(playGameListener.PlayerName(0) + " Hand");
+		playerText = new Text(MainView.gameEngine.getCurrentPlayer().getName() + " Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		playerText.setFill(Color.WHITE);
 
@@ -214,7 +211,7 @@ public class  GameView {
 		
 		for (int i = 0; i < hand.cardCount(); i++) {
 			
-			String cardName = hand.getCards().get(0).getName();
+			String cardName = hand.getCards().get(i).getName();
 			String imageName = "/resources/images/cards/" + cardName + ".png";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Button btn = new Button();
