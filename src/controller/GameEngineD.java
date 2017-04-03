@@ -58,9 +58,17 @@ public class GameEngineD {
 		
 	}
 	
-	public void setCurrentPlayerIndex(int playerIndex) {
+	public Player nextPlayer() {
 		
-		currentPlayerIndex = playerIndex;
+		if (currentPlayerIndex == players.getPlayerList().size()-1) {
+			
+			currentPlayerIndex = 0;
+			
+		}
+		
+		else currentPlayerIndex++;
+		
+		return getCurrentPlayer();
 		
 	}
 	

@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 
 import controller.PlayGameListener;
-import controller.PlayerInformation;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,6 +32,9 @@ public class  GameView {
 	Text playerText = null;
 	Player currentPlayer;
 	private int draggedCardIndex;
+	private Button roleBtn;
+	private HBox hbCards;
+	private VBox vbCards;
 
 	public GameView(Stage stage) {
 
@@ -42,7 +44,6 @@ public class  GameView {
 
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 		
-		PlayerInformation players = PlayerInformation.getInstance();
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
 		currentPlayer.getHand().print();
@@ -125,14 +126,14 @@ public class  GameView {
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		playerText.setFill(Color.WHITE);
 
-		VBox vbCards = new VBox(10);
+		vbCards = new VBox(10);
 		vbCards.setAlignment(Pos.BOTTOM_CENTER);
 		vbCards.getChildren().add(playerText);
 
-		HBox hbCards = new HBox(10);
+		hbCards = new HBox(10);
 		hbCards.setAlignment(Pos.TOP_CENTER);
 
-		Button roleBtn = new Button("Role");
+		roleBtn = new Button("Role");
 		roleBtn.setPrefHeight(80);
 		roleBtn.setPrefWidth(70);
 		hbCards.getChildren().add(roleBtn);
@@ -153,22 +154,7 @@ public class  GameView {
 			
 		});
 		
-		Hand hand = currentPlayer.getHand();
-
-		for (int i = 0; i < hand.cardCount(); i++) {
-			
-			String cardName = hand.getCards().get(i).getName();
-			String imageName = "/resources/images/cards/" + cardName + ".png";
-			Image image = new Image(getClass().getResourceAsStream(imageName));
-			Button btn = new Button();
-			btn.setGraphic(new ImageView(image));
-			makeDraggable(btn, i);
-			btn.setPrefHeight(60);
-			btn.setPrefWidth(60);
-			hbCards.getChildren().add(btn);
-		}
-
-		vbCards.getChildren().add(hbCards);
+		displayHand();
 
 		VBox vbPlayers = new VBox(10);
 		vbPlayers.setAlignment(Pos.TOP_CENTER);
@@ -219,6 +205,33 @@ public class  GameView {
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
 
 	}
+	
+	public void displayHand() {
+		
+		HBox hb = new HBox(10);
+		hb.setAlignment(Pos.TOP_CENTER);
+		hb.getChildren().add(roleBtn);
+		
+		Hand hand = currentPlayer.getHand();
+		
+		for (int i = 0; i < hand.cardCount(); i++) {
+			
+			String cardName = hand.getCards().get(0).getName();
+			String imageName = "/resources/images/cards/" + cardName + ".png";
+			Image image = new Image(getClass().getResourceAsStream(imageName));
+			Button btn = new Button();
+			btn.setGraphic(new ImageView(image));
+			makeDraggable(btn, i);
+			btn.setPrefHeight(60);
+			btn.setPrefWidth(60);
+			hb.getChildren().add(btn);
+		
+		}
+		
+		vbCards.getChildren().add(hb);
+		hbCards = hb;
+		
+	}
 
 	public void makeDraggable(Button btn, int index) {
 		
@@ -253,15 +266,17 @@ public class  GameView {
 			
 			if (event.getGestureSource() != target) {
 
-				PlayGameListener playGameListener = new PlayGameListener();
-
 				String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
 				String imageName = "/resources/images/cards/" + draggedCardName + ".png";
+				System.out.println("/resources/images/cards/" + draggedCardName + ".png");
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				target.setImage(image);
 
 				// Temp change players turn to test
-				playerText.setText(playGameListener.nextTurn(0) + " Hand");
+				currentPlayer = MainView.gameEngine.nextPlayer();
+				playerText.setText(currentPlayer.getName() + " Hand");
+				vbCards.getChildren().remove(hbCards);
+				displayHand();
 				
 			}
 			
