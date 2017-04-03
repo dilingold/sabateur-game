@@ -16,11 +16,11 @@ public class Hand {
 
     }
 
-    ArrayList<Card> hand  = new ArrayList<>();
+    ArrayList<Card> cards  = new ArrayList<>();
 
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    public ArrayList<Card> getCards() {
+        return cards;
     }
     //removed - does not appear necessary for project
     //left in in case we need in future.
@@ -32,23 +32,23 @@ public class Hand {
 
     public boolean discardCard(int discardedCard){
 
-        hand.remove(discardedCard);
+        cards.remove(discardedCard);
 
         return true;
 
     }
 
     public int cardCount(){
-        return hand.size();
+        return cards.size();
     }
 
     public void addCard(Card card){
-        hand.add(card);
+        cards.add(card);
     }
    
 
     public void print(){
-        for(Card x : hand){
+        for(Card x : cards){
             System.out.println(x);
         }
     }
