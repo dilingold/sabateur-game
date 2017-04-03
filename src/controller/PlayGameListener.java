@@ -4,7 +4,6 @@ import javafx.stage.Stage;
 import model.Board;
 import model.Player;
 import view.GameView;
-import model.totalPlayers;
 import java.util.Collections;
 
 public class PlayGameListener {

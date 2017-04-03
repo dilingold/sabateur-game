@@ -21,8 +21,6 @@ import java.util.ArrayList;
 
 public class AddPlayerView {
 
-	private int numPlayers;
-
 	private Stage stage;
 
 	public AddPlayerView(Stage stage) {

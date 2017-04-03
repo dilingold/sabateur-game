@@ -63,7 +63,7 @@ public class PlayerCountView {
 		playersMenuItem.setOnMouseClicked(event -> {
 			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.playerCount(i, stage);
+			addPlayerListener.changeScene(i, stage);
 			
 		});
 		
