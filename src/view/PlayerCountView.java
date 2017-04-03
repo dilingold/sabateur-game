@@ -3,7 +3,6 @@ package view;
 import controller.AddPlayerListener;
 import controller.BackToWelcomeListener;
 import controller.PlayGameListener;
-import controller.createContent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;

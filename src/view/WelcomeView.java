@@ -1,7 +1,6 @@
 package view;
 
 import controller.PlayerCountListener;
-import controller.createContent;
 import controller.AddPlayerListener;
 import controller.ExitListener;
 import javafx.event.EventHandler;
@@ -42,8 +41,6 @@ public class WelcomeView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-
-		//root.setGridLinesVisible(true);
 
 		stage.setTitle("G2 Sabateur");
 
