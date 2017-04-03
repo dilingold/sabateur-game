@@ -31,6 +31,8 @@ public class  GameView {
 	private Stage stage;
 	int testTurn = 1;
 	Text playerText = null;
+	Player currentPlayer;
+	private int draggedCardIndex;
 
 	public GameView(Stage stage) {
 
@@ -41,7 +43,7 @@ public class  GameView {
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 		
 		PlayerInformation players = PlayerInformation.getInstance();
-		Player currentPlayer = MainView.gameEngine.getCurrentPlayer();
+		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
 		currentPlayer.getHand().print();
 
@@ -160,7 +162,7 @@ public class  GameView {
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Button btn = new Button();
 			btn.setGraphic(new ImageView(image));
-			makeDraggable(btn);
+			makeDraggable(btn, i);
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
 			hbCards.getChildren().add(btn);
@@ -218,10 +220,11 @@ public class  GameView {
 
 	}
 
-	public void makeDraggable(Button btn) {
+	public void makeDraggable(Button btn, int index) {
 		
 		btn.setOnDragDetected(event -> {
 			
+			draggedCardIndex = index;
 			Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
 			ClipboardContent content = new ClipboardContent();
 			content.putString(btn.getText());
@@ -252,7 +255,8 @@ public class  GameView {
 
 				PlayGameListener playGameListener = new PlayGameListener();
 
-				String imageName = "/resources/images/cards/cross.png";
+				String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
+				String imageName = "/resources/images/cards/" + draggedCardName + ".png";
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				target.setImage(image);
 
