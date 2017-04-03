@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Hand;
 import model.Player;
 
 public class  GameView {
@@ -101,7 +102,7 @@ public class  GameView {
 						boardGrid.add(coalPic, i, k);
 						break;
 					case 5:
-						Image startImage = new Image("/resources/images/cards/tcard.png");
+						Image startImage = new Image("/resources/images/cards/T Path.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
@@ -141,14 +142,24 @@ public class  GameView {
 				roleBtn.setText("Sabateur");
 				
 			}
+			
 			else {
+				
 				roleBtn.setText("Role");
+				
 			}
+			
 		});
+		
+		Hand hand = currentPlayer.getHand();
 
-		for (int i = 0; i < 6; i++) {
-
-			Button btn = new Button("Card " + i);
+		for (int i = 0; i < hand.cardCount(); i++) {
+			
+			String cardName = hand.getCards().get(i).getName();
+			String imageName = "/resources/images/cards/" + cardName + ".png";
+			Image image = new Image(getClass().getResourceAsStream(imageName));
+			Button btn = new Button();
+			btn.setGraphic(new ImageView(image));
 			makeDraggable(btn);
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
@@ -166,24 +177,9 @@ public class  GameView {
 		playersText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		vbPlayers.getChildren().add(playersText);
 
-		int numPlayers = 6;
-
-		// No need to do for loop, Use for each player
-		/*for (int i = 0; i < totalPlayers; i++) {
-
-			String imageName = "a" + (i+1) + ".jpg";
-			Image image = new Image(getClass().getResourceAsStream(imageName));
-
-
-			Label player = new Label("Player " + (i+1));
-			makeDroppable(player, i+1);
-			player.setGraphic(new ImageView(image));
-			vbPlayers.getChildren().add(player);
-
-		}*/
-
 		int k = 0;
 		for(Player player: playerNames) {
+			
 			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
@@ -192,6 +188,7 @@ public class  GameView {
 			pLabel.setGraphic(new ImageView(image));
 			vbPlayers.getChildren().add(pLabel);
 			k++;
+			
 		}
 
 		Button deckButton = new Button("Deck");
@@ -223,12 +220,15 @@ public class  GameView {
 	}
 
 	public void makeDraggable(Button btn) {
+		
 		btn.setOnDragDetected(event -> {
+			
 			Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
 			ClipboardContent content = new ClipboardContent();
 			content.putString(btn.getText());
 			db.setContent(content);
 			event.consume();
+			
 		});
 
 	}
@@ -236,14 +236,20 @@ public class  GameView {
 	public void makeDroppable(Label target, int index) {
 
 		target.setOnDragOver(event ->  {
+			
 			if (event.getGestureSource() != target) {
 				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+				
 			}
+			
 			event.consume();
+			
 		});
 
 		target.setOnDragDropped(event ->  {
+			
 			if (event.getGestureSource() != target) {
+				
 				PlayGameListener playGameListener = new PlayGameListener();
 
 				String imageName = "/resources/images/players/a" + index + "-curse.jpg";
@@ -257,14 +263,23 @@ public class  GameView {
 
 		});
 	};
+	
 	public void makeDroppableBoard(ImageView target) {
+		
 		target.setOnDragOver(event ->  {
+			
 			if (event.getGestureSource() != target) {
+				
 				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+				
 			}
+			
 			event.consume();
+			
 		});
+		
 		target.setOnDragDropped(event ->  {
+			
 			if (event.getGestureSource() != target) {
 
 				PlayGameListener playGameListener = new PlayGameListener();
@@ -275,7 +290,9 @@ public class  GameView {
 
 				// Temp change players turn to test
 				playerText.setText(playGameListener.nextTurn(0) + " Hand");
+				
 			}
+			
 		});
 
 	}
