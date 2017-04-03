@@ -28,9 +28,8 @@ import model.Player;
 public class  GameView {
 
 	private Stage stage;
-	int testTurn = 1;
-	Text playerText = null;
-	Player currentPlayer;
+	private Text playerText = null;
+	private Player currentPlayer;
 	private int draggedCardIndex;
 	private Button roleBtn;
 	private HBox hbCards;
@@ -183,7 +182,6 @@ public class  GameView {
 		deckButton.setPrefWidth(60);
 
 		Button discardButton = new Button("Discard");
-		//makeDroppable(discardButton, 1);
 		discardButton.setPrefHeight(60);
 		discardButton.setPrefWidth(60);
 
@@ -268,7 +266,6 @@ public class  GameView {
 
 				String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
 				String imageName = "/resources/images/cards/" + draggedCardName + ".png";
-				System.out.println("/resources/images/cards/" + draggedCardName + ".png");
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				target.setImage(image);
 
