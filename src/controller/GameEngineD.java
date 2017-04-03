@@ -2,6 +2,7 @@ package controller;
 
 import model.Board;
 import model.Deck;
+import model.Player;
 import view.MainView;
 
 public class GameEngineD {
@@ -51,15 +52,21 @@ public class GameEngineD {
 		
 	}
 	
-	public int getCurrentPlayer() {
+	public int getCurrentPlayerIndex() {
 		
 		return currentPlayerIndex;
 		
 	}
 	
-	public void setCurrentPlayer(int playerIndex) {
+	public void setCurrentPlayerIndex(int playerIndex) {
 		
 		currentPlayerIndex = playerIndex;
+		
+	}
+	
+	public Player getCurrentPlayer() {
+		
+		return players.getPlayerByPosition(currentPlayerIndex);
 		
 	}
 

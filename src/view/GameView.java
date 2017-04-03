@@ -4,21 +4,16 @@ import java.util.ArrayList;
 
 import controller.PlayGameListener;
 import controller.PlayerInformation;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,7 +23,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Deck;
 import model.Player;
 
 public class  GameView {
@@ -44,10 +38,11 @@ public class  GameView {
 	}
 
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
-		System.out.println("PLAYER 2 HAND!!!");
-		PlayerInformation.getInstance().getPlayerList().get(1).getHand().print();
+		
+		PlayerInformation players = PlayerInformation.getInstance();
+		Player currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
-		//Deck.getInstance().printCards();
+		currentPlayer.getHand().print();
 
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
@@ -56,9 +51,6 @@ public class  GameView {
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
 		gameGrid.setGridLinesVisible(true);
-
-		final int numCols = 7;
-		final int numRows = 7;
 
 		VBox vbBoard = new VBox(10);
 
@@ -70,27 +62,18 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		/*for (int i = 0; i < numCols; i++) {
-
-			for (int j = 0; j < numRows; j++) {
-
-				Button btn = new Button();
-				btn.setPrefHeight(60);
-				btn.setPrefWidth(60);
-				boardGrid.add(btn, i, j);
-
-			}
-
-		}*/
-		boardGrid.setGridLinesVisible(true);
-
 		// Call the controller for the current gameboard to layout gameboard TEST
 		PlayGameListener playGameListener = new PlayGameListener();
 		int[][] currentBoard = playGameListener.getCurrentBoard();
+		
 		for(int i = 0; i < 7; i++) {
+			
 			for(int k = 0; k < 7; k++) {
+				
 				System.out.println(currentBoard[i][k]);
+				
 				switch (currentBoard[k][i]) {
+				
 					case 0:
 						System.out.println("Empty");
 						Image image = new Image("/resources/images/board/empty.png");
@@ -109,7 +92,6 @@ public class  GameView {
 						goldPic.setImage(goldImage);
 						boardGrid.add(goldPic, i, k);
 						break;
-
 					case 2:
 						Image coalimage = new Image("/resources/images/board/coal.png");
 						ImageView coalPic = new ImageView();
@@ -118,7 +100,6 @@ public class  GameView {
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
 						break;
-
 					case 5:
 						Image startImage = new Image("/resources/images/cards/tcard.png");
 						ImageView startPic = new ImageView();
@@ -126,9 +107,13 @@ public class  GameView {
 						startPic.setFitHeight(60);
 						startPic.setImage(startImage);
 						boardGrid.add(startPic, i, k);
+						
 				}
+				
 			}
+			
 		}
+		
 		boardGrid.setAlignment(Pos.BOTTOM_CENTER);
 		vbBoard.getChildren().add(boardGrid);
 
@@ -150,8 +135,11 @@ public class  GameView {
 		hbCards.getChildren().add(roleBtn);
 
 		roleBtn.setOnAction(event ->  {
+			
 			if (roleBtn.getText() == "Role") {
+				
 				roleBtn.setText("Sabateur");
+				
 			}
 			else {
 				roleBtn.setText("Role");
