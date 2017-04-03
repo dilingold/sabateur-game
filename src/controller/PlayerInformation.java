@@ -53,8 +53,8 @@ public class PlayerInformation {
         return null;
     }
 
-    public String getPlayerByPosition(int position){
-        return players.get(position).getName();
+    public Player getPlayerByPosition(int position){
+        return players.get(position);
     }
 
     public int playerCount()

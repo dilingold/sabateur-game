@@ -17,7 +17,7 @@ public class PlayGameListener {
 
 	// Incomplete. The current players name
 	public String PlayerName(int position) {
-		return PlayerInformation.getInstance().getPlayerByPosition(position);
+		return PlayerInformation.getInstance().getPlayerByPosition(position).getName();
 
 	}
 

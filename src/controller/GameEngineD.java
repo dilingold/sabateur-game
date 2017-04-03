@@ -10,6 +10,7 @@ public class GameEngineD {
 	private Board board;
 	private PlayerInformation players;
 	private Deck deck;
+	private int currentPlayerIndex;
 	
 	public static void main(String[] args) {
 		
@@ -26,6 +27,7 @@ public class GameEngineD {
 		
 		players = PlayerInformation.getInstance();
 		deck = Deck.getInstance();
+		currentPlayerIndex = 0;
 		mainView = new MainView();
 		mainView.launchApp(this);
 		
@@ -46,6 +48,18 @@ public class GameEngineD {
 	public Deck getDeck() {
 		
 		return deck;
+		
+	}
+	
+	public int getCurrentPlayer() {
+		
+		return currentPlayerIndex;
+		
+	}
+	
+	public void setCurrentPlayer(int playerIndex) {
+		
+		currentPlayerIndex = playerIndex;
 		
 	}
 

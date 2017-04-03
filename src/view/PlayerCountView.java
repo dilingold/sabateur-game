@@ -1,7 +1,6 @@
 package view;
 
 import controller.AddPlayerListener;
-import controller.BackToWelcomeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
