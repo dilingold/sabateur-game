@@ -2,7 +2,6 @@ package view;
 
 import controller.GameEngineD;
 import javafx.application.Application;
-import model.Board;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
@@ -10,7 +9,7 @@ public class MainView extends Application {
 	public static int SCENE_WIDTH = 860;
 	public static int SCENE_HEIGHT = 600;
 	
-	private GameEngineD gameEngine;
+	public static GameEngineD gameEngine;
 
 	public void launchApp(GameEngineD gameEngine) {
 		
