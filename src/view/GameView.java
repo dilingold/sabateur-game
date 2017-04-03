@@ -91,7 +91,7 @@ public class  GameView {
 				switch (currentBoard[k][i]) {
 					case 0:
 						System.out.println("Empty");
-						Image image = new Image("/images/board/empty.png");
+						Image image = new Image("/resources/images/board/empty.png");
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
@@ -100,7 +100,7 @@ public class  GameView {
 						boardGrid.add(pic, i, k);
 						break;
 					case 1:
-						Image goldImage = new Image("/images/board/gold.png");
+						Image goldImage = new Image("/resources/images/board/gold.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -109,7 +109,7 @@ public class  GameView {
 						break;
 
 					case 2:
-						Image coalimage = new Image("/images/board/coal.png");
+						Image coalimage = new Image("/resources/images/board/coal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
@@ -118,7 +118,7 @@ public class  GameView {
 						break;
 
 					case 5:
-						Image startImage = new Image("/images/cards/tcard.png");
+						Image startImage = new Image("/resources/images/cards/tcard.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
@@ -194,9 +194,8 @@ public class  GameView {
 
 		int k = 0;
 		for(String player: playerNames) {
-			String imageName = "images/players/a" + (k+1) + ".jpg";
-			//Image image = new Image(getClass().getResourceAsStream(imageName));
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
+			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player);
 			makeDroppable(pLabel, k+1);
 			pLabel.setMinWidth(150.0);
@@ -255,11 +254,10 @@ public class  GameView {
 
 		target.setOnDragDropped(event ->  {
 			if (event.getGestureSource() != target) {
-				//target.setText("curse");
 				PlayGameListener playGameListener = new PlayGameListener();
 
-				String imageName = "images/players/a" + index + "-curse.jpg";
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+				String imageName = "/resources/images/players/a" + index + "-curse.jpg";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
 				target.setGraphic(new ImageView(image));
 
 				// Temp change players turn to test
@@ -279,12 +277,10 @@ public class  GameView {
 		target.setOnDragDropped(event ->  {
 			if (event.getGestureSource() != target) {
 
-				//target.setText("curse");
-
 				PlayGameListener playGameListener = new PlayGameListener();
 
-				String imageName = "images/cards/cross.png";
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+				String imageName = "/resources/images/cards/cross.png";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
 				target.setImage(image);
 
 				// Temp change players turn to test
