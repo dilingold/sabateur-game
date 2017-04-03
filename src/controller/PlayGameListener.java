@@ -2,7 +2,6 @@ package controller;
 
 import javafx.stage.Stage;
 import model.Board;
-import model.Player;
 import view.GameView;
 import java.util.Collections;
 
