@@ -183,7 +183,6 @@ public class  GameView {
 			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
-			makeDroppable(pLabel, k+1);
 			pLabel.setMinWidth(150.0);
 			pLabel.setGraphic(new ImageView(image));
 			vbPlayers.getChildren().add(pLabel);
@@ -232,37 +231,6 @@ public class  GameView {
 		});
 
 	}
-
-	public void makeDroppable(Label target, int index) {
-
-		target.setOnDragOver(event ->  {
-			
-			if (event.getGestureSource() != target) {
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				
-			}
-			
-			event.consume();
-			
-		});
-
-		target.setOnDragDropped(event ->  {
-			
-			if (event.getGestureSource() != target) {
-				
-				PlayGameListener playGameListener = new PlayGameListener();
-
-				String imageName = "/resources/images/players/a" + index + "-curse.jpg";
-				Image image = new Image(getClass().getResourceAsStream(imageName));
-				target.setGraphic(new ImageView(image));
-
-				// Temp change players turn to test
-				playerText.setText(playGameListener.nextTurn(0) + " Hand");
-
-			}
-
-		});
-	};
 	
 	public void makeDroppableBoard(ImageView target) {
 		
