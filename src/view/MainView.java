@@ -1,41 +1,21 @@
 package view;
 
-import java.awt.Color;
-
+import controller.GameEngineD;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import model.Board;
-import model.Board.*;
-import model.Validator;
-import model.Validator.*;
 import javafx.stage.Stage;
 
 public class MainView extends Application {
 	
 	public static int SCENE_WIDTH = 860;
 	public static int SCENE_HEIGHT = 600;
+	
+	private GameEngineD gameEngine;
 
-	public static void main(String[] args) {
+	public void launchApp(GameEngineD gameEngine) {
 		
-		launch(args);
+		this.gameEngine = gameEngine;
+		launch();
 
 	}
 	
@@ -46,19 +26,6 @@ public class MainView extends Application {
 		welcomeView.displayView();
 		
 		stage.show();
-		//Board aBoard = new Board.getInstance();
-		Board.getInstance().initBoard();
-		//aBoard.initBoard();
-
-		//Board.getInstance().getGameBoard();
-		//System.out.println(aBoard.getGameBoard()[0][0]);
-
-		Board.getInstance().setGameBoard(6, 3, 5);
-
-		Board.getInstance().printBoard();
-
-		System.out.println(Board.getInstance().getGameBoard(1, 1));
-
 
 	}
 
