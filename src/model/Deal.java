@@ -19,8 +19,8 @@ public class Deal {
     public void deal(Player player){
 
         for(int i = 0; i<maxCards; i++){
-        	player.getHand().addCard(GameEngineT.deck.draw());
-            //player.getHand().addCard(Deck.getInstance().draw());
+//        	player.getHand().addCard(GameEngineT.deck.draw());
+            player.getHand().addCard(Deck.getInstance().draw());
 
         }
 

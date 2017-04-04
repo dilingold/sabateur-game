@@ -15,17 +15,16 @@ public class Deck {
 
 	private Stack<Card> deck = new Stack<Card>();
 
-	public Deck(){
+	private Deck(){
 
 		//add the following cards to the deck
 		//where the passed int is the number of cards
 		addLPathCards(10);
 		addXPathCards(10);
 		addStraightPathCards(10);
-		addBlockPathCards(10);
+//		addBlockPathCards(10);
 		addTPathCards(10);
-
-
+		shuffle();
 	}
 	public void shuffle(){
 		//shuffle all cards in deck
