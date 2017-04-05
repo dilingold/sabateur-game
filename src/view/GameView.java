@@ -51,7 +51,7 @@ public class  GameView {
 		gameGrid.setHgap(10);
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
-		gameGrid.setGridLinesVisible(true);
+		gameGrid.setGridLinesVisible(false);
 
 		VBox vbBoard = new VBox(10);
 
@@ -85,7 +85,7 @@ public class  GameView {
 						boardGrid.add(pic, i, k);
 						break;
 					case 1:
-						Image goldImage = new Image("/resources/images/board/gold.png");
+						Image goldImage = new Image("/resources/images/board/goal.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -93,7 +93,7 @@ public class  GameView {
 						boardGrid.add(goldPic, i, k);
 						break;
 					case 2:
-						Image coalimage = new Image("/resources/images/board/coal.png");
+						Image coalimage = new Image("/resources/images/board/goal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
@@ -101,7 +101,7 @@ public class  GameView {
 						boardGrid.add(coalPic, i, k);
 						break;
 					case 5:
-						Image startImage = new Image("/resources/images/cards/T Path.png");
+						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
