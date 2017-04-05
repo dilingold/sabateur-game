@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class PlayerController {
 
     private ArrayList<Player> players = null;
-
     private static PlayerController ourInstance = new PlayerController();
 
     public static PlayerController getInstance() {
@@ -41,19 +40,6 @@ public class PlayerController {
         }
 
         return true;
-        
-    }
-
-    public Player getPlayerByName(String name) {
-    	
-        for (int i = 0; i < players.size(); i++) {
-        	
-            if (players.get(i).getName().equals(name))
-                return players.get(i);
-            
-        }
-
-        return null;
         
     }
 

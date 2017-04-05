@@ -2,7 +2,6 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.PlayGameListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,8 +62,7 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		PlayGameListener playGameListener = new PlayGameListener();
-		int[][] currentBoard = playGameListener.getCurrentBoard();
+		int[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
 		
 		for(int i = 0; i < 7; i++) {
 			
