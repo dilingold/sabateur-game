@@ -63,16 +63,13 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		// Call the controller for the current gameboard to layout gameboard TEST
 		PlayGameListener playGameListener = new PlayGameListener();
 		int[][] currentBoard = playGameListener.getCurrentBoard();
 		
 		for(int i = 0; i < 7; i++) {
 			
 			for(int k = 0; k < 7; k++) {
-				
-				System.out.println(currentBoard[i][k]);
-				
+								
 				switch (currentBoard[k][i]) {
 				
 					case 0:
@@ -174,25 +171,28 @@ public class  GameView {
 			
 		}
 
-		Button deckButton = new Button("Deck");
-		deckButton.setPrefHeight(60);
-		deckButton.setPrefWidth(60);
-
-		Button discardButton = new Button("Discard");
-		discardButton.setPrefHeight(60);
-		discardButton.setPrefWidth(60);
+		Text discardText = new Text("Discard");
+		discardText.setFill(Color.WHITE);
+		discardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		
+		Label discardIcon = new Label();
+		discardIcon.setPrefHeight(60);
+		discardIcon.setPrefWidth(60);
+		Image image = new Image(getClass().getResourceAsStream("/resources/images/board/discard.png"));
+		discardIcon.setGraphic(new ImageView(image));
 
 		// Deck Area
-		HBox cardPile = new HBox();
-		cardPile.setSpacing(20);
+		VBox vbDiscard = new VBox();
+		vbDiscard.setSpacing(10);
 
-		cardPile.getChildren().addAll(discardButton, deckButton);
-		cardPile.setAlignment(Pos.CENTER);
+		vbDiscard.getChildren().add(discardText);
+		vbDiscard.getChildren().add(discardIcon);
+		vbDiscard.setAlignment(Pos.CENTER);
 
 		gameGrid.add(vbBoard, 0, 0);
 		gameGrid.add(vbCards, 0, 1);
 		gameGrid.add(vbPlayers, 2, 0, 1, 2);
-		gameGrid.add(cardPile, 2, 1, 1, 2);
+		gameGrid.add(vbDiscard, 2, 1, 1, 2);
 
 		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 
