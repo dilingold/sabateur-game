@@ -9,14 +9,14 @@ public class PlayGameListener {
 	
 	public void changeScene(Stage stage) {
 		
-		PlayerInformation players = PlayerInformation.getInstance();
+		PlayerController players = PlayerController.getInstance();
 		GameView gameView = new GameView(stage);
 		gameView.displayView(players.playerCount(), players.getPlayerList());
 	}
 
 	// Incomplete. The current players name
 	public String PlayerName(int position) {
-		return PlayerInformation.getInstance().getPlayerByPosition(position).getName();
+		return PlayerController.getInstance().getPlayerByPosition(position).getName();
 
 	}
 
@@ -25,12 +25,12 @@ public class PlayGameListener {
 	}
 
 	public String nextTurn(int position) {
-		if(position < PlayerInformation.getInstance().playerCount()) {
-			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
+		if(position < PlayerController.getInstance().playerCount()) {
+			Collections.rotate(PlayerController.getInstance().getPlayerList(), -1);
 			return PlayerName(position);
 		}
 		else {
-			Collections.rotate(PlayerInformation.getInstance().getPlayerList(), -1);
+			Collections.rotate(PlayerController.getInstance().getPlayerList(), -1);
 			return PlayerName(position);
 		}
 	}

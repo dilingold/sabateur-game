@@ -5,28 +5,28 @@ import model.Deck;
 import model.Player;
 import view.MainView;
 
-public class GameEngineD {
+public class GameEngine {
 	
 	private MainView mainView;
 	private Board board;
-	private PlayerInformation players;
+	private PlayerController players;
 	private Deck deck;
 	private int currentPlayerIndex;
 	
 	public static void main(String[] args) {
 		
-		new GameEngineD();
+		new GameEngine();
 
 	}
 	
-	public GameEngineD() {
+	public GameEngine() {
 		
 		//setup board
 		board = Board.getInstance();
 		board.initBoard();
 		board.setGameBoard(6, 3, 5);
 		
-		players = PlayerInformation.getInstance();
+		players = PlayerController.getInstance();
 		deck = Deck.getInstance();
 		currentPlayerIndex = 0;
 		mainView = new MainView();
@@ -40,7 +40,7 @@ public class GameEngineD {
 		
 	}
 	
-	public PlayerInformation getPlayers() {
+	public PlayerController getPlayers() {
 		
 		return players;
 		

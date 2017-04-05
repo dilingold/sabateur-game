@@ -1,6 +1,5 @@
 package controller;
 
-import model.Deal;
 import model.Hand;
 import model.Player;
 import model.cards.Card;
@@ -8,17 +7,17 @@ import model.cards.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerInformation {
+public class PlayerController {
 
     private ArrayList<Player> players = null;
 
-    private static PlayerInformation ourInstance = new PlayerInformation();
+    private static PlayerController ourInstance = new PlayerController();
 
-    public static PlayerInformation getInstance() {
+    public static PlayerController getInstance() {
         return ourInstance;
     }
 
-    private PlayerInformation() {
+    private PlayerController() {
 
     }
 

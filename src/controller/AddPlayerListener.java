@@ -8,7 +8,7 @@ public class AddPlayerListener {
 
 	public void createPlayers(String[] players) {
 		
-		PlayerInformation.getInstance().createPlayers(players);
+		PlayerController.getInstance().createPlayers(players);
 
 	}
 	
