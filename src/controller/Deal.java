@@ -1,6 +1,7 @@
-package model;
+package controller;
 
-import controller.GameEngineT;
+import model.Deck;
+import model.Player;
 import model.cards.Card;
 
 /**
