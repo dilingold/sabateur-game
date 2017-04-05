@@ -11,7 +11,8 @@ public class StraightPathCard extends PathCard {
 	 */
 	
 	
-	public StraightPathCard(int rotation){
+	public StraightPathCard(int rotation) {
+		
 		this.name = "Straight Path";
 		this.rotation = rotation;
 		
@@ -19,6 +20,7 @@ public class StraightPathCard extends PathCard {
 		this.exits[1] = false;
 		this.exits[2] = true;
 		this.exits[3] = false;
+		
 	}
 
 }

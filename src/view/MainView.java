@@ -13,7 +13,7 @@ public class MainView extends Application {
 
 	public void launchApp(GameEngine gameEngine) {
 		
-		this.gameEngine = gameEngine;
+		MainView.gameEngine = gameEngine;
 		launch();
 
 	}
