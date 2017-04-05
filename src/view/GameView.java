@@ -2,6 +2,8 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.DragCardListener;
+import controller.DropListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,9 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -230,12 +229,9 @@ public class  GameView {
 		
 		btn.setOnDragDetected(event -> {
 			
+			DragCardListener dragListener = new DragCardListener();
+			dragListener.dragCard(btn, event);
 			draggedCardIndex = index;
-			Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
-			ClipboardContent content = new ClipboardContent();
-			content.putString(btn.getText());
-			db.setContent(content);
-			event.consume();
 			
 		});
 
@@ -243,37 +239,30 @@ public class  GameView {
 	
 	public void makeDroppableBoard(ImageView target) {
 		
+		DropListener dropListener = new DropListener();
+		
 		target.setOnDragOver(event ->  {
 			
-			if (event.getGestureSource() != target) {
-				
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				
-			}
-			
-			event.consume();
+			dropListener.dragOver(event, target);
 			
 		});
 		
 		target.setOnDragDropped(event ->  {
-			
-			if (event.getGestureSource() != target) {
 
-				String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
-				String imageName = "/resources/images/cards/" + draggedCardName + ".png";
-				Image image = new Image(getClass().getResourceAsStream(imageName));
-				target.setImage(image);
-
-				// Temp change players turn to test
-				currentPlayer = MainView.gameEngine.nextPlayer();
-				playerText.setText(currentPlayer.getName() + " Hand");
-				vbCards.getChildren().remove(hbCards);
-				displayHand();
-				
-			}
+			dropListener.drop(event, currentPlayer, draggedCardIndex, target);
+			nextTurn();
 			
 		});
 
+	}
+	
+	public void nextTurn() {
+		
+		currentPlayer = MainView.gameEngine.nextPlayer();
+		playerText.setText(currentPlayer.getName() + " Hand");
+		vbCards.getChildren().remove(hbCards);
+		displayHand();
+		
 	}
 
 }
