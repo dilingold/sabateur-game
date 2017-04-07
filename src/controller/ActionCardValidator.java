@@ -4,11 +4,7 @@ import model.cards.Card;
 /**
  * Created by johnny on 3/30/17.
  */
-public class Validator {
-
-    public Validator() {
-        
-    }
+public class ActionCardValidator {
     
     public boolean checkMove(Card card, int row, int column) {
     	
