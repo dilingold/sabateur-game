@@ -1,27 +1,39 @@
 package model.cards;
 
 public abstract class Card {
+	
 	private int quantity;
 	protected String type;
-	protected String name = "Card";
+	protected String name;
 
-	public Card(){
+	public Card() {
+		
+		name = "card";
 		
 	}
 	
-	public void changeQuantity(int amount){
+	public void changeQuantity(int amount) {
+		
 		quantity = quantity + amount;
+		
 	}
 	
-	public int getQuantity(){
+	public int getQuantity() {
+		
 		return quantity;
+		
 	}
 
 	public String type() {
+		
 		return type;
+		
 	}
-	public String getName(){
+	
+	public String getName() {
+		
 		return name;
+		
 	}
 	
 }

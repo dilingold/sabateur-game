@@ -5,7 +5,7 @@
 
 .root {
 	/*-fx-background-image: url("../../assets/images/above-adventure-aerial-air.jpg");*/
-	-fx-background-image: url("/images/background/cave.png");
+	-fx-background-image: url("/resources/images/background/cave.png");
 	-fx-background-size: cover;
 }
 	
@@ -33,12 +33,11 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: linear-gradient(GRAY, WHITE);
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-background-color: linear-gradient(WHITE, GRAY);
 }
 
 #title-test {

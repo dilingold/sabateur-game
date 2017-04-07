@@ -11,7 +11,8 @@ public class BlockPathCard extends PathCard {
 	 */
 	
 	
-	public BlockPathCard(int rotation){
+	public BlockPathCard(int rotation) {
+		
 		this.name = "Block Path";
 		this.rotation = rotation;
 		
@@ -19,7 +20,7 @@ public class BlockPathCard extends PathCard {
 		this.exits[1] = false;
 		this.exits[2] = false;
 		this.exits[3] = false;
+		
 	}
-
 
 }

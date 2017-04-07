@@ -1,27 +1,19 @@
 package view;
 
 import controller.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class AddPlayerView {
-
-	private int numPlayers;
 
 	private Stage stage;
 
@@ -39,7 +31,6 @@ public class AddPlayerView {
 		root.setVgap(10);
 		root.setPadding(new Insets(25, 25, 25, 85));
 		root.setPrefSize(860, 600);
-		//root.setGridLinesVisible(true);
 
 		stage.setTitle("G2 Sabateur");
 
@@ -50,10 +41,9 @@ public class AddPlayerView {
 		root.add(subTitle, 0, 1, 2, 1);
 
 		ArrayList<TextField> nameList = new ArrayList<TextField>();
-		String[] pName = new String[totalPlayers];
+		String[] playerNames = new String[totalPlayers];
 		int rowIndex = 1;
 		for (int i = 0; i < totalPlayers; i++) {
-
 
 			Label name = new Label(i+1 + ". Player Name");
 			root.add(name, 0, rowIndex+1);
@@ -62,6 +52,7 @@ public class AddPlayerView {
 			nameList.add(nameTextField);
 			root.add(nameTextField, 1, rowIndex+1);
 			rowIndex++;
+			
 		}
 
 		createContent.MenuItem playBtn = new createContent.MenuItem("PLAY");
@@ -71,16 +62,19 @@ public class AddPlayerView {
 		playBtn.setOnMouseClicked(event ->  {
 
 			PlayGameListener playGameListener = new PlayGameListener();
+			
 			int i = 0;
 			for (TextField field : nameList) {
-				pName[i] = field.getText();
-				//System.out.println(pName[i]);
+				
+				playerNames[i] = field.getText();
 				i++;
+				
 			}
+			
 			AddPlayerListener addPlayerListener = new AddPlayerListener();
-			addPlayerListener.createPlayer(pName);
+			addPlayerListener.createPlayers(playerNames);
 
-			playGameListener.changeScene(pName, stage);
+			playGameListener.changeScene(stage);
 
 		});
 
