@@ -24,14 +24,14 @@ public class GameEngine {
 
 		//setup board
 		EndPathCard card = new EndPathCard(1);
-		int column = 6;
-		int row = 3;
+		int column = 3;
+		int row = 6;
 
 		board = Board.getInstance();
 		board.initBoard();
 		Treasure setTreasure = new Treasure();
 		setTreasure.setTreasure();
-		board.setGameBoard(column,row,card);
+		board.setGameBoard(row,column,card);
 		
 		players = PlayerController.getInstance();
 		deck = Deck.getInstance();
