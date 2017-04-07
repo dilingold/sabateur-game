@@ -1,8 +1,8 @@
 package model.cards;
 
-public class BlankCard extends BoardCard {
+public class EmptyCard extends BoardCard {
 
-	public BlankCard() {
+	public EmptyCard() {
 		this.type = "blank";
 		this.name = "blank card";
 	}
