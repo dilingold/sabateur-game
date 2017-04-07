@@ -1,5 +1,5 @@
 
-package model;
+package Tests;
 
 public class DeckTest {
 
