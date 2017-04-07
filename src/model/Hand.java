@@ -1,33 +1,26 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
-import controller.Deal;
 import model.cards.Card;
 
 public class Hand {
 	
+	ArrayList<Card> cards;
+	
     public Hand(){
+    	
+    	cards = new ArrayList<>();
 
     }
-
-    ArrayList<Card> cards  = new ArrayList<>();
-
 
     public ArrayList<Card> getCards() {
+    	
         return cards;
+        
     }
-    //removed - does not appear necessary for project
-    //left in in case we need in future.
-    /*
-    public void setHand(ArrayList<Card> hand) {
-        this.hand = hand;
-    }
-    */
 
-    public boolean discardCard(int discardedCard){
+    public boolean discardCard(int discardedCard) {
 
         cards.remove(discardedCard);
 
@@ -35,21 +28,26 @@ public class Hand {
 
     }
 
-    public int cardCount(){
+    public int cardCount() {
+    	
         return cards.size();
+        
     }
 
-    public void addCard(Card card){
+    public void addCard(Card card) {
+    	
         cards.add(card);
+        
     }
    
-
-    public void print(){
-        for(Card x : cards){
+    public void print() {
+    	
+        for(Card x : cards) {
+        	
             System.out.println(x);
+            
         }
+        
     }
-
-
 
 }

@@ -2,7 +2,8 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.PlayGameListener;
+import controller.DragCardListener;
+import controller.DropListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,9 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -51,7 +49,7 @@ public class  GameView {
 		gameGrid.setHgap(10);
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
-		gameGrid.setGridLinesVisible(true);
+		gameGrid.setGridLinesVisible(false);
 
 		VBox vbBoard = new VBox(10);
 
@@ -63,16 +61,12 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		// Call the controller for the current gameboard to layout gameboard TEST
-		PlayGameListener playGameListener = new PlayGameListener();
-		int[][] currentBoard = playGameListener.getCurrentBoard();
+		int[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
 		
 		for(int i = 0; i < 7; i++) {
 			
 			for(int k = 0; k < 7; k++) {
-				
-				System.out.println(currentBoard[i][k]);
-				
+								
 				switch (currentBoard[k][i]) {
 				
 					case 0:
@@ -85,7 +79,7 @@ public class  GameView {
 						boardGrid.add(pic, i, k);
 						break;
 					case 1:
-						Image goldImage = new Image("/resources/images/board/gold.png");
+						Image goldImage = new Image("/resources/images/board/goal.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -93,7 +87,7 @@ public class  GameView {
 						boardGrid.add(goldPic, i, k);
 						break;
 					case 2:
-						Image coalimage = new Image("/resources/images/board/coal.png");
+						Image coalimage = new Image("/resources/images/board/goal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
@@ -101,7 +95,7 @@ public class  GameView {
 						boardGrid.add(coalPic, i, k);
 						break;
 					case 5:
-						Image startImage = new Image("/resources/images/cards/T Path.png");
+						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
@@ -174,25 +168,28 @@ public class  GameView {
 			
 		}
 
-		Button deckButton = new Button("Deck");
-		deckButton.setPrefHeight(60);
-		deckButton.setPrefWidth(60);
-
-		Button discardButton = new Button("Discard");
-		discardButton.setPrefHeight(60);
-		discardButton.setPrefWidth(60);
+		Text discardText = new Text("Discard");
+		discardText.setFill(Color.WHITE);
+		discardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		
+		Label discardIcon = new Label();
+		discardIcon.setPrefHeight(60);
+		discardIcon.setPrefWidth(60);
+		Image image = new Image(getClass().getResourceAsStream("/resources/images/board/discard.png"));
+		discardIcon.setGraphic(new ImageView(image));
 
 		// Deck Area
-		HBox cardPile = new HBox();
-		cardPile.setSpacing(20);
+		VBox vbDiscard = new VBox();
+		vbDiscard.setSpacing(10);
 
-		cardPile.getChildren().addAll(discardButton, deckButton);
-		cardPile.setAlignment(Pos.CENTER);
+		vbDiscard.getChildren().add(discardText);
+		vbDiscard.getChildren().add(discardIcon);
+		vbDiscard.setAlignment(Pos.CENTER);
 
 		gameGrid.add(vbBoard, 0, 0);
 		gameGrid.add(vbCards, 0, 1);
 		gameGrid.add(vbPlayers, 2, 0, 1, 2);
-		gameGrid.add(cardPile, 2, 1, 1, 2);
+		gameGrid.add(vbDiscard, 2, 1, 1, 2);
 
 		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 
@@ -232,12 +229,9 @@ public class  GameView {
 		
 		btn.setOnDragDetected(event -> {
 			
+			DragCardListener dragListener = new DragCardListener();
+			dragListener.dragCard(btn, event);
 			draggedCardIndex = index;
-			Dragboard db = btn.startDragAndDrop(TransferMode.COPY_OR_MOVE);
-			ClipboardContent content = new ClipboardContent();
-			content.putString(btn.getText());
-			db.setContent(content);
-			event.consume();
 			
 		});
 
@@ -245,37 +239,30 @@ public class  GameView {
 	
 	public void makeDroppableBoard(ImageView target) {
 		
+		DropListener dropListener = new DropListener();
+		
 		target.setOnDragOver(event ->  {
 			
-			if (event.getGestureSource() != target) {
-				
-				event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				
-			}
-			
-			event.consume();
+			dropListener.dragOver(event, target);
 			
 		});
 		
 		target.setOnDragDropped(event ->  {
-			
-			if (event.getGestureSource() != target) {
 
-				String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
-				String imageName = "/resources/images/cards/" + draggedCardName + ".png";
-				Image image = new Image(getClass().getResourceAsStream(imageName));
-				target.setImage(image);
-
-				// Temp change players turn to test
-				currentPlayer = MainView.gameEngine.nextPlayer();
-				playerText.setText(currentPlayer.getName() + " Hand");
-				vbCards.getChildren().remove(hbCards);
-				displayHand();
-				
-			}
+			dropListener.drop(event, currentPlayer, draggedCardIndex, target);
+			nextTurn();
 			
 		});
 
+	}
+	
+	public void nextTurn() {
+		
+		currentPlayer = MainView.gameEngine.nextPlayer();
+		playerText.setText(currentPlayer.getName() + " Hand");
+		vbCards.getChildren().remove(hbCards);
+		displayHand();
+		
 	}
 
 }

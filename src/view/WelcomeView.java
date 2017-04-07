@@ -10,11 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-/** NOTE: Perhaps Instead of constantly changing stages have one stage for the menu navigation
- * have them all in the single stage and switch scenes. Changing stages will resize the window
- * regardless if they changed it previously. JavaFX has a section on scene switching instead of stage switching.
- */
-
 public class WelcomeView {
 
 	Stage stage;
