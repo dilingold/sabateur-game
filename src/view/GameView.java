@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Hand;
 import model.Player;
+import model.cards.*;
 
 public class  GameView {
 
@@ -40,7 +41,7 @@ public class  GameView {
 	}
 
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
-		
+
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
 		stage.setTitle("Play Game");
@@ -61,15 +62,15 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		int[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
-		
+		Card[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
+
 		for(int i = 0; i < 7; i++) {
-			
+
 			for(int k = 0; k < 7; k++) {
-								
-				switch (currentBoard[k][i]) {
-				
-					case 0:
+
+				switch (currentBoard[k][i].getName()) {
+
+					case "blank card":
 						Image image = new Image("/resources/images/board/empty.png");
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
@@ -78,7 +79,7 @@ public class  GameView {
 						makeDroppableBoard(pic);
 						boardGrid.add(pic, i, k);
 						break;
-					case 1:
+					case "gold":
 						Image goldImage = new Image("/resources/images/board/goal.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
@@ -86,7 +87,7 @@ public class  GameView {
 						goldPic.setImage(goldImage);
 						boardGrid.add(goldPic, i, k);
 						break;
-					case 2:
+					case "stone":
 						Image coalimage = new Image("/resources/images/board/goal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
@@ -94,7 +95,7 @@ public class  GameView {
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
 						break;
-					case 5:
+					case "End Path":
 						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);

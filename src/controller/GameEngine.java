@@ -4,27 +4,34 @@ import model.Board;
 import model.Deck;
 import model.Player;
 import view.MainView;
-
+import model.cards.*;
+import model.Treasure;
 public class GameEngine {
-	
+
 	private MainView mainView;
 	private Board board;
 	private PlayerController players;
 	private Deck deck;
 	private int currentPlayerIndex;
-	
+
 	public static void main(String[] args) {
-		
+
 		new GameEngine();
 
 	}
-	
+
 	public GameEngine() {
-		
+
 		//setup board
+		EndPathCard card = new EndPathCard(1);
+		int column = 6;
+		int row = 3;
+
 		board = Board.getInstance();
 		board.initBoard();
-		board.setGameBoard(6, 3, 5);
+		Treasure setTreasure = new Treasure();
+		setTreasure.setTreasure();
+		board.setGameBoard(column,row,card);
 		
 		players = PlayerController.getInstance();
 		deck = Deck.getInstance();
