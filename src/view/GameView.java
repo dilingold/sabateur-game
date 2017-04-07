@@ -22,6 +22,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Hand;
 import model.Player;
+import model.cards.Card;
+import model.cards.PathCard;
 
 public class  GameView {
 
@@ -208,11 +210,26 @@ public class  GameView {
 		
 		for (int i = 0; i < hand.cardCount(); i++) {
 			
-			String cardName = hand.getCards().get(i).getName();
-			String imageName = "/resources/images/cards/" + cardName + ".png";
-			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Button btn = new Button();
-			btn.setGraphic(new ImageView(image));
+			
+			if (hand.getCards().get(i).type() == "path") {
+								
+				PathCard pathCard = (PathCard) hand.getCards().get(i);
+				makeClickable(btn, pathCard, i);
+				String imageName = "/resources/images/cards/" + pathCard.getName() + "-rotate" + pathCard.getRotation() + ".png";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
+				btn.setGraphic(new ImageView(image));
+				
+			}
+			
+			else {
+				
+				Card card = hand.getCards().get(i);
+				String imageName = "/resources/images/cards/" + card.getName() + ".png";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
+				btn.setGraphic(new ImageView(image));
+				
+			}
 			makeDraggable(btn, i);
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
@@ -235,6 +252,19 @@ public class  GameView {
 			
 		});
 
+	}
+	
+	public void makeClickable(Button btn, PathCard card, int index) {
+		
+		btn.setOnAction(event -> {
+			
+			card.changeRotation();
+			String imageName = "/resources/images/cards/" + card.getName() + "-rotate" + card.getRotation() + ".png";
+			Image image = new Image(getClass().getResourceAsStream(imageName));
+			btn.setGraphic(new ImageView(image));
+			
+		});
+		
 	}
 	
 	public void makeDroppableBoard(ImageView target) {

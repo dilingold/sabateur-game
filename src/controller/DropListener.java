@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import model.Player;
+import model.cards.PathCard;
 
 public class DropListener {
 	
@@ -24,8 +25,8 @@ public class DropListener {
 		
 		if (event.getGestureSource() != target) {
 		
-			String draggedCardName = currentPlayer.getHand().getCards().get(draggedCardIndex).getName();
-			String imageName = "/resources/images/cards/" + draggedCardName + ".png";
+			PathCard draggedCard = (PathCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
+			String imageName = "/resources/images/cards/" + draggedCard.getName() + "-rotate" + draggedCard.getRotation() + ".png";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			target.setImage(image);
 		
