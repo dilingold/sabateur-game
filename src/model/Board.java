@@ -6,7 +6,7 @@ import model.cards.*;
 /**
  * Created by johnny on 3/29/17.
  */
-public class Board {
+public class Board extends Treasure{
     private static Board ourInstance = new Board();
 
     public static Board getInstance() {
