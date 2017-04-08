@@ -18,6 +18,6 @@ public class BoardTest {
 	Player myPlayer = new Player(name, myHand);
 	//Deal.deal(myPlayer);
 	
-	System.out.println(myPlayer.getHand().getCards().get(3).type());
+	//System.out.println(myPlayer.getHand().getCards().get(3).type());
 	}
 }
