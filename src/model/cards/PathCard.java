@@ -83,4 +83,8 @@ public abstract class PathCard extends Card {
 		
 	}
 
+	@Override
+	public String getType() {
+		return type;
+	}
 }

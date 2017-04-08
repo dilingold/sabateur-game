@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import controller.DragCardListener;
@@ -7,6 +9,7 @@ import controller.DropListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Board;
 import model.Hand;
 import model.Player;
 import model.cards.*;
@@ -76,7 +80,7 @@ public class  GameView {
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
 						pic.setImage(image);
-						makeDroppableBoard(pic);
+						makeDroppableBoard(pic, gameGrid);
 						boardGrid.add(pic, i, k);
 						break;
 					case "gold":
@@ -198,7 +202,7 @@ public class  GameView {
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
 
 	}
-	
+	// Ensure Card Exist
 	public void displayHand() {
 		
 		HBox hb = new HBox(10);
@@ -233,12 +237,13 @@ public class  GameView {
 			DragCardListener dragListener = new DragCardListener();
 			dragListener.dragCard(btn, event);
 			draggedCardIndex = index;
+			currentPlayer.getHand().getCards().get(index);
 			
 		});
 
 	}
 	
-	public void makeDroppableBoard(ImageView target) {
+	public void makeDroppableBoard(ImageView target, GridPane gamegrid) {
 		
 		DropListener dropListener = new DropListener();
 		
@@ -249,10 +254,12 @@ public class  GameView {
 		});
 		
 		target.setOnDragDropped(event ->  {
-
-			dropListener.drop(event, currentPlayer, draggedCardIndex, target);
-			nextTurn();
-			
+			Node source = (Node) event.getSource();
+			Integer rowIndex = gamegrid.getColumnIndex(source);
+			Integer colIndex = gamegrid.getRowIndex(source);
+			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+				nextTurn();
+			}
 		});
 
 	}
@@ -263,6 +270,7 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
+		Board.getInstance().printBoard();
 		
 	}
 

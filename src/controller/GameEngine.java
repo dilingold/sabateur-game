@@ -29,8 +29,10 @@ public class GameEngine {
 
 		board = Board.getInstance();
 		board.initBoard();
-		Treasure setTreasure = new Treasure();
-		setTreasure.setTreasure();
+		//Treasure setTreasure = new Treasure();
+		//setTreasure.;
+
+		board.setTreasure();
 		board.setGameBoard(row,column,card);
 		
 		players = PlayerController.getInstance();

@@ -3,7 +3,7 @@ package model.cards;
 public abstract class Card {
 
 	private int quantity;
-	protected String type;
+	public String type;
 	protected String name;
 
 	public Card() {
@@ -24,7 +24,7 @@ public abstract class Card {
 
 	}
 
-	public String type() {
+	public String getType() {
 
 		return type;
 
