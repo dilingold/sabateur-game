@@ -21,11 +21,13 @@ public class Deck {
 
 		//add the following cards to the deck
 		//where the passed int is the number of cards
-		addLPathCards(10);
+		//addLPathCards(10);
 		addXPathCards(10);
 		addStraightPathCards(10);
 		addTPathCards(10);
-
+		//addStraightPathCards(10);
+		//addTPathCards(10);
+		addActionCard(10);
 		shuffle();
 		
 	}
@@ -123,6 +125,19 @@ public class Deck {
 			
 		}
 		
+	}
+
+	private void addActionCard(int totalCards) {
+
+		//System.out.println("addingTPC...");
+		for(int i = 0; i<totalCards; i++) {
+
+			System.out.println("TPC added");
+			ToxicCard toxicCard = new ToxicCard();
+			deck.push(toxicCard);
+
+		}
+
 	}
 
 }

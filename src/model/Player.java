@@ -7,6 +7,7 @@ public class Player {
     private String status;
     private int UID;
     private Hand hand;
+    private Boolean toolsDamaged = false;
 
     public Player (String PlayerName, Hand hand) {
 
@@ -73,6 +74,15 @@ public class Player {
     	
     	this.status = status;
     	
+    }
+    public Boolean areToolsDamaged(){
+    	return toolsDamaged;
+    }
+    public void changeToolsDamage(){
+    	if(toolsDamaged == true)
+    		toolsDamaged = false;
+    	else
+    		toolsDamaged = true;
     }
     
 }

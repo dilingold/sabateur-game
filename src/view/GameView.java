@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import controller.DragCardListener;
@@ -7,6 +9,7 @@ import controller.DropListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,10 +23,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Board;
 import model.Hand;
 import model.Player;
-import model.cards.Card;
-import model.cards.PathCard;
+import model.cards.*;
 
 public class  GameView {
 
@@ -42,7 +45,7 @@ public class  GameView {
 	}
 
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
-		
+
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 
 		stage.setTitle("Play Game");
@@ -63,24 +66,24 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
-		int[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
-		
+		Card[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
+
 		for(int i = 0; i < 7; i++) {
-			
+
 			for(int k = 0; k < 7; k++) {
-								
-				switch (currentBoard[k][i]) {
-				
-					case 0:
+
+				switch (currentBoard[k][i].getName()) {
+
+					case "blank card":
 						Image image = new Image("/resources/images/board/empty.png");
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
 						pic.setImage(image);
-						makeDroppableBoard(pic);
+						makeDroppableBoard(pic, gameGrid);
 						boardGrid.add(pic, i, k);
 						break;
-					case 1:
+					case "gold":
 						Image goldImage = new Image("/resources/images/board/goal.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
@@ -88,7 +91,7 @@ public class  GameView {
 						goldPic.setImage(goldImage);
 						boardGrid.add(goldPic, i, k);
 						break;
-					case 2:
+					case "stone":
 						Image coalimage = new Image("/resources/images/board/goal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
@@ -96,7 +99,7 @@ public class  GameView {
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
 						break;
-					case 5:
+					case "End Path":
 						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
@@ -199,7 +202,7 @@ public class  GameView {
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
 
 	}
-	
+	// Ensure Card Exist
 	public void displayHand() {
 		
 		HBox hb = new HBox(10);
@@ -212,7 +215,7 @@ public class  GameView {
 			
 			Button btn = new Button();
 			
-			if (hand.getCards().get(i).type() == "path") {
+			if (hand.getCards().get(i).getType() == "path") {
 								
 				PathCard pathCard = (PathCard) hand.getCards().get(i);
 				makeClickable(btn, pathCard, i);
@@ -249,6 +252,7 @@ public class  GameView {
 			DragCardListener dragListener = new DragCardListener();
 			dragListener.dragCard(btn, event);
 			draggedCardIndex = index;
+			currentPlayer.getHand().getCards().get(index);
 			
 		});
 
@@ -267,7 +271,7 @@ public class  GameView {
 		
 	}
 	
-	public void makeDroppableBoard(ImageView target) {
+	public void makeDroppableBoard(ImageView target, GridPane gamegrid) {
 		
 		DropListener dropListener = new DropListener();
 		
@@ -278,10 +282,12 @@ public class  GameView {
 		});
 		
 		target.setOnDragDropped(event ->  {
-
-			dropListener.drop(event, currentPlayer, draggedCardIndex, target);
-			nextTurn();
-			
+			Node source = (Node) event.getSource();
+			Integer rowIndex = gamegrid.getColumnIndex(source);
+			Integer colIndex = gamegrid.getRowIndex(source);
+			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+				nextTurn();
+			}
 		});
 
 	}
@@ -292,6 +298,7 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
+		Board.getInstance().printBoard();
 		
 	}
 

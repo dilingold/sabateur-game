@@ -7,11 +7,11 @@ public abstract class PathCard extends Card {
 	protected Boolean [] exits = new Boolean [4];
 	protected int rotation = 0;
 	protected Boolean isDisabled = false;
-	
+
 	public PathCard() {
 		
-		type = "path";
-		
+		this.type = "path";
+
 	}
 	
 	public Boolean[] getExits() {
@@ -86,4 +86,10 @@ public abstract class PathCard extends Card {
 		
 	}
 
+	@Override
+	public String getType() {
+		
+		return type;
+		
+	}
 }
