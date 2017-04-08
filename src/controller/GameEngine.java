@@ -5,7 +5,6 @@ import model.Deck;
 import model.Player;
 import view.MainView;
 import model.cards.*;
-import model.Treasure;
 public class GameEngine {
 
 	private MainView mainView;
@@ -29,12 +28,9 @@ public class GameEngine {
 
 		board = Board.getInstance();
 		board.initBoard();
-		//Treasure setTreasure = new Treasure();
-		//setTreasure.;
-
 		board.setTreasure();
 		board.setGameBoard(row,column,card);
-		
+
 		players = PlayerController.getInstance();
 		deck = Deck.getInstance();
 		currentPlayerIndex = 0;
