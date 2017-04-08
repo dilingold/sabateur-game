@@ -24,7 +24,7 @@ public abstract class Card {
 
 	}
 
-	public String type() {
+	public String getType() {
 
 		return type;
 

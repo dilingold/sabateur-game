@@ -6,7 +6,8 @@ import model.cards.*;
 /**
  * Created by johnny on 3/29/17.
  */
-public class Board extends Treasure{
+
+public class Board extends Treasure {
     private static Board ourInstance = new Board();
 
     public static Board getInstance() {
@@ -47,4 +48,14 @@ public class Board extends Treasure{
     public Card[][] currentBoard(){
         return this.gameBoard;
     }
+
+    public void printBoard() {
+        System.out.println("UPDATED BOARD");
+        for(int i = 0; i < numRows; i++) {
+            for(int k = 0; k < numCols; k++){
+                System.out.println(this.gameBoard[i][k]);
+            }
+        }
+    }
+
 }
