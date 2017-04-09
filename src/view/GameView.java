@@ -72,13 +72,12 @@ public class  GameView {
 		//get the board and populate it with the start card, the goal cards and blank cards
 		//add appropriate images in correct positions
 		//make only the blank positions on the board droppable so player's path cards can be dropped on them
-		Card[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
-
+		Board currentBoard = Board.getInstance();
 		for(int i = 0; i < 7; i++) {
 
 			for(int k = 0; k < 7; k++) {
 
-				switch (currentBoard[k][i].getName()) {
+				switch (currentBoard.getCard(k, i).getName()) {
 
 					case "blank card":
 						Image image = new Image("/resources/images/board/empty.png");

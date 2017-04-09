@@ -10,7 +10,6 @@ public class GameEngine {
 	private MainView mainView;
 	private Board board;
 	private PlayerController players;
-	private Deck deck;
 	private int currentPlayerIndex;
 	private Treasure treasure = new Treasure();
 
@@ -34,25 +33,13 @@ public class GameEngine {
 		board.playCard(row,column,card);
 
 		players = PlayerController.getInstance();
-		deck = Deck.getInstance();
 		currentPlayerIndex = 0;
 		mainView = new MainView();
 		mainView.launchApp(this);
 		
 	}
 	
-	public Board getBoard() {
-		
-		return board;
-		
-	}
-	
-	public PlayerController getPlayers() {
-		
-		return players;
-		
-	}
-	
+
 	
 	public int getCurrentPlayerIndex() {
 		
