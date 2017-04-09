@@ -5,6 +5,12 @@ Team Members:
 	s3435996 -- Sash Petrovski
 	s3547443 -- Tristan Boyd
 	
+Run Instructions:
+To run the program run from controller.GameEngine
+
+Requirements:
+Java 1.8
+
 SOLID Principals:
 
 Single Responsibility Principle - SRP
