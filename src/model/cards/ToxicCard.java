@@ -7,6 +7,7 @@ public class ToxicCard extends ActionCard {
 		
 		this.name = "Toxic Card";
 		this.effect = "disable";
+		this.type = "toxic";
 	}
 
 }

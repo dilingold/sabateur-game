@@ -6,7 +6,7 @@ import model.cards.*;
  * Created by johnny on 3/29/17.
  */
 
-public class Board extends Treasure {
+public class Board {
 	
     private static Board ourInstance = new Board();
 
@@ -15,7 +15,7 @@ public class Board extends Treasure {
         return ourInstance;
         
     }
-
+    
     private Card[][] gameBoard;
     EmptyCard card = new EmptyCard();
     private int numCols = 7;
@@ -42,14 +42,25 @@ public class Board extends Treasure {
         
     }
 
-    public Card getGameBoard(int row, int column) {
+    public Card getCard(int row, int column) {
     	
         return gameBoard[row][column];
         
     }
     
-    public void setGameBoard(int row, int column, Card cardType) {
-    	
+	/**
+	 * Place card in location on board
+	 * 
+	 * @pre.condition 0 <= row < board.numCols
+	 * @pre.condition 0 <= column < board.numRows
+	 * 
+	 */
+    public void playCard(int row, int column, Card cardType) {
+    	assert 0 < row;
+		assert row < Board.getInstance().getRows();
+		assert 0 <= column;
+		assert column < Board.getInstance().getCols();
+		
         gameBoard[row][column] = cardType;
         
     }

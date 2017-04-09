@@ -5,8 +5,20 @@ import model.cards.Card;
 
 public class ActionCardValidator {
 
+	/**
+	 * Validate path element
+	 * 
+	 * @pre.condition 0 <= row < board.numCols
+	 * @pre.condition 0 <= column < board.numRows
+	 * @post.condition $return != null
+	 */
 	public boolean checkMove(Card cardType, int row, int column) {
 
+		assert 0 < row;
+		assert row < Board.getInstance().getRows();
+		assert 0 <= column;
+		assert column < Board.getInstance().getCols();
+		
 		Boolean validated = false;
 
 		if (cardType.getType() == "path") {
@@ -25,33 +37,24 @@ public class ActionCardValidator {
 		if (validated == true) {
 
 			// tell board to play card in location
-			Board.getInstance().setGameBoard(row, column, cardType);
+			Board.getInstance().playCard(row, column, cardType);
 		}
 
 		return validated;
 
 	}
 
-	// Code for Assignment 2
-	/**
-	 * Validate path element
-	 * 
-	 * @pre.condition 0 <= row < board.numCols
-	 * @pre.condition 0 <= column < board.numRows
-	 * @post.condition $return != null
-	 */
+
+
 	private Boolean validatePath(Card cardType, int row, int column) {
-		assert 0 < row;
-		assert row < Board.getInstance().getRows();
-		assert 0 <= column;
-		assert column < Board.getInstance().getCols();
+
 
 		Boolean validated = false;
 		if (cardType.getType() == "path") {
 			
 		/*
 		 * NOT CURRENTLY WORKING
-		 * For implementation in Assignment 2.
+		 * Code for implementation in Assignment 2.
 		 * 
 		 */
 /*			if (Board.getInstance().getGameBoard(row, column).getType() == "action") {
@@ -102,8 +105,9 @@ public class ActionCardValidator {
 
 		switch (type) {
 
-		case "curse":
-			if (Board.getInstance().getGameBoard(row, column).getType() == "path") {
+		case "clean":
+			//needs code for assignment 2
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
 
 				validated = true;
 
@@ -112,16 +116,16 @@ public class ActionCardValidator {
 
 		case "bomb":
 			// check if location is not empty
-			if (Board.getInstance().getGameBoard(row, column).getType() == "path") {
-
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
+				
 				validated = true;
-
+				
 			}
 			break;
 
-		case "Toxic Card":
+		case "toxic":
 			// needs code for assignment 2
-			if (Board.getInstance().getGameBoard(row, column).getType() == "path") {
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
 
 				validated = true;
 

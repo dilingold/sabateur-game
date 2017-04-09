@@ -3,6 +3,7 @@ package controller;
 import model.Board;
 import model.Deck;
 import model.Player;
+import model.Treasure;
 import view.MainView;
 import model.cards.*;
 public class GameEngine {
@@ -12,6 +13,7 @@ public class GameEngine {
 	private PlayerController players;
 	private Deck deck;
 	private int currentPlayerIndex;
+	private Treasure treasure = new Treasure();
 
 	//run game
 	public static void main(String[] args) {
@@ -29,8 +31,8 @@ public class GameEngine {
 
 		board = Board.getInstance();
 		board.initBoard();
-		board.setTreasure();
-		board.setGameBoard(row,column,card);
+		treasure.setTreasure();
+		board.playCard(row,column,card);
 
 		players = PlayerController.getInstance();
 		deck = Deck.getInstance();

@@ -44,7 +44,7 @@ public class Treasure{
 
         for (int i = 0; i < 3; i++){
 
-            board.setGameBoard(ROW_POSITION, coordinates.get(i), treasure.get(i));
+            board.playCard(ROW_POSITION, coordinates.get(i), treasure.get(i));
         }
     }
 

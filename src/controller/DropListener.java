@@ -10,7 +10,9 @@ import model.cards.PathCard;
 import model.cards.Card;
 
 //allows for one component to be dropped on another
-public class DropListener extends ActionCardValidator{
+public class DropListener {
+	
+	private ActionCardValidator validator = new ActionCardValidator();
 	
 	public void dragOver(DragEvent event, ImageView target) {
 		
@@ -32,11 +34,11 @@ public class DropListener extends ActionCardValidator{
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 
-		if(checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
+		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
 					
 			if (event.getGestureSource() != target) {
 								
-				Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
+				Board.getInstance().playCard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
 				
 
 				//if the dragged card is a path card, get the correct rotation and image

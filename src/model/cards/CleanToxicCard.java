@@ -6,6 +6,7 @@ public class CleanToxicCard extends ActionCard {
 		
 		this.name = "Clean Toxic Card";
 		this.effect = "removeDisable";
+		this.type = "cleantoxic";
 		
 	}
 
