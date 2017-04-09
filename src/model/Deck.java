@@ -22,7 +22,7 @@ public class Deck {
 		addXPathCards(10);
 		addStraightPathCards(10);
 		addTPathCards(10);
-		addActionCard(10);
+		addToxicCard(10);
 		shuffle();
 		
 	}
@@ -101,7 +101,7 @@ public class Deck {
 		}
 	}
 
-	private void addActionCard(int totalCards) {
+	private void addToxicCard(int totalCards) {
 		for(int i = 0; i<totalCards; i++) {
 			ToxicCard toxicCard = new ToxicCard();
 			deck.push(toxicCard);

@@ -25,7 +25,8 @@ We have achieved this by ensuring that inheritance is used correctly, and any re
 can override the parent method. We have shown an example of this within the 'path' and 'action cards' class'.
 
 Interface Segregation Principle
-N/A
+Interface segregation can be demonstrated by the 3 abstract card classes (ActionCard, BoardCard and Personal Card 
+separating the methods and variables these classes use.
 
 Dependency Inversion Principle
 N/A
@@ -50,7 +51,7 @@ following:
 High Cohesion
 To ensure our code promotes understandability, maintainability and reuse, we ensured our classes maintained a small
 number of methods, small number of parameters and small number of lines of code. This is evident in the following
-classes:
+classes for example:
 
     - Deal
     - ToxicCard
@@ -82,7 +83,7 @@ fabrication to support high cohesion, low coupling, and reuse. We applied pure f
     - PlayerController keeps a list of all players and player order
 
 Protected Variations
-N/A
+All classes use getters and setters to change local variables, which are kept private.
 
 Indirection
 N/A

@@ -28,8 +28,8 @@ public class ActionCardValidator {
 
 		}
 
-		if (cardType.getType() == "action") {
-
+		if (cardType.getType() == "toxic") {
+			
 			validated = validateAction(cardType, row, column);
 
 		}
@@ -123,8 +123,9 @@ public class ActionCardValidator {
 			}
 			break;
 
-		case "toxic":
+		case "Toxic Card":
 			// needs code for assignment 2
+			
 			if (Board.getInstance().getCard(row, column).getType() == "path") {
 
 				validated = true;

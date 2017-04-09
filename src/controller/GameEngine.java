@@ -3,7 +3,6 @@ package controller;
 import model.Board;
 import model.Deck;
 import model.Player;
-import model.Treasure;
 import view.MainView;
 import model.cards.*;
 public class GameEngine {
@@ -54,11 +53,6 @@ public class GameEngine {
 		
 	}
 	
-	public Deck getDeck() {
-		
-		return deck;
-		
-	}
 	
 	public int getCurrentPlayerIndex() {
 		

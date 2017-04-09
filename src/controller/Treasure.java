@@ -1,9 +1,11 @@
-package model;
+package controller;
 
+import model.Board;
 import model.cards.Card;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import model.cards.GoldCard;
 import model.cards.StoneCard;
 
