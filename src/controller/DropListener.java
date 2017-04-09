@@ -34,11 +34,26 @@ public class DropListener extends ActionCardValidator{
 				Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
 				Board.getInstance().printBoard();
 
-				PathCard draggedCard = (PathCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
-				String imageName = "/resources/images/cards/" + draggedCard.getName() + "-rotate" + draggedCard.getRotation() + ".png";
-				Image image = new Image(getClass().getResourceAsStream(imageName));
-				target.setImage(image);
-				return true;
+				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
+					
+					PathCard draggedCard = (PathCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
+					String imageName = "/resources/images/cards/" + draggedCard.getName() + "-rotate" + draggedCard.getRotation() + ".png";
+					Image image = new Image(getClass().getResourceAsStream(imageName));
+					target.setImage(image);
+					return true;
+					
+				}
+				
+				else {
+					
+					Card draggedCard = currentPlayer.getHand().getCards().get(draggedCardIndex);
+					String imageName = "/resources/images/cards/" + draggedCard.getName() + ".png";
+					Image image = new Image(getClass().getResourceAsStream(imageName));
+					target.setImage(image);
+					return true;
+					
+				}
+				
 
 			}
 		}
