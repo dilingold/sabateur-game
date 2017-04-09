@@ -34,6 +34,7 @@ public class Deck {
 		
 	}
 
+	
 	public Card draw(){
 		//drawn next card from deck
 		//return null if no cards in deck
