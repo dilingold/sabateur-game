@@ -7,7 +7,6 @@ public class ActionCardValidator {
 	public boolean checkMove(Card cardType, int row, int column) {
 
 		Boolean validated = false;
-		System.out.println(cardType.getType());
 
 		if(cardType.getType() == "path") {
 
@@ -33,8 +32,18 @@ public class ActionCardValidator {
 	}
 
     //Code for Assignment 2
+	/**
+	* Validate path element
+	* @pre.condition 0 <= row < board.numCols
+	* @pre.condition 0 <= column < board.numRows
+	* @post.condition $return != null
+	*/
 	private Boolean validatePath(Card cardType, int row, int column) {
-
+		assert 0 < row;
+		assert row < Board.getInstance().getRows();
+		assert 0 <= column;
+		assert column < Board.getInstance().getCols();
+		
 		Boolean validated = false;
 		String type = cardType.getType();
 		switch (type) {
@@ -46,8 +55,6 @@ public class ActionCardValidator {
 					
 				}
 				
-				System.out.println("TEST");
-				System.out.println(Board.getInstance().getGameBoard(row, column).getType());
 				if (Board.getInstance().getGameBoard(row, column).getType() == "blank") {
 					
 					validated = true;
@@ -110,7 +117,7 @@ public class ActionCardValidator {
 			break;
 			
             case "Toxic Card":
-			//what does toxic do?
+            //needs code for assignment 2
 			if(Board.getInstance().getGameBoard(row,column).getType() == "path") {
 				
 				validated = true;

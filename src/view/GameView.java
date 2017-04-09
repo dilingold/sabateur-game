@@ -317,7 +317,6 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
-		Board.getInstance().printBoard();
 		
 	}
 

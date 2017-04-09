@@ -29,18 +29,19 @@ public class DropListener extends ActionCardValidator{
 	 * valid, the board is updated to reflect the move
 	 */
 	public boolean drop(DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
-		
-		System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
+		//for debugging
+		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 
 		if(checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
-			
-			Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
-			
+					
 			if (event.getGestureSource() != target) {
 				
-				System.out.println(Board.getInstance().getGameBoard(row, col).getName());
+				//for debugging
+				//System.out.println(Board.getInstance().getGameBoard(row, col).getName());
+				//Board.getInstance().printBoard();
+				
 				Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
-				Board.getInstance().printBoard();
+				
 
 				//if the dragged card is a path card, get the correct rotation and image
 				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
@@ -66,10 +67,7 @@ public class DropListener extends ActionCardValidator{
 			}
 			
 		}
-		
-		else
-			System.out.println("ITS FALSE");
-		
+				
 		return false;
 		
 	}

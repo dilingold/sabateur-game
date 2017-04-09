@@ -75,5 +75,12 @@ public class Board extends Treasure {
         }
         
     }
+    
+    public int getRows(){
+    	return numRows;
+    }
+    public int getCols(){
+    	return numCols;
+    }
 
 }

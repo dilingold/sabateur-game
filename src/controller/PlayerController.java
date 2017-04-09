@@ -34,8 +34,6 @@ public class PlayerController {
             players.add(player);
             player.setUID(i);
             deal.deal(player);
-            System.out.println(player.getName());
-            player.getHand().print();
             i++;
             
         }
