@@ -92,4 +92,5 @@ public abstract class PathCard extends Card {
 		return type;
 		
 	}
+	
 }

@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import controller.DragCardListener;
@@ -80,7 +78,7 @@ public class  GameView {
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
 						pic.setImage(image);
-						makeDroppableBoard(pic, gameGrid);
+						makeDroppableBoard(pic);
 						boardGrid.add(pic, i, k);
 						break;
 					case "gold":
@@ -202,6 +200,7 @@ public class  GameView {
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
 
 	}
+	
 	// Ensure Card Exist
 	public void displayHand() {
 		
@@ -233,6 +232,7 @@ public class  GameView {
 				btn.setGraphic(new ImageView(image));
 				
 			}
+			
 			makeDraggable(btn, i);
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
@@ -271,7 +271,7 @@ public class  GameView {
 		
 	}
 	
-	public void makeDroppableBoard(ImageView target, GridPane gamegrid) {
+	public void makeDroppableBoard(ImageView target) {
 		
 		DropListener dropListener = new DropListener();
 		
@@ -283,8 +283,8 @@ public class  GameView {
 		
 		target.setOnDragDropped(event ->  {
 			Node source = (Node) event.getSource();
-			Integer rowIndex = gamegrid.getColumnIndex(source);
-			Integer colIndex = gamegrid.getRowIndex(source);
+			Integer rowIndex = GridPane.getColumnIndex(source);
+			Integer colIndex = GridPane.getRowIndex(source);
 			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
 				nextTurn();
 			}

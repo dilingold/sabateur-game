@@ -21,13 +21,12 @@ public class Deck {
 
 		//add the following cards to the deck
 		//where the passed int is the number of cards
-		//addLPathCards(10);
+		addLPathCards(10);
 		addXPathCards(10);
 		addStraightPathCards(10);
 		addTPathCards(10);
-		//addStraightPathCards(10);
-		//addTPathCards(10);
 		addActionCard(10);
+		
 		shuffle();
 		
 	}

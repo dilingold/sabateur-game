@@ -27,9 +27,12 @@ public class DropListener extends ActionCardValidator{
 		
 		System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 
-		if(checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)){
+		if(checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
+			
 			Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
+			
 			if (event.getGestureSource() != target) {
+				
 				System.out.println(Board.getInstance().getGameBoard(row, col).getName());
 				Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
 				Board.getInstance().printBoard();
@@ -54,15 +57,14 @@ public class DropListener extends ActionCardValidator{
 					
 				}
 				
-
 			}
+			
 		}
+		
 		else
 			System.out.println("ITS FALSE");
+		
 		return false;
-
-
-
 		
 	}
 

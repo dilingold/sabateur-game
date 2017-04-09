@@ -1,15 +1,20 @@
 package model.cards;
 
-public class PersonalCard extends Card{
+public class PersonalCard extends Card {
 		
-		private String type = "personal";
-		protected String effect;
+	private String type = "personal";
+	protected String effect;
 		
-		public String getEffect() {
-			return effect;
-		}
+	public String getEffect() {
+			
+		return effect;
+			
+	}
 		
-		public String getType() {
-			return type;
-		}
+	public String getType() {
+			
+		return type;
+			
+	}
+		
 }

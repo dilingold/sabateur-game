@@ -1,6 +1,6 @@
 package model.cards;
 
-public class SearchTresureCard extends ActionCard{
+public class SearchTresureCard extends ActionCard {
 	
 	public SearchTresureCard() {
 		
