@@ -5,6 +5,7 @@ public abstract class Card {
 	private int quantity;
 	protected String type;
 	protected String name;
+	private boolean[] exits = {false, false, false, false};
 
 	public Card() {
 
@@ -34,6 +35,9 @@ public abstract class Card {
 
 		return name;
 
+	}
+	public boolean[] getExits(){
+		return exits;
 	}
 
 }

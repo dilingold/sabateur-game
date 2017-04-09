@@ -4,7 +4,7 @@ public abstract class PathCard extends Card {
 	
 	protected int x;
 	protected int y;
-	protected Boolean [] exits = new Boolean [4];
+	protected boolean[] exits = new boolean [4];
 	protected int rotation = 0;
 	protected Boolean isDisabled = false;
 
@@ -14,7 +14,7 @@ public abstract class PathCard extends Card {
 
 	}
 	
-	public Boolean[] getExits() {
+	public boolean[] getExits() {
 		
 		return rotateExits();
 		
@@ -23,13 +23,13 @@ public abstract class PathCard extends Card {
 	//Cycles each of the varibles in the exits array the amount
 	//of times the card has been rotated, then returns the result.
 	//Does not change the original exits array variable.
-	private Boolean[] rotateExits() {
+	private boolean[] rotateExits() {
 		
 		if(rotation == 1) return exits;
 		
 		else {
 			
-			Boolean[] exitsToReturn = exits;
+			boolean[] exitsToReturn = exits;
 			
 			for(int i = 0; i<rotation; i++) {
 				

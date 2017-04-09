@@ -35,11 +35,7 @@ public class DropListener extends ActionCardValidator{
 		if(checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
 					
 			if (event.getGestureSource() != target) {
-				
-				//for debugging
-				//System.out.println(Board.getInstance().getGameBoard(row, col).getName());
-				//Board.getInstance().printBoard();
-				
+								
 				Board.getInstance().setGameBoard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
 				
 
