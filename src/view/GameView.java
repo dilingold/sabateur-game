@@ -36,6 +36,10 @@ public class  GameView {
 	private HBox hbCards;
 	private VBox vbCards;
 
+	/*
+	 * this view is the game view which includes all the components required to play the game
+	 * including the board, players, current player's hand and a discard pile
+	 */
 	public GameView(Stage stage) {
 
 		this.stage = stage;
@@ -64,6 +68,10 @@ public class  GameView {
 
 		GridPane boardGrid = new GridPane();
 
+		//display the board in the centre of the screen
+		//get the board and populate it with the start card, the goal cards and blank cards
+		//add appropriate images in correct positions
+		//make only the blank positions on the board droppable so player's path cards can be dropped on them
 		Card[][] currentBoard = MainView.gameEngine.getBoard().currentBoard();
 
 		for(int i = 0; i < 7; i++) {
@@ -113,8 +121,7 @@ public class  GameView {
 		
 		boardGrid.setAlignment(Pos.BOTTOM_CENTER);
 		vbBoard.getChildren().add(boardGrid);
-
-		// Call Controller on Player ones Hand.
+		
 		playerText = new Text(MainView.gameEngine.getCurrentPlayer().getName() + " Hand");
 		playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		playerText.setFill(Color.WHITE);
@@ -131,6 +138,7 @@ public class  GameView {
 		roleBtn.setPrefWidth(70);
 		hbCards.getChildren().add(roleBtn);
 
+		//placeholder: a card to reveal the player's role
 		roleBtn.setOnAction(event ->  {
 			
 			if (roleBtn.getText() == "Role") {
@@ -158,6 +166,7 @@ public class  GameView {
 		playersText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		vbPlayers.getChildren().add(playersText);
 
+		//display the players with images to the top right of the screen
 		int k = 0;
 		for(Player player: playerNames) {
 			
@@ -171,6 +180,7 @@ public class  GameView {
 			
 		}
 
+		//display the discard icon to the bottom right of the screen
 		Text discardText = new Text("Discard");
 		discardText.setFill(Color.WHITE);
 		discardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -181,7 +191,6 @@ public class  GameView {
 		Image image = new Image(getClass().getResourceAsStream("/resources/images/board/discard.png"));
 		discardIcon.setGraphic(new ImageView(image));
 
-		// Deck Area
 		VBox vbDiscard = new VBox();
 		vbDiscard.setSpacing(10);
 
@@ -201,7 +210,7 @@ public class  GameView {
 
 	}
 	
-	// Ensure Card Exist
+	//display the current player's hand on the bottom of the screen
 	public void displayHand() {
 		
 		HBox hb = new HBox(10);
@@ -214,6 +223,9 @@ public class  GameView {
 			
 			Button btn = new Button();
 			
+			//add the correct images to all cards
+			//make all cards draggable
+			//if the card is a path card, rotate card when it is clicked
 			if (hand.getCards().get(i).getType() == "path") {
 								
 				PathCard pathCard = (PathCard) hand.getCards().get(i);
@@ -252,12 +264,12 @@ public class  GameView {
 			DragCardListener dragListener = new DragCardListener();
 			dragListener.dragCard(btn, event);
 			draggedCardIndex = index;
-			currentPlayer.getHand().getCards().get(index);
 			
 		});
 
 	}
 	
+	//when a path card is clicked from the current player's hand, it rotates once to the right
 	public void makeClickable(Button btn, PathCard card, int index) {
 		
 		btn.setOnAction(event -> {
@@ -271,6 +283,8 @@ public class  GameView {
 		
 	}
 	
+	//when a card is dropped onto the board it goes through a validation process
+	//if it is a valid move, the next player's turn is called
 	public void makeDroppableBoard(ImageView target) {
 		
 		DropListener dropListener = new DropListener();
@@ -282,16 +296,21 @@ public class  GameView {
 		});
 		
 		target.setOnDragDropped(event ->  {
+			
 			Node source = (Node) event.getSource();
 			Integer rowIndex = GridPane.getColumnIndex(source);
 			Integer colIndex = GridPane.getRowIndex(source);
 			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+				
 				nextTurn();
+				
 			}
+			
 		});
 
 	}
 	
+	//change to the next player's turn
 	public void nextTurn() {
 		
 		currentPlayer = MainView.gameEngine.nextPlayer();

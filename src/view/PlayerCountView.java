@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+//this view will allow the user to select how many players will be playing
 public class PlayerCountView {
 
 	private Stage stage;
@@ -37,6 +38,7 @@ public class PlayerCountView {
 		
 		createContent.MenuBox vbox = new createContent.MenuBox();
 		
+		//allow 3, 4, 5 or 6 players, and add a button for each option
 		int i = 3;
 		while (i <= 6) {
 			
@@ -57,6 +59,9 @@ public class PlayerCountView {
 		
 	}
 	
+	//create a button to allow for 3, 4, 5 or 6 players
+	//when the button is selected, display the add player view 
+	//the add player view allows the user to input names for the selected number of players
 	public createContent.MenuItem createPlayersMenuItem(int i) {
 		
 		createContent.MenuItem playersMenuItem = new createContent.MenuItem(i + " PLAYERS");

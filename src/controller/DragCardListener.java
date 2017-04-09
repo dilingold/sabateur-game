@@ -6,6 +6,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
+//allows a card to be dragged
 public class DragCardListener {
 	
 	public void dragCard(Button btn, Event event) {

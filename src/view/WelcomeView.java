@@ -52,6 +52,8 @@ public class WelcomeView {
 		root.add(title, 0, 0, 1, 1);
 		root.add(vbox,0, 2);
 
+		//display the player count view when the user chooses to start a new game
+		//the player count view will allow the user to select how many players will be playing
 		startGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
 			@Override

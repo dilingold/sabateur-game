@@ -5,6 +5,7 @@ import model.Player;
 
 import java.util.ArrayList;
 
+//This class is the creator and information expert on Players
 public class PlayerController {
 
     private ArrayList<Player> players = null;

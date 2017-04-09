@@ -21,6 +21,7 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage stage) {
 		
+		//display the welcome view at the start of the game
 		WelcomeView welcomeView = new WelcomeView(stage);
 		welcomeView.displayView();
 		

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+//this view allows the user to add names for the selected number of players
 public class AddPlayerView {
 
 	private Stage stage;
@@ -59,6 +60,12 @@ public class AddPlayerView {
 
 		createContent.MenuItem backBtn = new createContent.MenuItem("BACK");
 
+		/*
+		 * when the play button is selected, the player names input by the user is recorded in 
+		 * the players List in the PlayerController class, and the game view is displayed
+		 * 
+		 * when the back button is selected the user is reverted back to the player count view
+		 */
 		playBtn.setOnMouseClicked(event ->  {
 
 			PlayGameListener playGameListener = new PlayGameListener();

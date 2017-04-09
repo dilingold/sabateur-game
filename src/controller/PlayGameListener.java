@@ -3,6 +3,8 @@ package controller;
 import javafx.stage.Stage;
 import view.GameView;
 
+//listens for when the user selects the play game button from the AddPlayerView
+//displays the GameView
 public class PlayGameListener {
 	
 	public void changeScene(Stage stage) {

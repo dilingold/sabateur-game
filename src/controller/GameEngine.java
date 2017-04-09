@@ -13,6 +13,7 @@ public class GameEngine {
 	private Deck deck;
 	private int currentPlayerIndex;
 
+	//run game
 	public static void main(String[] args) {
 
 		new GameEngine();
@@ -21,7 +22,7 @@ public class GameEngine {
 
 	public GameEngine() {
 
-		//setup board
+		//setup board, players, deck and view
 		EndPathCard card = new EndPathCard(1);
 		int column = 3;
 		int row = 6;
@@ -63,6 +64,8 @@ public class GameEngine {
 		
 	}
 	
+	
+	//set the next player's turn
 	public Player nextPlayer() {
 		
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
