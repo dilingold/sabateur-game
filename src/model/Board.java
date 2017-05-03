@@ -17,7 +17,6 @@ public class Board {
     }
     
     private Card[][] gameBoard;
-    EmptyCard card = new EmptyCard();
     private int numCols = 7;
     private int numRows = 7;
 
@@ -33,6 +32,8 @@ public class Board {
         for (int rows=0; rows < numRows; rows++) {
         	
             for (int cols=0; cols < numCols; cols++) {
+            	
+            	EmptyCard card = new EmptyCard();
             	
                 this.gameBoard[rows][cols] = card;
                 
