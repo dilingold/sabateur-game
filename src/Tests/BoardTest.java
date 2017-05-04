@@ -4,7 +4,6 @@ import controller.Deal;
 import model.Deck;
 import model.Hand;
 import model.Player;
-import model.cards.Card;
 
 public class BoardTest {
 

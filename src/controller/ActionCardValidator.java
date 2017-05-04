@@ -2,7 +2,6 @@ package controller;
 
 import model.Board;
 import model.cards.Card;
-import model.cards.CardInterface;
 
 public class ActionCardValidator {
 
@@ -13,7 +12,7 @@ public class ActionCardValidator {
 	 * @pre.condition 0 <= column < board.numRows
 	 * @post.condition $return != null
 	 */
-	public boolean checkMove(CardInterface cardType, int row, int column) {
+	public boolean checkMove(Card cardType, int row, int column) {
 
 		assert 0 < row;
 		assert row < Board.getInstance().getRows();
@@ -47,7 +46,7 @@ public class ActionCardValidator {
 
 
 
-	private Boolean validatePath(CardInterface cardType, int row, int column) {
+	private Boolean validatePath(Card cardType, int row, int column) {
 
 
 		Boolean validated = false;
@@ -97,7 +96,7 @@ public class ActionCardValidator {
 
 	}
 
-	private Boolean validateAction(CardInterface cardType, int row, int column) {
+	private Boolean validateAction(Card cardType, int row, int column) {
 
 		Boolean validated = false;
 

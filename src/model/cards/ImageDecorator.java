@@ -2,7 +2,7 @@ package model.cards;
 
 public class ImageDecorator extends AbstractCardDecorator {
 	
-	public ImageDecorator(CardInterface cardInterface) {
+	public ImageDecorator(Card cardInterface) {
 		
 		super(cardInterface);
 		

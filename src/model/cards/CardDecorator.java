@@ -2,9 +2,9 @@ package model.cards;
 
 public class CardDecorator extends AbstractCardDecorator {
 	
-	private CardInterface card;
+	private Card card;
 	
-	public CardDecorator(CardInterface card) {
+	public CardDecorator(Card card) {
 		
 		super(card);
 		this.card = card;

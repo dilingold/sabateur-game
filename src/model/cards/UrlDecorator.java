@@ -2,7 +2,7 @@ package model.cards;
 
 public class UrlDecorator extends AbstractCardDecorator {
 	
-	public UrlDecorator(CardInterface card) {
+	public UrlDecorator(Card card) {
 		
 		super(card);
 		

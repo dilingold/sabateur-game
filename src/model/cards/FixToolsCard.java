@@ -8,5 +8,12 @@ public class FixToolsCard extends PersonalCard {
 		this.effect = "FixTools";
 		
 	}
+	
+	@Override
+	public String getName() {
+		
+		return name;
+		
+	}
 
 }

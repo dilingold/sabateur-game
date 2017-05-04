@@ -80,7 +80,7 @@ public class  GameView {
 				switch (currentBoard.getCard(k, i).getName()) {
 
 					case "blank card":
-						CardInterface emptyCard = new EmptyCard();
+						Card emptyCard = new EmptyCard();
 						Image image = new Image(new ImageDecorator(new CardDecorator(emptyCard)).getName());
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
@@ -90,7 +90,7 @@ public class  GameView {
 						boardGrid.add(pic, i, k);
 						break;
 					case "goal":
-						CardInterface goldCard = new GoldCard();
+						Card goldCard = new GoldCard();
 						Image goldImage = new Image(new ImageDecorator(new CardDecorator(goldCard)).getName());
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
@@ -99,7 +99,7 @@ public class  GameView {
 						boardGrid.add(goldPic, i, k);
 						break;
 					case "stone":
-						CardInterface coalCard = new StoneCard();
+						Card coalCard = new StoneCard();
 						Image coalimage = new Image(new ImageDecorator(new CardDecorator(coalCard)).getName());
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
@@ -108,7 +108,7 @@ public class  GameView {
 						boardGrid.add(coalPic, i, k);
 						break;
 					case "start":
-						CardInterface startCard = new EndPathCard(1);
+						Card startCard = new EndPathCard(1);
 						Image startImage = new Image(new ImageDecorator(new CardDecorator(startCard)).getName());
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
@@ -241,7 +241,7 @@ public class  GameView {
 			
 			else {
 				
-				CardInterface card = hand.getCards().get(i);
+				Card card = hand.getCards().get(i);
 				String imageName = new ImageDecorator(new CardDecorator(card)).getName();
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));

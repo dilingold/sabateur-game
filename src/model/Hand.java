@@ -3,11 +3,10 @@ package model;
 import java.util.ArrayList;
 
 import model.cards.Card;
-import model.cards.CardInterface;
 
 public class Hand {
 	
-	ArrayList<CardInterface> cards;
+	ArrayList<Card> cards;
 	
     public Hand(){
     	
@@ -15,7 +14,7 @@ public class Hand {
 
     }
 
-    public ArrayList<CardInterface> getCards() {
+    public ArrayList<Card> getCards() {
     	
         return cards;
         
@@ -35,7 +34,7 @@ public class Hand {
         
     }
 
-    public void addCard(CardInterface card) {
+    public void addCard(Card card) {
     	
         cards.add(card);
         
@@ -43,7 +42,7 @@ public class Hand {
    
     public void print() {
     	
-        for(CardInterface x : cards) {
+        for(Card x : cards) {
         	
             System.out.println(x);
             

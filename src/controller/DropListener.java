@@ -8,9 +8,8 @@ import model.Board;
 import model.Player;
 import model.cards.PathCard;
 import model.cards.RotationDecorator;
-import model.cards.Card;
 import model.cards.CardDecorator;
-import model.cards.CardInterface;
+import model.cards.Card;
 import model.cards.ImageDecorator;
 
 //allows for one component to be dropped on another
@@ -58,7 +57,7 @@ public class DropListener {
 				
 				else {
 					
-					CardInterface draggedCard = currentPlayer.getHand().getCards().get(draggedCardIndex);
+					Card draggedCard = currentPlayer.getHand().getCards().get(draggedCardIndex);
 					String imageName = new ImageDecorator(new CardDecorator(draggedCard)).getName();
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);

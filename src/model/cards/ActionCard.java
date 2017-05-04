@@ -1,6 +1,6 @@
 package model.cards;
 
-public abstract class ActionCard implements CardInterface {
+public abstract class ActionCard implements Card {
 
 	public String type = "action";
 	protected String name;

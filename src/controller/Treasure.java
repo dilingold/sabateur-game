@@ -2,7 +2,6 @@ package controller;
 
 import model.Board;
 import model.cards.Card;
-import model.cards.CardInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,11 +20,11 @@ public class Treasure{
     private int TREASURE_COL_POS_2 = 3;
     private int TREASURE_COL_POS_3 = 5;
 
-    CardInterface gold = new GoldCard();
-    CardInterface stoneOne = new StoneCard();
-    CardInterface stoneTwo = new StoneCard();
+    Card gold = new GoldCard();
+    Card stoneOne = new StoneCard();
+    Card stoneTwo = new StoneCard();
 
-    private List<CardInterface> treasure = new ArrayList<>();
+    private List<Card> treasure = new ArrayList<>();
 
     private List<Integer> coordinates = new ArrayList<>();
 

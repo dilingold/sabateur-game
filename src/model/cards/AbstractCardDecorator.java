@@ -1,10 +1,10 @@
 package model.cards;
 
-public abstract class AbstractCardDecorator implements CardInterface {
+public abstract class AbstractCardDecorator implements Card {
 	
-	private CardInterface cardInterface;
+	private Card cardInterface;
 	
-	public AbstractCardDecorator(CardInterface cardInterface) {
+	public AbstractCardDecorator(Card cardInterface) {
 		
 		this.cardInterface = cardInterface;
 		

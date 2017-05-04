@@ -1,6 +1,6 @@
 package model.cards;
 
-public abstract class BoardCard implements CardInterface {
+public abstract class BoardCard implements Card {
 	
 	protected String type;
 	protected String name;

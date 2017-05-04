@@ -1,9 +1,18 @@
 package model.cards;
 
-public class PersonalCard extends Card {
+public abstract class PersonalCard implements Card {
 		
-	private String type = "personal";
+	protected String name;
+	protected String type;
+	protected String url;
 	protected String effect;
+	
+	public PersonalCard() {
+		
+		type = "personal";
+		url = "/resources/images/cards/";
+		
+	}
 		
 	public String getEffect() {
 			
@@ -15,6 +24,12 @@ public class PersonalCard extends Card {
 			
 		return type;
 			
+	}
+
+	@Override
+	public String getUrl() {
+		
+		return url;
 	}
 		
 }
