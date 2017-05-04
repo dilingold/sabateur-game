@@ -23,4 +23,10 @@ public class StraightPathCard extends PathCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

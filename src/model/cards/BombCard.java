@@ -10,5 +10,11 @@ public class BombCard extends ActionCard {
 		this.effect = "disable";
 		
 	}
+
+	@Override
+	public String getName() {
+		
+		return name;
+	}
 	
 }

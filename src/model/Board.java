@@ -16,13 +16,13 @@ public class Board {
         
     }
     
-    private Card[][] gameBoard;
+    private CardInterface[][] gameBoard;
     private int numCols = 7;
     private int numRows = 7;
 
     private Board() {
 
-        this.gameBoard = new Card[numRows][numCols];
+        this.gameBoard = new CardInterface[numRows][numCols];
 
     }
 
@@ -33,7 +33,7 @@ public class Board {
         	
             for (int cols=0; cols < numCols; cols++) {
             	
-            	EmptyCard card = new EmptyCard();
+            	CardInterface card = new EmptyCard();
             	
                 this.gameBoard[rows][cols] = card;
                 
@@ -43,7 +43,7 @@ public class Board {
         
     }
 
-    public Card getCard(int row, int column) {
+    public CardInterface getCard(int row, int column) {
     	
         return gameBoard[row][column];
         
@@ -56,7 +56,7 @@ public class Board {
 	 * @pre.condition 0 <= column < board.numRows
 	 * 
 	 */
-    public void playCard(int row, int column, Card cardType) {
+    public void playCard(int row, int column, CardInterface cardType) {
     	assert 0 < row;
 		assert row < Board.getInstance().getRows();
 		assert 0 <= column;
@@ -66,7 +66,7 @@ public class Board {
         
     }
 
-    public Card[][] currentBoard() {
+    public CardInterface[][] currentBoard() {
     	
         return this.gameBoard;
         

@@ -23,4 +23,10 @@ public class BlockPathCard extends PathCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

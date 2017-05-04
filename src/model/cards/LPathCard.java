@@ -22,4 +22,11 @@ public class LPathCard extends PathCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+		
+	}
+
 }

@@ -9,4 +9,10 @@ public class EmptyCard extends BoardCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

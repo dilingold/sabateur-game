@@ -10,4 +10,10 @@ public class ToxicCard extends ActionCard {
 		this.type = "toxic";
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

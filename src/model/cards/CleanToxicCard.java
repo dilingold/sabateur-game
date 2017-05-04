@@ -10,4 +10,10 @@ public class CleanToxicCard extends ActionCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

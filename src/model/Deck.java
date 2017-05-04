@@ -13,7 +13,7 @@ public class Deck {
 		return ourInstance;
 	}
 
-	private Stack<Card> deck = new Stack<Card>();
+	private Stack<CardInterface> deck = new Stack<CardInterface>();
 
 	private Deck() {
 		//add the following cards to the deck
@@ -35,7 +35,7 @@ public class Deck {
 	}
 
 	
-	public Card draw(){
+	public CardInterface draw(){
 		//drawn next card from deck
 		//return null if no cards in deck
 		if(deck.isEmpty() == false) {
@@ -47,7 +47,7 @@ public class Deck {
 	//print card name to console, for debugging:
 	public void printCards() {
 		System.out.println("cards2 stack printout: ");
-		Iterator<Card> deckIteration = deck.iterator();
+		Iterator<CardInterface> deckIteration = deck.iterator();
 		while (deckIteration.hasNext()) {
 			System.out.println(deckIteration.next());
 		}
@@ -104,7 +104,7 @@ public class Deck {
 
 	private void addToxicCard(int totalCards) {
 		for(int i = 0; i<totalCards; i++) {
-			ToxicCard toxicCard = new ToxicCard();
+			CardInterface toxicCard = new ToxicCard();
 			deck.push(toxicCard);
 		}
 	}

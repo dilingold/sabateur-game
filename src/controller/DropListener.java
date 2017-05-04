@@ -7,7 +7,11 @@ import javafx.scene.input.TransferMode;
 import model.Board;
 import model.Player;
 import model.cards.PathCard;
+import model.cards.RotationDecorator;
 import model.cards.Card;
+import model.cards.CardDecorator;
+import model.cards.CardInterface;
+import model.cards.ImageDecorator;
 
 //allows for one component to be dropped on another
 public class DropListener {
@@ -34,7 +38,7 @@ public class DropListener {
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 
-		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
+		if (validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
 					
 			if (event.getGestureSource() != target) {
 								
@@ -44,8 +48,8 @@ public class DropListener {
 				//if the dragged card is a path card, get the correct rotation and image
 				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
 					
-					PathCard draggedCard = (PathCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
-					String imageName = "/resources/images/cards/" + draggedCard.getName() + "-rotate" + draggedCard.getRotation() + ".png";
+					PathCard draggedCard = (PathCard)currentPlayer.getHand().getCards().get(draggedCardIndex);
+					String imageName = new ImageDecorator(new CardDecorator(new RotationDecorator(draggedCard))).getName();
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);
 					return true;
@@ -54,8 +58,8 @@ public class DropListener {
 				
 				else {
 					
-					Card draggedCard = currentPlayer.getHand().getCards().get(draggedCardIndex);
-					String imageName = "/resources/images/cards/" + draggedCard.getName() + ".png";
+					CardInterface draggedCard = currentPlayer.getHand().getCards().get(draggedCardIndex);
+					String imageName = new ImageDecorator(new CardDecorator(draggedCard)).getName();
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);
 					return true;

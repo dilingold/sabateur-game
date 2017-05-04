@@ -9,4 +9,10 @@ public class SearchTresureCard extends ActionCard {
 		
 	}
 
+	@Override
+	public String getName() {
+		
+		return name;
+	}
+
 }

@@ -76,11 +76,12 @@ public class  GameView {
 		for(int i = 0; i < 7; i++) {
 
 			for(int k = 0; k < 7; k++) {
-
+				
 				switch (currentBoard.getCard(k, i).getName()) {
 
 					case "blank card":
-						Image image = new Image("/resources/images/board/empty.png");
+						CardInterface emptyCard = new EmptyCard();
+						Image image = new Image(new ImageDecorator(new CardDecorator(emptyCard)).getName());
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
@@ -88,8 +89,9 @@ public class  GameView {
 						makeDroppableBoard(pic);
 						boardGrid.add(pic, i, k);
 						break;
-					case "gold":
-						Image goldImage = new Image("/resources/images/board/goal.png");
+					case "goal":
+						CardInterface goldCard = new GoldCard();
+						Image goldImage = new Image(new ImageDecorator(new CardDecorator(goldCard)).getName());
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -97,15 +99,17 @@ public class  GameView {
 						boardGrid.add(goldPic, i, k);
 						break;
 					case "stone":
-						Image coalimage = new Image("/resources/images/board/goal.png");
+						CardInterface coalCard = new StoneCard();
+						Image coalimage = new Image(new ImageDecorator(new CardDecorator(coalCard)).getName());
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
 						break;
-					case "End Path":
-						Image startImage = new Image("/resources/images/cards/start.png");
+					case "start":
+						CardInterface startCard = new EndPathCard(1);
+						Image startImage = new Image(new ImageDecorator(new CardDecorator(startCard)).getName());
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
@@ -229,7 +233,7 @@ public class  GameView {
 								
 				PathCard pathCard = (PathCard) hand.getCards().get(i);
 				makeClickable(btn, pathCard, i);
-				String imageName = "/resources/images/cards/" + pathCard.getName() + "-rotate" + pathCard.getRotation() + ".png";
+				String imageName = new ImageDecorator(new CardDecorator(new RotationDecorator(pathCard))).getName();
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
 				
@@ -237,8 +241,8 @@ public class  GameView {
 			
 			else {
 				
-				Card card = hand.getCards().get(i);
-				String imageName = "/resources/images/cards/" + card.getName() + ".png";
+				CardInterface card = hand.getCards().get(i);
+				String imageName = new ImageDecorator(new CardDecorator(card)).getName();
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
 				
@@ -274,7 +278,7 @@ public class  GameView {
 		btn.setOnAction(event -> {
 			
 			card.changeRotation();
-			String imageName = "/resources/images/cards/" + card.getName() + "-rotate" + card.getRotation() + ".png";
+			String imageName = new ImageDecorator(new CardDecorator(new RotationDecorator(card))).getName();
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			btn.setGraphic(new ImageView(image));
 			

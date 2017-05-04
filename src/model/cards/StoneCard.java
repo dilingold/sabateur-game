@@ -4,9 +4,15 @@ public class StoneCard extends BoardCard {
 
 	public StoneCard() {
 		
-		this.type = "stone";
-		this.name = "stone";
+		this.type = "coal";
+		this.name = "goal";
 		
+	}
+
+	@Override
+	public String getName() {
+		
+		return name;
 	}
 	
 }
