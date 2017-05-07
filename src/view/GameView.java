@@ -25,6 +25,7 @@ import model.Board;
 import model.Hand;
 import model.Player;
 import model.cards.*;
+import sun.applet.Main;
 
 public class  GameView {
 
@@ -49,7 +50,6 @@ public class  GameView {
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
-
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
@@ -217,34 +217,39 @@ public class  GameView {
 		hb.getChildren().add(roleBtn);
 		
 		Hand hand = currentPlayer.getHand();
-		
+		//System.out.println(hand1.getCards().get(5).getType());
 		for (int i = 0; i < hand.cardCount(); i++) {
 			
 			Button btn = new Button();
-			
+			//System.out.println(hand.cardCount());
 			//add the correct images to all cards
 			//make all cards draggable
 			//if the card is a path card, rotate card when it is clicked
-			if (hand.getCards().get(i).getType() == "path") {
-								
+
+			if (hand.getCards().get(i) == null) {
+				String imageName = "/resources/images/cards/backofCard" + ".png";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
+				btn.setGraphic(new ImageView(image));
+			}
+			else if(hand.getCards().get(i).getType() == "path"){
+
 				PathCard pathCard = (PathCard) hand.getCards().get(i);
 				makeClickable(btn, pathCard, i);
 				String imageName = "/resources/images/cards/" + pathCard.getName() + "-rotate" + pathCard.getRotation() + ".png";
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
-				
 			}
-			
 			else {
-				
 				Card card = hand.getCards().get(i);
 				String imageName = "/resources/images/cards/" + card.getName() + ".png";
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
 				
 			}
-			
-			makeDraggable(btn, i);
+
+			if(hand.getCards().get(i) != null){
+				makeDraggable(btn, i);
+			}
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
 			hb.getChildren().add(btn);
