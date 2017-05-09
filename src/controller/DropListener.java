@@ -38,7 +38,7 @@ public class DropListener {
 
 			if (event.getGestureSource() != target) {
 
-				Board.getInstance().playCard(col,row, currentPlayer.getHand().getCards().get(draggedCardIndex));
+				Board.getInstance().playCard(row,col, currentPlayer.getHand().getCards().get(draggedCardIndex));
 
 
 				//if the dragged card is a path card, get the correct rotation and image
@@ -50,6 +50,15 @@ public class DropListener {
 					target.setImage(image);
 					currentPlayer.getHand().discardCard(draggedCardIndex);
 					deal.drawCard(currentPlayer);
+					
+					if(validator.checkWin(row, col)) {
+						
+						System.out.println("Win!");
+						
+					}
+					
+					else System.out.println("try again");
+					
 					return true;
 
 				}

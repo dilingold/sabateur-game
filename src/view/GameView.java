@@ -89,7 +89,7 @@ public class  GameView {
 						boardGrid.add(pic, i, k);
 						break;
 					case "gold":
-						Image goldImage = new Image("/resources/images/board/goal.png");
+						Image goldImage = new Image("/resources/images/board/gold.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -97,7 +97,7 @@ public class  GameView {
 						boardGrid.add(goldPic, i, k);
 						break;
 					case "stone":
-						Image coalimage = new Image("/resources/images/board/goal.png");
+						Image coalimage = new Image("/resources/images/board/coal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
@@ -308,8 +308,8 @@ public class  GameView {
 			
 			if (dropLocation == "board") {
 				
-				Integer rowIndex = GridPane.getColumnIndex(source);
-				Integer colIndex = GridPane.getRowIndex(source);
+				Integer rowIndex = GridPane.getRowIndex(source);
+				Integer colIndex = GridPane.getColumnIndex(source);
 				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
 					
 					nextTurn();

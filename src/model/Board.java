@@ -57,7 +57,7 @@ public class Board {
 	 * 
 	 */
     public void playCard(int row, int column, Card cardType) {
-    	assert 0 < row;
+    	assert 0 <= row;
 		assert row < Board.getInstance().getRows();
 		assert 0 <= column;
 		assert column < Board.getInstance().getCols();
