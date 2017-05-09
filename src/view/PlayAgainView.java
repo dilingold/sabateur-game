@@ -1,5 +1,6 @@
 package view;
 
+import controller.PlayAgainListener;
 import controller.PlayGameListener;
 import controller.Treasure;
 import javafx.geometry.Insets;
@@ -24,7 +25,7 @@ public class PlayAgainView {
 	public void displayView(String winner) {
 		
 		String winnerString;
-		if (winner == "miner") {
+		if (winner == "miners") {
 			
 			winnerString = "Miners Win!";
 			
@@ -48,11 +49,7 @@ public class PlayAgainView {
 		createContent.MenuItem playAgain = new createContent.MenuItem("PLAY AGAIN");
 		playAgain.setOnMouseClicked(event -> {
 			
-			Board.getInstance().initBoard();
-			new Treasure().setTreasure();
-			Board.getInstance().playCard(6, 3, new StartCard());
-			PlayGameListener playGameListener = new PlayGameListener();
-			playGameListener.changeScene(stage);
+			new PlayAgainListener().playAgain(stage);
 			
 		});
 		

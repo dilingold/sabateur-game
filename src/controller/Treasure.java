@@ -50,5 +50,26 @@ public class Treasure{
         }
     }
 
+    public void setTreasure(int[] rows, int[] cols) {
+    	
+    	treasure.add(new GoldCard());
+    	
+    	for (int i = 1; i < rows.length; i++) {
+    		
+    		treasure.add(new StoneCard());
+    		
+    	}
+    	
+    	Collections.shuffle(treasure);
+    	
+    	int i = 0;
+    	for (int row : rows) {
+    		
+    		Board.getInstance().playCard(row, cols[i], treasure.get(i));
+    		i++;
+    		
+    	}
+    	
+    }
 
 }

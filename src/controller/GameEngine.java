@@ -27,10 +27,10 @@ public class GameEngine {
 		int column = 3;
 		int row = 6;
 
-		board = Board.getInstance();
-		board.initBoard();
-		treasure.setTreasure();
-		board.playCard(row,column,card);
+		BoardBuilder boardBuilder = new BoardBuilder();
+		boardBuilder.initBoard();
+		boardBuilder.setStart();
+		boardBuilder.setTreasureSites(5);
 
 		players = PlayerController.getInstance();
 		currentPlayerIndex = 0;
