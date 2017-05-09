@@ -197,8 +197,6 @@ public class ActionCardValidator {
 			
 		}
 		
-		System.out.println(GameEngine.getNextPlayer().getName() + ": " + GameEngine.getNextPlayer().getHand().cardCount());
-		System.out.println("sorry");
 		return false;
 		
 	}

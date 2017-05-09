@@ -57,14 +57,14 @@ public class DropListener {
 					if(validator.checkMinersWin(row, col)) {
 						
 						System.out.println("Miners Win!");
-						new PlayAgainView(stage).displayView();;
+						new PlayAgainView(stage).displayView("miners");;
 						
 					}
 					
 					else if(validator.checkSabateursWin()) {
 						
 						System.out.println("Sabateurs win!");
-						new PlayAgainView(stage).displayView();
+						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
 									
