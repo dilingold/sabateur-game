@@ -23,6 +23,7 @@ public class Deck {
 		addStraightPathCards(3);
 		addTPathCards(6);
 		addToxicCard(3);
+		addEndPathCard(3);
 		shuffle();
 		
 	}
@@ -106,6 +107,17 @@ public class Deck {
 			ToxicCard toxicCard = new ToxicCard();
 			deck.push(toxicCard);
 		}
+	}
+	
+	private void addEndPathCard(int totalCards) {
+		
+		for(int i = 0; i<totalCards; i++) {
+			
+			EndPathCard endCard = new EndPathCard(0);
+			deck.push(endCard);
+			
+		}
+		
 	}
 
 }
