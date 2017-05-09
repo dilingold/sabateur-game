@@ -25,6 +25,7 @@ import model.Board;
 import model.Hand;
 import model.Player;
 import model.cards.*;
+//import sun.applet.Main;
 
 public class  GameView {
 
@@ -49,7 +50,6 @@ public class  GameView {
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
-
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
@@ -81,17 +81,18 @@ public class  GameView {
 
 					case "blank card":
 						Card emptyCard = new EmptyCard();
-						Image image = new Image(new ImageDecorator(new CardDecorator(emptyCard)).getName());
+						Image image = new Image("/resources/images/board/blank card.png");
 						ImageView pic = new ImageView();
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
 						pic.setImage(image);
-						makeDroppableBoard(pic);
+						makeDroppable(pic, "board");
 						boardGrid.add(pic, i, k);
 						break;
+
 					case "goal":
 						Card goldCard = new GoldCard();
-						Image goldImage = new Image(new ImageDecorator(new CardDecorator(goldCard)).getName());
+						Image goldImage = new Image("/resources/images/board/gold.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -100,7 +101,7 @@ public class  GameView {
 						break;
 					case "stone":
 						Card coalCard = new StoneCard();
-						Image coalimage = new Image(new ImageDecorator(new CardDecorator(coalCard)).getName());
+						Image coalimage = new Image("/resources/images/board/coal.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
@@ -108,8 +109,7 @@ public class  GameView {
 						boardGrid.add(coalPic, i, k);
 						break;
 					case "start":
-						Card startCard = new EndPathCard(1);
-						Image startImage = new Image(new ImageDecorator(new CardDecorator(startCard)).getName());
+						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
 						startPic.setFitHeight(60);
@@ -187,18 +187,18 @@ public class  GameView {
 		Text discardText = new Text("Discard");
 		discardText.setFill(Color.WHITE);
 		discardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		
-		Label discardIcon = new Label();
-		discardIcon.setPrefHeight(60);
-		discardIcon.setPrefWidth(60);
 		Image image = new Image(getClass().getResourceAsStream("/resources/images/board/discard.png"));
-		discardIcon.setGraphic(new ImageView(image));
+		ImageView discardImageView = new ImageView();
+		discardImageView.setImage(image);
+		discardImageView.setFitWidth(60);
+		discardImageView.setFitHeight(60);
+		makeDroppable(discardImageView, "discard");
 
 		VBox vbDiscard = new VBox();
 		vbDiscard.setSpacing(10);
 
 		vbDiscard.getChildren().add(discardText);
-		vbDiscard.getChildren().add(discardIcon);
+		vbDiscard.getChildren().add(discardImageView);
 		vbDiscard.setAlignment(Pos.CENTER);
 
 		gameGrid.add(vbBoard, 0, 0);
@@ -221,7 +221,6 @@ public class  GameView {
 		hb.getChildren().add(roleBtn);
 		
 		Hand hand = currentPlayer.getHand();
-		
 		for (int i = 0; i < hand.cardCount(); i++) {
 			
 			Button btn = new Button();
@@ -229,26 +228,30 @@ public class  GameView {
 			//add the correct images to all cards
 			//make all cards draggable
 			//if the card is a path card, rotate card when it is clicked
-			if (hand.getCards().get(i).getType() == "path") {
-								
+			if (hand.getCards().get(i) == null) {
+				String imageName = "/resources/images/board/empty.png";
+				Image image = new Image(getClass().getResourceAsStream(imageName));
+				btn.setGraphic(new ImageView(image));
+			}
+			else if(hand.getCards().get(i).getType() == "path"){
+
 				PathCard pathCard = (PathCard) hand.getCards().get(i);
 				makeClickable(btn, pathCard, i);
 				String imageName = new ImageDecorator(new CardDecorator(new RotationDecorator(pathCard))).getName();
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
-				
 			}
-			
 			else {
-				
 				Card card = hand.getCards().get(i);
 				String imageName = new ImageDecorator(new CardDecorator(card)).getName();
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
 				
 			}
-			
-			makeDraggable(btn, i);
+
+			if(hand.getCards().get(i) != null){
+				makeDraggable(btn, i);
+			}
 			btn.setPrefHeight(60);
 			btn.setPrefWidth(60);
 			hb.getChildren().add(btn);
@@ -286,9 +289,14 @@ public class  GameView {
 		
 	}
 	
-	//when a card is dropped onto the board it goes through a validation process
-	//if it is a valid move, the next player's turn is called
-	public void makeDroppableBoard(ImageView target) {
+	/*
+	 * when a card is dropped onto the board it goes through a validation process,
+	 * if it is a valid move, the next player's turn is called
+	 * 
+	 * when a card is dropped on the discard icon it is removed from the player's hand 
+	 * and the next player's turn is called
+	 */
+	public void makeDroppable(ImageView target, String dropLocation) {
 		
 		DropListener dropListener = new DropListener();
 		
@@ -301,13 +309,29 @@ public class  GameView {
 		target.setOnDragDropped(event ->  {
 			
 			Node source = (Node) event.getSource();
-			Integer rowIndex = GridPane.getColumnIndex(source);
-			Integer colIndex = GridPane.getRowIndex(source);
-			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+			
+			if (dropLocation == "board") {
 				
-				nextTurn();
+				Integer rowIndex = GridPane.getRowIndex(source);
+				Integer colIndex = GridPane.getColumnIndex(source);
+				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+					
+					nextTurn();
+					
+				}
 				
 			}
+			
+			else if (dropLocation == "discard") {
+				
+				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target)) {
+					
+					nextTurn();
+					
+				}
+				
+			}
+			
 			
 		});
 

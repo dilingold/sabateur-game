@@ -10,12 +10,11 @@ public class Deal {
 
     private int maxCards = 6;
 
-//Code Assignment 2
-//    public void drawCard(Card card) {
-//
-//        hand.add(card);
-    
-//    }
+    public void drawCard(Player player) {
+
+        player.getHand().addCard(Deck.getInstance().draw());
+
+    }
 
     public void deal(Player player) {
 

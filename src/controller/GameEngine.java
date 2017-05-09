@@ -23,7 +23,7 @@ public class GameEngine {
 	public GameEngine() {
 
 		//setup board, players, deck and view
-		PathCard card = new EndPathCard(1);
+		StartCard card = new StartCard();
 		int column = 3;
 		int row = 6;
 
@@ -36,38 +36,44 @@ public class GameEngine {
 		currentPlayerIndex = 0;
 		mainView = new MainView();
 		mainView.launchApp(this);
-		
-	}
-	
 
-	
-	public int getCurrentPlayerIndex() {
-		
-		return currentPlayerIndex;
-		
 	}
-	
-	
+
+
+
+	public int getCurrentPlayerIndex() {
+
+		return currentPlayerIndex;
+
+	}
+
+
 	//set the next player's turn
 	public Player nextPlayer() {
-		
+
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
-			
+
 			currentPlayerIndex = 0;
-			
+
 		}
-		
+
 		else currentPlayerIndex++;
-		
+
 		return getCurrentPlayer();
-		
+
 	}
-	
+
 	public Player getCurrentPlayer() {
-		
+
 		return players.getPlayerByPosition(currentPlayerIndex);
-		
+
 	}
+	public Player getPrevPlay() {
+
+		return players.getPlayerByPosition(currentPlayerIndex);
+
+	}
+
 
 }
 

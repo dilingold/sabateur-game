@@ -18,11 +18,11 @@ public class Deck {
 	private Deck() {
 		//add the following cards to the deck
 		//where the passed int is the number of cards
-		addLPathCards(10);
-		addXPathCards(10);
-		addStraightPathCards(10);
-		addTPathCards(10);
-		addToxicCard(10);
+		addLPathCards(3);
+		addXPathCards(3);
+		addStraightPathCards(3);
+		addTPathCards(6);
+		addEndPathCard(3);
 		shuffle();
 		
 	}
@@ -34,7 +34,6 @@ public class Deck {
 		
 	}
 
-	
 	public Card draw(){
 		//drawn next card from deck
 		//return null if no cards in deck
@@ -107,6 +106,17 @@ public class Deck {
 			Card toxicCard = new ToxicCard();
 			deck.push(toxicCard);
 		}
+	}
+	
+	private void addEndPathCard(int totalCards) {
+		
+		for(int i = 0; i<totalCards; i++) {
+			
+			EndPathCard endCard = new EndPathCard(0);
+			deck.push(endCard);
+			
+		}
+		
 	}
 
 }

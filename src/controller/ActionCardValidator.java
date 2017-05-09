@@ -138,5 +138,54 @@ public class ActionCardValidator {
 		return validated;
 
 	}
+	
+	public boolean checkWin(int row, int col) {
+				
+		//check if square to the right is gold
+		if (col < 6 && Board.getInstance().getCard(row, col+1) != null) { 
+			if (Board.getInstance().getCard(row, col+1).getName() == "gold") {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		//check if square to the left is gold
+		if (col > 0 && Board.getInstance().getCard(row, col-1) != null) { 
+			
+			if (Board.getInstance().getCard(row, col-1).getName() == "gold") {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		//check if square to the top is gold
+		if (row > 0 && Board.getInstance().getCard(row-1, col) != null) { 
+						
+			if (Board.getInstance().getCard(row-1, col).getName() == "gold") {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		//check if square to the bottom is gold
+		if (row < 6 && Board.getInstance().getCard(row+1, col) != null) { 
+			
+			if (Board.getInstance().getCard(row+1, col).getName() == "gold") {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
 
 }
