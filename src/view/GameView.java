@@ -85,7 +85,7 @@ public class  GameView {
 						pic.setFitWidth(60);
 						pic.setFitHeight(60);
 						pic.setImage(image);
-						makeDroppableBoard(pic);
+						makeDroppable(pic, "board");
 						boardGrid.add(pic, i, k);
 						break;
 					case "gold":
@@ -183,18 +183,18 @@ public class  GameView {
 		Text discardText = new Text("Discard");
 		discardText.setFill(Color.WHITE);
 		discardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		
-		Label discardIcon = new Label();
-		discardIcon.setPrefHeight(60);
-		discardIcon.setPrefWidth(60);
 		Image image = new Image(getClass().getResourceAsStream("/resources/images/board/discard.png"));
-		discardIcon.setGraphic(new ImageView(image));
+		ImageView discardImageView = new ImageView();
+		discardImageView.setImage(image);
+		discardImageView.setFitWidth(60);
+		discardImageView.setFitHeight(60);
+		makeDroppable(discardImageView, "discard");
 
 		VBox vbDiscard = new VBox();
 		vbDiscard.setSpacing(10);
 
 		vbDiscard.getChildren().add(discardText);
-		vbDiscard.getChildren().add(discardIcon);
+		vbDiscard.getChildren().add(discardImageView);
 		vbDiscard.setAlignment(Pos.CENTER);
 
 		gameGrid.add(vbBoard, 0, 0);
@@ -217,15 +217,13 @@ public class  GameView {
 		hb.getChildren().add(roleBtn);
 		
 		Hand hand = currentPlayer.getHand();
-		//System.out.println(hand1.getCards().get(5).getType());
 		for (int i = 0; i < hand.cardCount(); i++) {
 			
 			Button btn = new Button();
-			//System.out.println(hand.cardCount());
+			
 			//add the correct images to all cards
 			//make all cards draggable
 			//if the card is a path card, rotate card when it is clicked
-
 			if (hand.getCards().get(i) == null) {
 				String imageName = "/resources/images/board/empty.png";
 				Image image = new Image(getClass().getResourceAsStream(imageName));
@@ -287,9 +285,14 @@ public class  GameView {
 		
 	}
 	
-	//when a card is dropped onto the board it goes through a validation process
-	//if it is a valid move, the next player's turn is called
-	public void makeDroppableBoard(ImageView target) {
+	/*
+	 * when a card is dropped onto the board it goes through a validation process,
+	 * if it is a valid move, the next player's turn is called
+	 * 
+	 * when a card is dropped on the discard icon it is removed from the player's hand 
+	 * and the next player's turn is called
+	 */
+	public void makeDroppable(ImageView target, String dropLocation) {
 		
 		DropListener dropListener = new DropListener();
 		
@@ -302,13 +305,29 @@ public class  GameView {
 		target.setOnDragDropped(event ->  {
 			
 			Node source = (Node) event.getSource();
-			Integer rowIndex = GridPane.getColumnIndex(source);
-			Integer colIndex = GridPane.getRowIndex(source);
-			if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+			
+			if (dropLocation == "board") {
 				
-				nextTurn();
+				Integer rowIndex = GridPane.getColumnIndex(source);
+				Integer colIndex = GridPane.getRowIndex(source);
+				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+					
+					nextTurn();
+					
+				}
 				
 			}
+			
+			else if (dropLocation == "discard") {
+				
+				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target)) {
+					
+					nextTurn();
+					
+				}
+				
+			}
+			
 			
 		});
 

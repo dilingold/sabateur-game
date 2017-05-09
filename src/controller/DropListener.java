@@ -73,5 +73,18 @@ public class DropListener {
 		return false;
 
 	}
+	
+	/*
+	 * when a card is dropped on the discard icon, it is removed from the player's hand
+	 */
+	public boolean drop(DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
+		
+		Deal deal = new Deal();
+		currentPlayer.getHand().discardCard(draggedCardIndex);
+		deal.drawCard(currentPlayer);
+		
+		return true;
+
+	}
 
 }
