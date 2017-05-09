@@ -7,10 +7,12 @@ import model.cards.Card;
 public class Hand {
 	
 	ArrayList<Card> cards;
+	private int cardCount;
 	
     public Hand(){
     	
     	cards = new ArrayList<>();
+    	cardCount = 0;
 
     }
 
@@ -23,6 +25,7 @@ public class Hand {
     public boolean discardCard(int discardedCard) {
 
         cards.remove(discardedCard);
+        cardCount--;
 
         return true;
 
@@ -30,13 +33,14 @@ public class Hand {
 
     public int cardCount() {
     	
-        return cards.size();
+        return cardCount;
         
     }
 
     public void addCard(Card card) {
     	
         cards.add(card);
+        cardCount++;
         
     }
    

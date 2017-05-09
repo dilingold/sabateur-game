@@ -1,6 +1,7 @@
 package controller;
 
 import model.Board;
+import model.Player;
 import model.cards.Card;
 
 public class ActionCardValidator {
@@ -139,7 +140,7 @@ public class ActionCardValidator {
 
 	}
 	
-	public boolean checkWin(int row, int col) {
+	public boolean checkMinersWin(int row, int col) {
 				
 		//check if square to the right is gold
 		if (col < 6 && Board.getInstance().getCard(row, col+1) != null) { 
@@ -184,6 +185,20 @@ public class ActionCardValidator {
 			
 		}
 		
+		return false;
+		
+	}
+	
+	public Boolean checkSabateursWin() {
+		
+		if (GameEngine.getNextPlayer().getHand().cardCount() == 0) {
+			
+			return true;
+			
+		}
+		
+		System.out.println(GameEngine.getNextPlayer().getName() + ": " + GameEngine.getNextPlayer().getHand().cardCount());
+		System.out.println("sorry");
 		return false;
 		
 	}

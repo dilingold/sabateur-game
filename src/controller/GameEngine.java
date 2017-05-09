@@ -9,8 +9,8 @@ public class GameEngine {
 
 	private MainView mainView;
 	private Board board;
-	private PlayerController players;
-	private int currentPlayerIndex;
+	private static PlayerController players;
+	private static int currentPlayerIndex;
 	private Treasure treasure = new Treasure();
 
 	//run game
@@ -71,6 +71,18 @@ public class GameEngine {
 	public Player getPrevPlay() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
+
+	}
+	
+	public static Player getNextPlayer() {
+
+		if (currentPlayerIndex == players.getPlayerList().size()-1) {
+
+			return players.getPlayerByPosition(0);
+
+		}
+
+		else return players.getPlayerByPosition(currentPlayerIndex+1);
 
 	}
 

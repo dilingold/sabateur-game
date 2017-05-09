@@ -33,6 +33,7 @@ public class DropListener {
 	 * valid, the board is updated to reflect the move
 	 */
 	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
+		
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 		Deal deal = new Deal();
@@ -53,13 +54,20 @@ public class DropListener {
 					currentPlayer.getHand().discardCard(draggedCardIndex);
 					deal.drawCard(currentPlayer);
 					
-					if(validator.checkWin(row, col)) {
+					if(validator.checkMinersWin(row, col)) {
 						
-						System.out.println("Win!");
+						System.out.println("Miners Win!");
 						new PlayAgainView(stage).displayView();;
 						
 					}
 					
+					else if(validator.checkSabateursWin()) {
+						
+						System.out.println("Sabateurs win!");
+						new PlayAgainView(stage).displayView();
+						
+					}
+									
 					return true;
 
 				}
