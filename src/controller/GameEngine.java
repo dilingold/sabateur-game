@@ -23,7 +23,7 @@ public class GameEngine {
 	public GameEngine() {
 
 		//setup board, players, deck and view
-		EndPathCard card = new EndPathCard(1);
+		StartCard card = new StartCard();
 		int column = 3;
 		int row = 6;
 

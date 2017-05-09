@@ -18,11 +18,11 @@ public class Deck {
 	private Deck() {
 		//add the following cards to the deck
 		//where the passed int is the number of cards
-		addLPathCards(10);
-		addXPathCards(10);
-		addStraightPathCards(10);
-		addTPathCards(10);
-		addToxicCard(10);
+		addLPathCards(3);
+		addXPathCards(3);
+		addStraightPathCards(3);
+		addTPathCards(6);
+		addToxicCard(3);
 		shuffle();
 		
 	}

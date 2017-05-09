@@ -25,7 +25,7 @@ import model.Board;
 import model.Hand;
 import model.Player;
 import model.cards.*;
-import sun.applet.Main;
+//import sun.applet.Main;
 
 public class  GameView {
 
@@ -104,7 +104,7 @@ public class  GameView {
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
 						break;
-					case "End Path":
+					case "start":
 						Image startImage = new Image("/resources/images/cards/start.png");
 						ImageView startPic = new ImageView();
 						startPic.setFitWidth(60);
@@ -227,7 +227,7 @@ public class  GameView {
 			//if the card is a path card, rotate card when it is clicked
 
 			if (hand.getCards().get(i) == null) {
-				String imageName = "/resources/images/cards/backofCard" + ".png";
+				String imageName = "/resources/images/board/empty.png";
 				Image image = new Image(getClass().getResourceAsStream(imageName));
 				btn.setGraphic(new ImageView(image));
 			}
