@@ -23,6 +23,8 @@ public class PlayAgainListener {
 		PlayerController.getInstance().clearPlayerHands();
 		PlayerController.getInstance().dealPlayerHands();
 		
+		GameEngine.setCurrentPlayerIndex(0);
+		
 		new PlayGameListener().changeScene(stage);
 		
 	}

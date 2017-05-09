@@ -49,6 +49,12 @@ public class GameEngine {
 		return currentPlayerIndex;
 
 	}
+	
+	public static void setCurrentPlayerIndex(int index) {
+		
+		currentPlayerIndex = index;
+		
+	}
 
 
 	//set the next player's turn
