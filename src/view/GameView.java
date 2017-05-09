@@ -310,7 +310,7 @@ public class  GameView {
 				
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
-				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
 					
 					nextTurn();
 					

@@ -174,7 +174,7 @@ public class ActionCardValidator {
 		}
 		
 		//check if square to the bottom is gold
-		if (row < 7 && Board.getInstance().getCard(row+1, col) != null) { 
+		if (row < 6 && Board.getInstance().getCard(row+1, col) != null) { 
 			
 			if (Board.getInstance().getCard(row+1, col).getName() == "gold") {
 				

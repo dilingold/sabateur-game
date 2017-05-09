@@ -22,7 +22,6 @@ public class Deck {
 		addXPathCards(3);
 		addStraightPathCards(3);
 		addTPathCards(6);
-		addToxicCard(3);
 		addEndPathCard(3);
 		shuffle();
 		

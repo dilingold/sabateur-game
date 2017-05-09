@@ -34,11 +34,6 @@ public class WelcomeView {
 		createContent.Title title = new createContent.Title("S A B A T E U R");
 
 		createContent.MenuItem startGame = new createContent.MenuItem("START GAME");
-		startGame.setOnMouseClicked(event -> {
-			
-			System.out.println();
-			
-		});
 
 		createContent.MenuItem itemExit = new createContent.MenuItem("EXIT");
 

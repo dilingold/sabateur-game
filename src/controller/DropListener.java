@@ -4,9 +4,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.Stage;
 import model.Board;
 import model.Player;
 import model.cards.PathCard;
+import view.PlayAgainView;
 import model.cards.Card;
 
 //allows for one component to be dropped on another
@@ -30,7 +32,7 @@ public class DropListener {
 	 * when a card is dropped on the board, it goes through a validation process, and if it is
 	 * valid, the board is updated to reflect the move
 	 */
-	public boolean drop(DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
 		Deal deal = new Deal();
@@ -54,10 +56,9 @@ public class DropListener {
 					if(validator.checkWin(row, col)) {
 						
 						System.out.println("Win!");
+						new PlayAgainView(stage).displayView();;
 						
 					}
-					
-					else System.out.println("try again");
 					
 					return true;
 
