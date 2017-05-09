@@ -142,7 +142,8 @@ public class  GameView {
 			
 			if (roleBtn.getText() == "Role") {
 				
-				roleBtn.setText("Sabateur");
+				String role = MainView.gameEngine.getCurrentPlayer().getRole();
+				roleBtn.setText(role);
 				
 			}
 			

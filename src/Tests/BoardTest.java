@@ -15,7 +15,7 @@ public class BoardTest {
 		
 	Hand myHand = new Hand();
 	String name = "name";
-	Player myPlayer = new Player(name, myHand);
+	Player myPlayer = new Player(name, myHand, "miner");
 	//Deal.deal(myPlayer);
 	
 	//System.out.println(myPlayer.getHand().getCards().get(3).type());

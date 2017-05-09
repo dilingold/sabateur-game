@@ -3,16 +3,17 @@ package model;
 public class Player {
 	
     private String name;
-    private boolean role;
+    private String role;
     private String status;
     private int UID;
     private Hand hand;
     private Boolean toolsDamaged = false;
 
-    public Player (String PlayerName, Hand hand) {
+    public Player (String PlayerName, Hand hand, String role) {
 
         name = PlayerName;
         this.hand = hand;
+        this.role = role;
         
     }
 
@@ -40,13 +41,13 @@ public class Player {
         
     }
 
-    public boolean getRole() {
+    public String getRole() {
     	
         return role;
         
     }
 
-    public void setRole(boolean role) {
+    public void setRole(String role) {
     	
         this.role = role;
         
