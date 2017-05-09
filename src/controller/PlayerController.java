@@ -26,7 +26,6 @@ public class PlayerController {
     public boolean createPlayers(String[] playerNames) {
     	
         players = new ArrayList<>();
-        Deal deal = new Deal();
         
         int numPlayers = playerNames.length;
         
@@ -52,13 +51,23 @@ public class PlayerController {
             Player player = new Player(pNames, hand, roles.get(i));
             players.add(player);
             player.setUID(i);
-            deal.deal(player);
             i++;
             
         }
 
         return true;
         
+    }
+    
+    public void dealPlayerHands() {
+    	
+    	Deal deal = new Deal();
+    	for(Player player : players) {
+    		
+    		deal.deal(player);
+    		
+    	}
+    	
     }
 
     public Player getPlayerByPosition(int position) {
@@ -77,6 +86,16 @@ public class PlayerController {
     	
         return players;
         
+    }
+    
+    public void clearPlayerHands() {
+    	
+    	for(Player player : players) {
+    		
+    		player.getHand().getCards().clear();
+    		
+    	}
+    	
     }
 
 }

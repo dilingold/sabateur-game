@@ -1,6 +1,7 @@
 package controller;
 
 import model.Deck;
+import model.Hand;
 import model.Player;
 import model.cards.Card;
 
@@ -24,11 +25,14 @@ public class Deal {
 
     public void deal(Player player) {
 
+    	Hand hand = new Hand();
         for(int i = 0; i<maxCards; i++) {
         	
-        	player.getHand().addCard(Deck.getInstance().draw());
+        	hand.addCard(Deck.getInstance().draw());
 
         }
+        
+        player.setHand(hand);
 
     }
     

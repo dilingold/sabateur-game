@@ -13,6 +13,7 @@ public class AddPlayerListener {
 	public void createPlayers(String[] players) {
 		
 		PlayerController.getInstance().createPlayers(players);
+		PlayerController.getInstance().dealPlayerHands();
 
 	}
 	

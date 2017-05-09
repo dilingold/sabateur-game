@@ -29,7 +29,7 @@ public class BoardBuilder {
 			
 			int randRow = rand.nextInt((6 - 0) + 1) + 0;
 			int randCol = rand.nextInt((6 - 0) + 1) + 0;
-			System.out.println(randRow + ", " + randCol);
+			
 			randRows[i] = randRow;
 			randCols[i] = randCol;
 			

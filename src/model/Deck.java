@@ -14,18 +14,6 @@ public class Deck {
 	}
 
 	private Stack<Card> deck = new Stack<Card>();
-
-	private Deck() {
-		//add the following cards to the deck
-		//where the passed int is the number of cards
-		addLPathCards(3);
-		addXPathCards(3);
-		addStraightPathCards(3);
-		addTPathCards(6);
-		addEndPathCard(3);
-		shuffle();
-		
-	}
 	
 	public void shuffle(){
 		
@@ -52,7 +40,7 @@ public class Deck {
 		}
 	}
 
-	private void addLPathCards(int totalCards) {
+	public void addLPathCards(int totalCards) {
 		
 		for(int i = 0; i<totalCards; i++) {
 			
@@ -63,7 +51,7 @@ public class Deck {
 		
 	}
 	
-	private void addXPathCards(int totalCards) {
+	public void addXPathCards(int totalCards) {
 		
 		for(int i = 0; i<totalCards; i++) {
 			
@@ -87,28 +75,28 @@ public class Deck {
 	}
 	*/
 	
-	private void addStraightPathCards(int totalCards) {
+	public void addStraightPathCards(int totalCards) {
 		for(int i = 0; i<totalCards; i++) {
 			StraightPathCard straightCard = new StraightPathCard(0);
 			deck.push(straightCard);
 		}
 	}
 	
-	private void addTPathCards(int totalCards) {
+	public void addTPathCards(int totalCards) {
 		for(int i = 0; i<totalCards; i++) {
 			TPathCard tPathCard = new TPathCard(0);
 			deck.push(tPathCard);
 		}
 	}
 
-	private void addToxicCard(int totalCards) {
+	public void addToxicCard(int totalCards) {
 		for(int i = 0; i<totalCards; i++) {
 			ToxicCard toxicCard = new ToxicCard();
 			deck.push(toxicCard);
 		}
 	}
 	
-	private void addEndPathCard(int totalCards) {
+	public void addEndPathCard(int totalCards) {
 		
 		for(int i = 0; i<totalCards; i++) {
 			
@@ -116,6 +104,18 @@ public class Deck {
 			deck.push(endCard);
 			
 		}
+		
+	}
+	
+	public Stack<Card> getDeck() {
+		
+		return deck;
+		
+	}
+	
+	public void clearDeck() {
+		
+		deck.clear();
 		
 	}
 

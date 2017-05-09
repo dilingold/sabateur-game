@@ -22,15 +22,18 @@ public class GameEngine {
 
 	public GameEngine() {
 
-		//setup board, players, deck and view
-		StartCard card = new StartCard();
-		int column = 3;
-		int row = 6;
-
 		BoardBuilder boardBuilder = new BoardBuilder();
 		boardBuilder.initBoard();
-		boardBuilder.setStart();
 		boardBuilder.setTreasureSites(5);
+		boardBuilder.setStart();
+		
+		DeckBuilder deckBuilder = new DeckBuilder();
+		deckBuilder.addEndPathCards(3);
+		deckBuilder.addLPathCards(6);
+		deckBuilder.addStraighPathCards(3);
+		deckBuilder.addTPathCards(3);
+		deckBuilder.addXPathCards(3);
+		deckBuilder.Shuffle();
 
 		players = PlayerController.getInstance();
 		currentPlayerIndex = 0;
