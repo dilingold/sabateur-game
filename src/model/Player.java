@@ -1,5 +1,7 @@
 package model;
 
+import model.cards.Card;
+
 public class Player {
 	
     private String name;
@@ -53,6 +55,17 @@ public class Player {
     	
         this.role = role;
         
+    }
+    
+    public void drawCard() {
+    	
+    	Card card = Deck.getInstance().draw();
+    	if(card != null) {
+    		
+    		getHand().addCard(card);
+    		
+    	}
+    	
     }
 
     public Hand getHand() {

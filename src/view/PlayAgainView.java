@@ -1,16 +1,11 @@
 package view;
 
 import controller.PlayAgainListener;
-import controller.PlayGameListener;
-import controller.Treasure;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Board;
-import model.cards.StartCard;
 
 public class PlayAgainView {
 	

@@ -10,7 +10,7 @@ import model.cards.GoldCard;
 import model.cards.StoneCard;
 
 
-public class Treasure{
+public class Treasure {
 
     private Board board;
     //standard treasure positions

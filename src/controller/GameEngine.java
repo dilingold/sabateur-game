@@ -1,17 +1,12 @@
 package controller;
 
-import model.Board;
-import model.Deck;
 import model.Player;
 import view.MainView;
-import model.cards.*;
 public class GameEngine {
 
 	private MainView mainView;
-	private Board board;
 	private static PlayerController players;
 	private static int currentPlayerIndex;
-	private Treasure treasure = new Treasure();
 
 	//run game
 	public static void main(String[] args) {
@@ -23,11 +18,11 @@ public class GameEngine {
 	public GameEngine() {
 
 		DeckBuilder deckBuilder = new DeckBuilder();
-		deckBuilder.addEndPathCards(3);
-		deckBuilder.addLPathCards(6);
-		deckBuilder.addStraighPathCards(3);
-		deckBuilder.addTPathCards(3);
-		deckBuilder.addXPathCards(3);
+		deckBuilder.addEndPathCards();
+		deckBuilder.addLPathCards();
+		deckBuilder.addStraighPathCards();
+		deckBuilder.addTPathCards();
+		deckBuilder.addXPathCards();
 		deckBuilder.Shuffle();
 
 		players = PlayerController.getInstance();

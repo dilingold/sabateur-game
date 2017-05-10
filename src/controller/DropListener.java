@@ -36,7 +36,6 @@ public class DropListener {
 		
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
-		Deal deal = new Deal();
 		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), col, row)) {
 
 			if (event.getGestureSource() != target) {
@@ -52,7 +51,7 @@ public class DropListener {
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);
 					currentPlayer.getHand().discardCard(draggedCardIndex);
-					deal.drawCard(currentPlayer);
+					currentPlayer.drawCard();
 					
 					if(validator.checkMinersWin(row, col)) {
 						
@@ -80,7 +79,7 @@ public class DropListener {
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);
 					currentPlayer.getHand().discardCard(draggedCardIndex);
-					deal.drawCard(currentPlayer);
+					currentPlayer.drawCard();
 					
 					if(validator.checkSabateursWin()) {
 						
@@ -106,9 +105,8 @@ public class DropListener {
 	 */
 	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
 		
-		Deal deal = new Deal();
 		currentPlayer.getHand().discardCard(draggedCardIndex);
-		deal.drawCard(currentPlayer);
+		currentPlayer.drawCard();
 		
 		if(validator.checkSabateursWin()) {
 			

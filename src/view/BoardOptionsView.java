@@ -104,7 +104,7 @@ public class BoardOptionsView {
 			
 			int[] treasureRows = new int[numTreasuresSpinner.getValue()];
 			int i = 0;
-			for (Spinner spinner : treasureRowSpinners) {
+			for (Spinner<Integer> spinner : treasureRowSpinners) {
 				
 				treasureRows[i] = (int) spinner.getValue();
 				i++;
@@ -112,7 +112,7 @@ public class BoardOptionsView {
 			}
 			int[] treasureCols = new int[numTreasuresSpinner.getValue()];
 			i = 0;
-			for (Spinner spinner : treasureColSpinners) {
+			for (Spinner<Integer> spinner : treasureColSpinners) {
 				
 				treasureCols[i] = (int) spinner.getValue();
 				i++;
@@ -163,12 +163,12 @@ public class BoardOptionsView {
 			createContent.MenuText treasureRowText = new createContent.MenuText("Row");
 			createContent.MenuText treasureColumnText = new createContent.MenuText("Column");
 			
-			Spinner<Integer> rowSpinner = new Spinner<>(0, 7, 0, 1);
+			Spinner<Integer> rowSpinner = new Spinner<>(0, 9, 0, 1);
 			rowSpinner.setPrefWidth(60);
 			
 			rows.add(rowSpinner);
 			
-			Spinner<Integer> colSpinner = new Spinner<>(0, 7, i, 1);
+			Spinner<Integer> colSpinner = new Spinner<>(0, 9, i, 1);
 			colSpinner.setPrefWidth(60);
 			
 			cols.add(colSpinner);

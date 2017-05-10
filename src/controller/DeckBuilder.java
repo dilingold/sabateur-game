@@ -7,33 +7,35 @@ import model.cards.Card;
 
 public class DeckBuilder {
 	
-	public void addLPathCards(int totalCards) {
+	private int numPathCards = 3;
+	
+	public void addLPathCards() {
 		
-		Deck.getInstance().addLPathCards(totalCards);
+		Deck.getInstance().addLPathCards(numPathCards);
 		
 	}
 	
-	public void addXPathCards(int totalCards) {
+	public void addXPathCards() {
 		
-		Deck.getInstance().addXPathCards(totalCards);
-		
-	}
-	
-	public void addStraighPathCards(int totalCards) {
-		
-		Deck.getInstance().addStraightPathCards(totalCards);
+		Deck.getInstance().addXPathCards(numPathCards);
 		
 	}
 	
-	public void addTPathCards(int totalCards) {
+	public void addStraighPathCards() {
 		
-		Deck.getInstance().addTPathCards(totalCards);
+		Deck.getInstance().addStraightPathCards(numPathCards);
 		
 	}
 	
-	public void addEndPathCards(int totalCards) {
+	public void addTPathCards() {
 		
-		Deck.getInstance().addEndPathCard(totalCards);
+		Deck.getInstance().addTPathCards(numPathCards);
+		
+	}
+	
+	public void addEndPathCards() {
+		
+		Deck.getInstance().addEndPathCard(numPathCards);
 		
 	}
 	

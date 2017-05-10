@@ -1,6 +1,5 @@
 package Tests;
 
-import controller.Deal;
 import model.Deck;
 import model.Hand;
 import model.Player;

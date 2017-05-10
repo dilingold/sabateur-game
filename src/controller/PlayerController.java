@@ -1,5 +1,6 @@
 package controller;
 
+import model.Deck;
 import model.Hand;
 import model.Player;
 
@@ -61,12 +62,19 @@ public class PlayerController {
     
     public void dealPlayerHands() {
     	
-    	Deal deal = new Deal();
     	for(Player player : players) {
-    		
-    		deal.deal(player);
-    		
-    	}
+			
+			Hand hand = new Hand();
+			
+			for (int i = 0; i < 6; i++) {
+				
+				hand.addCard(Deck.getInstance().draw());
+				
+			}
+			
+			player.setHand(hand);
+			
+		}
     	
     }
     
