@@ -7,7 +7,7 @@ import model.cards.Card;
 
 public class DeckBuilder {
 	
-	private int numPathCards = 3;
+	private int numPathCards = 10;
 	
 	public void addLPathCards() {
 		

@@ -7,7 +7,6 @@ public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
 		
-		PlayerController.getInstance().distributeGold();
 		for(Player player : PlayerController.getInstance().getPlayerList()) {
 			
 			System.out.println(player.getName() + ": " + player.getGold());
@@ -50,7 +49,7 @@ public class PlayAgainListener {
 		
 		PlayerController.getInstance().clearPlayerHands();
 		PlayerController.getInstance().dealPlayerHands();
-		
+		PlayerController.getInstance().setPlayerRoles();
 		GameEngine.setCurrentPlayerIndex(0);
 	}
 

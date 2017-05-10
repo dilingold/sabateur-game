@@ -20,6 +20,14 @@ public class Player {
         this.gold = 0;
         
     }
+    
+    public Player (String PlayerName, Hand hand) {
+
+        name = PlayerName;
+        this.hand = hand;
+        this.gold = 0;
+        
+    }
 
     public int getUID() {
     	

@@ -27,35 +27,19 @@ public class PlayerController {
     public boolean createPlayers(String[] playerNames) {
     	
         players = new ArrayList<>();
-        
-        int numPlayers = playerNames.length;
-        
-        List<String> roles = new ArrayList<String>();    	
-        for(int i = 0; i < numPlayers; i++) {
-        		
-        	if(i < numPlayers/2) {
-        			
-            	roles.add("miner");
-            			
-            }
-            		
-            else roles.add("sabateur");
-        		
-        }
-        
-        Collections.shuffle(roles);
-        
+                
         int i = 0;
         for(String pNames: playerNames) {
         	
+        	System.out.println("Player" + i);
             Hand hand = new Hand();
-            Player player = new Player(pNames, hand, roles.get(i));
+            Player player = new Player(pNames, hand);
             players.add(player);
             player.setUID(i);
             i++;
             
         }
-
+        
         return true;
         
     }
@@ -77,12 +61,6 @@ public class PlayerController {
 		}
     	
     }
-    
-    public void distributeGold() {
-    	
-    	
-    	
-    }
 
     public Player getPlayerByPosition(int position) {
     	
@@ -100,6 +78,31 @@ public class PlayerController {
     	
         return players;
         
+    }
+    
+    public void setPlayerRoles() {
+    	
+    	List<String> roles = new ArrayList<String>();    	
+        for(int i = 0; i < playerCount(); i++) {
+        		
+        	if(i < playerCount()/2) {
+        			
+            	roles.add("sabateur");
+            			
+            }
+            		
+            else roles.add("miner");
+        		
+        }
+        
+        Collections.shuffle(roles);
+        
+        for (int i = 0; i < playerCount(); i++) {
+        	
+        	players.get(i).setRole(roles.get(i));
+        	
+        }
+    	
     }
     
     public void clearPlayerHands() {
