@@ -54,8 +54,7 @@ public class WelcomeView {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				PlayerCountListener playerCountListener = new PlayerCountListener();
-				playerCountListener.changeScene(stage);
+				new BoardOptionsView(stage).displayView();
 				
 			}
 			

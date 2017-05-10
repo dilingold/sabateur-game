@@ -69,6 +69,12 @@ public class PlayerController {
     	}
     	
     }
+    
+    public void distributeGold() {
+    	
+    	
+    	
+    }
 
     public Player getPlayerByPosition(int position) {
     	

@@ -73,9 +73,11 @@ public class  GameView {
 		//add appropriate images in correct positions
 		//make only the blank positions on the board droppable so player's path cards can be dropped on them
 		Board currentBoard = Board.getInstance();
-		for(int i = 0; i < 7; i++) {
+		int rows = currentBoard.getRows();
+		int cols = currentBoard.getCols();
+		for(int i = 0; i < cols; i++) {
 
-			for(int k = 0; k < 7; k++) {
+			for(int k = 0; k < rows; k++) {
 
 				switch (currentBoard.getCard(k, i).getName()) {
 

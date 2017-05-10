@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import model.cards.*;
 
 /**
@@ -17,17 +21,19 @@ public class Board {
     }
     
     private Card[][] gameBoard;
-    private int numCols = 7;
-    private int numRows = 7;
+    private int numCols;
+    private int numRows;
 
     private Board() {
 
-        this.gameBoard = new Card[numRows][numCols];
+        
 
     }
 
     //Initializes the game board
     public void initBoard() {
+    	
+    	this.gameBoard = new Card[numRows][numCols];
     	
         for (int rows=0; rows < numRows; rows++) {
         	
@@ -41,6 +47,29 @@ public class Board {
             
         }
         
+    }
+    
+    public void setTreasure(int[] rows, int[] cols) {
+    	
+    	List<Card> treasure = new ArrayList<Card>();
+    	treasure.add(new GoldCard());
+    	
+    	for (int i = 1; i < rows.length; i++) {
+    		
+    		treasure.add(new StoneCard());
+    		
+    	}
+    	
+    	Collections.shuffle(treasure);
+    	
+    	int i = 0;
+    	for (int row : rows) {
+    		
+    		Board.getInstance().playCard(row, cols[i], treasure.get(i));
+    		i++;
+    		
+    	}
+    	
     }
 
     public Card getCard(int row, int column) {
@@ -93,6 +122,13 @@ public class Board {
     }
     public int getCols(){
     	return numCols;
+    }
+    
+    public void setRows(int rows){
+    	this.numRows = rows;
+    }
+    public void setCols(int cols){
+    	this.numCols = cols;
     }
 
 }

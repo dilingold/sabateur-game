@@ -3,6 +3,7 @@ package view;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -52,6 +53,22 @@ public class createContent {
         }
         
     }
+    
+    public static class MenuText extends GridPane {
+    	
+        public MenuText(String name) {
+        	
+            // This is the main heading title box
+            Text text = new Text(name);
+            text.setFill(Color.WHITE);
+            text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.MEDIUM, 16));
+
+            setAlignment(Pos.CENTER);
+            getChildren().add(text);
+            
+        }
+        
+    }
 
     public static class MenuBox extends VBox {
     	
@@ -75,6 +92,22 @@ public class createContent {
             sep.setEndX(200);
             sep.setStroke(Color.DARKGRAY);
             return sep;
+            
+        }
+        
+    }
+    
+    public static class HMenuBox extends HBox {
+    	
+        public HMenuBox(createContent.MenuItem... items) {
+
+            // Dynamically add separator after each menu item
+            for (createContent.MenuItem item : items) {
+            	
+                getChildren().addAll(item);
+                setAlignment(Pos.CENTER);
+                
+            }
             
         }
         

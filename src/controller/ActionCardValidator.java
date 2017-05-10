@@ -143,7 +143,7 @@ public class ActionCardValidator {
 	public boolean checkMinersWin(int row, int col) {
 				
 		//check if square to the right is gold
-		if (col < 6 && Board.getInstance().getCard(row, col+1) != null) { 
+		if (col < Board.getInstance().getCols()-1 && Board.getInstance().getCard(row, col+1) != null) { 
 			if (Board.getInstance().getCard(row, col+1).getName() == "gold") {
 				
 				return true;
@@ -175,7 +175,7 @@ public class ActionCardValidator {
 		}
 		
 		//check if square to the bottom is gold
-		if (row < 6 && Board.getInstance().getCard(row+1, col) != null) { 
+		if (row < Board.getInstance().getRows()-1 && Board.getInstance().getCard(row+1, col) != null) { 
 			
 			if (Board.getInstance().getCard(row+1, col).getName() == "gold") {
 				
@@ -190,7 +190,7 @@ public class ActionCardValidator {
 	}
 	
 	public Boolean checkSabateursWin() {
-		
+				
 		if (GameEngine.getNextPlayer().getHand().cardCount() == 0) {
 			
 			return true;

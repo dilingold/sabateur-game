@@ -22,11 +22,6 @@ public class GameEngine {
 
 	public GameEngine() {
 
-		BoardBuilder boardBuilder = new BoardBuilder();
-		boardBuilder.initBoard();
-		boardBuilder.setTreasureSites(5);
-		boardBuilder.setStart();
-		
 		DeckBuilder deckBuilder = new DeckBuilder();
 		deckBuilder.addEndPathCards(3);
 		deckBuilder.addLPathCards(6);
