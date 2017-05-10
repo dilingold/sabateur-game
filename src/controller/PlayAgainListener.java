@@ -2,10 +2,17 @@ package controller;
 
 import javafx.stage.Stage;
 import model.Board;
+import model.Player;
 
 public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
+		
+		for(Player player : PlayerController.getInstance().getPlayerList()) {
+			
+			System.out.println(player.getName() + ": " + player.getGold());
+			
+		}
 		
 		BoardBuilder boardBuilder = new BoardBuilder();
 		boardBuilder.getRows();

@@ -56,12 +56,15 @@ public class DropListener {
 					
 					if(validator.checkMinersWin(row, col)) {
 						
+						DistributeGold.currentPlayer(currentPlayer);
+						DistributeGold.miners();
 						new PlayAgainView(stage).displayView("miners");;
 						
 					}
 					
 					else if(validator.checkSabateursWin()) {
 						
+						DistributeGold.sabateurs();
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -81,6 +84,7 @@ public class DropListener {
 					
 					if(validator.checkSabateursWin()) {
 						
+						DistributeGold.sabateurs();
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -108,6 +112,7 @@ public class DropListener {
 		
 		if(validator.checkSabateursWin()) {
 			
+			DistributeGold.sabateurs();
 			new PlayAgainView(stage).displayView("sabateurs");
 			
 		}

@@ -8,12 +8,14 @@ public class Player {
     private int UID;
     private Hand hand;
     private Boolean toolsDamaged = false;
+    private int gold;
 
     public Player (String PlayerName, Hand hand, String role) {
 
         name = PlayerName;
         this.hand = hand;
         this.role = role;
+        this.gold = 0;
         
     }
 
@@ -84,6 +86,18 @@ public class Player {
     		toolsDamaged = false;
     	else
     		toolsDamaged = true;
+    }
+    
+    public int getGold() {
+    	
+    	return gold;
+    	
+    }
+    
+    public void addGold(int gold) {
+    	
+    	this.gold+=gold;
+    	
     }
     
 }
