@@ -323,7 +323,7 @@ public class  GameView {
 			
 			else if (dropLocation == "discard") {
 				
-				if(dropListener.drop(event, currentPlayer, draggedCardIndex, target)) {
+				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target)) {
 					
 					nextTurn();
 					

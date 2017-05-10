@@ -78,6 +78,13 @@ public class DropListener {
 					target.setImage(image);
 					currentPlayer.getHand().discardCard(draggedCardIndex);
 					deal.drawCard(currentPlayer);
+					
+					if(validator.checkSabateursWin()) {
+						
+						new PlayAgainView(stage).displayView("sabateurs");
+						
+					}
+					
 					return true;
 
 				}
@@ -93,11 +100,17 @@ public class DropListener {
 	/*
 	 * when a card is dropped on the discard icon, it is removed from the player's hand
 	 */
-	public boolean drop(DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
 		
 		Deal deal = new Deal();
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		deal.drawCard(currentPlayer);
+		
+		if(validator.checkSabateursWin()) {
+			
+			new PlayAgainView(stage).displayView("sabateurs");
+			
+		}
 		
 		return true;
 
