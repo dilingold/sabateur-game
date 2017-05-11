@@ -18,13 +18,7 @@ public class GameEngine {
 	public GameEngine() {
 
 		DeckBuilder deckBuilder = new DeckBuilder();
-		deckBuilder.addEndPathCards();
-		deckBuilder.addLPathCards();
-		deckBuilder.addStraighPathCards();
-		deckBuilder.addTPathCards();
-		deckBuilder.addXPathCards();
-		deckBuilder.addHeistCards();
-		deckBuilder.addExposeCard();
+		deckBuilder.addAllCards();
 		deckBuilder.Shuffle();
 
 		players = PlayerController.getInstance();

@@ -2,7 +2,7 @@ package model.cards;
 
 import model.PlayerD;
 
-public abstract class PersonalCard extends Card {
+public abstract class PersonalCard implements Card {
 		
 	protected String name;
 	private String type = "personal";
@@ -13,13 +13,15 @@ public abstract class PersonalCard extends Card {
 		return effect;
 			
 	}
-		
+	
+	@Override
 	public String getType() {
 			
 		return type;
 			
 	}
 	
+	@Override
 	public String getName() {
 		
 		return name;

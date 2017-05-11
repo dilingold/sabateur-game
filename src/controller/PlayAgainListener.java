@@ -35,14 +35,7 @@ public class PlayAgainListener {
 	public void resetDeck() {
 
 		DeckBuilder deckBuilder = new DeckBuilder();
-		deckBuilder.clearDeck();
-		deckBuilder.addEndPathCards();
-		deckBuilder.addLPathCards();
-		deckBuilder.addStraighPathCards();
-		deckBuilder.addTPathCards();
-		deckBuilder.addXPathCards();
-		deckBuilder.addHeistCards();
-		deckBuilder.addExposeCard();
+		deckBuilder.addAllCards();
 		deckBuilder.Shuffle();
 		
 	}

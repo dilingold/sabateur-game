@@ -7,11 +7,25 @@ import model.cards.Card;
 import model.cards.ExposeCard;
 import model.cards.HeistCard;
 import model.cards.LPathCard;
+import model.cards.SuperToolCard;
 
 public class DeckBuilder {
 	
 	private int numPathCards = 5;
 	private int numPersonalCards = 10;
+	
+	public void addAllCards() {
+		
+		addEndPathCards();
+		addLPathCards();
+		addStraighPathCards();
+		addTPathCards();
+		addXPathCards();
+		addHeistCards();
+		addExposeCard();
+		addSuperToolCard();
+		
+	}
 	
 	public void addLPathCards() {
 		
@@ -60,6 +74,17 @@ public class DeckBuilder {
 			
 			ExposeCard exposeCard = new ExposeCard();
 			Deck.getInstance().getDeck().push(exposeCard);
+			
+		}
+		
+	}
+	
+	public void addSuperToolCard() {
+		
+		for(int i = 0; i<numPersonalCards; i++) {
+			
+			SuperToolCard superToolCard = new SuperToolCard();
+			Deck.getInstance().getDeck().push(superToolCard);
 			
 		}
 		

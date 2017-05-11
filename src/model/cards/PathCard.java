@@ -1,7 +1,9 @@
 package model.cards;
 
-public abstract class PathCard extends Card {
+public abstract class PathCard implements Card {
 	
+	protected String type;
+	protected String name;
 	protected int x;
 	protected int y;
 	protected boolean[] exits = new boolean [4];
@@ -10,7 +12,7 @@ public abstract class PathCard extends Card {
 
 	public PathCard() {
 		
-		this.type = "path";
+		type = "path";
 
 	}
 	
@@ -90,6 +92,13 @@ public abstract class PathCard extends Card {
 	public String getType() {
 		
 		return type;
+		
+	}
+	
+	@Override
+	public String getName() {
+		
+		return name;
 		
 	}
 	
