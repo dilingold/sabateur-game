@@ -1,6 +1,6 @@
 package controller;
 
-import model.Player;
+import model.PlayerD;
 import view.MainView;
 public class GameEngine {
 
@@ -23,6 +23,8 @@ public class GameEngine {
 		deckBuilder.addStraighPathCards();
 		deckBuilder.addTPathCards();
 		deckBuilder.addXPathCards();
+		deckBuilder.addHeistCards();
+		deckBuilder.addExposeCard();
 		deckBuilder.Shuffle();
 
 		players = PlayerController.getInstance();
@@ -48,7 +50,7 @@ public class GameEngine {
 
 
 	//set the next player's turn
-	public Player nextPlayer() {
+	public PlayerD nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 
@@ -62,18 +64,18 @@ public class GameEngine {
 
 	}
 
-	public Player getCurrentPlayer() {
+	public PlayerD getCurrentPlayer() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
-	public Player getPrevPlay() {
+	public PlayerD getPrevPlay() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
 	
-	public static Player getNextPlayer() {
+	public static PlayerD getNextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 

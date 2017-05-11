@@ -1,13 +1,13 @@
 package controller;
 
 import javafx.stage.Stage;
-import model.Player;
+import model.PlayerD;
 
 public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
 		
-		for(Player player : PlayerController.getInstance().getPlayerList()) {
+		for(PlayerD player : PlayerController.getInstance().getPlayerList()) {
 			
 			System.out.println(player.getName() + ": " + player.getGold());
 			
@@ -41,6 +41,8 @@ public class PlayAgainListener {
 		deckBuilder.addStraighPathCards();
 		deckBuilder.addTPathCards();
 		deckBuilder.addXPathCards();
+		deckBuilder.addHeistCards();
+		deckBuilder.addExposeCard();
 		deckBuilder.Shuffle();
 		
 	}
@@ -49,7 +51,6 @@ public class PlayAgainListener {
 		
 		PlayerController.getInstance().clearPlayerHands();
 		PlayerController.getInstance().dealPlayerHands();
-		PlayerController.getInstance().setPlayerRoles();
 		GameEngine.setCurrentPlayerIndex(0);
 	}
 

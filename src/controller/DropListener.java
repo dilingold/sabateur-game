@@ -1,13 +1,15 @@
 package controller;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 import model.Board;
-import model.Player;
+import model.PlayerD;
 import model.cards.PathCard;
+import model.cards.PersonalCard;
 import view.PlayAgainView;
 import model.cards.Card;
 
@@ -27,12 +29,24 @@ public class DropListener {
 		event.consume();
 
 	}
+	
+	public void dragOver(DragEvent event, Label target) {
+
+		if (event.getGestureSource() != target) {
+
+			event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+		}
+
+		event.consume();
+
+	}
 
 	/*
 	 * when a card is dropped on the board, it goes through a validation process, and if it is
 	 * valid, the board is updated to reflect the move
 	 */
-	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
+	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, ImageView target, int row, int col) {
 		
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
@@ -103,7 +117,7 @@ public class DropListener {
 	/*
 	 * when a card is dropped on the discard icon, it is removed from the player's hand
 	 */
-	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
+	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, ImageView target) {
 		
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		currentPlayer.drawCard();
@@ -116,6 +130,40 @@ public class DropListener {
 		}
 		
 		return true;
+
+	}
+	
+	// when a card is dropped on a player, if it is a personal card and a legal move,
+	// discard card, draw new card, check if sabateurs won and return true
+	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, PlayerD targetPlayer, int draggedCardIndex, Label target) {
+		
+		PersonalCardValidator personalCardValidator = new PersonalCardValidator();
+		
+		if(!(currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "personal")) {
+			
+			return false;
+			
+		}
+		
+		PersonalCard card = (PersonalCard)currentPlayer.getHand().getCards().get(draggedCardIndex);
+		if(personalCardValidator.checkMove(card, currentPlayer, targetPlayer)) {
+			
+			card.doAction(currentPlayer, targetPlayer);
+			currentPlayer.getHand().discardCard(draggedCardIndex);
+			currentPlayer.drawCard();
+			
+			if(validator.checkSabateursWin()) {
+				
+				DistributeGold.sabateurs();
+				new PlayAgainView(stage).displayView("sabateurs");
+				
+			}
+			
+			return true;
+			
+		}
+		
+		return false;
 
 	}
 

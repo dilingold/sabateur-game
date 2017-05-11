@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
 import model.Hand;
-import model.Player;
+import model.PlayerD;
 import model.cards.*;
 //import sun.applet.Main;
 
@@ -31,7 +31,7 @@ public class  GameView {
 
 	private Stage stage;
 	private Text playerText = null;
-	private Player currentPlayer;
+	private PlayerD currentPlayer;
 	private int draggedCardIndex;
 	private Button roleBtn;
 	private HBox hbCards;
@@ -47,7 +47,7 @@ public class  GameView {
 
 	}
 
-	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
+	public void displayView(int totalPlayers, ArrayList<PlayerD> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 		stage.setTitle("Play Game");
@@ -144,7 +144,7 @@ public class  GameView {
 			
 			if (roleBtn.getText() == "Role") {
 				
-				String role = MainView.gameEngine.getCurrentPlayer().getRole();
+				String role = MainView.gameEngine.getCurrentPlayer().getType();
 				roleBtn.setText(role);
 				
 			}
@@ -170,13 +170,18 @@ public class  GameView {
 
 		//display the players with images to the top right of the screen
 		int k = 0;
-		for(Player player: playerNames) {
+		for(PlayerD player: playerNames) {
 			
 			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
 			pLabel.setMinWidth(150.0);
-			pLabel.setGraphic(new ImageView(image));
+			ImageView playerImageView = new ImageView();
+			playerImageView.setImage(image);
+			playerImageView.setFitWidth(60);
+			playerImageView.setFitHeight(60);
+			pLabel.setGraphic(playerImageView);
+			makeDroppable(pLabel, player);
 			vbPlayers.getChildren().add(pLabel);
 			k++;
 			
@@ -313,7 +318,7 @@ public class  GameView {
 				
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
-				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex) == true) {
+				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex)) {
 					
 					nextTurn();
 					
@@ -331,6 +336,29 @@ public class  GameView {
 				
 			}
 			
+			
+		});
+
+	}
+	
+	public void makeDroppable(Label target, PlayerD player) {
+		
+		DropListener dropListener = new DropListener();
+		
+		target.setOnDragOver(event ->  {
+			
+			dropListener.dragOver(event, target);
+			
+		});
+		
+		target.setOnDragDropped(event ->  {
+			
+			Node source = (Node) event.getSource();	
+			if(dropListener.drop(stage, event, currentPlayer, player, draggedCardIndex, target)) {
+				
+				nextTurn();
+				
+			}
 			
 		});
 

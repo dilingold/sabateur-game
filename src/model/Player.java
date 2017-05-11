@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.cards.Card;
 
 public class Player {
@@ -11,6 +14,7 @@ public class Player {
     private Hand hand;
     private Boolean toolsDamaged = false;
     private int gold;
+    private List<Player> heists;
 
     public Player (String PlayerName, Hand hand, String role) {
 
@@ -118,6 +122,28 @@ public class Player {
     public void addGold(int gold) {
     	
     	this.gold+=gold;
+    	
+    }
+    
+    public void planHeist(Player player) {
+    	
+    	if (!player.equals(this)) {
+    		
+    		if (heists == null) {
+        		
+        		heists = new ArrayList<Player>();
+        		
+        	}
+        	
+        	heists.add(player);
+    		
+    	}
+    	
+    }
+    
+    public List<Player> getPlannedHeists() {
+    	
+    	return heists;
     	
     }
     

@@ -2,13 +2,22 @@ package controller;
 
 import java.util.List;
 
-import model.Player;
+import model.PlayerD;
 
 public class DistributeGold {
 	
-	public static void currentPlayer(Player currentPlayer) {
+	public static void currentPlayer(PlayerD currentPlayer) {
 		
-		if(currentPlayer.getRole() == "miner") {
+		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
+			
+			System.out.println(p.getName() + " heists:");
+			distributeHeistsRecursive(p);
+			
+			System.out.println(p.getName() + " exposed:");
+			distributeExposedSabRecursive(p);
+			
+		}
+		if(currentPlayer.getType() == "miner") {
 			
 			currentPlayer.addGold(1);
 			
@@ -18,10 +27,10 @@ public class DistributeGold {
 	
 	public static void miners() {
 		
-		List<Player> players = PlayerController.getInstance().getPlayerList();
-		for (Player player : players) {
+		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
+		for (PlayerD player : players) {
 			
-			if(player.getRole() == "miner") {
+			if(player.getType() == "miner") {
 				
 				player.addGold(1);
 				
@@ -33,14 +42,36 @@ public class DistributeGold {
 	
 	public static void sabateurs() {
 		
-		List<Player> players = PlayerController.getInstance().getPlayerList();
-		for (Player player : players) {
+		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
+		for (PlayerD player : players) {
 			
-			if(player.getRole() == "sabateur") {
+			if(player.getType() == "sabateur") {
 				
 				player.addGold(1);
 				
 			}
+			
+		}
+		
+	}
+	
+	public static void distributeHeistsRecursive(PlayerD player) {
+		
+		for (PlayerD p : player.getPlannedHeists()) {
+
+			System.out.println(p.getName());
+			distributeHeistsRecursive(p);
+			
+		}
+		
+	}
+	
+	public static void distributeExposedSabRecursive(PlayerD player) {
+		
+		for (PlayerD p : player.getExposedSabateurs()) {
+
+			System.out.println(p.getName());
+			distributeExposedSabRecursive(p);
 			
 		}
 		

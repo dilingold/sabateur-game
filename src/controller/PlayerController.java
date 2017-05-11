@@ -2,7 +2,9 @@ package controller;
 
 import model.Deck;
 import model.Hand;
-import model.Player;
+import model.Miner;
+import model.PlayerD;
+import model.Sabateur;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +13,7 @@ import java.util.List;
 //This class is the creator and information expert on Players
 public class PlayerController {
 
-    private ArrayList<Player> players = null;
+    private ArrayList<PlayerD> players = null;
     private static PlayerController ourInstance = new PlayerController();
 
     public static PlayerController getInstance() {
@@ -27,15 +29,24 @@ public class PlayerController {
     public boolean createPlayers(String[] playerNames) {
     	
         players = new ArrayList<>();
+        List<String> roles = setPlayerRoles(playerNames.length);
                 
         int i = 0;
         for(String pNames: playerNames) {
         	
-        	System.out.println("Player" + i);
-            Hand hand = new Hand();
-            Player player = new Player(pNames, hand);
-            players.add(player);
-            player.setUID(i);
+        	if (roles.get(i) == "miner") {
+        		
+        		PlayerD player = new Miner(pNames);
+                players.add(player);
+        		
+        	}
+        	
+        	else {
+        		
+        		PlayerD player = new Sabateur(pNames);
+        		players.add(player);
+        		
+        	}
             i++;
             
         }
@@ -46,7 +57,7 @@ public class PlayerController {
     
     public void dealPlayerHands() {
     	
-    	for(Player player : players) {
+    	for(PlayerD player : players) {
 			
 			Hand hand = new Hand();
 			
@@ -62,7 +73,7 @@ public class PlayerController {
     	
     }
 
-    public Player getPlayerByPosition(int position) {
+    public PlayerD getPlayerByPosition(int position) {
     	
         return players.get(position);
         
@@ -74,18 +85,18 @@ public class PlayerController {
         
     }
 
-    public ArrayList<Player> getPlayerList() {
+    public ArrayList<PlayerD> getPlayerList() {
     	
         return players;
         
     }
     
-    public void setPlayerRoles() {
+    public List<String> setPlayerRoles(int size) {
     	
     	List<String> roles = new ArrayList<String>();    	
-        for(int i = 0; i < playerCount(); i++) {
+        for(int i = 0; i < size; i++) {
         		
-        	if(i < playerCount()/2) {
+        	if(i < size/2) {
         			
             	roles.add("sabateur");
             			
@@ -96,18 +107,13 @@ public class PlayerController {
         }
         
         Collections.shuffle(roles);
-        
-        for (int i = 0; i < playerCount(); i++) {
-        	
-        	players.get(i).setRole(roles.get(i));
-        	
-        }
+        return roles;
     	
     }
     
     public void clearPlayerHands() {
     	
-    	for(Player player : players) {
+    	for(PlayerD player : players) {
     		
     		player.getHand().getCards().clear();
     		

@@ -1,7 +1,10 @@
 package model.cards;
 
-public class PersonalCard extends Card {
+import model.PlayerD;
+
+public abstract class PersonalCard extends Card {
 		
+	protected String name;
 	private String type = "personal";
 	protected String effect;
 		
@@ -16,5 +19,13 @@ public class PersonalCard extends Card {
 		return type;
 			
 	}
+	
+	public String getName() {
+		
+		return name;
+		
+	}
+	
+	public abstract void doAction(PlayerD currentPlayer, PlayerD targetPlayer);
 		
 }
