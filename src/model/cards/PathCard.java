@@ -1,5 +1,7 @@
 package model.cards;
 
+import model.Board;
+
 public abstract class PathCard implements Card {
 	
 	protected String type;
@@ -99,6 +101,14 @@ public abstract class PathCard implements Card {
 	public String getName() {
 		
 		return name;
+		
+	}
+	
+	public Card doAction(int row, int col) {
+		
+		Card card = doAction();
+		Board.getInstance().playCard(row, col, card);
+		return card;
 		
 	}
 	

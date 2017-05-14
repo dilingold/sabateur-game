@@ -109,7 +109,7 @@ public class ActionCardValidator {
 		case "clean":
 			//needs code for assignment 2
 			if (Board.getInstance().getCard(row, column).getType() == "path") {
-
+				
 				validated = true;
 
 			}
@@ -126,9 +126,8 @@ public class ActionCardValidator {
 
 		case "Toxic Card":
 			// needs code for assignment 2
-			
 			if (Board.getInstance().getCard(row, column).getType() == "path") {
-
+				System.out.println("validated");
 				validated = true;
 
 			}

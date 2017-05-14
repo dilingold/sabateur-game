@@ -23,4 +23,10 @@ public class XPathCard extends PathCard {
 		
 	}
 
+	@Override
+	public Card doAction() {
+		
+		return this;
+	}
+
 }

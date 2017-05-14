@@ -28,6 +28,13 @@ public abstract class PersonalCard implements Card {
 		
 	}
 	
+	@Override
+	public Card doAction() {
+		
+		return this;
+		
+	}
+	
 	public abstract void doAction(PlayerD currentPlayer, PlayerD targetPlayer);
 		
 }

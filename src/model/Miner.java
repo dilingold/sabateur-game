@@ -2,9 +2,9 @@ package model;
 
 public class Miner extends PlayerD {
 		
-	public Miner(String name) {
+	public Miner(String name, int UID) {
 		
-		super(name);
+		super(name, UID);
 		this.type = "miner";
 		
 	}

@@ -30,7 +30,7 @@ public class GameEngine {
 
 
 
-	public int getCurrentPlayerIndex() {
+	public static int getCurrentPlayerIndex() {
 
 		return currentPlayerIndex;
 

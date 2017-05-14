@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import controller.DragCardListener;
 import controller.DropListener;
@@ -32,10 +33,12 @@ public class  GameView {
 	private Stage stage;
 	private Text playerText = null;
 	private PlayerD currentPlayer;
+	private ImageView[][] imageViews;
 	private int draggedCardIndex;
 	private Button roleBtn;
 	private HBox hbCards;
 	private VBox vbCards;
+	private List<Label> playerLabels;
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -75,6 +78,7 @@ public class  GameView {
 		Board currentBoard = Board.getInstance();
 		int rows = currentBoard.getRows();
 		int cols = currentBoard.getCols();
+		imageViews = new ImageView[rows][cols];
 		for(int i = 0; i < cols; i++) {
 
 			for(int k = 0; k < rows; k++) {
@@ -89,6 +93,7 @@ public class  GameView {
 						pic.setImage(image);
 						makeDroppable(pic, "board");
 						boardGrid.add(pic, i, k);
+						imageViews[k][i] = pic;
 						break;
 					case "gold":
 						Image goldImage = new Image("/resources/images/board/gold.png");
@@ -97,6 +102,7 @@ public class  GameView {
 						goldPic.setFitHeight(60);
 						goldPic.setImage(goldImage);
 						boardGrid.add(goldPic, i, k);
+						imageViews[k][i] = goldPic;
 						break;
 					case "stone":
 						Image coalimage = new Image("/resources/images/board/coal.png");
@@ -105,6 +111,7 @@ public class  GameView {
 						coalPic.setFitHeight(60);
 						coalPic.setImage(coalimage);
 						boardGrid.add(coalPic, i, k);
+						imageViews[k][i] = coalPic;
 						break;
 					case "start":
 						Image startImage = new Image("/resources/images/cards/start.png");
@@ -113,6 +120,7 @@ public class  GameView {
 						startPic.setFitHeight(60);
 						startPic.setImage(startImage);
 						boardGrid.add(startPic, i, k);
+						imageViews[k][i] = startPic;
 						
 				}
 				
@@ -167,12 +175,16 @@ public class  GameView {
 		playersText.setFill(Color.WHITE);
 		playersText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		vbPlayers.getChildren().add(playersText);
-
+		
+		playerLabels = new ArrayList<Label>();
+		
 		//display the players with images to the top right of the screen
 		int k = 0;
 		for(PlayerD player: playerNames) {
 			
-			String imageName = "/resources/images/players/a" + (k+1) + ".jpg";
+			String imageName;
+			imageName = "/resources/images/players/a" + (k+1) + ".jpg";
+			
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
 			pLabel.setMinWidth(150.0);
@@ -184,6 +196,8 @@ public class  GameView {
 			makeDroppable(pLabel, player);
 			vbPlayers.getChildren().add(pLabel);
 			k++;
+			
+			playerLabels.add(pLabel);
 			
 		}
 
@@ -302,7 +316,7 @@ public class  GameView {
 	 */
 	public void makeDroppable(ImageView target, String dropLocation) {
 		
-		DropListener dropListener = new DropListener();
+		DropListener dropListener = new DropListener(this);
 		
 		target.setOnDragOver(event ->  {
 			
@@ -318,7 +332,8 @@ public class  GameView {
 				
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
-				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target, rowIndex, colIndex)) {
+				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target,
+						imageViews, rowIndex, colIndex)) {
 					
 					nextTurn();
 					
@@ -343,7 +358,7 @@ public class  GameView {
 	
 	public void makeDroppable(Label target, PlayerD player) {
 		
-		DropListener dropListener = new DropListener();
+		DropListener dropListener = new DropListener(this);
 		
 		target.setOnDragOver(event ->  {
 			
@@ -371,6 +386,66 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
+		
+	}
+	
+	public void setPowerToolImage(PlayerD player) {
+		
+		Label target = playerLabels.get(player.getUID());
+		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-power.png";
+		
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+		target.setMinWidth(150.0);
+		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
+		
+	}
+	
+	public void setSuperPowerToolImage(PlayerD player) {
+		
+		Label target = playerLabels.get(player.getUID());
+		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-super.png";
+		
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+		target.setMinWidth(150.0);
+		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
+		
+	}
+	
+	public void removePowerToolImage() {
+		
+		Label target = playerLabels.get(currentPlayer.getUID());
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+		target.setMinWidth(150.0);
+		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
+		
+	}
+	
+	public void removeSuperPowerToolImage() {
+		
+		Label target = playerLabels.get(currentPlayer.getUID());
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+		target.setMinWidth(150.0);
+		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
 		
 	}
 

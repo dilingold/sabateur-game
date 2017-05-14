@@ -12,7 +12,6 @@ public class HeistCard extends PersonalCard {
 		
 	}
 	
-	@Override
 	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
 		
 		if (targetPlayer.getHeistedBy() != null) {

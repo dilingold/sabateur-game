@@ -36,14 +36,14 @@ public class PlayerController {
         	
         	if (roles.get(i) == "miner") {
         		
-        		PlayerD player = new Miner(pNames);
+        		PlayerD player = new Miner(pNames, i);
                 players.add(player);
         		
         	}
         	
         	else {
         		
-        		PlayerD player = new Sabateur(pNames);
+        		PlayerD player = new Sabateur(pNames, i);
         		players.add(player);
         		
         	}

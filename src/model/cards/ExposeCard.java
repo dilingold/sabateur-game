@@ -12,7 +12,6 @@ public class ExposeCard extends PersonalCard {
 		
 	}
 
-	@Override
 	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
 		
 		if (targetPlayer.getExposedBy() != null) {

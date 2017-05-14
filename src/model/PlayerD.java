@@ -8,21 +8,25 @@ import model.cards.Card;
 public abstract class PlayerD {
 	
     private String name;
+    private int UID;
     protected String type;
     private String status;
     private Hand hand;
     private Boolean toolsDamaged = false;
+    private Boolean hasPowerTool = false;
+    private Boolean hasSuperPowerTool = false;
     private int gold;
     private List<PlayerD> exposedSabateurs = new ArrayList<PlayerD>();
     private List<PlayerD> heists = new ArrayList<PlayerD>();
     private PlayerD heistedBy = null;
     private PlayerD exposedBy = null;
     
-    public PlayerD(String PlayerName) {
+    public PlayerD(String PlayerName, int UID) {
 
         name = PlayerName;
         hand = new Hand();
         this.gold = 0;
+        this.UID = UID;
         
     }
 
@@ -41,6 +45,12 @@ public abstract class PlayerD {
     public String getType() {
     	
     	return type;
+    	
+    }
+    
+    public int getUID() {
+    	
+    	return UID;
     	
     }
     
@@ -91,6 +101,43 @@ public abstract class PlayerD {
     		toolsDamaged = false;
     	else
     		toolsDamaged = true;
+    	
+    }
+    
+    public void givePowerTool() {
+    	
+    	hasPowerTool = true;
+    	
+    }
+    
+    public void removePowerTool() {
+    	
+    	hasPowerTool = false;
+    	
+    }
+    
+    public Boolean hasPowerTool() {
+    	
+    	return hasPowerTool;
+    	
+    }
+    
+    public Boolean hasSuperPowerTool() {
+    	
+    	return hasSuperPowerTool;
+    	
+    }
+    
+    public void giveSuperPowerTool() {
+    	
+    	hasSuperPowerTool = true;
+    	hasPowerTool = false;
+    	
+    }
+    
+    public void removeSuperPowerTool() {
+    	
+    	hasSuperPowerTool = false;
     	
     }
     

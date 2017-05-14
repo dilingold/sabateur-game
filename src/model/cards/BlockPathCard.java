@@ -23,4 +23,9 @@ public class BlockPathCard extends PathCard {
 		
 	}
 
+	@Override
+	public Card doAction() {
+		return this;
+	}
+
 }

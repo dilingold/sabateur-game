@@ -2,9 +2,9 @@ package model;
 
 public class Sabateur extends PlayerD {
 	
-	public Sabateur(String name) {
+	public Sabateur(String name, int UID) {
 		
-		super(name);
+		super(name, UID);
 		this.type = "sabateur";
 		
 	}

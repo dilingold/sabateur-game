@@ -7,12 +7,14 @@ import model.cards.Card;
 import model.cards.ExposeCard;
 import model.cards.HeistCard;
 import model.cards.LPathCard;
-import model.cards.SuperToolCard;
+import model.cards.PowerToolCard;
+import model.cards.ToxicCard;
 
 public class DeckBuilder {
 	
 	private int numPathCards = 5;
 	private int numPersonalCards = 10;
+	private int numActionCards = 10;
 	
 	public void addAllCards() {
 		
@@ -23,8 +25,18 @@ public class DeckBuilder {
 		addXPathCards();
 		addHeistCards();
 		addExposeCard();
+		addToxicCard();
 		addSuperToolCard();
 		
+	}
+	
+	public void addToxicCard() {
+		
+		for(int i = 0; i<numActionCards; i++) {
+			ToxicCard toxicCard = new ToxicCard();
+			Deck.getInstance().getDeck().push(toxicCard);
+			
+		}
 	}
 	
 	public void addLPathCards() {
@@ -83,7 +95,7 @@ public class DeckBuilder {
 		
 		for(int i = 0; i<numPersonalCards; i++) {
 			
-			SuperToolCard superToolCard = new SuperToolCard();
+			PowerToolCard superToolCard = new PowerToolCard();
 			Deck.getInstance().getDeck().push(superToolCard);
 			
 		}

@@ -23,4 +23,9 @@ public abstract class BoardCard implements Card {
 		return name;
 		
 	}
+	
+	@Override
+	public Card doAction() {
+		return this;
+	}
 }
