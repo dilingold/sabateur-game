@@ -15,9 +15,9 @@ public class LPathCard extends PathCard {
 		this.name = "L Path";
 		this.rotation = rotation;
 		
-		this.exits[0] = true;
+		this.exits[0] = false;
 		this.exits[1] = true;
-		this.exits[2] = false;
+		this.exits[2] = true;
 		this.exits[3] = false;
 		
 	}

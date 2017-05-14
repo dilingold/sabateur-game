@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.stage.Stage;
+import model.Board;
 import model.PlayerD;
 
 public class PlayAgainListener {
@@ -27,7 +28,7 @@ public class PlayAgainListener {
 		boardBuilder.getRows();
 		boardBuilder.getCols();
 		boardBuilder.initBoard();
-		boardBuilder.setTreasureSites(3);
+		boardBuilder.setTreasureSites();
 		boardBuilder.setStart();
 		
 	}

@@ -13,6 +13,11 @@ public abstract class AbstractCardDecorator implements Card {
 	}
 	
 	@Override
+	public boolean[] getExits() {
+		return null;
+	}
+	
+	@Override
 	public Card doAction() {
 		
 		card.doAction();

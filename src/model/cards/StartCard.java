@@ -13,6 +13,10 @@ public class StartCard extends PathCard {
 	public StartCard() {
 		
 		this.name = "start";
+		this.exits[0] = true;
+		this.exits[1] = true;
+		this.exits[2] = true;
+		this.exits[3] = true;
 		
 	}
 

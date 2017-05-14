@@ -1,7 +1,6 @@
 package controller;
 
 import model.Board;
-import model.Player;
 import model.cards.Card;
 
 public class ActionCardValidator {
@@ -47,50 +46,99 @@ public class ActionCardValidator {
 
 
 
-	private Boolean validatePath(Card cardType, int row, int column) {
+	private Boolean validatePath(Card card, int row, int column) {
 
 
 		Boolean validated = false;
-		if (cardType.getType() == "path") {
+		if (card.getType() == "path") {
+			Card dropLocation = Board.getInstance().getCard(row, column);
+			Card squareUp = null;
+			Card squareDown = null;
+			Card squareLeft = null;
+			Card squareRight = null;
+			if(row > 0)
+				squareUp = Board.getInstance().getCard((row - 1), column);
+			if(row < Board.getInstance().getRows()-1)
+				squareDown = Board.getInstance().getCard((row + 1), column);
+			if(column < Board.getInstance().getCols()-1)
+				squareRight = Board.getInstance().getCard(row, (column + 1));
+			if(column > 0)
+				squareLeft = Board.getInstance().getCard(row, (column - 1));
 			
-		/*
-		 * NOT CURRENTLY WORKING
-		 * Code for implementation in Assignment 2.
-		 * 
-		 */
-/*			if (Board.getInstance().getGameBoard(row, column).getType() == "action") {
-				validated = false;
+			//check that player is dropping card in an empty position
+			if (!(dropLocation.getName() == "blank card")) {
+				
+				System.out.println("invalid - non blank drop location");
+				return false;
+				
 			}
+				
+			// if the square above to drop position is not empty, check that the exits match up
+			if (squareUp != null && squareUp.getType() != "board") {
 
-			else if (Board.getInstance().getGameBoard(row, column).getType() == "blank") {
-				// check if any adjacent tiles are path cards
-				// first check if there's a tile down
-				if (Board.getInstance().getGameBoard((row - 1), column) != null)
-					// check if this tile has exit UP
-					if (Board.getInstance().getGameBoard((row - 1), column).getExits()[1])
-						;
-				validated = true;
-				// then left
-				if (Board.getInstance().getGameBoard((row), column - 1) != null)
-					// check if this tile has exit RIGHT
-					if (Board.getInstance().getGameBoard((row), column - 1).getExits()[2])
-						;
-				validated = true;
-				// right
-				if (Board.getInstance().getGameBoard((row), column + 1) != null)
-					// check if this tile has exit LEFT
-					if (Board.getInstance().getGameBoard((row), column + 1).getExits()[0])
-						;
-				validated = true;
-				// up
-				if (Board.getInstance().getGameBoard((row + 1), column) != null)
-					// check if this tile has exit DOWN
-					if (Board.getInstance().getGameBoard((row + 1), column).getExits()[3])
-						;
-				validated = true;
-
-			}*/
-			validated = true;
+				System.out.println("checking exits square up...");
+					
+				if (!checkExits(card, squareUp, 1)) {
+						
+					System.out.println("invalid square up");
+					return false;
+						
+				}
+					
+				else validated = true;
+				System.out.println("valid square up...");
+				
+			}
+				
+			// if the square left of drop position is not empty, check that the exits match up
+			if (squareLeft != null && squareLeft.getType() != "board") {
+				
+				System.out.println("checking square left");
+				
+				if (!checkExits(card, squareLeft, 0)) {
+					
+					System.out.println("invalid square left");
+					return false;
+						
+				}
+					
+				else validated = true;
+				System.out.println("valid square left...");
+				
+			}
+			// if the square right of drop position is not empty, check that the exits match up
+			if (squareRight != null && squareRight.getType() != "board") {
+					
+				System.out.println("checking square right");
+				
+				if (!checkExits(card, squareRight, 2)) {
+					
+					System.out.println("invalid square right");
+					return false;
+						
+				}
+					
+				else validated = true;
+				System.out.println("valid square right...");
+				
+			}
+			// if the square below drop position is not empty, check that the exits match up
+			if (squareDown != null && squareDown.getType() != "board") {
+					
+				System.out.println("checking square down");
+					
+				if (!checkExits(card, squareDown, 3)) {
+					
+					System.out.println("invalid square down");
+					return false;
+					
+				}
+				
+					else validated = true;
+					System.out.println("valid square down...");
+					
+			}
+			
 		}
 
 		return validated;
@@ -137,6 +185,21 @@ public class ActionCardValidator {
 
 		return validated;
 
+	}
+	
+	public boolean checkExits(Card playerCard, Card boardCard, int exit) {
+		
+		int boardExit;
+		if (exit > 1) {
+			boardExit = exit - 2;
+		}
+		else boardExit = exit + 2;
+		System.out.println("card exit: " + exit + playerCard.getExits()[exit] + " board exit: " + boardExit + boardCard.getExits()[boardExit]);
+		if (playerCard.getExits()[exit] && boardCard.getExits()[boardExit]) {
+			return true;
+		}
+		else return false;
+		
 	}
 	
 	public boolean checkMinersWin(int row, int col) {

@@ -14,6 +14,11 @@ public abstract class PersonalCard implements Card {
 			
 	}
 	
+	public boolean[] getExits() {
+		
+		return null;
+	}
+	
 	@Override
 	public String getType() {
 			

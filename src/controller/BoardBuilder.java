@@ -48,6 +48,12 @@ public class BoardBuilder {
 		
 	}
 	
+	public void setTreasureSites() {
+		
+		Board.getInstance().setTreasure(Board.getInstance().getTreasureRows(), Board.getInstance().getTreasureCols());
+		
+	}
+	
 	public void setTreasureSites(int numTreasures) {
 		
 		Random rand = new Random();

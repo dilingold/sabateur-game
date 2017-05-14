@@ -15,10 +15,10 @@ public class HeistTest {
 		
 	public static void main(String[] args) {
 		
-		PlayerD bob = new Miner("Bob");
-		PlayerD jane = new Miner("Jane");
-		PlayerD matt = new Sabateur("Matt");
-		PlayerD al = new Sabateur("Al");
+		PlayerD bob = new Miner("Bob", 0);
+		PlayerD jane = new Miner("Jane", 1);
+		PlayerD matt = new Sabateur("Matt", 2);
+		PlayerD al = new Sabateur("Al", 3);
 		
 		List<PlayerD> players = new ArrayList<PlayerD>();
 		players.add(bob);

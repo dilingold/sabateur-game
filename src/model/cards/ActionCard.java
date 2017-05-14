@@ -29,6 +29,12 @@ public abstract class ActionCard implements Card {
 	}
 	
 	@Override
+	public boolean[] getExits() {
+		
+		return null;
+	}
+	
+	@Override
 	public Card doAction() {
 		
 		return this;

@@ -23,6 +23,8 @@ public class Board {
     private Card[][] gameBoard;
     private int numCols;
     private int numRows;
+    private int[] treasureRows;
+    private int[] treasureCols;
 
     private Board() {
 
@@ -129,6 +131,18 @@ public class Board {
     }
     public void setCols(int cols){
     	this.numCols = cols;
+    }
+    public void setTreasureRows(int[] treasureRows) {
+    	this.treasureRows = treasureRows;
+    }
+    public void setTreasureCols(int[] treasureCols) {
+    	this.treasureCols = treasureCols;
+    }
+    public int[] getTreasureRows() {
+    	return treasureRows;
+    }
+    public int[] getTreasureCols() {
+    	return treasureCols;
     }
 
 }

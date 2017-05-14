@@ -20,16 +20,23 @@ public abstract class PathCard implements Card {
 	
 	public boolean[] getExits() {
 		
-		return rotateExits();
+		return exits;
 		
 	}
 	
 	//Cycles each of the varibles in the exits array the amount
 	//of times the card has been rotated, then returns the result.
 	//Does not change the original exits array variable.
-	private boolean[] rotateExits() {
+	private void rotateExits() {
 		
-		if(rotation == 1) return exits;
+		System.out.println(exits[0] + ", " + exits[1] + ", " + exits[2] + ", " + exits[3]);
+		boolean tmp = exits[3];
+		exits[3] = exits[2];
+		exits[2] = exits[1];
+		exits[1] = exits[0];
+		exits[0] = tmp;
+		
+		/*if(rotation == 0) return exits;
 		
 		else {
 			
@@ -50,7 +57,7 @@ public abstract class PathCard implements Card {
 			}	
 			
 			return exitsToReturn;
-		}
+		} */
 		
 	}
 
@@ -79,6 +86,7 @@ public abstract class PathCard implements Card {
 	//rotate card by clicking on it in the player's hand
 	public void changeRotation() {
 		
+		rotateExits();
 		if(rotation == 3) rotation = 0;
 		else rotation ++;
 		
