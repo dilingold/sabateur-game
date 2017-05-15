@@ -48,8 +48,8 @@ public class ActionCardValidator {
 
 	private Boolean validatePath(Card card, int row, int column) {
 
-
 		Boolean validated = false;
+		
 		if (card.getType() == "path") {
 			Card dropLocation = Board.getInstance().getCard(row, column);
 			Card squareUp = null;
@@ -74,7 +74,7 @@ public class ActionCardValidator {
 			}
 				
 			// if the square above to drop position is not empty, check that the exits match up
-			if (squareUp != null && squareUp.getType() != "board") {
+			if (squareUp != null && squareUp.getType() == "path") {
 
 				System.out.println("checking exits square up...");
 					
@@ -91,7 +91,7 @@ public class ActionCardValidator {
 			}
 				
 			// if the square left of drop position is not empty, check that the exits match up
-			if (squareLeft != null && squareLeft.getType() != "board") {
+			if (squareLeft != null && squareLeft.getType() == "path") {
 				
 				System.out.println("checking square left");
 				
@@ -107,7 +107,7 @@ public class ActionCardValidator {
 				
 			}
 			// if the square right of drop position is not empty, check that the exits match up
-			if (squareRight != null && squareRight.getType() != "board") {
+			if (squareRight != null && squareRight.getType() == "path") {
 					
 				System.out.println("checking square right");
 				
@@ -123,7 +123,7 @@ public class ActionCardValidator {
 				
 			}
 			// if the square below drop position is not empty, check that the exits match up
-			if (squareDown != null && squareDown.getType() != "board") {
+			if (squareDown != null && squareDown.getType() == "path") {
 					
 				System.out.println("checking square down");
 					
@@ -134,15 +134,81 @@ public class ActionCardValidator {
 					
 				}
 				
-					else validated = true;
-					System.out.println("valid square down...");
+				else validated = true;
+				System.out.println("valid square down...");
 					
+			}
+			
+			if (squareUp != null && (squareUp.getName() == "gold" || squareUp.getName() == "stone")) {
+				
+				if (!card.getExits()[1]) {
+					
+					System.out.println("invalid square up");
+					return false;
+						
+				}
+				
+			}
+			
+			if (squareDown != null && (squareDown.getName() == "gold" || squareDown.getName() == "stone")) {
+				
+				if (!card.getExits()[3]) {
+					
+					System.out.println("invalid square down");
+					return false;
+						
+				}
+				
+			}
+			
+			if (squareRight != null && (squareRight.getName() == "gold" || squareRight.getName() == "stone")) {
+				
+				if (!card.getExits()[2]) {
+					
+					System.out.println("invalid square right");
+					return false;
+						
+				}
+				
+			}
+			
+			if (squareLeft != null && (squareLeft.getName() == "gold" || squareLeft.getName() == "stone")) {
+				
+				if (!card.getExits()[0]) {
+					
+					System.out.println("invalid square left");
+					return false;
+						
+				}
+				
 			}
 			
 		}
 
 		return validated;
 
+	}
+	
+	public boolean checkSuperPowerMove(Card card, int row, int col) {
+				
+		if(row > Board.getInstance().getRows()-1 || row < 0 || 
+				col > Board.getInstance().getCols()-1 || col < 0) {
+			
+			return false;
+			
+		}
+		
+		Card boardLocation = Board.getInstance().getCard(row, col);
+		if(boardLocation.getName() == "stone" || boardLocation.getName() == "gold" 
+				|| boardLocation.getName() == "start") {
+			
+			System.out.println("returning false " + boardLocation.getName());
+			return false;
+			
+		}
+				
+		return true;
+		
 	}
 
 	private Boolean validateAction(Card cardType, int row, int column) {

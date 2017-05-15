@@ -14,36 +14,35 @@ public class SuperPowerToolDecorator extends AbstractCardDecorator {
 	@Override
 	public String getType() {
 
-		return this.getType();
+		return card.getType();
 	}
 
 	@Override
 	public String getName() {
-		return this.getName();
-	}
-	
-	@Override
-	public Card doAction() {
-		
-		return new XPathCard(0);
-		
+		return card.getName();
 	}
 	
 	public Card doAction(int row, int col) {
 		
 		Card card = doAction();
 		ActionCardValidator validator = new ActionCardValidator();
-		if (validator.checkMove(card, row, col+1))
-			Board.getInstance().playCard(row, col+1, card);
-		if (validator.checkMove(card, row, col-1))
-			Board.getInstance().playCard(row, col-1, card);
-		if (validator.checkMove(card, row+1, col))
-			Board.getInstance().playCard(row+1, col, card);
-		if (validator.checkMove(card, row-1, col))
-			Board.getInstance().playCard(row-1, col, card);
+		 if (validator.checkSuperPowerMove(card, row, col+1))
+			 card.doAction(row, col+1);
+		if (validator.checkSuperPowerMove(card, row, col-1))
+			card.doAction(row, col-1);
+		if (validator.checkSuperPowerMove(card, row+1, col))
+			card.doAction(row+1, col);
+		if (validator.checkSuperPowerMove(card, row-1, col))
+			card.doAction(row-1, col); 
 		
 		return card;
 		
+	}
+
+	@Override
+	public Card doAction() {
+		
+		return card.doAction();
 	}
 
 }

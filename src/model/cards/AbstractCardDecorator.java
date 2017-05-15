@@ -18,9 +18,10 @@ public abstract class AbstractCardDecorator implements Card {
 	}
 	
 	@Override
-	public Card doAction() {
+	public Card doAction(int row, int col) {
 		
-		card.doAction();
+		Card card = doAction();
+		Board.getInstance().playCard(row, col, card);
 		return card;
 		
 	}

@@ -67,6 +67,7 @@ public class DropListener {
 			if (event.getGestureSource() != target) {
 
 				Card card;
+				boolean minersWin = false;
 
 				//if the dragged card is a path card, get the correct rotation and image
 				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
@@ -76,34 +77,44 @@ public class DropListener {
 						currentPlayer.removePowerTool();
 						gameView.removePowerToolImage();
 						playCard(card, target, currentPlayer, draggedCardIndex);
+						minersWin = validator.checkMinersWin(row, col);
 					}
 					
 					else if(currentPlayer.hasSuperPowerTool()) {
 						
 						card = new SuperPowerToolDecorator(new PowerToolDecorator(
-								currentPlayer.getHand().getCards().get(draggedCardIndex)).doAction(row, col)).doAction(row, col);
+								currentPlayer.getHand().getCards().get(draggedCardIndex))).doAction(row, col);
 						currentPlayer.removeSuperPowerTool();
 						gameView.removeSuperPowerToolImage();
 						playCard(card, imageViews[row][col], currentPlayer, draggedCardIndex);
-						if (validator.checkMove(card, row, col+1))
+						if (validator.checkSuperPowerMove(card, row, col+1)) {
 							playCard(card, imageViews[row][col+1], currentPlayer, draggedCardIndex);
-						if (validator.checkMove(card, row, col-1))
+							minersWin = validator.checkMinersWin(row, col+1);
+						}
+						if (validator.checkSuperPowerMove(card, row, col-1)) {
 							playCard(card, imageViews[row][col-1], currentPlayer, draggedCardIndex);
-						if (validator.checkMove(card, row+1, col))
+							minersWin = validator.checkMinersWin(row, col-1);
+						}
+						if (validator.checkSuperPowerMove(card, row+1, col)) {
 							playCard(card, imageViews[row+1][col], currentPlayer, draggedCardIndex);
-						if (validator.checkMove(card, row-1, col))
+							minersWin = validator.checkMinersWin(row+1, col);
+						}
+						if (validator.checkSuperPowerMove(card, row-1, col)) {
 							playCard(card, imageViews[row-1][col], currentPlayer, draggedCardIndex);
+							minersWin = validator.checkMinersWin(row-1, col);
+						}
 						
 					}
 					
 					else {
-						card = new NoDecorator(currentPlayer.getHand().getCards().get(draggedCardIndex)).doAction(row, col);
+						card = currentPlayer.getHand().getCards().get(draggedCardIndex).doAction(row, col);
 						playCard(card, target, currentPlayer, draggedCardIndex);
+						minersWin = validator.checkMinersWin(row, col);
 						
 					}
 					
 					
-					if(validator.checkMinersWin(row, col)) {
+					if(minersWin) {
 						
 						DistributeGold.currentPlayer(currentPlayer);
 						DistributeGold.miners();

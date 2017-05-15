@@ -31,13 +31,5 @@ public class PowerToolDecorator extends AbstractCardDecorator {
 		return new XPathCard(0);
 		
 	}
-	
-	public Card doAction(int row, int col) {
-		
-		Card card = doAction();
-		Board.getInstance().playCard(row, col, card);
-		return card;
-		
-	}
 
 }

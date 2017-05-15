@@ -112,6 +112,7 @@ public abstract class PathCard implements Card {
 		
 	}
 	
+	@Override
 	public Card doAction(int row, int col) {
 		
 		Card card = doAction();
