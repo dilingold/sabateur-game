@@ -8,6 +8,7 @@ import model.cards.ExposeCard;
 import model.cards.HeistCard;
 import model.cards.LPathCard;
 import model.cards.PowerToolCard;
+import model.cards.RemoveToxicCard;
 import model.cards.ToxicCard;
 
 public class DeckBuilder {
@@ -27,6 +28,7 @@ public class DeckBuilder {
 		addExposeCard();
 		addToxicCard();
 		addSuperToolCard();
+		addRemoveToxicCard();
 		
 	}
 	
@@ -35,6 +37,15 @@ public class DeckBuilder {
 		for(int i = 0; i<numActionCards; i++) {
 			ToxicCard toxicCard = new ToxicCard();
 			Deck.getInstance().getDeck().push(toxicCard);
+			
+		}
+	}
+	
+	public void addRemoveToxicCard() {
+		
+		for(int i = 0; i<numActionCards; i++) {
+			RemoveToxicCard removeToxicCard = new RemoveToxicCard();
+			Deck.getInstance().getDeck().push(removeToxicCard);
 			
 		}
 	}

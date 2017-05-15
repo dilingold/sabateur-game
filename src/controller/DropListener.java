@@ -14,6 +14,7 @@ import model.cards.PowerToolDecorator;
 import model.cards.SuperPowerToolDecorator;
 import view.GameView;
 import view.PlayAgainView;
+import model.cards.ActionCard;
 import model.cards.Card;
 import model.cards.NoDecorator;
 
@@ -133,10 +134,20 @@ public class DropListener {
 
 				}
 
-				else {
+				else if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "action") {
 					
-					card = currentPlayer.getHand().getCards().get(draggedCardIndex);
-					String imageName = "/resources/images/cards/" + card.getName() + ".png";
+					card = (ActionCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
+					Card boardCard = Board.getInstance().getCard(row, col);
+					String imageName;
+					if(((ActionCard) card).getEffect() == "enable") {
+						imageName = "/resources/images/cards/" + boardCard.getName() 
+								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
+						((PathCard) boardCard).setIsToxic(false);
+					}
+					else {
+						imageName = "/resources/images/cards/" + card.getName() + ".png";
+						((PathCard) boardCard).setIsToxic(true);
+					}
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);
 					currentPlayer.getHand().discardCard(draggedCardIndex);

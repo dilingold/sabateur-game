@@ -1,7 +1,9 @@
 package controller;
 
 import model.Board;
+import model.cards.ActionCard;
 import model.cards.Card;
+import model.cards.PathCard;
 
 public class ActionCardValidator {
 
@@ -28,16 +30,10 @@ public class ActionCardValidator {
 
 		}
 
-		if (cardType.getType() == "toxic") {
+		if (cardType.getType() == "action") {
 			
-			validated = validateAction(cardType, row, column);
+			validated = validateAction((ActionCard) cardType, row, column);
 
-		}
-
-		if (validated == true) {
-
-			// tell board to play card in location
-			Board.getInstance().playCard(row, column, cardType);
 		}
 
 		return validated;
@@ -68,74 +64,57 @@ public class ActionCardValidator {
 			//check that player is dropping card in an empty position
 			if (!(dropLocation.getName() == "blank card")) {
 				
-				System.out.println("invalid - non blank drop location");
 				return false;
 				
 			}
 				
 			// if the square above to drop position is not empty, check that the exits match up
 			if (squareUp != null && squareUp.getType() == "path") {
-
-				System.out.println("checking exits square up...");
 					
 				if (!checkExits(card, squareUp, 1)) {
 						
-					System.out.println("invalid square up");
 					return false;
 						
 				}
 					
 				else validated = true;
-				System.out.println("valid square up...");
 				
 			}
 				
 			// if the square left of drop position is not empty, check that the exits match up
 			if (squareLeft != null && squareLeft.getType() == "path") {
-				
-				System.out.println("checking square left");
-				
+								
 				if (!checkExits(card, squareLeft, 0)) {
 					
-					System.out.println("invalid square left");
 					return false;
 						
 				}
 					
 				else validated = true;
-				System.out.println("valid square left...");
 				
 			}
 			// if the square right of drop position is not empty, check that the exits match up
 			if (squareRight != null && squareRight.getType() == "path") {
-					
-				System.out.println("checking square right");
-				
+									
 				if (!checkExits(card, squareRight, 2)) {
 					
-					System.out.println("invalid square right");
 					return false;
 						
 				}
 					
 				else validated = true;
-				System.out.println("valid square right...");
 				
 			}
 			// if the square below drop position is not empty, check that the exits match up
 			if (squareDown != null && squareDown.getType() == "path") {
-					
-				System.out.println("checking square down");
-					
+										
 				if (!checkExits(card, squareDown, 3)) {
 					
-					System.out.println("invalid square down");
 					return false;
 					
 				}
 				
 				else validated = true;
-				System.out.println("valid square down...");
 					
 			}
 			
@@ -143,7 +122,6 @@ public class ActionCardValidator {
 				
 				if (!card.getExits()[1]) {
 					
-					System.out.println("invalid square up");
 					return false;
 						
 				}
@@ -154,7 +132,6 @@ public class ActionCardValidator {
 				
 				if (!card.getExits()[3]) {
 					
-					System.out.println("invalid square down");
 					return false;
 						
 				}
@@ -165,7 +142,6 @@ public class ActionCardValidator {
 				
 				if (!card.getExits()[2]) {
 					
-					System.out.println("invalid square right");
 					return false;
 						
 				}
@@ -176,7 +152,6 @@ public class ActionCardValidator {
 				
 				if (!card.getExits()[0]) {
 					
-					System.out.println("invalid square left");
 					return false;
 						
 				}
@@ -211,45 +186,40 @@ public class ActionCardValidator {
 		
 	}
 
-	private Boolean validateAction(Card cardType, int row, int column) {
+	private Boolean validateAction(ActionCard card, int row, int column) {
 
 		Boolean validated = false;
-
-		// get action card type
-		String type = cardType.getName();
-
-		switch (type) {
-
-		case "clean":
-			//needs code for assignment 2
-			if (Board.getInstance().getCard(row, column).getType() == "path") {
-				
-				validated = true;
-
-			}
-			break;
-
-		case "bomb":
-			// check if location is not empty
-			if (Board.getInstance().getCard(row, column).getType() == "path") {
-				
-				validated = true;
-				
-			}
-			break;
-
-		case "Toxic Card":
-			// needs code for assignment 2
-			if (Board.getInstance().getCard(row, column).getType() == "path") {
-				System.out.println("validated");
-				validated = true;
-
-			}
-			break;
-
+		
+		if (Board.getInstance().getCard(row, column).getType() != "path") {
+			
+			return false;
+			
 		}
+		PathCard boardLocation = (PathCard) Board.getInstance().getCard(row, column);
+		
+			if (card.getEffect() == "disable") {
+				
+				if (boardLocation.getIsToxic()) {
+				
+					return false;
 
-		return validated;
+				}
+				
+				else validated = true;
+				
+			}
+
+			else if (card.getEffect() == "enable") {
+				if (!boardLocation.getIsToxic()) {
+					
+					return false;
+				
+				}
+				else validated = true;
+
+			}
+			
+			return validated;
 
 	}
 	
@@ -260,7 +230,7 @@ public class ActionCardValidator {
 			boardExit = exit - 2;
 		}
 		else boardExit = exit + 2;
-		System.out.println("card exit: " + exit + playerCard.getExits()[exit] + " board exit: " + boardExit + boardCard.getExits()[boardExit]);
+
 		if (playerCard.getExits()[exit] && boardCard.getExits()[boardExit]) {
 			return true;
 		}

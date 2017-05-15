@@ -11,6 +11,7 @@ public abstract class PathCard implements Card {
 	protected boolean[] exits = new boolean [4];
 	protected int rotation = 0;
 	protected Boolean isDisabled = false;
+	protected boolean isToxic = false;
 
 	public PathCard() {
 		
@@ -118,6 +119,18 @@ public abstract class PathCard implements Card {
 		Card card = doAction();
 		Board.getInstance().playCard(row, col, card);
 		return card;
+		
+	}
+	
+	public boolean getIsToxic() {
+		
+		return isToxic;
+		
+	}
+	
+	public void setIsToxic(boolean isToxic) {
+		
+		this.isToxic = isToxic;
 		
 	}
 	
