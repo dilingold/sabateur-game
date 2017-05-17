@@ -4,12 +4,16 @@ import java.util.Stack;
 
 import model.Deck;
 import model.cards.Card;
+import model.cards.EndPathCard;
 import model.cards.ExposeCard;
 import model.cards.HeistCard;
 import model.cards.LPathCard;
 import model.cards.PowerToolCard;
 import model.cards.RemoveToxicCard;
+import model.cards.StraightPathCard;
+import model.cards.TPathCard;
 import model.cards.ToxicCard;
+import model.cards.XPathCard;
 
 public class DeckBuilder {
 	
@@ -52,31 +56,56 @@ public class DeckBuilder {
 	
 	public void addLPathCards() {
 		
-		Deck.getInstance().addLPathCards(numPathCards);
+		for(int i = 0; i<numPathCards; i++) {
+			
+			LPathCard lPCard = new LPathCard(0);
+			Deck.getInstance().getDeck().push(lPCard);
+			
+		}
 		
 	}
 	
 	public void addXPathCards() {
 		
-		Deck.getInstance().addXPathCards(numPathCards);
+		for(int i = 0; i<numPathCards; i++) {
+			
+			XPathCard xPathCard = new XPathCard(0);
+			Deck.getInstance().getDeck().push(xPathCard);
+			
+		}
 		
 	}
 	
 	public void addStraighPathCards() {
 		
-		Deck.getInstance().addStraightPathCards(numPathCards);
+		for(int i = 0; i<numPathCards; i++) {
+			
+			StraightPathCard straightPathCard = new StraightPathCard(0);
+			Deck.getInstance().getDeck().push(straightPathCard);
+			
+		}
 		
 	}
 	
 	public void addTPathCards() {
 		
-		Deck.getInstance().addTPathCards(numPathCards);
+		for(int i = 0; i<numPathCards; i++) {
+			
+			TPathCard tPathCard = new TPathCard(0);
+			Deck.getInstance().getDeck().push(tPathCard);
+			
+		}
 		
 	}
 	
 	public void addEndPathCards() {
 		
-		Deck.getInstance().addEndPathCard(numPathCards);
+		for(int i = 0; i<numPathCards; i++) {
+			
+			EndPathCard endPathCard = new EndPathCard(0);
+			Deck.getInstance().getDeck().push(endPathCard);
+			
+		}
 		
 	}
 	
