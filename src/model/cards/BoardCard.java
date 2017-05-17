@@ -39,4 +39,14 @@ public abstract class BoardCard implements Card {
 	public Card doAction(int row, int col) {
 		return this;
 	}
+	
+	@Override
+	public Card getCopy(){
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -40,5 +40,15 @@ public class NoDecorator extends AbstractCardDecorator {
 		return card;
 		
 	}
+    
+    @Override
+    public Card getCopy(){
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

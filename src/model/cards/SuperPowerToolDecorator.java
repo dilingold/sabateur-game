@@ -44,5 +44,15 @@ public class SuperPowerToolDecorator extends AbstractCardDecorator {
 		
 		return card.doAction();
 	}
+    
+    @Override
+    public Card getCopy(){
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

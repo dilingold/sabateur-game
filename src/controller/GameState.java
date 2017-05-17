@@ -35,7 +35,7 @@ public class GameState {
         boardStates.put(stateID, Board.getInstance());
         playerStates.put(stateID, PlayerController.getInstance().getPlayerList()); 
         System.out.println("!!!!");
-        Stack<Card> deckState = Deck.getDeck();
+        Stack<Card> deckState = saveDeck();
         System.out.println("deckstatesize = "+deckState.size());
         deckStates.put(stateID, deckState);
         if(deckStates.get(10) != null)
@@ -72,18 +72,12 @@ public class GameState {
     }
     //TODO
     //incomplete
-    public Stack<Card> saveDeck(){
+    public static Stack<Card> saveDeck(){
         Deck.getInstance();
         Stack<Card> deckInstance = Deck.getDeck();
         Stack<Card> savedDeck = new Stack<Card>();
-        String cardName;
-        String cardType;
         for(int i = 0; i < deckInstance.size(); i++){
-            cardType = deckInstance.get(i).getType();
-            cardName = deckInstance.get(i).getName();
-            if(cardType.equals("path")){
-                
-            }
+            savedDeck.push(deckInstance.get(i).getCopy());
         }
         return savedDeck;
     }

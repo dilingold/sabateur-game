@@ -31,5 +31,15 @@ public class PowerToolDecorator extends AbstractCardDecorator {
 		return new XPathCard(0);
 		
 	}
+    
+    @Override
+    public Card getCopy(){
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

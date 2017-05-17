@@ -2,7 +2,7 @@ package model.cards;
 
 import model.PlayerD;
 
-public class PowerToolCard extends PersonalCard {
+public class PowerToolCard extends PersonalCard implements Cloneable{
 	
 	public PowerToolCard() {
 		
