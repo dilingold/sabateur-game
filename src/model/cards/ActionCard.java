@@ -45,7 +45,15 @@ public abstract class ActionCard implements Card {
 		
 		Board.getInstance().playCard(row, col, doAction());
 		return doAction();
-		
+
+	}
+	public Card getCopy(){
+	    try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+	    return null;
 	}
 
 }

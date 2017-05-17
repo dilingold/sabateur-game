@@ -218,6 +218,12 @@ public class ActionCardValidator {
                 else validated = true;
 
             }
+            else if (card.getEffect() == "rewind"){
+                if(GameEngine.getTurn() > 1)
+                    GameEngine.getGameStates().loadState(1);
+                else
+                    return false;
+            }
             
             return validated;
 

@@ -8,6 +8,7 @@ public class GameEngine {
 	private static PlayerController players;
 	private static int currentPlayerIndex;
 	private static int turn;
+	private static GameState gameStates;
 
 	//run game
 	public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class GameEngine {
 
 	public GameEngine() {
 
-	    GameState gameState = new GameState();
+	    gameStates = new GameState();
 	    //gameState
 	    
 		DeckBuilder deckBuilder = new DeckBuilder();
@@ -54,11 +55,10 @@ public class GameEngine {
 		    turn++;
 			currentPlayerIndex = 0;
 			System.out.println("New turn");
-
 		}
-
-		else currentPlayerIndex++;
-
+		else {
+		    currentPlayerIndex++;
+		}
 		//save game state for this part of this turn
 		GameState.saveState();
 		return getCurrentPlayer();
@@ -94,6 +94,9 @@ public class GameEngine {
 
     public static void setTurn(int oldTurn) {
         turn = oldTurn;
+    }
+    public static GameState getGameStates(){
+        return gameStates;
     }
 
 

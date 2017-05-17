@@ -9,6 +9,7 @@ import model.cards.HeistCard;
 import model.cards.LPathCard;
 import model.cards.PowerToolCard;
 import model.cards.RemoveToxicCard;
+import model.cards.RewindCard;
 import model.cards.ToxicCard;
 
 public class DeckBuilder {
@@ -29,8 +30,17 @@ public class DeckBuilder {
 		addToxicCard();
 		addSuperToolCard();
 		addRemoveToxicCard();
+		addRewindCard();
 		
 	}
+	   public void addRewindCard() {
+	        
+	        for(int i = 0; i<numActionCards; i++) {
+	            RewindCard rewind = new RewindCard();
+	            Deck.getInstance().getDeck().push(rewind);
+	            
+	        }
+	    }
 	
 	public void addToxicCard() {
 		
