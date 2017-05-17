@@ -119,4 +119,10 @@ public class Deck {
 		
 	}
 
+	//for use with undoing turns
+    public void setDeck(Stack<Card> newDeck){
+        deck = newDeck;
+    }
+
+
 }

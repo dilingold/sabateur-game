@@ -7,6 +7,7 @@ public class GameEngine {
 	private MainView mainView;
 	private static PlayerController players;
 	private static int currentPlayerIndex;
+	private static int turn;
 
 	//run game
 	public static void main(String[] args) {
@@ -17,6 +18,9 @@ public class GameEngine {
 
 	public GameEngine() {
 
+	    GameState gameState = new GameState();
+	    //gameState
+	    
 		DeckBuilder deckBuilder = new DeckBuilder();
 		deckBuilder.addAllCards();
 		deckBuilder.Shuffle();
@@ -47,8 +51,9 @@ public class GameEngine {
 	public PlayerD nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
-
+		    turn++;
 			currentPlayerIndex = 0;
+			System.out.println("New turn");
 
 		}
 

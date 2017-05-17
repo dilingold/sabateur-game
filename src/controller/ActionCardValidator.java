@@ -1,9 +1,8 @@
 package controller;
 
 import model.Board;
-import model.cards.ActionCard;
+import model.Player;
 import model.cards.Card;
-import model.cards.PathCard;
 
 public class ActionCardValidator {
 
@@ -30,10 +29,16 @@ public class ActionCardValidator {
 
 		}
 
-		if (cardType.getType() == "action") {
+		if (cardType.getType() == "toxic") {
 			
-			validated = validateAction((ActionCard) cardType, row, column);
+			validated = validateAction(cardType, row, column);
 
+		}
+
+		if (validated == true) {
+
+			// tell board to play card in location
+			Board.getInstance().playCard(row, column, cardType);
 		}
 
 		return validated;
@@ -42,200 +47,97 @@ public class ActionCardValidator {
 
 
 
-	private Boolean validatePath(Card card, int row, int column) {
+	private Boolean validatePath(Card cardType, int row, int column) {
+
 
 		Boolean validated = false;
-		
-		if (card.getType() == "path") {
-			Card dropLocation = Board.getInstance().getCard(row, column);
-			Card squareUp = null;
-			Card squareDown = null;
-			Card squareLeft = null;
-			Card squareRight = null;
-			if(row > 0)
-				squareUp = Board.getInstance().getCard((row - 1), column);
-			if(row < Board.getInstance().getRows()-1)
-				squareDown = Board.getInstance().getCard((row + 1), column);
-			if(column < Board.getInstance().getCols()-1)
-				squareRight = Board.getInstance().getCard(row, (column + 1));
-			if(column > 0)
-				squareLeft = Board.getInstance().getCard(row, (column - 1));
+		if (cardType.getType() == "path") {
 			
-			//check that player is dropping card in an empty position
-			if (!(dropLocation.getName() == "blank card")) {
-				
-				return false;
-				
+		/*
+		 * NOT CURRENTLY WORKING
+		 * Code for implementation in Assignment 2.
+		 * 
+		 */
+/*			if (Board.getInstance().getGameBoard(row, column).getType() == "action") {
+				validated = false;
 			}
-				
-			// if the square above to drop position is not empty, check that the exits match up
-			if (squareUp != null && squareUp.getType() == "path") {
-					
-				if (!checkExits(card, squareUp, 1)) {
-						
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-				
-			// if the square left of drop position is not empty, check that the exits match up
-			if (squareLeft != null && squareLeft.getType() == "path") {
-								
-				if (!checkExits(card, squareLeft, 0)) {
-					
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-			// if the square right of drop position is not empty, check that the exits match up
-			if (squareRight != null && squareRight.getType() == "path") {
-									
-				if (!checkExits(card, squareRight, 2)) {
-					
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-			// if the square below drop position is not empty, check that the exits match up
-			if (squareDown != null && squareDown.getType() == "path") {
-										
-				if (!checkExits(card, squareDown, 3)) {
-					
-					return false;
-					
-				}
-				
-				else validated = true;
-					
-			}
-			
-			if (squareUp != null && (squareUp.getName() == "gold" || squareUp.getName() == "stone")) {
-				
-				if (!card.getExits()[1]) {
-					
-					return false;
-						
-				}
-				
-			}
-			
-			if (squareDown != null && (squareDown.getName() == "gold" || squareDown.getName() == "stone")) {
-				
-				if (!card.getExits()[3]) {
-					
-					return false;
-						
-				}
-				
-			}
-			
-			if (squareRight != null && (squareRight.getName() == "gold" || squareRight.getName() == "stone")) {
-				
-				if (!card.getExits()[2]) {
-					
-					return false;
-						
-				}
-				
-			}
-			
-			if (squareLeft != null && (squareLeft.getName() == "gold" || squareLeft.getName() == "stone")) {
-				
-				if (!card.getExits()[0]) {
-					
-					return false;
-						
-				}
-				
-			}
-			
+
+			else if (Board.getInstance().getGameBoard(row, column).getType() == "blank") {
+				// check if any adjacent tiles are path cards
+				// first check if there's a tile down
+				if (Board.getInstance().getGameBoard((row - 1), column) != null)
+					// check if this tile has exit UP
+					if (Board.getInstance().getGameBoard((row - 1), column).getExits()[1])
+						;
+				validated = true;
+				// then left
+				if (Board.getInstance().getGameBoard((row), column - 1) != null)
+					// check if this tile has exit RIGHT
+					if (Board.getInstance().getGameBoard((row), column - 1).getExits()[2])
+						;
+				validated = true;
+				// right
+				if (Board.getInstance().getGameBoard((row), column + 1) != null)
+					// check if this tile has exit LEFT
+					if (Board.getInstance().getGameBoard((row), column + 1).getExits()[0])
+						;
+				validated = true;
+				// up
+				if (Board.getInstance().getGameBoard((row + 1), column) != null)
+					// check if this tile has exit DOWN
+					if (Board.getInstance().getGameBoard((row + 1), column).getExits()[3])
+						;
+				validated = true;
+
+			}*/
+			validated = true;
 		}
 
 		return validated;
 
 	}
-	
-	public boolean checkSuperPowerMove(Card card, int row, int col) {
-				
-		if(row > Board.getInstance().getRows()-1 || row < 0 || 
-				col > Board.getInstance().getCols()-1 || col < 0) {
-			
-			return false;
-			
-		}
-		
-		Card boardLocation = Board.getInstance().getCard(row, col);
-		if(boardLocation.getName() == "stone" || boardLocation.getName() == "gold" 
-				|| boardLocation.getName() == "start") {
-			
-			System.out.println("returning false " + boardLocation.getName());
-			return false;
-			
-		}
-				
-		return true;
-		
-	}
 
-	private Boolean validateAction(ActionCard card, int row, int column) {
+	private Boolean validateAction(Card cardType, int row, int column) {
 
 		Boolean validated = false;
-		
-		if (Board.getInstance().getCard(row, column).getType() != "path") {
-			
-			return false;
-			
-		}
-		PathCard boardLocation = (PathCard) Board.getInstance().getCard(row, column);
-		
-			if (card.getEffect() == "disable") {
-				
-				if (boardLocation.getIsToxic()) {
-				
-					return false;
 
-				}
-				
-				else validated = true;
-				
-			}
+		// get action card type
+		String type = cardType.getName();
 
-			else if (card.getEffect() == "enable") {
-				if (!boardLocation.getIsToxic()) {
-					
-					return false;
-				
-				}
-				else validated = true;
+		switch (type) {
+
+		case "clean":
+			//needs code for assignment 2
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
+
+				validated = true;
 
 			}
+			break;
+
+		case "bomb":
+			// check if location is not empty
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
+				
+				validated = true;
+				
+			}
+			break;
+
+		case "Toxic Card":
+			// needs code for assignment 2
 			
-			return validated;
+			if (Board.getInstance().getCard(row, column).getType() == "path") {
 
-	}
-	
-	public boolean checkExits(Card playerCard, Card boardCard, int exit) {
-		
-		int boardExit;
-		if (exit > 1) {
-			boardExit = exit - 2;
-		}
-		else boardExit = exit + 2;
+				validated = true;
 
-		if (playerCard.getExits()[exit] && boardCard.getExits()[boardExit]) {
-			return true;
+			}
+			break;
+
 		}
-		else return false;
-		
+
+		return validated;
+
 	}
 	
 	public boolean checkMinersWin(int row, int col) {
