@@ -13,7 +13,7 @@ import java.util.List;
 //This class is the creator and information expert on Players
 public class PlayerController {
 
-    private ArrayList<PlayerD> players = null;
+    private static ArrayList<PlayerD> players = null;
     private static PlayerController ourInstance = new PlayerController();
 
     public static PlayerController getInstance() {
@@ -119,6 +119,12 @@ public class PlayerController {
     		
     	}
     	
+    }
+    public static ArrayList<PlayerD> getPlayers(){
+        return players;
+    }
+    public static void setPlayers(ArrayList<PlayerD> oldPlayers){
+        players = oldPlayers;
     }
 
 }

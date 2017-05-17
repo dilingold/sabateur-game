@@ -13,7 +13,7 @@ public class Deck {
 		return ourInstance;
 	}
 
-	private Stack<Card> deck = new Stack<Card>();
+	private static Stack<Card> deck = new Stack<Card>();
 	
 	public void shuffle(){
 		
@@ -107,7 +107,7 @@ public class Deck {
 		
 	}
 	
-	public Stack<Card> getDeck() {
+	public static Stack<Card> getDeck() {
 		
 		return deck;
 		
@@ -118,11 +118,9 @@ public class Deck {
 		deck.clear();
 		
 	}
-
-	//for use with undoing turns
-    public void setDeck(Stack<Card> newDeck){
-        deck = newDeck;
-    }
-
+	
+	public static void setDeck(Stack<Card> oldDeck){
+	    deck = oldDeck;
+	}
 
 }

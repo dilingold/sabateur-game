@@ -145,4 +145,8 @@ public class Board {
     	return treasureCols;
     }
 
+    public static void setBoard(Board oldBoard) {
+        ourInstance = oldBoard;
+    }
+
 }

@@ -59,6 +59,8 @@ public class GameEngine {
 
 		else currentPlayerIndex++;
 
+		//save game state for this part of this turn
+		GameState.saveState();
 		return getCurrentPlayer();
 
 	}
@@ -85,6 +87,14 @@ public class GameEngine {
 		else return players.getPlayerByPosition(currentPlayerIndex+1);
 
 	}
+	
+	public static int getTurn(){
+	    return turn;
+	}
+
+    public static void setTurn(int oldTurn) {
+        turn = oldTurn;
+    }
 
 
 }
