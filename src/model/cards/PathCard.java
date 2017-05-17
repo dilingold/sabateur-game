@@ -30,7 +30,6 @@ public abstract class PathCard implements Card {
 	//Does not change the original exits array variable.
 	private void rotateExits() {
 		
-		System.out.println(exits[0] + ", " + exits[1] + ", " + exits[2] + ", " + exits[3]);
 		boolean tmp = exits[3];
 		exits[3] = exits[2];
 		exits[2] = exits[1];

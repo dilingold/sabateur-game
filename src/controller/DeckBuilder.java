@@ -13,8 +13,8 @@ import model.cards.ToxicCard;
 
 public class DeckBuilder {
 	
-	private int numPathCards = 5;
-	private int numPersonalCards = 10;
+	private int numPathCards = 10;
+	private int numPersonalCards = 5;
 	private int numActionCards = 10;
 	
 	public void addAllCards() {

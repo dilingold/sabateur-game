@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Board;
 import model.cards.ActionCard;
 import model.cards.Card;
@@ -14,6 +17,9 @@ public class ActionCardValidator {
 	 * @pre.condition 0 <= column < board.numRows
 	 * @post.condition $return != null
 	 */
+	
+	private List<Card> visitedSquares;
+	
 	public boolean checkMove(Card cardType, int row, int column) {
 
 		assert 0 < row;
@@ -39,8 +45,6 @@ public class ActionCardValidator {
 		return validated;
 
 	}
-
-
 
 	private Boolean validatePath(Card card, int row, int column) {
 
@@ -159,6 +163,10 @@ public class ActionCardValidator {
 			}
 			
 		}
+		
+		visitedSquares = new ArrayList<Card>();
+		validated = (checkPathRecursive(row+1, column) || checkPathRecursive(row-1, column)
+				|| checkPathRecursive(row, column+1) || checkPathRecursive(row, column-1));
 
 		return validated;
 
@@ -297,6 +305,75 @@ public class ActionCardValidator {
 		
 		return false;
 		
+	}
+	
+	public boolean checkPathRecursive(int row, int col) {
+
+		boolean validated = false;
+		
+		Card square = null;
+		
+		if (row >= 0 && row < Board.getInstance().getRows()
+				&& col >= 0 && col < Board.getInstance().getCols()) {
+			square = Board.getInstance().getCard(row, col);
+			if (!(square.getType() == "path")) 
+				return false;
+		}
+		
+		else return false;
+		
+		if (((PathCard)square).getIsToxic()) {
+			System.out.println("toxic - returning false");
+			return false;
+		}
+		
+		for (Card square1: visitedSquares) {
+			
+			System.out.println("square " + square1.getName());
+			if (square.equals(square1)) {
+				
+				System.out.println("revisiting square at " + row + ", " + col);
+				System.out.println("revisited square " + square1.getName());
+				return false;
+				
+			}
+			
+		}
+		
+		visitedSquares.add(square);
+		System.out.println("adding " + square.getName() + " at " + row + ", " + col + " to visited list");
+		
+		// return true if player reaches start position
+		System.out.println("checking if hit start position");
+		if (square != null && square.getName() == "start") {
+			System.out.println("hit start position - returning true");
+			
+			validated = true;
+			
+		}
+		
+		else if (square != null) {
+			
+			System.out.println("checking down");
+			validated = checkPathRecursive(row+1, col);
+				
+			if (!validated) {
+				System.out.println("checking right");
+				validated = checkPathRecursive(row, col+1);
+			}
+			if (!validated) {
+				System.out.println("checking up");
+				validated = checkPathRecursive(row-1, col);
+					
+			}
+			if (!validated){
+				System.out.println("checking left");
+				validated = checkPathRecursive(row, col-1);
+			}
+			
+		}
+		
+		return validated;
 	}
 
 }
