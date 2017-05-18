@@ -119,7 +119,9 @@ public class DropListener {
 						
 						DistributeGold.currentPlayer(currentPlayer);
 						DistributeGold.miners();
-						new PlayAgainView(stage).displayView("miners");;
+						DistributeGold.heistedMiners();
+						DistributeGold.exposedSabateurs();
+						new PlayAgainView(stage).displayView("miners");
 						
 					}
 					

@@ -153,6 +153,13 @@ public abstract class PlayerD {
     	
     }
     
+    public void removeGold(int gold) {
+    	
+    	if (this.gold >= gold)
+    		this.gold-=gold;
+ 
+    }
+    
     public void exposeSabateur(PlayerD player) {
     	
     	exposedSabateurs.add(player);
