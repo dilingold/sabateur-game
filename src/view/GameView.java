@@ -1,10 +1,15 @@
 package view;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import controller.DragCardListener;
 import controller.DropListener;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Board;
 import model.Hand;
 import model.PlayerD;
@@ -39,6 +45,8 @@ public class  GameView {
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
+	private static final Integer SetTimer = 30; // Have this in options perhaps?
+	private Integer STARTTIME = SetTimer;
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -64,10 +72,29 @@ public class  GameView {
 		VBox vbBoard = new VBox(10);
 
 		Text boardText = new Text("Board");
+		STARTTIME = SetTimer;
+		Label timeLabel = new Label();
+		Timeline timeline = new Timeline();
+		timeline.getKeyFrames().add(
+				new KeyFrame(
+						Duration.seconds(1),
+						event -> {
+							STARTTIME--;
+							timeLabel.setText(STARTTIME.toString());
+							if(STARTTIME < 1){
+								timeline.stop();
+							}
+						}
+				)
+		);
+		timeline.setCycleCount( Timeline.INDEFINITE );
+		timeline.play();
+
 		vbBoard.setAlignment(Pos.CENTER);
 		boardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		boardText.setFill(Color.WHITE);
 		vbBoard.getChildren().add(boardText);
+		vbBoard.getChildren().add(timeLabel);
 
 		GridPane boardGrid = new GridPane();
 
