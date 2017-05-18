@@ -14,19 +14,23 @@ public class ExposeCard extends PersonalCard {
 
 	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
 		
-		if (targetPlayer.getExposedBy() != null) {
+		if (targetPlayer.getType() == "sabateur") {
+		
+			if (targetPlayer.getExposedBy() != null) {
 			
-			targetPlayer.getExposedBy().removeExposedSabateur(targetPlayer);
-			removeExposedSabRecursive(targetPlayer, currentPlayer);
-			currentPlayer.exposeSabateur(targetPlayer);
-			targetPlayer.setExposedBy(currentPlayer);
+				targetPlayer.getExposedBy().removeExposedSabateur(targetPlayer);
+				removeExposedSabRecursive(targetPlayer, currentPlayer);
+				currentPlayer.exposeSabateur(targetPlayer);
+				targetPlayer.setExposedBy(currentPlayer);
 			
-		}
-		else {
+			}
+			else {
 			
-			removeExposedSabRecursive(targetPlayer, currentPlayer);
-			currentPlayer.exposeSabateur(targetPlayer);
-			targetPlayer.setExposedBy(currentPlayer);
+				removeExposedSabRecursive(targetPlayer, currentPlayer);
+				currentPlayer.exposeSabateur(targetPlayer);
+				targetPlayer.setExposedBy(currentPlayer);
+				
+			}
 			
 		}
 		

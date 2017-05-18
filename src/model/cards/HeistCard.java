@@ -14,19 +14,24 @@ public class HeistCard extends PersonalCard {
 	
 	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
 		
-		if (targetPlayer.getHeistedBy() != null) {
+		if (targetPlayer.getType() == "miner") {
+		
+			if (targetPlayer.getHeistedBy() != null) {
 			
-			targetPlayer.getHeistedBy().removeHeist(targetPlayer);
-			removeHeistRecursive(targetPlayer, currentPlayer);
-			currentPlayer.planHeist(targetPlayer);
-			targetPlayer.setHeistedBy(currentPlayer);
+				targetPlayer.getHeistedBy().removeHeist(targetPlayer);
+				removeHeistRecursive(targetPlayer, currentPlayer);
+				currentPlayer.planHeist(targetPlayer);
+				targetPlayer.setHeistedBy(currentPlayer);
 			
-		}
-		else {
+			}
+		
+			else {
 			
-			removeHeistRecursive(targetPlayer, currentPlayer);
-			currentPlayer.planHeist(targetPlayer);
-			targetPlayer.setHeistedBy(currentPlayer);
+				removeHeistRecursive(targetPlayer, currentPlayer);
+				currentPlayer.planHeist(targetPlayer);
+				targetPlayer.setHeistedBy(currentPlayer);
+				
+			}
 			
 		}
 		
