@@ -148,5 +148,19 @@ public class Board {
     public static void setBoard(Board oldBoard) {
         ourInstance = oldBoard;
     }
+    
+    // clone board in current state
+    public static Board getBoardCopy(){
+        Board boardCopy = new Board();
+        boardCopy.numRows = ourInstance.numRows;
+        boardCopy.numCols = ourInstance.numCols;
+        boardCopy.initBoard();
+        for(int r = 0; r < ourInstance.numRows; r++){
+            for(int c = 0; c < ourInstance.numCols; c++){
+                boardCopy.playCard(r,c,ourInstance.getCard(r,c));
+            }
+        }
+        return boardCopy;
+    }
 
 }

@@ -126,5 +126,12 @@ public class PlayerController {
     public static void setPlayers(ArrayList<PlayerD> oldPlayers){
         players = oldPlayers;
     }
+    public static ArrayList<PlayerD> copyPlayerList(){
+        ArrayList<PlayerD> playersCopy = new ArrayList<PlayerD>();
+        for(int i = 0; i < players.size(); i ++){
+            playersCopy.add(players.get(i));
+        }
+        return playersCopy;
+    }
 
 }

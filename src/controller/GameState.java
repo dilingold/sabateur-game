@@ -8,13 +8,15 @@ import model.Board;
 import model.Deck;
 import model.PlayerD;
 import model.cards.Card;
+import view.AddPlayerView;
+import view.GameView;
 
 public class GameState {
     
-    private Deck deck = new Deck();
     
     //TODO
-    //Not working, keeps static variables contatined within. 
+    //Only deckStates appears working, others keeps static variables contatined within.
+    //update to fix.
     static Map<Integer,Stack<Card>> deckStates=new HashMap<Integer,Stack<Card>>();  
     //static ArrayList<Stack<Card>> deckStates = new ArrayList<Stack<Card>>();
     static Map<Integer,Board> boardStates=new HashMap<Integer,Board>();  
@@ -32,12 +34,12 @@ public class GameState {
         currentPlayerIndex = GameEngine.getCurrentPlayerIndex();
         int stateID = generateStateID();
         System.out.println("stateID = "+stateID);
-        boardStates.put(stateID, Board.getInstance());
-        playerStates.put(stateID, PlayerController.getInstance().getPlayerList()); 
-        System.out.println("!!!!");
+        boardStates.put(stateID, getBoardState());
+        playerStates.put(stateID, getPlayerState()); 
         Stack<Card> deckState = saveDeck();
         System.out.println("deckstatesize = "+deckState.size());
         deckStates.put(stateID, deckState);
+        System.out.println("State "+stateID+" saved");
         if(deckStates.get(10) != null)
             System.out.println("deckstatesize at 10 = "+deckStates.get(10).size());
     }
@@ -54,6 +56,7 @@ public class GameState {
             oldStateID = generateStateID(i);
             System.out.println("deck size at turn "+i+" = "+deckStates.get(oldStateID).size());
         }
+        PlayGameListener.changeScene(AddPlayerView.getStage());;
 
     }
     
@@ -67,11 +70,7 @@ public class GameState {
         return Integer.parseInt(stateID);  
     }
 
-    public Deck getDeck(){
-        return deck;
-    }
-    //TODO
-    //incomplete
+
     public static Stack<Card> saveDeck(){
         Deck.getInstance();
         Stack<Card> deckInstance = Deck.getDeck();
@@ -81,6 +80,18 @@ public class GameState {
         }
         return savedDeck;
     }
+    //TODO
+    //incomplete
+    public static ArrayList<PlayerD> getPlayerState(){
+        return PlayerController.copyPlayerList();
+    }
+    public static Board getBoardState(){
+        return Board.getBoardCopy();
+    }
+    
+    //saveBoard
+    //savePlayers
+    //saveHands
     
 
 }
