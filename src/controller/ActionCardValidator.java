@@ -46,130 +46,193 @@ public class ActionCardValidator {
 
 	}
 
-	private Boolean validatePath(Card card, int row, int column) {
+	private Boolean validatePath(Card card, int row, int col) {
 
 		Boolean validated = false;
 		
-		if (card.getType() == "path") {
-			Card dropLocation = Board.getInstance().getCard(row, column);
-			Card squareUp = null;
-			Card squareDown = null;
-			Card squareLeft = null;
-			Card squareRight = null;
-			if(row > 0)
-				squareUp = Board.getInstance().getCard((row - 1), column);
-			if(row < Board.getInstance().getRows()-1)
-				squareDown = Board.getInstance().getCard((row + 1), column);
-			if(column < Board.getInstance().getCols()-1)
-				squareRight = Board.getInstance().getCard(row, (column + 1));
-			if(column > 0)
-				squareLeft = Board.getInstance().getCard(row, (column - 1));
+		//check that dropped card matches any neighboring cards and leads back to start
+		if (Board.getInstance().getCard(row, col).getType() == "path") {
+			return false;
+		}
+		Card squareUp = null;
+		Card squareDown = null;
+		Card squareLeft = null;
+		Card squareRight = null;
+		if(row > 0)
+			squareUp = Board.getInstance().getCard((row - 1), col);
+		if(row < Board.getInstance().getRows()-1)
+			squareDown = Board.getInstance().getCard((row + 1), col);
+		if(col < Board.getInstance().getCols()-1)
+			squareRight = Board.getInstance().getCard(row, (col + 1));
+		if(col > 0)
+			squareLeft = Board.getInstance().getCard(row, (col - 1));
+		
+		// check that dropped card is attached on at least one side to another path card
+		boolean attachedToPath = false;
+		
+		boolean squareDownIsPath = squareDown != null && squareDown.getType() == "path" 
+				&& !((PathCard)squareDown).getIsToxic();
+		boolean squareRightIsPath = squareRight != null && squareRight.getType() == "path"
+				&& !((PathCard)squareRight).getIsToxic();
+		boolean squareUpIsPath = squareUp != null && squareUp.getType() == "path"
+				&& !((PathCard)squareUp).getIsToxic();
+		boolean squareLeftIsPath = squareLeft != null && squareLeft.getType() == "path"
+				&& !((PathCard)squareLeft).getIsToxic();
+		
+		boolean attachedToSquareDown = squareDownIsPath && checkExitsTrue(card, squareDown, 3);
+		boolean attachedToSquareRight = squareRightIsPath && checkExitsTrue(card, squareRight, 2);
+		boolean attachedToSquareUp = squareUpIsPath && checkExitsTrue(card, squareUp, 1);
+		boolean attachedToSquareLeft = squareLeftIsPath && checkExitsTrue(card, squareLeft, 0);
+		
+		if (!(attachedToSquareDown || attachedToSquareRight || attachedToSquareUp || attachedToSquareLeft)) {
+			return false;
+		}
+		
+		else attachedToPath = true;
+		
+		// check that dropped cards' sides match up to all surrounding path cards - exits are either
+		// both true or both false
+		boolean validPathPosition = false;
+		
+		if (squareDownIsPath) {
 			
-			//check that player is dropping card in an empty position
-			if (!(dropLocation.getName() == "blank card")) {
-				
+			if (!checkExitsMatch(card, squareDown, 3)) {
 				return false;
-				
-			}
-				
-			// if the square above to drop position is not empty, check that the exits match up
-			if (squareUp != null && squareUp.getType() == "path") {
-					
-				if (!checkExits(card, squareUp, 1)) {
-						
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-				
-			// if the square left of drop position is not empty, check that the exits match up
-			if (squareLeft != null && squareLeft.getType() == "path") {
-								
-				if (!checkExits(card, squareLeft, 0)) {
-					
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-			// if the square right of drop position is not empty, check that the exits match up
-			if (squareRight != null && squareRight.getType() == "path") {
-									
-				if (!checkExits(card, squareRight, 2)) {
-					
-					return false;
-						
-				}
-					
-				else validated = true;
-				
-			}
-			// if the square below drop position is not empty, check that the exits match up
-			if (squareDown != null && squareDown.getType() == "path") {
-										
-				if (!checkExits(card, squareDown, 3)) {
-					
-					return false;
-					
-				}
-				
-				else validated = true;
-					
 			}
 			
-			if (squareUp != null && (squareUp.getName() == "gold" || squareUp.getName() == "stone")) {
-				
-				if (!card.getExits()[1]) {
-					
-					return false;
-						
-				}
-				
-			}
+			validPathPosition = true;
 			
-			if (squareDown != null && (squareDown.getName() == "gold" || squareDown.getName() == "stone")) {
-				
-				if (!card.getExits()[3]) {
-					
-					return false;
-						
-				}
-				
-			}
+		}
+		if (squareRightIsPath) {
 			
-			if (squareRight != null && (squareRight.getName() == "gold" || squareRight.getName() == "stone")) {
-				
-				if (!card.getExits()[2]) {
-					
-					return false;
-						
-				}
-				
+			if (!checkExitsMatch(card, squareRight, 2)) {
+				return false;
 			}
+			validPathPosition = true;
 			
-			if (squareLeft != null && (squareLeft.getName() == "gold" || squareLeft.getName() == "stone")) {
+		}
+		
+		if (squareUpIsPath) {
+			if (!checkExitsMatch(card, squareUp, 1)) {
+				return false;
+			}
+			validPathPosition = true;
+			
+		}
+		
+		if (squareLeftIsPath) {
+			if (!checkExitsMatch(card, squareLeft, 0)) {
+				return false;
+			}
+			validPathPosition = true;
+			
+		}
+		
+		// recursively check the path successfully leads back to start position
+		visitedSquares = new ArrayList<Card>();
+		boolean validPathToStart = (checkPathRecursive(row+1, col) || checkPathRecursive(row-1, col)
+				|| checkPathRecursive(row, col+1) || checkPathRecursive(row, col-1));
+		
+		if (attachedToPath && validPathPosition && validPathToStart) {
+			
+			return true;
+			
+		}
+		
+		else return false;
+
+	}
+	
+	public boolean checkPathRecursive(int row, int col) {
+
+		boolean validated = false;
+		
+		Card square = null;
+		// check square is on board
+		if (row >= 0 && row < Board.getInstance().getRows()
+				&& col >= 0 && col < Board.getInstance().getCols()) {
+			square = Board.getInstance().getCard(row, col);
+			if (!(square.getType() == "path")) 
+				return false;
+		}
+		
+		else return false;
+		
+		// check if square is disabled
+		if (((PathCard)square).getIsToxic()) {
+			System.out.println("toxic - returning false");
+			return false;
+		}
+		
+		// check square has not already been visited
+		for (Card square1: visitedSquares) {
+			
+			System.out.println("square " + square1.getName());
+			if (square.equals(square1)) {
 				
-				if (!card.getExits()[0]) {
-					
-					return false;
-						
-				}
+				System.out.println("revisiting square at " + row + ", " + col);
+				System.out.println("revisited square " + square1.getName());
+				return false;
 				
 			}
 			
 		}
 		
-		visitedSquares = new ArrayList<Card>();
-		validated = (checkPathRecursive(row+1, column) || checkPathRecursive(row-1, column)
-				|| checkPathRecursive(row, column+1) || checkPathRecursive(row, column-1));
-
+		visitedSquares.add(square);
+		System.out.println("adding " + square.getName() + " at " + row + ", " + col + " to visited list");
+		
+		// return true if player reaches start position
+		System.out.println("checking if hit start position");
+		if (square != null && square.getName() == "start") {
+			System.out.println("hit start position - returning true");
+			
+			validated = true;
+			
+		}
+		
+		else if (square != null) {
+			
+			Card squareUp = null;
+			Card squareDown = null;
+			Card squareLeft = null;
+			Card squareRight = null;
+			if(row > 0)
+				squareUp = Board.getInstance().getCard((row - 1), col);
+			if(row < Board.getInstance().getRows()-1)
+				squareDown = Board.getInstance().getCard((row + 1), col);
+			if(col < Board.getInstance().getCols()-1)
+				squareRight = Board.getInstance().getCard(row, (col + 1));
+			if(col > 0)
+				squareLeft = Board.getInstance().getCard(row, (col - 1));
+			
+			// check square below
+			if (squareDown != null && checkExitsTrue(square, squareDown, 3)) {
+				System.out.println("checking down");
+				validated = checkPathRecursive(row+1, col);
+			}
+				
+			// check square to right
+			if (!validated && squareRight != null && checkExitsTrue(square, squareRight, 2)) {
+				System.out.println("checking right");
+				validated = checkPathRecursive(row, col+1);
+			}
+			
+			// check square above
+			if (!validated && squareUp != null && checkExitsTrue(square, squareUp, 1)) {
+				System.out.println("checking up");
+				validated = checkPathRecursive(row-1, col);
+					
+			}
+			
+			// check square to left
+			if (!validated && squareLeft != null && checkExitsTrue(square, squareLeft, 0)){
+				System.out.println("checking left");
+				validated = checkPathRecursive(row, col-1);
+			}
+			
+		}
+		
 		return validated;
-
 	}
 	
 	public boolean checkSuperPowerMove(Card card, int row, int col) {
@@ -231,15 +294,35 @@ public class ActionCardValidator {
 
 	}
 	
-	public boolean checkExits(Card playerCard, Card boardCard, int exit) {
+	public boolean checkExitsMatch(Card playerCard, Card boardCard, int exit) {
 		
 		int boardExit;
 		if (exit > 1) {
 			boardExit = exit - 2;
 		}
 		else boardExit = exit + 2;
+		
+		boolean exitsTrue = playerCard.getExits()[exit] && boardCard.getExits()[boardExit];
+		boolean exitsFalse = !playerCard.getExits()[exit] && !boardCard.getExits()[boardExit];
 
-		if (playerCard.getExits()[exit] && boardCard.getExits()[boardExit]) {
+		if (exitsTrue || exitsFalse) {
+			return true;
+		}
+		else return false;
+		
+	}
+	
+	public boolean checkExitsTrue(Card playerCard, Card boardCard, int exit) {
+		
+		int boardExit;
+		if (exit > 1) {
+			boardExit = exit - 2;
+		}
+		else boardExit = exit + 2;
+		
+		boolean exitsTrue = playerCard.getExits()[exit] && boardCard.getExits()[boardExit];
+
+		if (exitsTrue) {
 			return true;
 		}
 		else return false;
@@ -247,10 +330,25 @@ public class ActionCardValidator {
 	}
 	
 	public boolean checkMinersWin(int row, int col) {
-				
-		//check if square to the right is gold
-		if (col < Board.getInstance().getCols()-1 && Board.getInstance().getCard(row, col+1) != null) { 
-			if (Board.getInstance().getCard(row, col+1).getName() == "gold") {
+			
+		Card playedSquare = Board.getInstance().getCard(row, col);
+		
+		Card squareUp = null;
+		Card squareDown = null;
+		Card squareLeft = null;
+		Card squareRight = null;
+		if(row > 0)
+			squareUp = Board.getInstance().getCard((row - 1), col);
+		if(row < Board.getInstance().getRows()-1)
+			squareDown = Board.getInstance().getCard((row + 1), col);
+		if(col < Board.getInstance().getCols()-1)
+			squareRight = Board.getInstance().getCard(row, (col + 1));
+		if(col > 0)
+			squareLeft = Board.getInstance().getCard(row, (col - 1));
+		
+		//check if the played square leads to gold on the right
+		if (squareRight != null) { 
+			if (squareRight.getName() == "gold" && checkExitsTrue(playedSquare, squareRight, 2)) {
 				
 				return true;
 				
@@ -259,9 +357,9 @@ public class ActionCardValidator {
 		}
 		
 		//check if square to the left is gold
-		if (col > 0 && Board.getInstance().getCard(row, col-1) != null) { 
+		if (squareLeft != null) { 
 			
-			if (Board.getInstance().getCard(row, col-1).getName() == "gold") {
+			if (squareLeft.getName() == "gold" && checkExitsTrue(playedSquare, squareLeft, 0)) {
 				
 				return true;
 				
@@ -270,9 +368,9 @@ public class ActionCardValidator {
 		}
 		
 		//check if square to the top is gold
-		if (row > 0 && Board.getInstance().getCard(row-1, col) != null) { 
+		if (squareUp != null) { 
 						
-			if (Board.getInstance().getCard(row-1, col).getName() == "gold") {
+			if (squareUp.getName() == "gold" && checkExitsTrue(playedSquare, squareUp, 1)) {
 				
 				return true;
 				
@@ -281,9 +379,9 @@ public class ActionCardValidator {
 		}
 		
 		//check if square to the bottom is gold
-		if (row < Board.getInstance().getRows()-1 && Board.getInstance().getCard(row+1, col) != null) { 
+		if (squareDown != null) { 
 			
-			if (Board.getInstance().getCard(row+1, col).getName() == "gold") {
+			if (squareDown.getName() == "gold" && checkExitsTrue(playedSquare, squareDown, 3)) {
 				
 				return true;
 				
@@ -305,75 +403,6 @@ public class ActionCardValidator {
 		
 		return false;
 		
-	}
-	
-	public boolean checkPathRecursive(int row, int col) {
-
-		boolean validated = false;
-		
-		Card square = null;
-		
-		if (row >= 0 && row < Board.getInstance().getRows()
-				&& col >= 0 && col < Board.getInstance().getCols()) {
-			square = Board.getInstance().getCard(row, col);
-			if (!(square.getType() == "path")) 
-				return false;
-		}
-		
-		else return false;
-		
-		if (((PathCard)square).getIsToxic()) {
-			System.out.println("toxic - returning false");
-			return false;
-		}
-		
-		for (Card square1: visitedSquares) {
-			
-			System.out.println("square " + square1.getName());
-			if (square.equals(square1)) {
-				
-				System.out.println("revisiting square at " + row + ", " + col);
-				System.out.println("revisited square " + square1.getName());
-				return false;
-				
-			}
-			
-		}
-		
-		visitedSquares.add(square);
-		System.out.println("adding " + square.getName() + " at " + row + ", " + col + " to visited list");
-		
-		// return true if player reaches start position
-		System.out.println("checking if hit start position");
-		if (square != null && square.getName() == "start") {
-			System.out.println("hit start position - returning true");
-			
-			validated = true;
-			
-		}
-		
-		else if (square != null) {
-			
-			System.out.println("checking down");
-			validated = checkPathRecursive(row+1, col);
-				
-			if (!validated) {
-				System.out.println("checking right");
-				validated = checkPathRecursive(row, col+1);
-			}
-			if (!validated) {
-				System.out.println("checking up");
-				validated = checkPathRecursive(row-1, col);
-					
-			}
-			if (!validated){
-				System.out.println("checking left");
-				validated = checkPathRecursive(row, col-1);
-			}
-			
-		}
-		
-		return validated;
 	}
 
 }
