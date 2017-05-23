@@ -10,6 +10,7 @@ import model.PlayerD;
 import model.cards.Card;
 import view.AddPlayerView;
 import view.GameView;
+import view.RefreshBoard;
 
 public class GameState {
     
@@ -54,6 +55,8 @@ public class GameState {
             oldStateID = generateStateID(i);
         }
         PlayGameListener.changeScene(AddPlayerView.getStage());;
+        RefreshBoard refreshBoard = new RefreshBoard();
+        refreshBoard.refreshView();
 
     }
     

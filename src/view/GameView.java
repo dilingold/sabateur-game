@@ -5,6 +5,7 @@ import java.util.List;
 
 import controller.DragCardListener;
 import controller.DropListener;
+import controller.PlayGameListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,13 +34,16 @@ public class  GameView {
 	private Stage stage;
 	private Text playerText = null;
 	private PlayerD currentPlayer;
-	private ImageView[][] imageViews;
+	private static ImageView[][] imageViews;
 	private int draggedCardIndex;
 	private Button roleBtn;
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
 
+	//T - accessible for refresh script
+	private GridPane boardGrid;
+	
 	/*
 	 * this view is the game view which includes all the components required to play the game
 	 * including the board, players, current player's hand and a discard pile
@@ -69,7 +73,8 @@ public class  GameView {
 		boardText.setFill(Color.WHITE);
 		vbBoard.getChildren().add(boardText);
 
-		GridPane boardGrid = new GridPane();
+		//T - making accessible for refresh board
+		boardGrid = new GridPane();
 
 		//display the board in the centre of the screen
 		//get the board and populate it with the start card, the goal cards and blank cards
@@ -121,7 +126,30 @@ public class  GameView {
 						startPic.setImage(startImage);
 						boardGrid.add(startPic, i, k);
 						imageViews[k][i] = startPic;
-						
+					
+/*	
+ * For refresh view method:
+					default: //else
+						case "path":
+							String pathImageName = "/resources/images/cards/" + currentBoard.getCard(k, i).getName() + "-rotate"
+								+ ((PathCard) currentBoard.getCard(k, i)).getRotation() + ".png";
+							Image pathImage = new Image(pathImageName);
+							ImageView pathPic = new ImageView();
+							pathPic.setFitWidth(60);
+							pathPic.setFitHeight(60);
+							pathPic.setImage(pathImage);
+							boardGrid.add(pathPic, i, k);
+							imageViews[k][i] = pathPic;
+						case "action":
+							String actionImageName = "/resources/images/cards/"+currentBoard.getCard(k, i).getName() + ".png";
+							Image actionImage = new Image(actionImageName);
+							ImageView actionPic = new ImageView();
+							actionPic.setFitWidth(60);
+							actionPic.setFitHeight(60);
+							actionPic.setImage(actionImage);
+							boardGrid.add(actionPic, i, k);
+							imageViews[k][i] = actionPic;
+*/
 				}
 				
 			}
@@ -449,8 +477,26 @@ public class  GameView {
 		
 	}
 	
-	public void setImageView(int row, int col, ImageView image){
-	    imageViews[row][col] = image;
+	
+	
+	public void setImage(int row, int col, String imageName){
+		/*		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
+		*/
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+
+		ImageView card = new ImageView();
+		card.setFitWidth(60);
+		card.setFitHeight(60);
+		card.setImage(image);
+		//boardGrid.add(coalPic, i, k);
+		//imageViews[row][col] = card;
+		//boardGrid.add(pic, i, k);
+		boardGrid.add(card, row, col);
+		//imageViews[row][col].setImage(image);
 	}
 
 }
