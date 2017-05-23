@@ -347,17 +347,16 @@ public class  GameView {
 		DropListener dropListener = new DropListener(this);
 		
 		target.setOnDragOver(event ->  {
-			
 			dropListener.dragOver(event, target);
 			
 		});
-		
 		target.setOnDragDropped(event ->  {
-			
+
+            System.out.println("drop event; location = "+ dropLocation);
 			Node source = (Node) event.getSource();
 			
 			if (dropLocation == "board") {
-				
+			    System.out.println("drop event board");
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
 				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target,
@@ -495,6 +494,7 @@ public class  GameView {
 		//boardGrid.add(coalPic, i, k);
 		//imageViews[row][col] = card;
 		//boardGrid.add(pic, i, k);
+		makeDroppable(card, "board");
 		boardGrid.add(card, row, col);
 		//imageViews[row][col].setImage(image);
 	}
