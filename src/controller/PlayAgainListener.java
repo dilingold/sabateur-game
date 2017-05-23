@@ -35,7 +35,7 @@ public class PlayAgainListener {
 	
 	public void resetDeck() {
 
-		DeckBuilder deckBuilder = new DeckBuilder();
+		DeckFactory deckBuilder = new DeckFactory();
 		deckBuilder.addAllCards();
 		deckBuilder.Shuffle();
 		

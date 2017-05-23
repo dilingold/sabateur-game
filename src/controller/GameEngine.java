@@ -17,7 +17,7 @@ public class GameEngine {
 
 	public GameEngine() {
 
-		DeckBuilder deckBuilder = new DeckBuilder();
+		DeckFactory deckBuilder = new DeckFactory();
 		deckBuilder.addAllCards();
 		deckBuilder.Shuffle();
 
