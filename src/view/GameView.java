@@ -4,11 +4,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.Set;
 
 import controller.DragCardListener;
 import controller.DropListener;
 import controller.GameEngine;
+import controller.TimerController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -37,8 +39,11 @@ import model.Hand;
 import model.PlayerD;
 import model.cards.*;
 //import sun.applet.Main;
+import java.util.Observable;
+import java.util.Observer;
 
-public class  GameView {
+public class GameView {
+
 
 	private Stage stage;
 	private Text playerText = null;
@@ -52,6 +57,7 @@ public class  GameView {
 	private static final Integer SetTimer = 30; // Have this in options perhaps?
 	private IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	private Label timeLabel = new Label();
+	private Timeline timeline = TimerController.startTimer(timeLabel);
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -60,6 +66,8 @@ public class  GameView {
 	public GameView(Stage stage) {
 
 		this.stage = stage;
+		TimerController timerListener = new TimerController();
+		timerListener.TimerListener();
 
 	}
 
@@ -241,22 +249,17 @@ public class  GameView {
 		gameGrid.add(vbDiscard, 2, 1, 1, 2);
 
 		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
-		/**
-		 * Timer Added
-		 */
-		Timeline timeline = GameEngine.updateTime(timeLabel, currentPlayer);
-			System.out.println( "Restarting app!" );
-			timeline.setOnFinished(event -> {
-				currentPlayer.getHand().discardCard(0);
-				currentPlayer.drawCard();
-				nextTurn();
-			});
-		/**
-		 * End Timer
-		 */
+
 
 		stage.setScene(scene);
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
+		/**
+		 * Timer Added
+		 */
+
+		/**
+		 * End Timer
+		 */
 
 	}
 	
@@ -410,19 +413,17 @@ public class  GameView {
 	
 	//change to the next player's turn
 	public void nextTurn() {
-		
 		currentPlayer = MainView.gameEngine.nextPlayer();
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
-		GameEngine.updateTime(timeLabel, currentPlayer);
-		Timeline timeline = GameEngine.updateTime(timeLabel, currentPlayer);
-		System.out.println( "Restarting app!" );
-		timeline.setOnFinished(event -> {
+
+		TimerController.updateTime(timeline);
+		/*timeline.setOnFinished(event -> {
 			currentPlayer.getHand().discardCard(0);
 			currentPlayer.drawCard();
 			nextTurn();
-		});
+		});*/
 		
 	}
 	
