@@ -408,7 +408,7 @@ public class ActionCardValidator {
 		int row = -1;
 		int col = -1;
 		
-		for (int i : treasureRows) {
+		for (int i = 0; i < treasureRows.length; i++) {
 			
 			if (Board.getInstance().getCard(treasureRows[i], treasureCols[i]).getName() == "gold") {
 				
@@ -435,25 +435,25 @@ public class ActionCardValidator {
 		if(col > 0)
 			squareLeft = Board.getInstance().getCard(row, (col - 1));
 		
-		if (squareUp != null && squareUp.getType() != "path") {
+		if (squareUp != null && squareUp.getName() == "blank card") {
 			
 			win = false;
 			
 		}
 		
-		if (squareDown != null && squareDown.getType() != "path") {
+		if (squareDown != null && squareDown.getName() == "blank card") {
 			
 			win = false;
 			
 		}
 		
-		if (squareRight != null && squareRight.getType() != "path") {
+		if (squareRight != null && squareRight.getName() == "blank card") {
 			
 			win = false;
 			
 		}
 		
-		if (squareLeft != null && squareLeft.getType() != "path") {
+		if (squareLeft != null && squareLeft.getType() == "blank card") {
 			
 			win = false;
 			
