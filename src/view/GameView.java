@@ -352,11 +352,9 @@ public class  GameView {
 		});
 		target.setOnDragDropped(event ->  {
 
-            System.out.println("drop event; location = "+ dropLocation);
 			Node source = (Node) event.getSource();
 			
 			if (dropLocation == "board") {
-			    System.out.println("drop event board");
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
 				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target,
@@ -498,5 +496,11 @@ public class  GameView {
 		boardGrid.add(card, row, col);
 		//imageViews[row][col].setImage(image);
 	}
+	
+	public void refreshHand(){
+	    vbCards.getChildren().remove(hbCards);
+	    displayHand();
+	}
+	
 
 }

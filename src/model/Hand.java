@@ -43,6 +43,16 @@ public class Hand {
         cardCount++;
         
     }
+    
+    public ArrayList<Card> getHand(){
+        return cards;
+        
+    }
+    public void setHand(ArrayList<Card> priorCards){
+        for(int i = 0; i < cards.size();i++){
+            cards.set(i, priorCards.get(i));
+        }
+    }
    
     public void print() {
     	

@@ -26,6 +26,7 @@ public class GameState {
     //static ArrayList<ArrayList<PlayerD>> playerStates = new ArrayList<ArrayList<PlayerD>>();
     static int turn = 0;
     static int currentPlayerIndex = 0;
+    static Map<Integer, ArrayList<ArrayList<Card>>> handStates=new HashMap<Integer,ArrayList<ArrayList<Card>>>();
 
     public GameState() {
     }
@@ -40,6 +41,8 @@ public class GameState {
         Stack<Card> deckState = saveDeck();
         deckStates.put(stateID, deckState);
         System.out.println("State "+stateID+" saved");
+        handStates.put(stateID, getPlayerHands());
+        
     }
 
     public void loadState(int turnsReverted){
@@ -50,6 +53,7 @@ public class GameState {
         //GameEngine.setPlayerIndex ? Think can avoid
         Deck.setDeck(deckStates.get(oldStateID));
         PlayerController.setPlayers(playerStates.get(oldStateID));
+        PlayerController.setHand(handStates.get(oldStateID));
         Board.setBoard(boardStates.get(oldStateID));
         for(int i = 0; i < GameEngine.getTurn(); i ++){
             oldStateID = generateStateID(i);
@@ -57,7 +61,6 @@ public class GameState {
         PlayGameListener.changeScene(AddPlayerView.getStage());;
         RefreshBoard refreshBoard = new RefreshBoard();
         refreshBoard.refreshView();
-
     }
     
     
@@ -85,6 +88,11 @@ public class GameState {
     public static ArrayList<PlayerD> getPlayerState(){
         return PlayerController.copyPlayerList();
     }
+    public static ArrayList<ArrayList<Card>> getPlayerHands(){
+        return PlayerController.getHands();
+    }
+    
+    
     public static Board getBoardState(){
         return Board.getBoardCopy();
     }

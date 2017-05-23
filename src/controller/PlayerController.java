@@ -5,6 +5,7 @@ import model.Hand;
 import model.Miner;
 import model.PlayerD;
 import model.Sabateur;
+import model.cards.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,6 +124,23 @@ public class PlayerController {
     public static ArrayList<PlayerD> getPlayers(){
         return players;
     }
+    public static ArrayList<ArrayList<Card>> getHands(){
+        ArrayList<ArrayList<Card>> handList = new ArrayList<ArrayList<Card>>();
+        for(int i = 0; i < players.size(); i++){
+            ArrayList<Card> handOfPlayer = new ArrayList<Card>();
+            for(int j = 0; j < (players.get(i).getHand().getHand().size()); j++){
+                handOfPlayer.add(players.get(i).getHand().getHand().get(j));
+            }
+            handList.add(handOfPlayer);
+        }
+        return handList;
+    }
+    public static void setHand(ArrayList<ArrayList<Card>> priorHandList){
+        for(int i = 0; i < players.size(); i++){
+                players.get(i).getHand().setHand(priorHandList.get(i));
+        }
+    }
+    
     public static void setPlayers(ArrayList<PlayerD> oldPlayers){
         players = oldPlayers;
     }

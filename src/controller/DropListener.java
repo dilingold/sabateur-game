@@ -62,8 +62,7 @@ public class DropListener {
 			ImageView target, ImageView[][] imageViews, int row, int col) {
 		
 		//for debugging
-		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
-        System.out.println("starting validator...");
+
 		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), row, col)) {
 
 			if (event.getGestureSource() != target) {
