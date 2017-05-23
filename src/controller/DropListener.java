@@ -21,7 +21,7 @@ import model.cards.NoDecorator;
 //allows for one component to be dropped on another
 public class DropListener {
 
-	private ActionCardValidator validator = new ActionCardValidator();
+	private ActionCardValidator validator;
 	private GameView gameView;
 	
 	public DropListener(GameView gameView) {
@@ -60,6 +60,8 @@ public class DropListener {
 	 */
 	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, 
 			ImageView target, ImageView[][] imageViews, int row, int col) {
+		
+		validator = new ActionCardValidator();
 		
 		//for debugging
 		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
@@ -179,6 +181,7 @@ public class DropListener {
 	 */
 	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, ImageView target) {
 		
+		validator = new ActionCardValidator();
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		currentPlayer.drawCard();
 		
@@ -197,6 +200,7 @@ public class DropListener {
 	// discard card, draw new card, check if sabateurs won and return true
 	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, PlayerD targetPlayer, int draggedCardIndex, Label target) {
 		
+		validator = new ActionCardValidator();
 		PersonalCardValidator personalCardValidator = new PersonalCardValidator();
 		
 		if(!(currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "personal")) {

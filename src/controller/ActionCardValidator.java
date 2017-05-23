@@ -49,7 +49,7 @@ public class ActionCardValidator {
 	private Boolean validatePath(Card card, int row, int col) {
 
 		Boolean validated = false;
-		
+		visitedSquares = new ArrayList<Card>();
 		//check that dropped card matches any neighboring cards and leads back to start
 		if (Board.getInstance().getCard(row, col).getType() == "path") {
 			return false;
@@ -401,7 +401,65 @@ public class ActionCardValidator {
 			
 		}
 		
-		return false;
+		int[] treasureRows = Board.getInstance().getTreasureRows();
+		int[] treasureCols = Board.getInstance().getTreasureCols();
+		
+		Card gold = null;
+		int row = -1;
+		int col = -1;
+		
+		for (int i : treasureRows) {
+			
+			if (Board.getInstance().getCard(treasureRows[i], treasureCols[i]).getName() == "gold") {
+				
+				gold = Board.getInstance().getCard(treasureRows[i], treasureCols[i]);
+				row = treasureRows[i];
+				col = treasureCols[i];
+				
+			}
+			
+		}
+		
+		boolean win = true;
+		
+		Card squareUp = null;
+		Card squareDown = null;
+		Card squareLeft = null;
+		Card squareRight = null;
+		if(row > 0)
+			squareUp = Board.getInstance().getCard((row - 1), col);
+		if(row >=0 && row < Board.getInstance().getRows()-1)
+			squareDown = Board.getInstance().getCard((row + 1), col);
+		if(col >= 0 && col < Board.getInstance().getCols()-1)
+			squareRight = Board.getInstance().getCard(row, (col + 1));
+		if(col > 0)
+			squareLeft = Board.getInstance().getCard(row, (col - 1));
+		
+		if (squareUp != null && squareUp.getType() != "path") {
+			
+			win = false;
+			
+		}
+		
+		if (squareDown != null && squareDown.getType() != "path") {
+			
+			win = false;
+			
+		}
+		
+		if (squareRight != null && squareRight.getType() != "path") {
+			
+			win = false;
+			
+		}
+		
+		if (squareLeft != null && squareLeft.getType() != "path") {
+			
+			win = false;
+			
+		}
+		
+		return win;
 		
 	}
 
