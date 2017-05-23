@@ -448,5 +448,9 @@ public class  GameView {
 		target.setGraphic(playerImageView);
 		
 	}
+	
+	public void setImageView(int row, int col, ImageView image){
+	    imageViews[row][col] = image;
+	}
 
 }

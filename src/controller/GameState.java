@@ -37,12 +37,10 @@ public class GameState {
         boardStates.put(stateID, getBoardState());
         playerStates.put(stateID, getPlayerState()); 
         Stack<Card> deckState = saveDeck();
-        System.out.println("deckstatesize = "+deckState.size());
         deckStates.put(stateID, deckState);
         System.out.println("State "+stateID+" saved");
-        if(deckStates.get(10) != null)
-            System.out.println("deckstatesize at 10 = "+deckStates.get(10).size());
     }
+
     public void loadState(int turnsReverted){
         System.out.println("Rewinding turn: going to turn "+(GameEngine.getTurn() - turnsReverted));
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
@@ -54,7 +52,6 @@ public class GameState {
         Board.setBoard(boardStates.get(oldStateID));
         for(int i = 0; i < GameEngine.getTurn(); i ++){
             oldStateID = generateStateID(i);
-            System.out.println("deck size at turn "+i+" = "+deckStates.get(oldStateID).size());
         }
         PlayGameListener.changeScene(AddPlayerView.getStage());;
 
