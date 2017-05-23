@@ -5,6 +5,7 @@ import java.util.List;
 
 import controller.DragCardListener;
 import controller.DropListener;
+import controller.GameEngine;
 import controller.PlayGameListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -37,6 +38,7 @@ public class  GameView {
 	private static ImageView[][] imageViews;
 	private int draggedCardIndex;
 	private Button roleBtn;
+	private Button undoTurnBtn;
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
@@ -175,6 +177,11 @@ public class  GameView {
 		roleBtn.setPrefWidth(70);
 		hbCards.getChildren().add(roleBtn);
 
+        undoTurnBtn = new Button("Undo Turn");
+		undoTurnBtn.setPrefHeight(80);
+		undoTurnBtn.setPrefWidth(70);
+		hbCards.getChildren().add(undoTurnBtn);
+
 		//placeholder: a card to reveal the player's role
 		roleBtn.setOnAction(event ->  {
 			
@@ -192,6 +199,13 @@ public class  GameView {
 			}
 			
 		});
+		//when undo turn button pressed
+		undoTurnBtn.setOnAction(event ->  {
+            if(GameEngine.getTurn() > 1){
+                GameEngine.getGameStates().loadState(1);
+                undoTurnBtn.setDisable(true);
+            }
+        });
 		
 		displayHand();
 
@@ -265,6 +279,7 @@ public class  GameView {
 		HBox hb = new HBox(10);
 		hb.setAlignment(Pos.TOP_CENTER);
 		hb.getChildren().add(roleBtn);
+		hb.getChildren().add(undoTurnBtn);
 		
 		Hand hand = currentPlayer.getHand();
 		for (int i = 0; i < hand.cardCount(); i++) {

@@ -30,7 +30,8 @@ public class DeckBuilder {
 		addToxicCard();
 		addSuperToolCard();
 		addRemoveToxicCard();
-		addRewindCard();
+		//rewind card, used to test undo turn
+		//addRewindCard();
 		
 	}
 	   public void addRewindCard() {
