@@ -5,7 +5,7 @@ import java.util.Stack;
 import model.Deck;
 import model.cards.*;
 
-public class DeckBuilder {
+public class DeckFactory {
 	
 	private int numPathCards = 10;
 	private int numPersonalCards = 5;
