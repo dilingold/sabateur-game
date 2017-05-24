@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Stack;
 
+import model.CardPrototypeFactory;
 import model.Deck;
 import model.cards.Card;
 import model.cards.ExposeCard;
@@ -19,8 +20,11 @@ public class DeckBuilder {
 	private int numActionCards = 10;
 	
 	public void addAllCards() {
+	    
+	   // CardPrototypeFactory.getInstance();
+	    Deck.getInstance();
 		
-		addEndPathCards();
+	    addEndPathCards();
 		addLPathCards();
 		addStraighPathCards();
 		addTPathCards();
@@ -30,24 +34,17 @@ public class DeckBuilder {
 		addToxicCard();
 		addSuperToolCard();
 		addRemoveToxicCard();
-		//rewind card, used to test undo turn
-		//addRewindCard();
 		
 	}
-	   public void addRewindCard() {
-	        
-	        for(int i = 0; i<numActionCards; i++) {
-	            RewindCard rewind = new RewindCard();
-	            Deck.getInstance().getDeck().push(rewind);
-	            
-	        }
-	    }
 	
 	public void addToxicCard() {
 		
 		for(int i = 0; i<numActionCards; i++) {
-			ToxicCard toxicCard = new ToxicCard();
-			Deck.getInstance().getDeck().push(toxicCard);
+		    
+            ToxicCard toxicCard = (ToxicCard) CardPrototypeFactory.getPrototype("toxicCard");
+		 
+			
+            Deck.getDeck().push(toxicCard);
 			
 		}
 	}
@@ -55,7 +52,7 @@ public class DeckBuilder {
 	public void addRemoveToxicCard() {
 		
 		for(int i = 0; i<numActionCards; i++) {
-			RemoveToxicCard removeToxicCard = new RemoveToxicCard();
+			RemoveToxicCard removeToxicCard = (RemoveToxicCard) CardPrototypeFactory.getPrototype("removeToxicCard");
 			Deck.getInstance().getDeck().push(removeToxicCard);
 			
 		}

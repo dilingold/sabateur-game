@@ -1,8 +1,8 @@
 package model.cards;
 
-public class SearchTresureCard extends ActionCard {
+public class SearchTreasureCard extends ActionCard {
 	
-	public SearchTresureCard() {
+	public SearchTreasureCard() {
 		
 		this.name = "Treasure Card";
 		this.effect = "search";

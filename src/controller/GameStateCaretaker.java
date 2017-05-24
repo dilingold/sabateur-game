@@ -12,45 +12,44 @@ import view.AddPlayerView;
 import view.GameView;
 import view.RefreshBoard;
 
-public class GameState {
+public class GameStateCaretaker {
     
     
-    //TODO
-    //Only deckStates appears working, others keeps static variables contatined within.
-    //update to fix.
+    
     static Map<Integer,Stack<Card>> deckStates=new HashMap<Integer,Stack<Card>>();  
-    //static ArrayList<Stack<Card>> deckStates = new ArrayList<Stack<Card>>();
-    static Map<Integer,Board> boardStates=new HashMap<Integer,Board>();  
-    //static ArrayList<Board> boardStates = new ArrayList<Board>();
-    static Map<Integer,ArrayList<PlayerD>> playerStates=new HashMap<Integer,ArrayList<PlayerD>>();  
-    //static ArrayList<ArrayList<PlayerD>> playerStates = new ArrayList<ArrayList<PlayerD>>();
+    static Map<Integer,Board> boardStates=new HashMap<Integer,Board>();
+    static Map<Integer,ArrayList<PlayerD>> playerStates=new HashMap<Integer,ArrayList<PlayerD>>(); 
     static int turn = 0;
     static int currentPlayerIndex = 0;
     static Map<Integer, ArrayList<ArrayList<Card>>> handStates=new HashMap<Integer,ArrayList<ArrayList<Card>>>();
-
-    public GameState() {
+    private static int numberOfRegressions = 0;
+    //arraylist of ints of stateIDs used
+    //when load state, delete ones after one loaded
+    //when load state, look for..
+    //maybe map<int, int> of stateID, regression?
+    
+    public GameStateCaretaker() {
     }
     
     public static void saveState(){
+        int stateID = generateStateID();
         turn = GameEngine.getTurn();
         currentPlayerIndex = GameEngine.getCurrentPlayerIndex();
-        int stateID = generateStateID();
-        System.out.println("stateID = "+stateID);
-        boardStates.put(stateID, getBoardState());
-        playerStates.put(stateID, getPlayerState()); 
-        Stack<Card> deckState = saveDeck();
+        boardStates.put(stateID, GameStateMemento.getBoardState());
+        playerStates.put(stateID, GameStateMemento.getPlayerState()); 
+        Stack<Card> deckState = GameStateMemento.saveDeck();
+        handStates.put(stateID, GameStateMemento.getPlayerHands());
         deckStates.put(stateID, deckState);
         System.out.println("State "+stateID+" saved");
-        handStates.put(stateID, getPlayerHands());
         
     }
 
     public void loadState(int turnsReverted){
+       
         System.out.println("Rewinding turn: going to turn "+(GameEngine.getTurn() - turnsReverted));
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
         GameEngine.setTurn(oldTurn);
         int oldStateID = generateStateID(turnsReverted);
-        //GameEngine.setPlayerIndex ? Think can avoid
         Deck.setDeck(deckStates.get(oldStateID));
         PlayerController.setPlayers(playerStates.get(oldStateID));
         PlayerController.setHand(handStates.get(oldStateID));
@@ -61,45 +60,21 @@ public class GameState {
         PlayGameListener.changeScene(AddPlayerView.getStage());;
         RefreshBoard refreshBoard = new RefreshBoard();
         refreshBoard.refreshView();
+        numberOfRegressions ++;
     }
     
     
     private static int generateStateID() {
-        String stateID = Integer.toString(turn)+Integer.toString(currentPlayerIndex);
+        String stateID = Integer.toString(turn)+Integer.toString(currentPlayerIndex)+Integer.toString(numberOfRegressions);
+        System.out.println("State generated: "+ stateID);
         return Integer.parseInt(stateID);  
     }
     private static int generateStateID(int turnsReverted) {
-        String stateID = Integer.toString(turn-turnsReverted)+Integer.toString(currentPlayerIndex);
+        String stateID = Integer.toString(turn-turnsReverted)+Integer.toString(currentPlayerIndex)+Integer.toString(numberOfRegressions);
+        System.out.println("State to load generated: "+ stateID);
         return Integer.parseInt(stateID);  
     }
 
-
-    public static Stack<Card> saveDeck(){
-        Deck.getInstance();
-        Stack<Card> deckInstance = Deck.getDeck();
-        Stack<Card> savedDeck = new Stack<Card>();
-        for(int i = 0; i < deckInstance.size(); i++){
-            savedDeck.push(deckInstance.get(i).getCopy());
-        }
-        return savedDeck;
-    }
-    //TODO
-    //incomplete
-    public static ArrayList<PlayerD> getPlayerState(){
-        return PlayerController.copyPlayerList();
-    }
-    public static ArrayList<ArrayList<Card>> getPlayerHands(){
-        return PlayerController.getHands();
-    }
-    
-    
-    public static Board getBoardState(){
-        return Board.getBoardCopy();
-    }
-    
-    //saveBoard
-    //savePlayers
-    //saveHands
     
 
 }
