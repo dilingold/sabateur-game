@@ -5,6 +5,9 @@ import java.util.List;
 import model.PlayerD;
 
 public class DistributeGold {
+	
+	private static PlayerD topDogHeist;
+	private static PlayerD topDogExpose;
 		
 	public static void currentPlayer(PlayerD currentPlayer) {
 		
@@ -50,6 +53,7 @@ public class DistributeGold {
 		
 		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
 			
+			topDogHeist = p;
 			System.out.println(p.getName() + " heists:");
 			distributeHeistsRecursive(p);
 			
@@ -61,6 +65,7 @@ public class DistributeGold {
 		
 		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
 			
+			topDogExpose = p;
 			System.out.println(p.getName() + " exposed:");
 			distributeExposedSabRecursive(p);
 			
@@ -75,7 +80,7 @@ public class DistributeGold {
 			System.out.println(p.getName());
 			if (p.getGold() > 0) {
 				
-				player.addGold(1);
+				topDogHeist.addGold(1);
 				p.removeGold(1);
 				
 			}
@@ -92,7 +97,7 @@ public class DistributeGold {
 			System.out.println(p.getName());
 			if (p.getGold() > 0) {
 				
-				player.addGold(1);
+				topDogExpose.addGold(1);
 				p.removeGold(1);
 				
 			}
