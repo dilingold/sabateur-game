@@ -3,17 +3,7 @@ package controller;
 import java.util.Stack;
 
 import model.Deck;
-import model.cards.Card;
-import model.cards.EndPathCard;
-import model.cards.ExposeCard;
-import model.cards.HeistCard;
-import model.cards.LPathCard;
-import model.cards.PowerToolCard;
-import model.cards.RemoveToxicCard;
-import model.cards.StraightPathCard;
-import model.cards.TPathCard;
-import model.cards.ToxicCard;
-import model.cards.XPathCard;
+import model.cards.*;
 
 public class DeckBuilder {
 	
@@ -33,6 +23,10 @@ public class DeckBuilder {
 		addToxicCard();
 		addSuperToolCard();
 		addRemoveToxicCard();
+		addRoadBlockCard();
+		addRemoveRoadBlockCard();
+		addRatInfestation();
+		addRemoveRatInfestation();
 		
 	}
 	
@@ -140,6 +134,46 @@ public class DeckBuilder {
 			
 		}
 		
+	}
+
+	public void addRoadBlockCard() {
+
+		for (int i = 0; i < numPersonalCards; i++) {
+
+			RoadBlockCard floodCard = new RoadBlockCard();
+			Deck.getInstance().getDeck().push(floodCard);
+
+		}
+	}
+
+	public void addRemoveRoadBlockCard() {
+
+		for (int i = 0; i < numPersonalCards; i++) {
+
+			RemoveRoadBlock removeFlood = new RemoveRoadBlock();
+			Deck.getInstance().getDeck().push(removeFlood);
+
+		}
+	}
+
+	public void addRatInfestation() {
+
+		for (int i = 0; i < numPersonalCards; i++) {
+
+			RatInfestation ratInfestation = new RatInfestation();
+			Deck.getInstance().getDeck().push(ratInfestation);
+
+		}
+	}
+
+	public void addRemoveRatInfestation() {
+
+		for (int i = 0; i < numPersonalCards; i++) {
+
+			RemoveRatInfestation removeRatInfestation = new RemoveRatInfestation();
+			Deck.getInstance().getDeck().push(removeRatInfestation);
+
+		}
 	}
 	
 	public void Shuffle() {
