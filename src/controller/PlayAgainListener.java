@@ -14,15 +14,23 @@ public class PlayAgainListener {
 			
 		}
 		
-		resetBoard();
-		resetDeck();
-		resetPlayers();
+		/*
+		Command Pattern
+		 */
+		Restart restart = new Restart();
+		BoardBuilder boardBuilder = new BoardBuilder();
+		DeckFactory deckBuilder = new DeckFactory();
+
+		Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
+
+		restart.setCommand(resetGame);
+		restart.invokeReset();
 		
 		new PlayGameListener().changeScene(stage);
 		
 	}
 	
-	public void resetBoard() {
+	/*public void resetBoard() {
 		
 		BoardBuilder boardBuilder = new BoardBuilder();
 		boardBuilder.getRows();
@@ -46,6 +54,6 @@ public class PlayAgainListener {
 		PlayerController.getInstance().clearPlayerHands();
 		PlayerController.getInstance().dealPlayerHands();
 		GameEngine.setCurrentPlayerIndex(0);
-	}
+	}*/
 
 }

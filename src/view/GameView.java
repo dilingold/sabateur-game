@@ -2,9 +2,12 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import controller.DragCardListener;
 import controller.DropListener;
+import controller.PlayGameListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,12 +26,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
+import model.EventObserver;
 import model.Hand;
 import model.Player;
 import model.cards.*;
 //import sun.applet.Main;
 
-public class  GameView {
+public class  GameView implements Observer{
 
 	private Stage stage;
 	private Text playerText = null;
@@ -39,6 +43,29 @@ public class  GameView {
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
+	private Label timeLabel = new Label();
+	private EventObserver timerUpdate ;
+
+	@Override
+	public void update(Observable observable, Object arg)
+	{
+		timerUpdate = (EventObserver) observable;
+		System.out.println("Timer Has Changed Status to "+timerUpdate.getTimerStatus());
+		System.out.println("Discarding Card position 0");
+		try {
+			currentPlayer.getHand().discardCard(0);
+			currentPlayer.drawCard();
+		}catch (Exception e) {
+			PlayGameListener.stopTime();
+		}
+
+		if(timerUpdate.getTimerStatus()) {
+			System.out.println("Next Turn!!!");
+			nextTurn();
+		}
+
+		//PlayGameListener.stopTime();
+	}
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -47,6 +74,7 @@ public class  GameView {
 	public GameView(Stage stage) {
 
 		this.stage = stage;
+		PlayGameListener.startTimer(timeLabel);
 
 	}
 
@@ -68,6 +96,7 @@ public class  GameView {
 		boardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		boardText.setFill(Color.WHITE);
 		vbBoard.getChildren().add(boardText);
+		vbBoard.getChildren().add(timeLabel);
 
 		GridPane boardGrid = new GridPane();
 
@@ -386,6 +415,7 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
+		PlayGameListener.updateTime();
 		
 	}
 	

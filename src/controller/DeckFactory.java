@@ -26,6 +26,11 @@ public class DeckFactory {
 	private int numPersonalCards = 5;
 	private int numActionCards = 10;
 
+	public void reset() {
+		addAllCards();
+		Shuffle();
+	}
+
 	public void addAllCards() {
 
 		addEndPathCards();
