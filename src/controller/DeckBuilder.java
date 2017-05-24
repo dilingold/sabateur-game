@@ -15,7 +15,7 @@ import model.cards.TPathCard;
 import model.cards.ToxicCard;
 import model.cards.XPathCard;
 
-public class DeckFactory {
+public class DeckBuilder {
 	
 	private int numPathCards = 10;
 	private int numPersonalCards = 5;
