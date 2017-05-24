@@ -17,7 +17,7 @@ public class PlayAgainListener {
 		resetBoard();
 		resetDeck();
 		resetPlayers();
-		
+
 		new PlayGameListener().changeScene(stage);
 		
 	}
@@ -30,7 +30,7 @@ public class PlayAgainListener {
 		boardBuilder.initBoard();
 		boardBuilder.setTreasureSites();
 		boardBuilder.setStart();
-		
+
 	}
 	
 	public void resetDeck() {

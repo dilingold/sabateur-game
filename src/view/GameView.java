@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -46,7 +48,7 @@ public class GameView implements Observer{
 	private static final Integer SetTimer = 30; // Have this in options perhaps?
 	private IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	private Label timeLabel = new Label();
-	private Timeline timeline = PlayGameListener.startTimer(timeLabel);
+	//private Timeline timeline =
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -57,17 +59,26 @@ public class GameView implements Observer{
 	public void update(Observable observable, Object arg)
 	{
 		timerUpdate = (EventObserver) observable;
-		System.out.println("Timer1 Has Changed Status to "+timerUpdate.getTimerStatus());
+		System.out.println("Timer Has Changed Status to "+timerUpdate.getTimerStatus());
 		System.out.println("Discarding Card position 0");
 		currentPlayer.getHand().discardCard(0);
 		currentPlayer.drawCard();
-		System.out.println("Next Turn!!!");
-		nextTurn();
+		if(timerUpdate.getTimerStatus()) {
+			System.out.println("Next Turn!!!");
+			nextTurn();
+		}
+		//PlayGameListener.stopTime();
 	}
 
 	public GameView(Stage stage) {
 
 		this.stage = stage;
+		PlayGameListener.startTimer(timeLabel);
+		stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+			if (KeyCode.ESCAPE == event.getCode()) {
+				stage.close();
+			}
+		});
 
 	}
 
@@ -418,7 +429,7 @@ public class GameView implements Observer{
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
 
-		PlayGameListener.updateTime(timeline);
+		PlayGameListener.updateTime();
 		/*timeline.setOnFinished(event -> {
 			currentPlayer.getHand().discardCard(0);
 			currentPlayer.drawCard();

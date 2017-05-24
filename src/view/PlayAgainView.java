@@ -1,6 +1,7 @@
 package view;
 
 import controller.PlayAgainListener;
+import controller.PlayGameListener;
 import controller.PlayerController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +17,8 @@ public class PlayAgainView {
 	public PlayAgainView(Stage stage) {
 		
 		this.stage = stage;
-		
+		System.out.println("play again screen");
+		PlayGameListener.stopTime();
 	}
 	
 	public void displayView(String winner) {
@@ -45,7 +47,7 @@ public class PlayAgainView {
 		
 		createContent.MenuItem playAgain = new createContent.MenuItem("PLAY AGAIN");
 		playAgain.setOnMouseClicked(event -> {
-			
+
 			new PlayAgainListener().playAgain(stage);
 			
 		});

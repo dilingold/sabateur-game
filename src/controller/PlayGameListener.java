@@ -17,15 +17,19 @@ import java.util.Observer;
 //displays the GameView
 public class PlayGameListener {
 
-	private static EventObserver observable = new EventObserver(null);
-	private EventObserver timerUpdate ;
+	private static EventObserver observable = new EventObserver(true);
 
 	private static final Integer SetTimer = 5; // Have this in options perhaps?
-	private static boolean status = false;
 	private static IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
+	//private Timeline timeline;
+	protected static Timeline timeline = new Timeline();
 	
 	public void changeScene(Stage stage) {
+		try {
+			observable.deleteObservers();
+		} catch (Exception e){
 
+		}
 		PlayerController players = PlayerController.getInstance();
 		//GameView gameView = new GameView(stage);
 		GameView observer = new GameView(stage);
@@ -35,26 +39,31 @@ public class PlayGameListener {
 
 	}
 
-	public static Timeline startTimer(javafx.scene.control.Label timeLabel) {
+	public static void startTimer(javafx.scene.control.Label timeLabel) {
+		if(observable.getTimerStatus() == true) {
+			timeLabel.textProperty().bind(STARTTIME.asString());
+			STARTTIME.set(SetTimer);
+			timeline.getKeyFrames().add(
+					new KeyFrame(Duration.seconds(SetTimer+1), event -> {
+						System.out.println("Timer Ended: " + timeLabel.textProperty().getValue());
+						observable.setTimerStatus(true);
+					}, new KeyValue(STARTTIME, 0))
+			);
+			//timeline.setCycleCount( Timeline.INDEFINITE );
+			timeline.playFromStart();
+		}
 
-		timeLabel.textProperty().bind(STARTTIME.asString());
-		STARTTIME.set(SetTimer);
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(
-				new KeyFrame(Duration.seconds(SetTimer+1), event -> {
-					System.out.println("Timer Ended: " + timeLabel.textProperty().getValue());
-					observable.setTimerStatus(true);
-				}, new KeyValue(STARTTIME, 0))
-		);
-		//timeline.setCycleCount( Timeline.INDEFINITE );
-		timeline.playFromStart();
-		return timeline;
 	}
 
-	public static void updateTime(Timeline timeline) {
+	public static void updateTime() {
 		timeline.stop();
 		STARTTIME.set(SetTimer);
 		timeline.playFromStart();
+	}
+	public static void stopTime() {
+		observable.setTimerStatus(false);
+		System.out.println("play again screen said stop");
+		timeline.stop();
 	}
 
 }

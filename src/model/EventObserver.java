@@ -3,6 +3,7 @@ package model;
 /**
  * Timer Status. Need to change name of file
  */
+import controller.PlayGameListener;
 import view.GameView;
 
 import java.util.Observable;
@@ -20,8 +21,10 @@ public class EventObserver extends Observable {
 
     public void setTimerStatus(Boolean status) {
         this.status = status;
-        if(this.status)
-        setChanged();
-        notifyObservers();
+        System.out.println("OBSERVER: " + status);
+        if(this.status){
+            setChanged();
+            notifyObservers();
+        }
     }
 }

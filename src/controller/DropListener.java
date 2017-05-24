@@ -23,11 +23,11 @@ public class DropListener {
 
 	private ActionCardValidator validator = new ActionCardValidator();
 	private GameView gameView;
-	
+
 	public DropListener(GameView gameView) {
 		
 		this.gameView = gameView;
-		
+
 	}
 
 	public void dragOver(DragEvent event, ImageView target) {
@@ -116,7 +116,7 @@ public class DropListener {
 					
 					
 					if(minersWin) {
-						
+
 						DistributeGold.currentPlayer(currentPlayer);
 						DistributeGold.miners();
 						DistributeGold.heistedMiners();
