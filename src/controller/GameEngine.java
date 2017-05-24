@@ -17,9 +17,9 @@ public class GameEngine {
 
 	public GameEngine() {
 
-		DeckFactory deckBuilder = new DeckFactory();
-		deckBuilder.addAllCards();
-		deckBuilder.Shuffle();
+		DeckFactory deck = new DeckFactory();
+		deck.addAllCards();
+		deck.Shuffle();
 
 		players = PlayerController.getInstance();
 		currentPlayerIndex = 0;
