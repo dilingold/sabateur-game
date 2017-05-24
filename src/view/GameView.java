@@ -1,18 +1,10 @@
 package view;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
-import java.util.Set;
 
-import controller.DragCardListener;
-import controller.DropListener;
-import controller.GameEngine;
-import controller.TimerController;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
+import controller.*;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,17 +25,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Board;
+import model.EventObserver;
 import model.Hand;
 import model.PlayerD;
 import model.cards.*;
-//import sun.applet.Main;
 import java.util.Observable;
-import java.util.Observer;
 
-public class GameView {
-
+public class GameView implements Observer{
 
 	private Stage stage;
 	private Text playerText = null;
@@ -57,17 +46,28 @@ public class GameView {
 	private static final Integer SetTimer = 30; // Have this in options perhaps?
 	private IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	private Label timeLabel = new Label();
-	private Timeline timeline = TimerController.startTimer(timeLabel);
+	private Timeline timeline = PlayGameListener.startTimer(timeLabel);
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
 	 * including the board, players, current player's hand and a discard pile
 	 */
+	private EventObserver weatherUpdate ;
+	@Override
+	public void update(Observable observable, Object arg)
+	{
+		weatherUpdate = (EventObserver) observable;
+		System.out.println("Timer1 Has Changed Status to "+weatherUpdate.getTimerStatus());
+		System.out.println("Discarding Card position 0");
+		currentPlayer.getHand().discardCard(0);
+		currentPlayer.drawCard();
+		System.out.println("Next Turn!!!");
+		nextTurn();
+	}
+
 	public GameView(Stage stage) {
 
 		this.stage = stage;
-		TimerController timerListener = new TimerController();
-		timerListener.TimerListener();
 
 	}
 
@@ -418,7 +418,7 @@ public class GameView {
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
 
-		TimerController.updateTime(timeline);
+		PlayGameListener.updateTime(timeline);
 		/*timeline.setOnFinished(event -> {
 			currentPlayer.getHand().discardCard(0);
 			currentPlayer.drawCard();
