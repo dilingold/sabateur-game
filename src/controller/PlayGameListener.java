@@ -15,7 +15,7 @@ import java.util.Observer;
 
 //listens for when the user selects the play game button from the AddPlayerView
 //displays the GameView
-public class PlayGameListener implements Observer{
+public class PlayGameListener {
 
 	private static EventObserver observable = new EventObserver(null);
 	private EventObserver timerUpdate ;
@@ -33,13 +33,6 @@ public class PlayGameListener implements Observer{
 		//observable.setTimerStatus(true);
 		observer.displayView(players.playerCount(), players.getPlayerList());
 
-	}
-	@Override
-	public void update(Observable observable, Object arg)
-	{
-		timerUpdate = (EventObserver) observable;
-		System.out.println("PlayGameListener Has Changed Status to "+timerUpdate.getTimerStatus());
-		System.out.println("Next Turn!!!");
 	}
 
 	public static Timeline startTimer(javafx.scene.control.Label timeLabel) {

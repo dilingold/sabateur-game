@@ -52,12 +52,12 @@ public class GameView implements Observer{
 	 * this view is the game view which includes all the components required to play the game
 	 * including the board, players, current player's hand and a discard pile
 	 */
-	private EventObserver weatherUpdate ;
+	private EventObserver timerUpdate ;
 	@Override
 	public void update(Observable observable, Object arg)
 	{
-		weatherUpdate = (EventObserver) observable;
-		System.out.println("Timer1 Has Changed Status to "+weatherUpdate.getTimerStatus());
+		timerUpdate = (EventObserver) observable;
+		System.out.println("Timer1 Has Changed Status to "+timerUpdate.getTimerStatus());
 		System.out.println("Discarding Card position 0");
 		currentPlayer.getHand().discardCard(0);
 		currentPlayer.drawCard();
