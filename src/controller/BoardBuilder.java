@@ -4,11 +4,19 @@ import java.util.Random;
 
 import model.Board;
 import model.cards.StartCard;
-
+//reciever
 public class BoardBuilder {
 	
 	private int maxRow;
 	private int maxCol;
+
+	public void reset() {
+		getRows();
+		getCols();
+		initBoard();
+		setTreasureSites();
+		setStart();
+	}
 	
 	public void setRows(int rows) {
 		

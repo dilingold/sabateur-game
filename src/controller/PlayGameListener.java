@@ -19,7 +19,7 @@ public class PlayGameListener {
 
 	private static EventObserver observable = new EventObserver(true);
 
-	private static final Integer SetTimer = 5; // Have this in options perhaps?
+	private static final Integer SetTimer = 30; // Have this in options perhaps?
 	private static IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	//private Timeline timeline;
 	protected static Timeline timeline = new Timeline();

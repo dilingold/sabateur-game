@@ -13,15 +13,26 @@ public class PlayAgainListener {
 			System.out.println(player.getName() + ": " + player.getGold());
 			
 		}
-		
-		resetBoard();
-		resetDeck();
-		resetPlayers();
-		
+
+		Resetter resetter = new Resetter();
+		BoardBuilder boardBuilder = new BoardBuilder();
+		DeckFactory deckBuilder = new DeckFactory();
+
+		Command resetGame = new ResetBoardCommand(boardBuilder, deckBuilder);
+
+		resetter.setCommand(resetGame);
+		resetter.invokeReset();
+
 		new PlayGameListener().changeScene(stage);
 		
+		//resetBoard();
+		//resetDeck();
+		//resetPlayers();
+		
+
+		
 	}
-	
+	/*
 	public void resetBoard() {
 		
 		BoardBuilder boardBuilder = new BoardBuilder();
@@ -47,5 +58,5 @@ public class PlayAgainListener {
 		PlayerController.getInstance().dealPlayerHands();
 		GameEngine.setCurrentPlayerIndex(0);
 	}
-
+*/
 }

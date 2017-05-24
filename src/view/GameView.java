@@ -45,7 +45,7 @@ public class  GameView implements Observer{
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
-	private static final Integer SetTimer = 30; // Have this in options perhaps?
+	//private static final Integer SetTimer = 30; // Have this in options perhaps?
 	//private IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	private Label timeLabel = new Label();
 
