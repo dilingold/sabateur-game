@@ -1,11 +1,11 @@
 package controller;
+
 import model.Player;
-import model.PlayerD;
 import model.cards.PersonalCard;
 
 public class PersonalCardValidator {
 	
-	public Boolean checkMove(PersonalCard card, PlayerD currentPlayer, PlayerD targetPlayer) {
+	public Boolean checkMove(PersonalCard card, Player currentPlayer, Player targetPlayer) {
 
 		if (card.getName() == "expose") {
 			

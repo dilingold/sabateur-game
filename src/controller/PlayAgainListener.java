@@ -2,13 +2,13 @@ package controller;
 
 import javafx.stage.Stage;
 import model.Board;
-import model.PlayerD;
+import model.Player;
 
 public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
 		
-		for(PlayerD player : PlayerController.getInstance().getPlayerList()) {
+		for(Player player : PlayerController.getInstance().getPlayerList()) {
 			
 			System.out.println(player.getName() + ": " + player.getGold());
 			

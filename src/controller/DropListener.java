@@ -7,11 +7,9 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 import model.Board;
-import model.PlayerD;
+import model.Player;
 import model.cards.PathCard;
 import model.cards.PersonalCard;
-import model.cards.PowerToolDecorator;
-import model.cards.SuperPowerToolDecorator;
 import model.cards.XPathCard;
 import view.GameView;
 import view.PlayAgainView;
@@ -58,7 +56,7 @@ public class DropListener {
 	 * when a card is dropped on the board, it goes through a validation process, and if it is
 	 * valid, the board is updated to reflect the move
 	 */
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, 
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, 
 			ImageView target, ImageView[][] imageViews, int row, int col) {
 		
 		validator = new ActionCardValidator();
@@ -169,7 +167,7 @@ public class DropListener {
 	/*
 	 * when a card is dropped on the discard icon, it is removed from the player's hand
 	 */
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, ImageView target) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
 		
 		validator = new ActionCardValidator();
 		currentPlayer.getHand().discardCard(draggedCardIndex);
@@ -190,7 +188,7 @@ public class DropListener {
 	
 	// when a card is dropped on a player, if it is a personal card and a legal move,
 	// discard card, draw new card, check if sabateurs won and return true
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, PlayerD targetPlayer, int draggedCardIndex, Label target) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, Player targetPlayer, int draggedCardIndex, Label target) {
 		
 		validator = new ActionCardValidator();
 		PersonalCardValidator personalCardValidator = new PersonalCardValidator();
@@ -257,7 +255,7 @@ public class DropListener {
 
 	}
 	
-	public void givePowerTool(PlayerD currentPlayer, PlayerD targetPlayer) {
+	public void givePowerTool(Player currentPlayer, Player targetPlayer) {
 		
 		if (targetPlayer.hasPowerTool()) {
 			targetPlayer.removePowerTool();
@@ -284,7 +282,7 @@ public class DropListener {
 	}
 	
 	public boolean useSuperPowerTool(int row, int col, Card card, 
-			ImageView[][] imageViews, PlayerD currentPlayer, int draggedCardIndex) {
+			ImageView[][] imageViews, Player currentPlayer, int draggedCardIndex) {
 		
 		boolean minersWin = false;
 		
@@ -321,7 +319,7 @@ public class DropListener {
 		
 	}
 	
-	public void playCard(Card card, ImageView target, PlayerD currentPlayer, int draggedCardIndex) {
+	public void playCard(Card card, ImageView target, Player currentPlayer, int draggedCardIndex) {
 		
 		String imageName = "/resources/images/cards/" + card.getName() + "-rotate" + ((PathCard) card).getRotation() + ".png";
 		Image image = new Image(getClass().getResourceAsStream(imageName));

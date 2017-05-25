@@ -7,7 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.PlayerD;
+import model.Player;
 
 public class PlayAgainView {
 	
@@ -55,7 +55,7 @@ public class PlayAgainView {
 		createContent.subTitle scoreSubTitle = new createContent.subTitle("Gold");
 		createContent.MenuBox scoreVBox = new createContent.MenuBox();
 		scoreVBox.getChildren().add(scoreSubTitle);
-		for (PlayerD player : PlayerController.getInstance().getPlayerList()) {
+		for (Player player : PlayerController.getInstance().getPlayerList()) {
 			
 			createContent.MenuText playerText = new createContent.MenuText(
 					player.getName() + ": " + player.getGold());

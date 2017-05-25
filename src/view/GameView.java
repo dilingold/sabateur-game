@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
 import model.Hand;
-import model.PlayerD;
+import model.Player;
 import model.cards.*;
 //import sun.applet.Main;
 
@@ -32,7 +32,7 @@ public class  GameView {
 
 	private Stage stage;
 	private Text playerText = null;
-	private PlayerD currentPlayer;
+	private Player currentPlayer;
 	private ImageView[][] imageViews;
 	private int draggedCardIndex;
 	private Button roleBtn;
@@ -50,7 +50,7 @@ public class  GameView {
 
 	}
 
-	public void displayView(int totalPlayers, ArrayList<PlayerD> playerNames) {
+	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 		stage.setTitle("Play Game");
@@ -180,7 +180,7 @@ public class  GameView {
 		
 		//display the players with images to the top right of the screen
 		int k = 0;
-		for(PlayerD player: playerNames) {
+		for(Player player: playerNames) {
 			
 			String imageName;
 			imageName = "/resources/images/players/a" + (k+1) + ".jpg";
@@ -356,7 +356,7 @@ public class  GameView {
 
 	}
 	
-	public void makeDroppable(Label target, PlayerD player) {
+	public void makeDroppable(Label target, Player player) {
 		
 		DropListener dropListener = new DropListener(this);
 		
@@ -389,7 +389,7 @@ public class  GameView {
 		
 	}
 	
-	public void setPowerToolImage(PlayerD player) {
+	public void setPowerToolImage(Player player) {
 		
 		Label target = playerLabels.get(player.getUID());
 		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-power.png";
@@ -404,7 +404,7 @@ public class  GameView {
 		
 	}
 	
-	public void setSuperPowerToolImage(PlayerD player) {
+	public void setSuperPowerToolImage(Player player) {
 		
 		Label target = playerLabels.get(player.getUID());
 		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-super.png";

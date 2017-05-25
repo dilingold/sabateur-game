@@ -1,6 +1,6 @@
 package model.cards;
 
-import model.PlayerD;
+import model.Player;
 
 public class DestroyToolsCard extends PersonalCard{
 

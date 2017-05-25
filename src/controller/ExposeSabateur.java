@@ -2,11 +2,11 @@ package controller;
 
 import java.util.Iterator;
 
-import model.PlayerD;
+import model.Player;
 
 public class ExposeSabateur {
 	
-	public void playCard(PlayerD currentPlayer, PlayerD targetPlayer) {
+	public void playCard(Player currentPlayer, Player targetPlayer) {
 		
 		if (targetPlayer.getType() == "sabateur") {
 		
@@ -30,11 +30,11 @@ public class ExposeSabateur {
 		
 	}
 	
-	public void removeExposedSabRecursive(PlayerD topPlayer, PlayerD removePlayer) {
+	public void removeExposedSabRecursive(Player topPlayer, Player removePlayer) {
 		
-		for(Iterator<PlayerD> iterator = topPlayer.getExposedSabateurs().iterator(); iterator.hasNext(); ) {
+		for(Iterator<Player> iterator = topPlayer.getExposedSabateurs().iterator(); iterator.hasNext(); ) {
 			
-			PlayerD p = iterator.next();
+			Player p = iterator.next();
 			
 			if(p.equals(removePlayer)) {
 				

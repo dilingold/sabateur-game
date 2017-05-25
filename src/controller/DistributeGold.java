@@ -2,14 +2,14 @@ package controller;
 
 import java.util.List;
 
-import model.PlayerD;
+import model.Player;
 
 public class DistributeGold {
 	
-	private static PlayerD topDogHeist;
-	private static PlayerD topDogExpose;
+	private static Player topDogHeist;
+	private static Player topDogExpose;
 		
-	public static void currentPlayer(PlayerD currentPlayer) {
+	public static void currentPlayer(Player currentPlayer) {
 		
 		if(currentPlayer.getType() == "miner") {
 			
@@ -21,8 +21,8 @@ public class DistributeGold {
 	
 	public static void miners() {
 				
-		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
-		for (PlayerD player : players) {
+		List<Player> players = PlayerController.getInstance().getPlayerList();
+		for (Player player : players) {
 			
 			if(player.getType() == "miner") {
 				
@@ -36,8 +36,8 @@ public class DistributeGold {
 	
 	public static void sabateurs() {
 		
-		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
-		for (PlayerD player : players) {
+		List<Player> players = PlayerController.getInstance().getPlayerList();
+		for (Player player : players) {
 			
 			if(player.getType() == "sabateur") {
 				
@@ -51,7 +51,7 @@ public class DistributeGold {
 	
 	public static void heistedMiners() {
 		
-		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
+		for (Player p : PlayerController.getInstance().getPlayerList()) {
 			
 			topDogHeist = p;
 			System.out.println(p.getName() + " heists:");
@@ -63,7 +63,7 @@ public class DistributeGold {
 	
 	public static void exposedSabateurs() {
 		
-		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
+		for (Player p : PlayerController.getInstance().getPlayerList()) {
 			
 			topDogExpose = p;
 			System.out.println(p.getName() + " exposed:");
@@ -73,9 +73,9 @@ public class DistributeGold {
 		
 	}
 	
-	public static void distributeHeistsRecursive(PlayerD player) {
+	public static void distributeHeistsRecursive(Player player) {
 		
-		for (PlayerD p : player.getPlannedHeists()) {
+		for (Player p : player.getPlannedHeists()) {
 
 			System.out.println(p.getName());
 			if (p.getGold() > 0) {
@@ -90,9 +90,9 @@ public class DistributeGold {
 		
 	}
 	
-	public static void distributeExposedSabRecursive(PlayerD player) {
+	public static void distributeExposedSabRecursive(Player player) {
 		
-		for (PlayerD p : player.getExposedSabateurs()) {
+		for (Player p : player.getExposedSabateurs()) {
 
 			System.out.println(p.getName());
 			if (p.getGold() > 0) {

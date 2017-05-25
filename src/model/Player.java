@@ -5,44 +5,29 @@ import java.util.List;
 
 import model.cards.Card;
 
-public class Player {
+public abstract class Player {
 	
     private String name;
-    private String role;
-    private String status;
     private int UID;
+    protected String type;
+    private String status;
     private Hand hand;
     private Boolean toolsDamaged = false;
+    private Boolean hasPowerTool = false;
+    private Boolean hasSuperPowerTool = false;
     private int gold;
-    private List<Player> heists;
-
-    public Player (String PlayerName, Hand hand, String role) {
-
-        name = PlayerName;
-        this.hand = hand;
-        this.role = role;
-        this.gold = 0;
-        
-    }
+    private List<Player> exposedSabateurs = new ArrayList<Player>();
+    private List<Player> heists = new ArrayList<Player>();
+    private Player heistedBy = null;
+    private Player exposedBy = null;
     
-    public Player (String PlayerName, Hand hand) {
+    public Player(String PlayerName, int UID) {
 
         name = PlayerName;
-        this.hand = hand;
+        hand = new Hand();
         this.gold = 0;
+        this.UID = UID;
         
-    }
-
-    public int getUID() {
-    	
-    	return UID;
-    	
-    }
-
-    public void setUID(int UID) {
-    	
-    	this.UID = UID;
-    	
     }
 
     public String getName() {
@@ -56,17 +41,17 @@ public class Player {
         this.name = name;
         
     }
-
-    public String getRole() {
+    
+    public String getType() {
     	
-        return role;
-        
+    	return type;
+    	
     }
-
-    public void setRole(String role) {
+    
+    public int getUID() {
     	
-        this.role = role;
-        
+    	return UID;
+    	
     }
     
     public void drawCard() {
@@ -74,7 +59,7 @@ public class Player {
     	Card card = Deck.getInstance().draw();
     	if(card != null) {
     		
-    		getHand().addCard(card);
+    		hand.addCard(card);
     		
     	}
     	
@@ -103,14 +88,57 @@ public class Player {
     	this.status = status;
     	
     }
-    public Boolean areToolsDamaged(){
+    
+    public Boolean areToolsDamaged() {
+    	
     	return toolsDamaged;
+    	
     }
-    public void changeToolsDamage(){
+    
+    public void changeToolsDamage() {
+    	
     	if(toolsDamaged == true)
     		toolsDamaged = false;
     	else
     		toolsDamaged = true;
+    	
+    }
+    
+    public void givePowerTool() {
+    	
+    	hasPowerTool = true;
+    	
+    }
+    
+    public void removePowerTool() {
+    	
+    	hasPowerTool = false;
+    	
+    }
+    
+    public Boolean hasPowerTool() {
+    	
+    	return hasPowerTool;
+    	
+    }
+    
+    public Boolean hasSuperPowerTool() {
+    	
+    	return hasSuperPowerTool;
+    	
+    }
+    
+    public void giveSuperPowerTool() {
+    	
+    	hasSuperPowerTool = true;
+    	hasPowerTool = false;
+    	
+    }
+    
+    public void removeSuperPowerTool() {
+    	
+    	hasSuperPowerTool = false;
+    	
     }
     
     public int getGold() {
@@ -125,25 +153,70 @@ public class Player {
     	
     }
     
+    public void removeGold(int gold) {
+    	
+    	if (this.gold >= gold)
+    		this.gold-=gold;
+ 
+    }
+    
+    public void exposeSabateur(Player player) {
+    	
+    	exposedSabateurs.add(player);
+    	
+    }
+    
+    public List<Player> getExposedSabateurs() {
+    	
+    	return exposedSabateurs;
+    	
+    }
+    
+    public boolean removeExposedSabateur(Player player) {
+    	
+    	return exposedSabateurs.remove(player);
+    	
+    }
+    
+    public void setExposedBy(Player player) {
+    	
+    	this.exposedBy = player;
+    	
+    }
+    
+    public Player getExposedBy() {
+    	
+    	return exposedBy;
+    	
+    }
+    
     public void planHeist(Player player) {
     	
-    	if (!player.equals(this)) {
-    		
-    		if (heists == null) {
-        		
-        		heists = new ArrayList<Player>();
-        		
-        	}
-        	
-        	heists.add(player);
-    		
-    	}
+    	heists.add(player);
     	
     }
     
     public List<Player> getPlannedHeists() {
     	
     	return heists;
+    	
+    }
+    
+    public boolean removeHeist(Player player) {
+    	
+    	return heists.remove(player);
+    	
+    }
+    
+    public void setHeistedBy(Player player) {
+    	
+    	this.heistedBy = player;
+    	
+    }
+    
+    public Player getHeistedBy() {
+    	
+    	return heistedBy;
     	
     }
     

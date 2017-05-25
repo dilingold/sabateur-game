@@ -2,7 +2,7 @@ package model.cards;
 
 import java.util.Iterator;
 
-import model.PlayerD;
+import model.Player;
 
 public class ExposeCard extends PersonalCard {
 	

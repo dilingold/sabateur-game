@@ -2,11 +2,11 @@ package controller;
 
 import java.util.Iterator;
 
-import model.PlayerD;
+import model.Player;
 
 public class PlanHeist {
 	
-	public void playCard(PlayerD currentPlayer, PlayerD targetPlayer) {
+	public void playCard(Player currentPlayer, Player targetPlayer) {
 		
 		if (targetPlayer.getType() == "miner") {
 		
@@ -31,11 +31,11 @@ public class PlanHeist {
 		
 	}
 	
-	public void removeHeistRecursive(PlayerD topPlayer, PlayerD removePlayer) {
+	public void removeHeistRecursive(Player topPlayer, Player removePlayer) {
 		
-		for(Iterator<PlayerD> iterator = topPlayer.getPlannedHeists().iterator(); iterator.hasNext(); ) {
+		for(Iterator<Player> iterator = topPlayer.getPlannedHeists().iterator(); iterator.hasNext(); ) {
 			
-			PlayerD p = iterator.next();
+			Player p = iterator.next();
 			
 			if(p.equals(removePlayer)) {
 				

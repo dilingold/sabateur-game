@@ -1,6 +1,6 @@
 package controller;
 
-import model.PlayerD;
+import model.Player;
 import view.MainView;
 public class GameEngine {
 
@@ -44,7 +44,7 @@ public class GameEngine {
 
 
 	//set the next player's turn
-	public PlayerD nextPlayer() {
+	public Player nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 
@@ -58,18 +58,18 @@ public class GameEngine {
 
 	}
 
-	public PlayerD getCurrentPlayer() {
+	public Player getCurrentPlayer() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
-	public PlayerD getPrevPlay() {
+	public Player getPrevPlay() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
 	
-	public static PlayerD getNextPlayer() {
+	public static Player getNextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 
