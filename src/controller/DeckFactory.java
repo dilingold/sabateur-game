@@ -142,7 +142,7 @@ public class DeckFactory {
 
 	public void addSuperToolCard() {
 
-		for(int i = 0; i<numPersonalCards; i++) {
+		for(int i = 0; i<100; i++) {
 
 			PowerToolCard superToolCard = new PowerToolCard();
 			Deck.getInstance().getDeck().push(superToolCard);

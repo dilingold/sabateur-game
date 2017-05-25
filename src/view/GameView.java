@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.AvatarMaker;
 import controller.DragCardListener;
 import controller.DropListener;
 import javafx.geometry.HPos;
@@ -60,6 +61,7 @@ public class  GameView {
 		gameGrid.setVgap(10);
 		gameGrid.setPadding(new Insets(25, 25, 25, 25));
 		gameGrid.setGridLinesVisible(false);
+		AvatarMaker avatarMaker = new AvatarMaker();
 
 		VBox vbBoard = new VBox(10);
 
@@ -388,42 +390,42 @@ public class  GameView {
 		displayHand();
 		
 	}
-	
-	public void setPowerToolImage(PlayerD player) {
-		
+	//AvatarMaker avatarMaker = new AvatarMaker();
+	public void setAvatarSpecial(PlayerD player, String avatarType){
+
 		Label target = playerLabels.get(player.getUID());
-		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-power.png";
-		
-		Image image = new Image(getClass().getResourceAsStream(imageName));
-		target.setMinWidth(150.0);
-		ImageView playerImageView = new ImageView();
-		playerImageView.setImage(image);
-		playerImageView.setFitWidth(60);
-		playerImageView.setFitHeight(60);
-		target.setGraphic(playerImageView);
-		
+		String imageName = "/resources/images/players/a" + (player.getUID()+1) + avatarType;
+        System.out.println("1"+imageName);
+        addAvatartoGUI(target, imageName);
+
 	}
-	
-	public void setSuperPowerToolImage(PlayerD player) {
-		
-		Label target = playerLabels.get(player.getUID());
-		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-super.png";
-		
-		Image image = new Image(getClass().getResourceAsStream(imageName));
-		target.setMinWidth(150.0);
-		ImageView playerImageView = new ImageView();
-		playerImageView.setImage(image);
-		playerImageView.setFitWidth(60);
-		playerImageView.setFitHeight(60);
-		target.setGraphic(playerImageView);
-		
-	}
-	
-	public void removePowerToolImage() {
+    public void removeSpecialAvatar(){
+        Label target = playerLabels.get(currentPlayer.getUID());
+        String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
+        System.out.println("2"+imageName);
+        addAvatartoGUI(target, imageName);
+
+    }
+
+    public void addAvatartoGUI(Label target, String imageName){
+        System.out.println("1");
+        Image image = new Image(getClass().getResourceAsStream(imageName));
+        System.out.println("2");
+        target.setMinWidth(150.0);
+        System.out.println("3");
+        ImageView playerImageView = new ImageView();
+        playerImageView.setImage(image);
+        playerImageView.setFitWidth(60);
+        playerImageView.setFitHeight(60);
+        target.setGraphic(playerImageView);
+
+    }
+
+    public void removePowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
-		
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
+		System.out.println(currentPlayer.getUID()+1);
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);
 		ImageView playerImageView = new ImageView();
@@ -437,7 +439,7 @@ public class  GameView {
 	public void removeSuperPowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
 		
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);

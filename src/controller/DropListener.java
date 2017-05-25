@@ -22,6 +22,7 @@ public class DropListener {
 
 	private ActionCardValidator validator;
 	private GameView gameView;
+	AvatarMaker avatarMaker = new AvatarMaker();
 	
 	public DropListener(GameView gameView) {
 		
@@ -77,7 +78,7 @@ public class DropListener {
 					if (currentPlayer.hasPowerTool() && !currentPlayer.hasSuperPowerTool()) {
 						card = new PowerToolDecorator(currentPlayer.getHand().getCards().get(draggedCardIndex)).doAction(row, col);
 						currentPlayer.removePowerTool();
-						gameView.removePowerToolImage();
+						gameView.removeSpecialAvatar();
 						playCard(card, target, currentPlayer, draggedCardIndex);
 						minersWin = validator.checkMinersWin(row, col);
 					}
@@ -87,7 +88,7 @@ public class DropListener {
 						card = new SuperPowerToolDecorator(new PowerToolDecorator(
 								currentPlayer.getHand().getCards().get(draggedCardIndex))).doAction(row, col);
 						currentPlayer.removeSuperPowerTool();
-						gameView.removeSuperPowerToolImage();
+						gameView.removeSpecialAvatar();
 						playCard(card, imageViews[row][col], currentPlayer, draggedCardIndex);
 						if (validator.checkSuperPowerMove(card, row, col+1)) {
 							playCard(card, imageViews[row][col+1], currentPlayer, draggedCardIndex);
@@ -220,15 +221,21 @@ public class DropListener {
 			if (card.getName() == "power tool") {
 				
 				if (targetPlayer.hasPowerTool()) {
-					gameView.setSuperPowerToolImage(targetPlayer);
+
+					String superPowerTool;
+					superPowerTool = avatarMaker.addPower();
+					gameView.setAvatarSpecial(targetPlayer, superPowerTool);
 					
 				}
 				
 				else {
 					
 					if (!targetPlayer.hasSuperPowerTool()) {
-				
-						gameView.setPowerToolImage(targetPlayer);
+
+				        String powerTool;
+				        powerTool = avatarMaker.addSuperPower();
+						gameView.setAvatarSpecial(targetPlayer, powerTool );
+
 						
 					}
 					
