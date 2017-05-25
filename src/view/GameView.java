@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import controller.DragCardListener;
-import controller.DropListener;
-import controller.PlayGameListener;
+import controller.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -75,6 +75,20 @@ public class  GameView implements Observer{
 
 		this.stage = stage;
 		PlayGameListener.startTimer(timeLabel);
+		stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+			if (KeyCode.ESCAPE == event.getCode()) {
+				Restart restart = new Restart();
+				BoardBuilder boardBuilder = new BoardBuilder();
+				DeckFactory deckBuilder = new DeckFactory();
+
+				Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
+
+				restart.setCommand(resetGame);
+				restart.invokeReset();
+
+				displayView(PlayerController.getInstance().playerCount(), PlayerController.getInstance().getPlayerList());
+			}
+		});
 
 	}
 
