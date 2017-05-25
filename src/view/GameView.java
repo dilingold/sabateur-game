@@ -183,7 +183,7 @@ public class  GameView {
 		for(Player player: playerNames) {
 			
 			String imageName;
-			imageName = "/resources/images/players/a" + (k+1) + ".jpg";
+			imageName = "/resources/images/players/a" + (k+1) + ".png";
 			
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
@@ -422,7 +422,7 @@ public class  GameView {
 	public void removePowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
 		
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);
@@ -437,7 +437,7 @@ public class  GameView {
 	public void removeSuperPowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
 		
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);

@@ -104,18 +104,14 @@ public class DropListener {
 					if(minersWin) {
 						
 						DistributeGold.currentPlayer(currentPlayer);
-						DistributeGold.miners();
-						DistributeGold.heistedMiners();
-						DistributeGold.exposedSabateurs();
+						distributeGold("miners");
 						new PlayAgainView(stage).displayView("miners");
 						
 					}
 					
 					else if(validator.checkSabateursWin()) {
 						
-						DistributeGold.sabateurs();
-						DistributeGold.heistedMiners();
-						DistributeGold.exposedSabateurs();
+						distributeGold("sabateurs");
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -145,9 +141,7 @@ public class DropListener {
 					
 					if(validator.checkSabateursWin()) {
 						
-						DistributeGold.sabateurs();
-						DistributeGold.heistedMiners();
-						DistributeGold.exposedSabateurs();
+						distributeGold("sabateurs");
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -175,9 +169,7 @@ public class DropListener {
 		
 		if(validator.checkSabateursWin()) {
 			
-			DistributeGold.sabateurs();
-			DistributeGold.heistedMiners();
-			DistributeGold.exposedSabateurs();
+			distributeGold("sabateurs");
 			new PlayAgainView(stage).displayView("sabateurs");
 			
 		}
@@ -204,9 +196,8 @@ public class DropListener {
 			
 			if (card.getName() == "power tool") {
 				
-				givePowerTool(currentPlayer, targetPlayer);
-				
 				if (targetPlayer.hasPowerTool()) {
+					givePowerTool(targetPlayer);
 					gameView.setSuperPowerToolImage(targetPlayer);
 					
 				}
@@ -215,6 +206,7 @@ public class DropListener {
 					
 					if (!targetPlayer.hasSuperPowerTool()) {
 				
+						givePowerTool(targetPlayer);
 						gameView.setPowerToolImage(targetPlayer);
 						
 					}
@@ -240,9 +232,7 @@ public class DropListener {
 			
 			if(validator.checkSabateursWin()) {
 				
-				DistributeGold.sabateurs();
-				DistributeGold.heistedMiners();
-				DistributeGold.exposedSabateurs();
+				distributeGold("sabateurs");
 				new PlayAgainView(stage).displayView("sabateurs");
 				
 			}
@@ -255,7 +245,7 @@ public class DropListener {
 
 	}
 	
-	public void givePowerTool(Player currentPlayer, Player targetPlayer) {
+	public void givePowerTool(Player targetPlayer) {
 		
 		if (targetPlayer.hasPowerTool()) {
 			targetPlayer.removePowerTool();
@@ -326,6 +316,17 @@ public class DropListener {
 		target.setImage(image);
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		currentPlayer.drawCard();
+		
+	}
+	
+	public void distributeGold(String winners) {
+		
+		if (winners == "sabateurs")
+			DistributeGold.sabateurs();
+		else if (winners == "miners")
+			DistributeGold.miners();
+		DistributeGold.heistedMiners();
+		DistributeGold.exposedSabateurs();
 		
 	}
 
