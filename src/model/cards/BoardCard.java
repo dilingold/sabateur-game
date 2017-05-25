@@ -30,13 +30,4 @@ public abstract class BoardCard implements Card {
 		
 	}
 	
-	@Override
-	public Card doAction() {
-		return this;
-	}
-	
-	@Override
-	public Card doAction(int row, int col) {
-		return this;
-	}
 }

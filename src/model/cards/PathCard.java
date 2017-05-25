@@ -36,29 +36,6 @@ public abstract class PathCard implements Card {
 		exits[1] = exits[0];
 		exits[0] = tmp;
 		
-		/*if(rotation == 0) return exits;
-		
-		else {
-			
-			boolean[] exitsToReturn = exits;
-			
-			for(int i = 0; i<rotation; i++) {
-				
-				Boolean firstValue = exitsToReturn[0];
-				
-				for(int j=0;j<exits.length-1;j++) { 
-					
-					exitsToReturn[j] = exitsToReturn[j+1];
-					
-				}
-				
-				exitsToReturn[3] = firstValue;
-				
-			}	
-			
-			return exitsToReturn;
-		} */
-		
 	}
 
 	//takes two ints, x and y coordinate.
@@ -109,15 +86,6 @@ public abstract class PathCard implements Card {
 	public String getName() {
 		
 		return name;
-		
-	}
-	
-	@Override
-	public Card doAction(int row, int col) {
-		
-		Card card = doAction();
-		Board.getInstance().playCard(row, col, card);
-		return card;
 		
 	}
 	

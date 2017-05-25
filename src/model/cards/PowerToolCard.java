@@ -10,25 +10,4 @@ public class PowerToolCard extends PersonalCard {
 		
 	}
 
-	@Override
-	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
-		
-		if (targetPlayer.hasPowerTool()) {
-			targetPlayer.removePowerTool();
-			targetPlayer.giveSuperPowerTool();
-			
-		}
-		
-		else {
-			
-			if (!targetPlayer.hasSuperPowerTool()) {
-		
-				targetPlayer.givePowerTool();
-				
-			}
-			
-		}
-		
-	}
-
 }

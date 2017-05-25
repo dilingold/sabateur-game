@@ -11,10 +11,4 @@ public class FixToolsCard extends PersonalCard {
 		
 	}
 
-	@Override
-	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

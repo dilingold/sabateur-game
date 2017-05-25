@@ -16,14 +16,5 @@ public abstract class AbstractCardDecorator implements Card {
 	public boolean[] getExits() {
 		return null;
 	}
-	
-	@Override
-	public Card doAction(int row, int col) {
-		
-		Card card = doAction();
-		Board.getInstance().playCard(row, col, card);
-		return card;
-		
-	}
 
 }

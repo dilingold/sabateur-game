@@ -22,9 +22,4 @@ public class TPathCard extends PathCard {
 		
 	}
 
-	@Override
-	public Card doAction() {
-		return this;
-	}
-
 }

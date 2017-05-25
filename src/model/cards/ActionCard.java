@@ -33,19 +33,5 @@ public abstract class ActionCard implements Card {
 		
 		return null;
 	}
-	
-	@Override
-	public Card doAction() {
-		
-		return this;
-		
-	}
-	
-	public Card doAction(int row, int col) {
-		
-		Board.getInstance().playCard(row, col, doAction());
-		return doAction();
-		
-	}
 
 }

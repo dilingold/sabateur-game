@@ -32,19 +32,5 @@ public abstract class PersonalCard implements Card {
 		return name;
 		
 	}
-	
-	@Override
-	public Card doAction() {
-		
-		return this;
-		
-	}
-	
-	@Override
-	public Card doAction(int row, int col) {
-		return this;
-	}
-	
-	public abstract void doAction(PlayerD currentPlayer, PlayerD targetPlayer);
-		
+			
 }

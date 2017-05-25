@@ -24,12 +24,5 @@ public class PowerToolDecorator extends AbstractCardDecorator {
 		return super.card.getName();
 		
 	}
-	
-	@Override
-	public Card doAction() {
-		
-		return new XPathCard(0);
-		
-	}
 
 }

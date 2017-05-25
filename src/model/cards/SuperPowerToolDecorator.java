@@ -21,28 +21,5 @@ public class SuperPowerToolDecorator extends AbstractCardDecorator {
 	public String getName() {
 		return card.getName();
 	}
-	
-	public Card doAction(int row, int col) {
-
-		Card card;
-		ActionCardValidator validator = new ActionCardValidator();
-		 if (validator.checkSuperPowerMove(card=doAction(), row, col+1))
-			 card.doAction(row, col+1);
-		if (validator.checkSuperPowerMove(card=doAction(), row, col-1))
-			card.doAction(row, col-1);
-		if (validator.checkSuperPowerMove(card=doAction(), row+1, col))
-			card.doAction(row+1, col);
-		if (validator.checkSuperPowerMove(card=doAction(), row-1, col))
-			card.doAction(row-1, col); 
-		
-		return card;
-		
-	}
-
-	@Override
-	public Card doAction() {
-		
-		return card.doAction();
-	}
 
 }

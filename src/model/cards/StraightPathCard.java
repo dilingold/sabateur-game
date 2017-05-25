@@ -23,9 +23,4 @@ public class StraightPathCard extends PathCard {
 		
 	}
 
-	@Override
-	public Card doAction() {
-		return this;
-	}
-
 }
