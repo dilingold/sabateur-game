@@ -75,10 +75,16 @@ public class GameEngine {
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
+	public static int getPlayerSize(){
+	    System.out.println("Player Size = "+PlayerController.getPlayersSize());
+	    return PlayerController.getPlayersSize();
+	}
+	
 	
 	public static PlayerD getNextPlayer() {
 
-		if (currentPlayerIndex == players.getPlayerList().size()-1) {
+		if (currentPlayerIndex == getPlayerSize()-1) {
+		    
 
 			return players.getPlayerByPosition(0);
 

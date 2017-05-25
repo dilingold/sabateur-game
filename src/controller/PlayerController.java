@@ -151,5 +151,8 @@ public class PlayerController {
         }
         return playersCopy;
     }
+    public static int getPlayersSize(){
+        return players.size();
+    }
 
 }
