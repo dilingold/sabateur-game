@@ -8,6 +8,8 @@ import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 import model.Board;
 import model.Player;
+import model.avatars.PowerTools;
+import model.avatars.SuperTools;
 import model.cards.PathCard;
 import model.cards.PersonalCard;
 import model.cards.XPathCard;
@@ -15,12 +17,16 @@ import view.GameView;
 import view.PlayAgainView;
 import model.cards.ActionCard;
 import model.cards.Card;
+import model.avatars.AvatarMaker;
 
 //allows for one component to be dropped on another
 public class DropListener {
 
 	private ActionCardValidator validator;
 	private GameView gameView;
+
+	PowerTools powerTools = new PowerTools();
+	SuperTools superTools = new SuperTools();
 	
 	public DropListener(GameView gameView) {
 		
@@ -78,7 +84,8 @@ public class DropListener {
 						card = new XPathCard(0);
 						usePowerTool(row, col, card);
 						currentPlayer.removePowerTool();
-						gameView.removePowerToolImage();
+						gameView.removeSpecialAvatar();
+						//gameView.removePowerToolImage();
 						playCard(card, target, currentPlayer, draggedCardIndex);
 						minersWin = validator.checkMinersWin(row, col);
 					}
@@ -88,7 +95,9 @@ public class DropListener {
 						card = new XPathCard(0);
 						minersWin = useSuperPowerTool(row, col, card, imageViews, currentPlayer, draggedCardIndex);
 						currentPlayer.removeSuperPowerTool();
-						gameView.removeSuperPowerToolImage();
+						gameView.removeSpecialAvatar();
+						//gameView.removeSuperPowerToolImage();
+
 						
 					}
 					
@@ -190,7 +199,7 @@ public class DropListener {
 			return false;
 			
 		}
-		
+
 		PersonalCard card = (PersonalCard)currentPlayer.getHand().getCards().get(draggedCardIndex);
 		if(personalCardValidator.checkMove(card, currentPlayer, targetPlayer)) {
 			
@@ -198,7 +207,10 @@ public class DropListener {
 				
 				if (targetPlayer.hasPowerTool()) {
 					givePowerTool(targetPlayer);
-					gameView.setSuperPowerToolImage(targetPlayer);
+					//gameView.setSuperPowerToolImage(targetPlayer);
+
+					gameView.setAvatarSpecial(targetPlayer, superTools.getName());
+
 					
 				}
 				
@@ -207,7 +219,10 @@ public class DropListener {
 					if (!targetPlayer.hasSuperPowerTool()) {
 				
 						givePowerTool(targetPlayer);
-						gameView.setPowerToolImage(targetPlayer);
+						//gameView.setPowerToolImage(targetPlayer);
+
+						gameView.setAvatarSpecial(targetPlayer, powerTools.getName());
+
 						
 					}
 					

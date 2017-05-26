@@ -20,7 +20,7 @@ public abstract class Player {
     private List<Player> heists = new ArrayList<Player>();
     private Player heistedBy = null;
     private Player exposedBy = null;
-    
+
     public Player(String PlayerName, int UID) {
 
         name = PlayerName;
