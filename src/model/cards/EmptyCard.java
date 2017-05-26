@@ -7,5 +7,14 @@ public class EmptyCard extends BoardCard {
 		this.name = "blank card";
 		
 	}
+	
+    public Card getCopy() {
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
