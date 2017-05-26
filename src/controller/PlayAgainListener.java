@@ -17,14 +17,22 @@ public class PlayAgainListener {
 		/*
 		Command Pattern
 		 */
-		Restart restart = new Restart();
+		/*Restart restart = new Restart();
 		BoardBuilder boardBuilder = new BoardBuilder();
 		DeckFactory deckBuilder = new DeckFactory();
 
 		Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
 
 		restart.setCommand(resetGame);
-		restart.invokeReset();
+		restart.invokeReset();*/
+
+		RestartGame restartGame = new RestartGame();
+
+		restartGame.restartBoard();
+		restartGame.restartDeck();
+		restartGame.restartPlayer();
+
+
 		
 		new PlayGameListener().changeScene(stage);
 		
