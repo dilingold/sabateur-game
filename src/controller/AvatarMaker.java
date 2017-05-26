@@ -11,14 +11,14 @@ public class AvatarMaker {
         PowerTool = new PowerTool();
     }
 
-    public void addSuperPower(){
-
+    public String addSuperPower(){
         SuperPowerTools.getName();
-
+        return "-super.png";
    }
 
-    public void addPower(){
+    public String addPower(){
         PowerTool.getName();
+        return "-power.png";
     }
 
     public void removePower(){
