@@ -223,7 +223,7 @@ public class DropListener {
 				if (targetPlayer.hasPowerTool()) {
 
 					String superPowerTool;
-					superPowerTool = avatarMaker.addPower();
+					superPowerTool = avatarMaker.addPower().g;
 					gameView.setAvatarSpecial(targetPlayer, superPowerTool);
 					
 				}

@@ -4,24 +4,21 @@ public class AvatarMaker {
 
     private Avatar SuperPowerTools;
     private Avatar PowerTool;
+    protected String name;
 
     public AvatarMaker(){
         SuperPowerTools = new SuperPowerTools();
         PowerTool = new PowerTool();
     }
 
-    public String addSuperPower(){
-        SuperPowerTools.add();
-        return "-super.png";
+    public void addSuperPower(){
+
+        SuperPowerTools.getName();
+
    }
 
-    public void removeSuperPower(){
-        SuperPowerTools.remove();
-    }
-
-    public String addPower(){
-        PowerTool.add();
-        return "-power.png";
+    public void addPower(){
+        PowerTool.getName();
     }
 
     public void removePower(){

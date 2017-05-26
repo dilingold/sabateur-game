@@ -186,15 +186,8 @@ public class  GameView {
 			
 			String imageName;
 			imageName = "/resources/images/players/a" + (k+1) + ".jpg";
-			
-			Image image = new Image(getClass().getResourceAsStream(imageName));
-			Label pLabel = new Label(player.getName());
-			pLabel.setMinWidth(150.0);
-			ImageView playerImageView = new ImageView();
-			playerImageView.setImage(image);
-			playerImageView.setFitWidth(60);
-			playerImageView.setFitHeight(60);
-			pLabel.setGraphic(playerImageView);
+            Label pLabel = new Label(player.getName());
+			addAvatartoGUI(pLabel, imageName);
 			makeDroppable(pLabel, player);
 			vbPlayers.getChildren().add(pLabel);
 			k++;
@@ -350,12 +343,8 @@ public class  GameView {
 					nextTurn();
 					
 				}
-				
 			}
-			
-			
 		});
-
 	}
 	
 	public void makeDroppable(Label target, PlayerD player) {
@@ -395,24 +384,20 @@ public class  GameView {
 
 		Label target = playerLabels.get(player.getUID());
 		String imageName = "/resources/images/players/a" + (player.getUID()+1) + avatarType;
-        System.out.println("1"+imageName);
         addAvatartoGUI(target, imageName);
 
 	}
     public void removeSpecialAvatar(){
         Label target = playerLabels.get(currentPlayer.getUID());
-        String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
-        System.out.println("2"+imageName);
+        String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
         addAvatartoGUI(target, imageName);
 
     }
 
     public void addAvatartoGUI(Label target, String imageName){
-        System.out.println("1");
+
         Image image = new Image(getClass().getResourceAsStream(imageName));
-        System.out.println("2");
         target.setMinWidth(150.0);
-        System.out.println("3");
         ImageView playerImageView = new ImageView();
         playerImageView.setImage(image);
         playerImageView.setFitWidth(60);
@@ -420,35 +405,5 @@ public class  GameView {
         target.setGraphic(playerImageView);
 
     }
-
-    public void removePowerToolImage() {
-		
-		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
-		System.out.println(currentPlayer.getUID()+1);
-		Image image = new Image(getClass().getResourceAsStream(imageName));
-		target.setMinWidth(150.0);
-		ImageView playerImageView = new ImageView();
-		playerImageView.setImage(image);
-		playerImageView.setFitWidth(60);
-		playerImageView.setFitHeight(60);
-		target.setGraphic(playerImageView);
-		
-	}
-	
-	public void removeSuperPowerToolImage() {
-		
-		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
-		
-		Image image = new Image(getClass().getResourceAsStream(imageName));
-		target.setMinWidth(150.0);
-		ImageView playerImageView = new ImageView();
-		playerImageView.setImage(image);
-		playerImageView.setFitWidth(60);
-		playerImageView.setFitHeight(60);
-		target.setGraphic(playerImageView);
-		
-	}
 
 }
