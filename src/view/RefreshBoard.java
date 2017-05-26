@@ -1,7 +1,6 @@
 package view;
 
 import controller.PlayGameListener;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Board;
 import model.cards.Card;

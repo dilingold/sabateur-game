@@ -18,7 +18,7 @@ public class GameEngine {
 	}
 
 	public GameEngine() {
-
+	    gameStates = new GameStateCaretaker();
 
 		DeckFactory deck = new DeckFactory();
 		deck.addAllCards();
