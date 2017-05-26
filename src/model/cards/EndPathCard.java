@@ -22,10 +22,5 @@ public class EndPathCard extends PathCard {
 		this.exits[3] = true;
 		
 	}
-
-	@Override
-	public Card doAction() {
-		return this;
-	}
 	
 }

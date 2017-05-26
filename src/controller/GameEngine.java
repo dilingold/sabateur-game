@@ -1,6 +1,6 @@
 package controller;
 
-import model.PlayerD;
+import model.Player;
 import view.MainView;
 public class GameEngine {
 
@@ -19,12 +19,10 @@ public class GameEngine {
 
 	public GameEngine() {
 
-	    gameStates = new GameStateCaretaker();
-	    //gameState
-	    
-		DeckBuilder deckBuilder = new DeckBuilder();
-		deckBuilder.addAllCards();
-		deckBuilder.Shuffle();
+
+		DeckFactory deck = new DeckFactory();
+		deck.addAllCards();
+		deck.Shuffle();
 
 		players = PlayerController.getInstance();
 		currentPlayerIndex = 0;
@@ -49,7 +47,7 @@ public class GameEngine {
 
 
 	//set the next player's turn
-	public PlayerD nextPlayer() {
+	public Player nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 		    turn++;
@@ -65,12 +63,12 @@ public class GameEngine {
 
 	}
 
-	public PlayerD getCurrentPlayer() {
+	public Player getCurrentPlayer() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
-	public PlayerD getPrevPlay() {
+	public Player getPrevPlay() {
 
 		return players.getPlayerByPosition(currentPlayerIndex);
 
@@ -81,7 +79,7 @@ public class GameEngine {
 	}
 	
 	
-	public static PlayerD getNextPlayer() {
+	public static Player getNextPlayer() {
 
 		if (currentPlayerIndex == getPlayerSize()-1) {
 		    
@@ -102,6 +100,7 @@ public class GameEngine {
         turn = oldTurn;
     }
     public static GameStateCaretaker getGameStates(){
+        System.out.println("gameEng asking to load game state...");
         return gameStates;
     }
 

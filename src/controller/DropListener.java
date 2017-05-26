@@ -7,21 +7,19 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 import model.Board;
-import model.PlayerD;
+import model.Player;
 import model.cards.PathCard;
 import model.cards.PersonalCard;
-import model.cards.PowerToolDecorator;
-import model.cards.SuperPowerToolDecorator;
+import model.cards.XPathCard;
 import view.GameView;
 import view.PlayAgainView;
 import model.cards.ActionCard;
 import model.cards.Card;
-import model.cards.NoDecorator;
 
 //allows for one component to be dropped on another
 public class DropListener {
 
-	private ActionCardValidator validator = new ActionCardValidator();
+	private ActionCardValidator validator;
 	private GameView gameView;
 	
 	public DropListener(GameView gameView) {
@@ -58,8 +56,10 @@ public class DropListener {
 	 * when a card is dropped on the board, it goes through a validation process, and if it is
 	 * valid, the board is updated to reflect the move
 	 */
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, 
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, 
 			ImageView target, ImageView[][] imageViews, int row, int col) {
+		
+		validator = new ActionCardValidator();
 		
 		//for debugging
 
@@ -74,7 +74,9 @@ public class DropListener {
 				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
 					
 					if (currentPlayer.hasPowerTool() && !currentPlayer.hasSuperPowerTool()) {
-						card = new PowerToolDecorator(currentPlayer.getHand().getCards().get(draggedCardIndex)).doAction(row, col);
+						
+						card = new XPathCard(0);
+						usePowerTool(row, col, card);
 						currentPlayer.removePowerTool();
 						gameView.removePowerToolImage();
 						playCard(card, target, currentPlayer, draggedCardIndex);
@@ -83,32 +85,16 @@ public class DropListener {
 					
 					else if(currentPlayer.hasSuperPowerTool()) {
 						
-						card = new SuperPowerToolDecorator(new PowerToolDecorator(
-								currentPlayer.getHand().getCards().get(draggedCardIndex))).doAction(row, col);
+						card = new XPathCard(0);
+						minersWin = useSuperPowerTool(row, col, card, imageViews, currentPlayer, draggedCardIndex);
 						currentPlayer.removeSuperPowerTool();
 						gameView.removeSuperPowerToolImage();
-						playCard(card, imageViews[row][col], currentPlayer, draggedCardIndex);
-						if (validator.checkSuperPowerMove(card, row, col+1)) {
-							playCard(card, imageViews[row][col+1], currentPlayer, draggedCardIndex);
-							minersWin = validator.checkMinersWin(row, col+1);
-						}
-						if (validator.checkSuperPowerMove(card, row, col-1)) {
-							playCard(card, imageViews[row][col-1], currentPlayer, draggedCardIndex);
-							minersWin = validator.checkMinersWin(row, col-1);
-						}
-						if (validator.checkSuperPowerMove(card, row+1, col)) {
-							playCard(card, imageViews[row+1][col], currentPlayer, draggedCardIndex);
-							minersWin = validator.checkMinersWin(row+1, col);
-						}
-						if (validator.checkSuperPowerMove(card, row-1, col)) {
-							playCard(card, imageViews[row-1][col], currentPlayer, draggedCardIndex);
-							minersWin = validator.checkMinersWin(row-1, col);
-						}
 						
 					}
 					
 					else {
-						card = currentPlayer.getHand().getCards().get(draggedCardIndex).doAction(row, col);
+						card = currentPlayer.getHand().getCards().get(draggedCardIndex);
+						Board.getInstance().playCard(row, col, card);
 						playCard(card, target, currentPlayer, draggedCardIndex);
 						minersWin = validator.checkMinersWin(row, col);
 						
@@ -118,14 +104,14 @@ public class DropListener {
 					if(minersWin) {
 						
 						DistributeGold.currentPlayer(currentPlayer);
-						DistributeGold.miners();
-						new PlayAgainView(stage).displayView("miners");;
+						distributeGold("miners");
+						new PlayAgainView(stage).displayView("miners");
 						
 					}
 					
 					else if(validator.checkSabateursWin()) {
 						
-						DistributeGold.sabateurs();
+						distributeGold("sabateurs");
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -155,7 +141,7 @@ public class DropListener {
 					
 					if(validator.checkSabateursWin()) {
 						
-						DistributeGold.sabateurs();
+						distributeGold("sabateurs");
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -175,14 +161,15 @@ public class DropListener {
 	/*
 	 * when a card is dropped on the discard icon, it is removed from the player's hand
 	 */
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, int draggedCardIndex, ImageView target) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, int draggedCardIndex, ImageView target) {
 		
+		validator = new ActionCardValidator();
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		currentPlayer.drawCard();
 		
 		if(validator.checkSabateursWin()) {
 			
-			DistributeGold.sabateurs();
+			distributeGold("sabateurs");
 			new PlayAgainView(stage).displayView("sabateurs");
 			
 		}
@@ -193,8 +180,9 @@ public class DropListener {
 	
 	// when a card is dropped on a player, if it is a personal card and a legal move,
 	// discard card, draw new card, check if sabateurs won and return true
-	public boolean drop(Stage stage, DragEvent event, PlayerD currentPlayer, PlayerD targetPlayer, int draggedCardIndex, Label target) {
+	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, Player targetPlayer, int draggedCardIndex, Label target) {
 		
+		validator = new ActionCardValidator();
 		PersonalCardValidator personalCardValidator = new PersonalCardValidator();
 		
 		if(!(currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "personal")) {
@@ -209,6 +197,7 @@ public class DropListener {
 			if (card.getName() == "power tool") {
 				
 				if (targetPlayer.hasPowerTool()) {
+					givePowerTool(targetPlayer);
 					gameView.setSuperPowerToolImage(targetPlayer);
 					
 				}
@@ -217,6 +206,7 @@ public class DropListener {
 					
 					if (!targetPlayer.hasSuperPowerTool()) {
 				
+						givePowerTool(targetPlayer);
 						gameView.setPowerToolImage(targetPlayer);
 						
 					}
@@ -225,13 +215,24 @@ public class DropListener {
 				
 			}
 			
-			card.doAction(currentPlayer, targetPlayer);
+			else if (card.getName() == "heist") {
+				
+				new PlanHeist().playCard(currentPlayer, targetPlayer);
+				
+			}
+			
+			else if (card.getName() == "expose") {
+				
+				new ExposeSabateur().playCard(currentPlayer, targetPlayer);
+				
+			}
+
 			currentPlayer.getHand().discardCard(draggedCardIndex);
 			currentPlayer.drawCard();
 			
 			if(validator.checkSabateursWin()) {
 				
-				DistributeGold.sabateurs();
+				distributeGold("sabateurs");
 				new PlayAgainView(stage).displayView("sabateurs");
 				
 			}
@@ -244,13 +245,88 @@ public class DropListener {
 
 	}
 	
-	public void playCard(Card card, ImageView target, PlayerD currentPlayer, int draggedCardIndex) {
+	public void givePowerTool(Player targetPlayer) {
+		
+		if (targetPlayer.hasPowerTool()) {
+			targetPlayer.removePowerTool();
+			targetPlayer.giveSuperPowerTool();
+			
+		}
+		
+		else {
+			
+			if (!targetPlayer.hasSuperPowerTool()) {
+		
+				targetPlayer.givePowerTool();
+				
+			}
+			
+		}
+		
+	}
+	
+	public void usePowerTool(int row, int col, Card card) {
+		
+		Board.getInstance().playCard(row, col, card);
+		
+	}
+	
+	public boolean useSuperPowerTool(int row, int col, Card card, 
+			ImageView[][] imageViews, Player currentPlayer, int draggedCardIndex) {
+		
+		boolean minersWin = false;
+		
+		Card cardUp;
+		Card cardDown;
+		Card cardRight;
+		Card cardLeft;
+		Board.getInstance().playCard(row, col, card);
+		playCard(card, imageViews[row][col], currentPlayer, draggedCardIndex);
+		
+		ActionCardValidator validator = new ActionCardValidator();
+		 if (validator.checkSuperPowerMove(cardRight=new XPathCard(0), row, col+1)) {
+			Board.getInstance().playCard(row, col+1, cardRight);
+			playCard(cardRight, imageViews[row][col+1], currentPlayer, draggedCardIndex);
+			minersWin = validator.checkMinersWin(row, col+1);
+		 }
+		if (validator.checkSuperPowerMove(cardLeft=new XPathCard(0), row, col-1)) {
+			Board.getInstance().playCard(row, col-1, cardLeft);
+			playCard(cardLeft, imageViews[row][col-1], currentPlayer, draggedCardIndex);
+			minersWin = validator.checkMinersWin(row, col-1);
+		}
+		if (validator.checkSuperPowerMove(cardDown=new XPathCard(0), row+1, col)) {
+			Board.getInstance().playCard(row+1, col, cardDown);
+			playCard(cardDown, imageViews[row+1][col], currentPlayer, draggedCardIndex);
+			minersWin = validator.checkMinersWin(row+1, col);
+		}
+		if (validator.checkSuperPowerMove(cardUp=new XPathCard(0), row-1, col)) {
+			Board.getInstance().playCard(row-1, col, cardUp); 
+			playCard(cardUp, imageViews[row-1][col], currentPlayer, draggedCardIndex);
+			minersWin = validator.checkMinersWin(row-1, col);
+		}
+		
+		return minersWin;
+		
+	}
+	
+	public void playCard(Card card, ImageView target, Player currentPlayer, int draggedCardIndex) {
 		
 		String imageName = "/resources/images/cards/" + card.getName() + "-rotate" + ((PathCard) card).getRotation() + ".png";
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setImage(image);
 		currentPlayer.getHand().discardCard(draggedCardIndex);
 		currentPlayer.drawCard();
+		
+	}
+	
+	public void distributeGold(String winners) {
+		
+		if (winners == "sabateurs")
+			DistributeGold.sabateurs();
+		else if (winners == "miners")
+			DistributeGold.miners();
+		DistributeGold.heistedMiners();
+		DistributeGold.exposedSabateurs();
 		
 	}
 

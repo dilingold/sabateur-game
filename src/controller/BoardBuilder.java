@@ -9,6 +9,14 @@ public class BoardBuilder {
 	
 	private int maxRow;
 	private int maxCol;
+
+	public void reset() {
+		getRows();
+		getCols();
+		initBoard();
+		setTreasureSites();
+		setStart();
+	}
 	
 	public void setRows(int rows) {
 		

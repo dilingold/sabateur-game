@@ -1,7 +1,5 @@
 package model.cards;
 
-import model.Board;
-
 public abstract class PathCard implements Card, Cloneable{
 
     protected String type;
@@ -12,6 +10,7 @@ public abstract class PathCard implements Card, Cloneable{
     protected int rotation = 0;
     protected Boolean isDisabled = false;
     protected boolean isToxic = false;
+
 
     public PathCard() {
 
@@ -25,42 +24,17 @@ public abstract class PathCard implements Card, Cloneable{
 
     }
 
-    // Cycles each of the varibles in the exits array the amount
-    // of times the card has been rotated, then returns the result.
-    // Does not change the original exits array variable.
+    //Cycles each of the varibles in the exits array the amount
+    //of times the card has been rotated, then returns the result.
+    //Does not change the original exits array variable.
     private void rotateExits() {
-
-        System.out.println(exits[0] + ", " + exits[1] + ", " + exits[2] + ", " + exits[3]);
+        
         boolean tmp = exits[3];
         exits[3] = exits[2];
         exits[2] = exits[1];
         exits[1] = exits[0];
         exits[0] = tmp;
-
-        /*
-         * if(rotation == 0) return exits;
-         * 
-         * else {
-         * 
-         * boolean[] exitsToReturn = exits;
-         * 
-         * for(int i = 0; i<rotation; i++) {
-         * 
-         * Boolean firstValue = exitsToReturn[0];
-         * 
-         * for(int j=0;j<exits.length-1;j++) {
-         * 
-         * exitsToReturn[j] = exitsToReturn[j+1];
-         * 
-         * }
-         * 
-         * exitsToReturn[3] = firstValue;
-         * 
-         * }
-         * 
-         * return exitsToReturn; }
-         */
-
+        
     }
 
     // takes two ints, x and y coordinate.
@@ -117,14 +91,6 @@ public abstract class PathCard implements Card, Cloneable{
 
     }
 
-    @Override
-    public Card doAction(int row, int col) {
-
-        Card card = doAction();
-        Board.getInstance().playCard(row, col, card);
-        return card;
-
-    }
 
     public boolean getIsToxic() {
 

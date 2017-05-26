@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import model.Board;
 import model.Deck;
-import model.PlayerD;
+import model.Player;
 import model.cards.Card;
 
 public class GameStateMemento {
@@ -26,7 +26,7 @@ public static Stack<Card> saveDeck(){
     return savedDeck;
 }
 
-public static ArrayList<PlayerD> getPlayerState(){
+public static ArrayList<Player> getPlayerState(){
     return PlayerController.copyPlayerList();
 }
 public static ArrayList<ArrayList<Card>> getPlayerHands(){

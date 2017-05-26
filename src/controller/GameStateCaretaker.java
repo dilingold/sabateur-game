@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import model.Board;
 import model.Deck;
-import model.PlayerD;
+import model.Player;
 import model.cards.Card;
 import model.cards.PathCard;
 import view.AddPlayerView;
@@ -18,7 +18,7 @@ public class GameStateCaretaker {
 
     static Map<Integer, Stack<Card>> deckStates = new HashMap<Integer, Stack<Card>>();
     static Map<Integer, Board> boardStates = new HashMap<Integer, Board>();
-    static Map<Integer, ArrayList<PlayerD>> playerStates = new HashMap<Integer, ArrayList<PlayerD>>();
+    static Map<Integer, ArrayList<Player>> playerStates = new HashMap<Integer, ArrayList<Player>>();
     static int turn = 0;
     static int currentPlayerIndex = 0;
     static Map<Integer, ArrayList<ArrayList<Card>>> handStates = new HashMap<Integer, ArrayList<ArrayList<Card>>>();

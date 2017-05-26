@@ -2,37 +2,31 @@ package controller;
 
 import java.util.List;
 
-import model.PlayerD;
+import model.Player;
 
 public class DistributeGold {
 	
-	public static void currentPlayer(PlayerD currentPlayer) {
+	private static Player topDogHeist;
+	private static Player topDogExpose;
 		
-		for (PlayerD p : PlayerController.getInstance().getPlayerList()) {
-			
-			System.out.println(p.getName() + " heists:");
-			distributeHeistsRecursive(p);
-			
-			System.out.println(p.getName() + " exposed:");
-			distributeExposedSabRecursive(p);
-			
-		}
+	public static void currentPlayer(Player currentPlayer) {
+		
 		if(currentPlayer.getType() == "miner") {
 			
-			currentPlayer.addGold(1);
+			currentPlayer.addGold(4);
 			
 		}
 		
 	}
 	
 	public static void miners() {
-		
-		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
-		for (PlayerD player : players) {
+				
+		List<Player> players = PlayerController.getInstance().getPlayerList();
+		for (Player player : players) {
 			
 			if(player.getType() == "miner") {
 				
-				player.addGold(1);
+				player.addGold(10);
 				
 			}
 			
@@ -42,12 +36,12 @@ public class DistributeGold {
 	
 	public static void sabateurs() {
 		
-		List<PlayerD> players = PlayerController.getInstance().getPlayerList();
-		for (PlayerD player : players) {
+		List<Player> players = PlayerController.getInstance().getPlayerList();
+		for (Player player : players) {
 			
 			if(player.getType() == "sabateur") {
 				
-				player.addGold(1);
+				player.addGold(10);
 				
 			}
 			
@@ -55,22 +49,59 @@ public class DistributeGold {
 		
 	}
 	
-	public static void distributeHeistsRecursive(PlayerD player) {
+	public static void heistedMiners() {
 		
-		for (PlayerD p : player.getPlannedHeists()) {
-
-			System.out.println(p.getName());
+		for (Player p : PlayerController.getInstance().getPlayerList()) {
+			
+			topDogHeist = p;
+			System.out.println(p.getName() + " heists:");
 			distributeHeistsRecursive(p);
 			
 		}
 		
 	}
 	
-	public static void distributeExposedSabRecursive(PlayerD player) {
+	public static void exposedSabateurs() {
 		
-		for (PlayerD p : player.getExposedSabateurs()) {
+		for (Player p : PlayerController.getInstance().getPlayerList()) {
+			
+			topDogExpose = p;
+			System.out.println(p.getName() + " exposed:");
+			distributeExposedSabRecursive(p);
+			
+		}
+		
+	}
+	
+	public static void distributeHeistsRecursive(Player player) {
+		
+		for (Player p : player.getPlannedHeists()) {
 
 			System.out.println(p.getName());
+			if (p.getGold() > 0) {
+				
+				topDogHeist.addGold(1);
+				p.removeGold(1);
+				
+			}
+			distributeHeistsRecursive(p);
+			
+		}
+		
+	}
+	
+	public static void distributeExposedSabRecursive(Player player) {
+		
+		for (Player p : player.getExposedSabateurs()) {
+
+			System.out.println(p.getName());
+			if (p.getGold() > 0) {
+				
+				topDogExpose.addGold(1);
+				p.removeGold(1);
+				
+			}
+
 			distributeExposedSabRecursive(p);
 			
 		}

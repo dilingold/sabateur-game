@@ -2,11 +2,17 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 
 import controller.DragCardListener;
 import controller.DropListener;
 import controller.GameEngine;
 import controller.PlayGameListener;
+
+import controller.*;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,23 +33,50 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
+import model.EventObserver;
 import model.Hand;
-import model.PlayerD;
+import model.Player;
 import model.cards.*;
 //import sun.applet.Main;
 
-public class  GameView {
+public class  GameView implements Observer{
 
 	private Stage stage;
 	private Text playerText = null;
-	private PlayerD currentPlayer;
+	
+	private Player currentPlayer;
+	//made static for access to reset view
 	private static ImageView[][] imageViews;
+
 	private int draggedCardIndex;
 	private Button roleBtn;
 	private Button undoTurnBtn;
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
+	private Label timeLabel = new Label();
+	private EventObserver timerUpdate ;
+
+	@Override
+	public void update(Observable observable, Object arg)
+	{
+		timerUpdate = (EventObserver) observable;
+		System.out.println("Timer Has Changed Status to "+timerUpdate.getTimerStatus());
+		System.out.println("Discarding Card position 0");
+		try {
+			currentPlayer.getHand().discardCard(0);
+			currentPlayer.drawCard();
+		}catch (Exception e) {
+			PlayGameListener.stopTime();
+		}
+
+		if(timerUpdate.getTimerStatus()) {
+			System.out.println("Next Turn!!!");
+			nextTurn();
+		}
+
+		//PlayGameListener.stopTime();
+	}
 
 	//T - accessible for refresh script
 	private GridPane boardGrid;
@@ -53,10 +88,25 @@ public class  GameView {
 	public GameView(Stage stage) {
 
 		this.stage = stage;
+		PlayGameListener.startTimer(timeLabel);
+		stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+			if (KeyCode.ESCAPE == event.getCode()) {
+				Restart restart = new Restart();
+				BoardBuilder boardBuilder = new BoardBuilder();
+				DeckFactory deckBuilder = new DeckFactory();
+
+				Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
+
+				restart.setCommand(resetGame);
+				restart.invokeReset();
+
+				displayView(PlayerController.getInstance().playerCount(), PlayerController.getInstance().getPlayerList());
+			}
+		});
 
 	}
 
-	public void displayView(int totalPlayers, ArrayList<PlayerD> playerNames) {
+	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 		stage.setTitle("Play Game");
@@ -74,6 +124,7 @@ public class  GameView {
 		boardText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		boardText.setFill(Color.WHITE);
 		vbBoard.getChildren().add(boardText);
+		vbBoard.getChildren().add(timeLabel);
 
 		//T - making accessible for refresh board
 		boardGrid = new GridPane();
@@ -222,10 +273,10 @@ public class  GameView {
 		
 		//display the players with images to the top right of the screen
 		int k = 0;
-		for(PlayerD player: playerNames) {
+		for(Player player: playerNames) {
 			
 			String imageName;
-			imageName = "/resources/images/players/a" + (k+1) + ".jpg";
+			imageName = "/resources/images/players/a" + (k+1) + ".png";
 			
 			Image image = new Image(getClass().getResourceAsStream(imageName));
 			Label pLabel = new Label(player.getName());
@@ -396,7 +447,7 @@ public class  GameView {
 
 	}
 	
-	public void makeDroppable(Label target, PlayerD player) {
+	public void makeDroppable(Label target, Player player) {
 		
 		DropListener dropListener = new DropListener(this);
 		
@@ -426,10 +477,11 @@ public class  GameView {
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
+		PlayGameListener.updateTime();
 		
 	}
 	
-	public void setPowerToolImage(PlayerD player) {
+	public void setPowerToolImage(Player player) {
 		
 		Label target = playerLabels.get(player.getUID());
 		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-power.png";
@@ -444,7 +496,7 @@ public class  GameView {
 		
 	}
 	
-	public void setSuperPowerToolImage(PlayerD player) {
+	public void setSuperPowerToolImage(Player player) {
 		
 		Label target = playerLabels.get(player.getUID());
 		String imageName = "/resources/images/players/a" + (player.getUID()+1) + "-super.png";
@@ -462,7 +514,7 @@ public class  GameView {
 	public void removePowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
 		
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);
@@ -477,7 +529,7 @@ public class  GameView {
 	public void removeSuperPowerToolImage() {
 		
 		Label target = playerLabels.get(currentPlayer.getUID());
-		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".jpg";
+		String imageName = "/resources/images/players/a" + (currentPlayer.getUID()+1) + ".png";
 		
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 		target.setMinWidth(150.0);

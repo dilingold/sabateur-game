@@ -1,6 +1,6 @@
 package model.cards;
 
-import model.PlayerD;
+import model.Player;
 
 public class DestroyToolsCard extends PersonalCard{
 
@@ -8,12 +8,6 @@ public class DestroyToolsCard extends PersonalCard{
 		
 		this.name = "Destroy Tools";
 		this.effect = "destroyTools";
-		
-	}
-
-	@Override
-	public void doAction(PlayerD currentPlayer, PlayerD targetPlayer) {
-		// TODO Auto-generated method stub
 		
 	}
 

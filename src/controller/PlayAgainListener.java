@@ -2,27 +2,35 @@ package controller;
 
 import javafx.stage.Stage;
 import model.Board;
-import model.PlayerD;
+import model.Player;
 
 public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
 		
-		for(PlayerD player : PlayerController.getInstance().getPlayerList()) {
+		for(Player player : PlayerController.getInstance().getPlayerList()) {
 			
 			System.out.println(player.getName() + ": " + player.getGold());
 			
 		}
 		
-		resetBoard();
-		resetDeck();
-		resetPlayers();
+		/*
+		Command Pattern
+		 */
+		Restart restart = new Restart();
+		BoardBuilder boardBuilder = new BoardBuilder();
+		DeckFactory deckBuilder = new DeckFactory();
+
+		Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
+
+		restart.setCommand(resetGame);
+		restart.invokeReset();
 		
 		new PlayGameListener().changeScene(stage);
 		
 	}
 	
-	public void resetBoard() {
+	/*public void resetBoard() {
 		
 		BoardBuilder boardBuilder = new BoardBuilder();
 		boardBuilder.getRows();
@@ -35,9 +43,9 @@ public class PlayAgainListener {
 	
 	public void resetDeck() {
 
-		DeckBuilder deckBuilder = new DeckBuilder();
-		deckBuilder.addAllCards();
-		deckBuilder.Shuffle();
+		DeckFactory deck = new DeckFactory();
+		deck.addAllCards();
+		deck.Shuffle();
 		
 	}
 	
@@ -46,6 +54,6 @@ public class PlayAgainListener {
 		PlayerController.getInstance().clearPlayerHands();
 		PlayerController.getInstance().dealPlayerHands();
 		GameEngine.setCurrentPlayerIndex(0);
-	}
+	}*/
 
 }

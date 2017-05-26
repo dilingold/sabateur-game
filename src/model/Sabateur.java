@@ -1,6 +1,6 @@
 package model;
 
-public class Sabateur extends PlayerD {
+public class Sabateur extends Player {
 	
 	public Sabateur(String name, int UID) {
 		

@@ -6,7 +6,7 @@ import java.util.List;
 
 import controller.DistributeGold;
 import model.Miner;
-import model.PlayerD;
+import model.Player;
 import model.Sabateur;
 import model.cards.HeistCard;
 import model.cards.PersonalCard;
@@ -15,12 +15,12 @@ public class HeistTest {
 		
 	public static void main(String[] args) {
 		
-		PlayerD bob = new Miner("Bob", 0);
-		PlayerD jane = new Miner("Jane", 1);
-		PlayerD matt = new Sabateur("Matt", 2);
-		PlayerD al = new Sabateur("Al", 3);
+		Player bob = new Miner("Bob", 0);
+		Player jane = new Miner("Jane", 1);
+		Player matt = new Sabateur("Matt", 2);
+		Player al = new Sabateur("Al", 3);
 		
-		List<PlayerD> players = new ArrayList<PlayerD>();
+		List<Player> players = new ArrayList<Player>();
 		players.add(bob);
 		players.add(jane);
 		players.add(matt);
@@ -50,7 +50,7 @@ public class HeistTest {
 			
 		}
 		
-		for (PlayerD p : players) {
+		for (Player p : players) {
 			
 			System.out.println(p.getName() + " heists:");
 			dg.distributeHeistsRecursive(p);
@@ -60,10 +60,10 @@ public class HeistTest {
 		
 	}
 	
-	public static void removeHeistRecursive(PlayerD player, PlayerD remove) {
+	public static void removeHeistRecursive(Player player, Player remove) {
 		
-		for(Iterator<PlayerD> iterator = player.getPlannedHeists().iterator(); iterator.hasNext(); ) {
-			PlayerD p = iterator.next();
+		for(Iterator<Player> iterator = player.getPlannedHeists().iterator(); iterator.hasNext(); ) {
+			Player p = iterator.next();
 			if(p.equals(remove)) {
 				
 				iterator.remove();

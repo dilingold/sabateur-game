@@ -1,6 +1,6 @@
 package model.cards;
 
-import model.PlayerD;
+import model.Player;
 
 public abstract class PersonalCard implements Card, Cloneable{
 		
@@ -32,19 +32,7 @@ public abstract class PersonalCard implements Card, Cloneable{
 		return name;
 		
 	}
-	
-	@Override
-	public Card doAction() {
-		
-		return this;
-		
-	}
-	
-	@Override
-	public Card doAction(int row, int col) {
-		return this;
-	}
-    
+
     @Override
     public Card getCopy(){
         try {
@@ -55,6 +43,4 @@ public abstract class PersonalCard implements Card, Cloneable{
         return null;
     }
 	
-	public abstract void doAction(PlayerD currentPlayer, PlayerD targetPlayer);
-		
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Miner extends PlayerD {
+public class Miner extends Player {
 		
 	public Miner(String name, int UID) {
 		

@@ -1,11 +1,13 @@
 package view;
 
 import controller.PlayAgainListener;
+import controller.PlayerController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Player;
 
 public class PlayAgainView {
 	
@@ -50,9 +52,22 @@ public class PlayAgainView {
 		
 		createContent.MenuBox vbox = new createContent.MenuBox(playAgain);
 		
+		createContent.subTitle scoreSubTitle = new createContent.subTitle("Gold");
+		createContent.MenuBox scoreVBox = new createContent.MenuBox();
+		scoreVBox.getChildren().add(scoreSubTitle);
+		for (Player player : PlayerController.getInstance().getPlayerList()) {
+			
+			createContent.MenuText playerText = new createContent.MenuText(
+					player.getName() + ": " + player.getGold());
+			
+			scoreVBox.getChildren().add(playerText);
+			
+		}
+		
 		root.add(title, 0, 0, 1, 1);
 		root.add(subTitle, 0, 2);
 		root.add(vbox, 0, 4);
+		root.add(scoreVBox, 2, 2, 1, 4);
 		
 		Scene scene = new Scene(root, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 		stage.setScene(scene);

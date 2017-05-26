@@ -3,7 +3,7 @@ package controller;
 import model.Deck;
 import model.Hand;
 import model.Miner;
-import model.PlayerD;
+import model.Player;
 import model.Sabateur;
 import model.cards.Card;
 
@@ -14,7 +14,8 @@ import java.util.List;
 //This class is the creator and information expert on Players
 public class PlayerController {
 
-    private static ArrayList<PlayerD> players = null;
+
+    private static ArrayList<Player> players = null;
     private static PlayerController ourInstance = new PlayerController();
 
     public static PlayerController getInstance() {
@@ -37,14 +38,14 @@ public class PlayerController {
         	
         	if (roles.get(i) == "miner") {
         		
-        		PlayerD player = new Miner(pNames, i);
+        		Player player = new Miner(pNames, i);
                 players.add(player);
         		
         	}
         	
         	else {
         		
-        		PlayerD player = new Sabateur(pNames, i);
+        		Player player = new Sabateur(pNames, i);
         		players.add(player);
         		
         	}
@@ -58,7 +59,7 @@ public class PlayerController {
     
     public void dealPlayerHands() {
     	
-    	for(PlayerD player : players) {
+    	for(Player player : players) {
 			
 			Hand hand = new Hand();
 			
@@ -74,7 +75,7 @@ public class PlayerController {
     	
     }
 
-    public PlayerD getPlayerByPosition(int position) {
+    public Player getPlayerByPosition(int position) {
     	
         return players.get(position);
         
@@ -86,7 +87,7 @@ public class PlayerController {
         
     }
 
-    public ArrayList<PlayerD> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
     	
         return players;
         
@@ -114,14 +115,14 @@ public class PlayerController {
     
     public void clearPlayerHands() {
     	
-    	for(PlayerD player : players) {
+    	for(Player player : players) {
     		
     		player.getHand().getCards().clear();
     		
     	}
     	
     }
-    public static ArrayList<PlayerD> getPlayers(){
+    public static ArrayList<Player> getPlayers(){
         return players;
     }
     public static ArrayList<ArrayList<Card>> getHands(){
@@ -141,11 +142,11 @@ public class PlayerController {
         }
     }
     
-    public static void setPlayers(ArrayList<PlayerD> oldPlayers){
+    public static void setPlayers(ArrayList<Player> oldPlayers){
         players = oldPlayers;
     }
-    public static ArrayList<PlayerD> copyPlayerList(){
-        ArrayList<PlayerD> playersCopy = new ArrayList<PlayerD>();
+    public static ArrayList<Player> copyPlayerList(){
+        ArrayList<Player> playersCopy = new ArrayList<Player>();
         for(int i = 0; i < players.size(); i ++){
             playersCopy.add(players.get(i));
         }
