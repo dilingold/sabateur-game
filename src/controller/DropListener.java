@@ -39,7 +39,6 @@ public class DropListener {
 		event.consume();
 
 	}
-	
 	public void dragOver(DragEvent event, Label target) {
 
 		if (event.getGestureSource() != target) {
@@ -105,6 +104,7 @@ public class DropListener {
 						
 						DistributeGold.currentPlayer(currentPlayer);
 						distributeGold("miners");
+						Winner.getInstance().setWinner(true);
 						new PlayAgainView(stage).displayView("miners");
 						
 					}
@@ -112,6 +112,7 @@ public class DropListener {
 					else if(validator.checkSabateursWin()) {
 						
 						distributeGold("sabateurs");
+						Winner.getInstance().setWinner(true);
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -142,6 +143,7 @@ public class DropListener {
 					if(validator.checkSabateursWin()) {
 						
 						distributeGold("sabateurs");
+						Winner.getInstance().setWinner(true);
 						new PlayAgainView(stage).displayView("sabateurs");
 						
 					}
@@ -170,6 +172,7 @@ public class DropListener {
 		if(validator.checkSabateursWin()) {
 			
 			distributeGold("sabateurs");
+			Winner.getInstance().setWinner(true);
 			new PlayAgainView(stage).displayView("sabateurs");
 			
 		}
@@ -233,6 +236,7 @@ public class DropListener {
 			if(validator.checkSabateursWin()) {
 				
 				distributeGold("sabateurs");
+				Winner.getInstance().setWinner(true);
 				new PlayAgainView(stage).displayView("sabateurs");
 				
 			}

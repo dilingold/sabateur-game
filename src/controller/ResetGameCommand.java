@@ -16,5 +16,6 @@ public class ResetGameCommand implements Command{
         PlayerController.getInstance().clearPlayerHands();
         PlayerController.getInstance().dealPlayerHands();
         GameEngine.setCurrentPlayerIndex(0);
+        Winner.getInstance().setWinner(false);
     }
 }

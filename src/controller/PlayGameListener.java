@@ -28,19 +28,18 @@ public class PlayGameListener {
 		PlayerController players = PlayerController.getInstance();
 		//GameView gameView = new GameView(stage);
 		GameView observer = new GameView(stage);
-		observable.addObserver(observer);
 		//observable.setTimerStatus(true);
 		observer.displayView(players.playerCount(), players.getPlayerList());
 
 	}
 
-	public static void startTimer(javafx.scene.control.Label timeLabel) {
+	/*public void startTimer(javafx.scene.control.Label timeLabel) {
 		if(observable.getTimerStatus() == true) {
 			timeLabel.textProperty().bind(STARTTIME.asString());
 			STARTTIME.set(SetTimer);
 			timeline.getKeyFrames().add(
 					new KeyFrame(Duration.seconds(SetTimer+1), event -> {
-						System.out.println("Timer Ended: " + timeLabel.textProperty().getValue());
+						//System.out.println("Timer Ended: " + timeLabel.textProperty().getValue());
 						observable.setTimerStatus(true);
 					}, new KeyValue(STARTTIME, 0))
 			);
@@ -61,5 +60,9 @@ public class PlayGameListener {
 		System.out.println("play again screen said stop");
 
 	}
+
+	public static void resumeTxime() {
+		timeline.play();
+	}*/
 
 }

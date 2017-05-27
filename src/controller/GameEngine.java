@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import model.Player;
 import view.MainView;
 public class GameEngine {
@@ -7,6 +8,7 @@ public class GameEngine {
 	private MainView mainView;
 	private static PlayerController players;
 	private static int currentPlayerIndex;
+	private Boolean winner;
 
 	//run game
 	public static void main(String[] args) {
@@ -17,6 +19,7 @@ public class GameEngine {
 
 	public GameEngine() {
 
+		this.winner = winner;
 		DeckFactory deck = new DeckFactory();
 		deck.addAllCards();
 		deck.Shuffle();
@@ -80,7 +83,6 @@ public class GameEngine {
 		else return players.getPlayerByPosition(currentPlayerIndex+1);
 
 	}
-
 
 }
 

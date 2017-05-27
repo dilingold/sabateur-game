@@ -6,7 +6,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -17,17 +20,17 @@ public class WelcomeView {
 	public WelcomeView(Stage stage) {
 
 		this.stage = stage;
-
 	}
 
 	public void displayView() {
-		
-		GridPane root = new GridPane();
-		root.setAlignment(Pos.CENTER_LEFT);
-		root.setHgap(10);
-		root.setVgap(10);
-		root.setPadding(new Insets(25, 25, 25, 85));
-		root.setPrefSize(860, 600);
+
+		BorderPane root = new BorderPane();
+		GridPane inner = new GridPane();
+		inner.setAlignment(Pos.CENTER_LEFT);
+		inner.setHgap(10);
+		inner.setVgap(10);
+		inner.setPadding(new Insets(25, 25, 25, 85));
+		inner.setPrefSize(860, 600);
 
 		stage.setTitle("G2 Sabateur");
 
@@ -44,9 +47,17 @@ public class WelcomeView {
 				itemExit	
 		);
 
-		root.add(title, 0, 0, 1, 1);
-		root.add(vbox,0, 2);
+		final Menu menu1 = new Menu("File");
+		final Menu menu2 = new Menu("Options");
+		final Menu menu3 = new Menu("Help");
 
+		MenuBar menuBar = new MenuBar();
+		menuBar.getMenus().addAll(menu1, menu2, menu3);
+
+		inner.add(title, 0, 0, 1, 1);
+		inner.add(vbox,0, 2);
+		root.setTop(menuBar);
+		root.setCenter(inner);
 		//display the player count view when the user chooses to start a new game
 		//the player count view will allow the user to select how many players will be playing
 		startGame.setOnMouseClicked(new EventHandler<MouseEvent>() {

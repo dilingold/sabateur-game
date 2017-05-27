@@ -22,9 +22,9 @@ import model.cards.RemoveRoadBlock;
 
 public class DeckFactory implements Reset {
 
-	private int numPathCards = 10;
+	private int numPathCards = 5;
 	private int numPersonalCards = 5;
-	private int numActionCards = 10;
+	private int numActionCards = 5;
 
 	public void reset() {
 		addAllCards();

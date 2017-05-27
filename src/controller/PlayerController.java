@@ -26,6 +26,7 @@ public class PlayerController {
         clearPlayerHands();
         dealPlayerHands();
         GameEngine.setCurrentPlayerIndex(0);
+        Winner.getInstance().setWinner(false);
     }
 
     private PlayerController() {

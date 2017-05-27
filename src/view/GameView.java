@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import controller.*;
+import javafx.animation.Animation;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,7 +33,7 @@ import model.Player;
 import model.cards.*;
 //import sun.applet.Main;
 
-public class  GameView implements Observer{
+public class  GameView {
 
 	private Stage stage;
 	private Text playerText = null;
@@ -45,27 +46,10 @@ public class  GameView implements Observer{
 	private List<Label> playerLabels;
 	private Label timeLabel = new Label();
 	private EventObserver timerUpdate ;
+	private TimerController timerController = new TimerController(this);
 
-	@Override
-	public void update(Observable observable, Object arg)
-	{
-		timerUpdate = (EventObserver) observable;
-		System.out.println("Timer Has Changed Status to "+timerUpdate.getTimerStatus());
-		System.out.println("Discarding Card position 0");
-		try {
-			currentPlayer.getHand().discardCard(0);
-			currentPlayer.drawCard();
-		}catch (Exception e) {
-			PlayGameListener.stopTime();
-		}
-
-		if(timerUpdate.getTimerStatus()) {
-			System.out.println("Next Turn!!!");
-			nextTurn();
-		}
 
 		//PlayGameListener.stopTime();
-	}
 
 	/*
 	 * this view is the game view which includes all the components required to play the game
@@ -74,19 +58,17 @@ public class  GameView implements Observer{
 	public GameView(Stage stage) {
 
 		this.stage = stage;
-		PlayGameListener.startTimer(timeLabel);
+		//Winner.getInstance().setWinner(false);
+		//PlayGameListener.startTimer(timeLabel);
 		stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
 			if (KeyCode.ESCAPE == event.getCode()) {
-				Restart restart = new Restart();
-				BoardBuilder boardBuilder = new BoardBuilder();
-				DeckFactory deckBuilder = new DeckFactory();
+				//timerController.stopTime();
+				Stage pauseMenu = new Stage();
+				PauseView pauseView = new PauseView();
+				pauseView.start(pauseMenu, stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
+				System.out.println(stage.getX());
+				System.out.println(stage.getY());
 
-				Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
-
-				restart.setCommand(resetGame);
-				restart.invokeReset();
-
-				displayView(PlayerController.getInstance().playerCount(), PlayerController.getInstance().getPlayerList());
 			}
 		});
 
@@ -95,6 +77,7 @@ public class  GameView implements Observer{
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
 
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
+		timerController.startTimer(timeLabel);
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
 		gameGrid.setAlignment(Pos.CENTER);
@@ -424,13 +407,25 @@ public class  GameView implements Observer{
 	
 	//change to the next player's turn
 	public void nextTurn() {
-		
+		System.out.println(Winner.getInstance().getWinner());
+		if (Winner.getInstance().getWinner() == false) {
+			if (timerController.getTime() == Animation.Status.STOPPED) {
+				try {
+					currentPlayer.getHand().discardCard(0);
+					currentPlayer.drawCard();
+				} catch (Exception e) {
+
+				}
+			}
 		currentPlayer = MainView.gameEngine.nextPlayer();
 		playerText.setText(currentPlayer.getName() + " Hand");
 		vbCards.getChildren().remove(hbCards);
 		displayHand();
-		PlayGameListener.updateTime();
-		
+		timerController.updateTime();
+	}
+	else {
+			timerController.stopTime();
+		}
 	}
 	
 	public void setPowerToolImage(Player player) {

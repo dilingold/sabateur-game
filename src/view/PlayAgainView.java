@@ -29,7 +29,7 @@ public class PlayAgainView {
 		}
 		
 		else winnerString = "Sabateurs Win!";
-		
+
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER_LEFT);
 		root.setHgap(10);
