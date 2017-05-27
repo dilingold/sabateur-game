@@ -23,8 +23,8 @@ public class Board {
     private Card[][] gameBoard;
     private int numCols;
     private int numRows;
-    private int[] treasureRows;
-    private int[] treasureCols;
+    private static int[] treasureRows;
+    private static int[] treasureCols;
 
     private Board() {
 
@@ -134,11 +134,11 @@ public class Board {
     }
 
     public void setTreasureRows(int[] treasureRows) {
-        this.treasureRows = treasureRows;
+        Board.treasureRows = treasureRows;
     }
 
     public void setTreasureCols(int[] treasureCols) {
-        this.treasureCols = treasureCols;
+        Board.treasureCols = treasureCols;
     }
 
     public int[] getTreasureRows() {
@@ -169,6 +169,11 @@ public class Board {
                 }
             }
         }
+        int[] treasureRowsTemp = treasureRows;
+        int[] treasureColsTemp = treasureCols;
+        
+        boardCopy.setTreasureRows(treasureRowsTemp);
+        boardCopy.setTreasureCols(treasureColsTemp);
         return boardCopy;
     }
 
