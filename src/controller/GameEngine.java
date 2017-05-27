@@ -8,7 +8,7 @@ public class GameEngine {
 	private static PlayerController players;
 	private static int currentPlayerIndex;
 	private static int turn;
-	private static GameStateCaretaker gameStates;
+	private static GameStateOriginator gameStateOriginator;
 
 	//run game
 	public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class GameEngine {
 	}
 
 	public GameEngine() {
-	    gameStates = new GameStateCaretaker();
+	    gameStateOriginator = new GameStateOriginator();
 
 		DeckFactory deck = new DeckFactory();
 		deck.addAllCards();
@@ -58,7 +58,7 @@ public class GameEngine {
 		    currentPlayerIndex++;
 		}
 		//save game state for this part of this turn
-		GameStateCaretaker.saveState();
+		GameStateOriginator.saveState();
 		return getCurrentPlayer();
 
 	}
@@ -99,9 +99,9 @@ public class GameEngine {
     public static void setTurn(int oldTurn) {
         turn = oldTurn;
     }
-    public static GameStateCaretaker getGameStates(){
+    public static GameStateOriginator getGameStates(){
         System.out.println("gameEng asking to load game state...");
-        return gameStates;
+        return gameStateOriginator;
     }
 
 
