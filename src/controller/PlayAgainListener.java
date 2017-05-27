@@ -13,18 +13,6 @@ public class PlayAgainListener {
 			System.out.println(player.getName() + ": " + player.getGold());
 			
 		}
-		
-		/*
-		Command Pattern
-		 */
-		/*Restart restart = new Restart();
-		BoardBuilder boardBuilder = new BoardBuilder();
-		DeckFactory deckBuilder = new DeckFactory();
-
-		Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
-
-		restart.setCommand(resetGame);
-		restart.invokeReset();*/
 
 		RestartGame restartGame = new RestartGame();
 
