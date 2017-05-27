@@ -22,6 +22,12 @@ public class PlayerController {
         
     }
 
+    public void reset() {
+        clearPlayerHands();
+        dealPlayerHands();
+        GameEngine.setCurrentPlayerIndex(0);
+    }
+
     private PlayerController() {
 
     }

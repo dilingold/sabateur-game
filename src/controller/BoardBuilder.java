@@ -5,7 +5,7 @@ import java.util.Random;
 import model.Board;
 import model.cards.StartCard;
 
-public class BoardBuilder {
+public class BoardBuilder implements Reset{
 	
 	private int maxRow;
 	private int maxCol;
