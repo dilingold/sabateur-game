@@ -20,7 +20,7 @@ import model.cards.RoadBlockCard;
 import model.cards.RemoveRoadBlock;
 
 
-public class DeckFactory {
+public class DeckFactory implements Reset {
 
 	private int numPathCards = 10;
 	private int numPersonalCards = 5;

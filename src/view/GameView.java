@@ -91,16 +91,7 @@ public class  GameView implements Observer{
 		PlayGameListener.startTimer(timeLabel);
 		stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
 			if (KeyCode.ESCAPE == event.getCode()) {
-				Restart restart = new Restart();
-				BoardBuilder boardBuilder = new BoardBuilder();
-				DeckFactory deckBuilder = new DeckFactory();
-
-				Command resetGame = new ResetGameCommand(boardBuilder, deckBuilder);
-
-				restart.setCommand(resetGame);
-				restart.invokeReset();
-
-				displayView(PlayerController.getInstance().playerCount(), PlayerController.getInstance().getPlayerList());
+				//code to add
 			}
 		});
 
