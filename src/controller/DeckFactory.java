@@ -2,216 +2,172 @@ package controller;
 
 import java.util.Stack;
 
+import model.CardPrototypeFactory;
 import model.Deck;
 import model.cards.Card;
-import model.cards.EndPathCard;
-import model.cards.ExposeCard;
-import model.cards.HeistCard;
-import model.cards.LPathCard;
-import model.cards.PowerToolCard;
-import model.cards.RemoveToxicCard;
-import model.cards.StraightPathCard;
-import model.cards.TPathCard;
-import model.cards.ToxicCard;
-import model.cards.XPathCard;
-import model.cards.RatInfestation;
-import model.cards.RemoveRatInfestation;
-import model.cards.RoadBlockCard;
-import model.cards.RemoveRoadBlock;
-
 
 public class DeckFactory {
 
-	private int numPathCards = 10;
-	private int numPersonalCards = 5;
-	private int numActionCards = 10;
+    private int numPathCards = 10;
+    private int numPersonalCards = 5;
+    private int numActionCards = 10;
+
+    public void reset() {
+        addAllCards();
+        Shuffle();
+    }
+
+    public void addAllCards() {
+
+        addEndPathCards();
+        addLPathCards();
+        addStraighPathCards();
+        addTPathCards();
+        addXPathCards();
+        addHeistCards();
+        addExposeCard();
+        addToxicCard();
+        addSuperToolCard();
+        addRemoveToxicCard();
+        addRoadBlockCard();
+        addRemoveRoadBlockCard();
+        addRatInfestation();
+        addRemoveRatInfestation();
+    }
+
+    public void addToxicCard() {
 
-	public void reset() {
-		addAllCards();
-		Shuffle();
-	}
+        for (int i = 0; i < numActionCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("toxicCard"));
+        }
+    }
+
+    public void addRemoveToxicCard() {
 
-	public void addAllCards() {
+        for (int i = 0; i < numActionCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("removeToxicCard"));
+        }
+    }
+
+    public void addLPathCards() {
 
-		addEndPathCards();
-		addLPathCards();
-		addStraighPathCards();
-		addTPathCards();
-		addXPathCards();
-		addHeistCards();
-		addExposeCard();
-		addToxicCard();
-		addSuperToolCard();
-		addRemoveToxicCard();
-		addRoadBlockCard();
-		addRemoveRoadBlockCard();
-		addRatInfestation();
-		addRemoveRatInfestation();
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("lCard"));
+        }
 
-	}
+    }
 
-	public void addToxicCard() {
+    public void addXPathCards() {
 
-		for(int i = 0; i<numActionCards; i++) {
-			ToxicCard toxicCard = new ToxicCard();
-			Deck.getInstance().getDeck().push(toxicCard);
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("xCard"));
+        }
 
-		}
-	}
+    }
 
-	public void addRemoveToxicCard() {
+    public void addStraighPathCards() {
 
-		for(int i = 0; i<numActionCards; i++) {
-			RemoveToxicCard removeToxicCard = new RemoveToxicCard();
-			Deck.getInstance().getDeck().push(removeToxicCard);
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("straightCard"));
+        }
 
-		}
-	}
+    }
 
-	public void addLPathCards() {
+    public void addTPathCards() {
 
-		for(int i = 0; i<numPathCards; i++) {
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("tCard"));
+        }
 
-			LPathCard lPCard = new LPathCard(0);
-			Deck.getInstance().getDeck().push(lPCard);
+    }
 
-		}
+    public void addEndPathCards() {
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("endCard"));
+        }
+    }
 
-	}
+    public void addHeistCards() {
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("heistCard"));
+        }
+    }
 
-	public void addXPathCards() {
+    public void addExposeCard() {
 
-		for(int i = 0; i<numPathCards; i++) {
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("exposeCard"));
+        }
 
-			XPathCard xPathCard = new XPathCard(0);
-			Deck.getInstance().getDeck().push(xPathCard);
+    }
 
-		}
+    public void addSuperToolCard() {
 
-	}
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("superToolCard"));
+        }
 
-	public void addStraighPathCards() {
+    }
 
-		for(int i = 0; i<numPathCards; i++) {
+    public void addRoadBlockCard() {
 
-			StraightPathCard straightPathCard = new StraightPathCard(0);
-			Deck.getInstance().getDeck().push(straightPathCard);
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("roadBlockCard"));
+        }
+    }
 
-		}
+    public void addRemoveRoadBlockCard() {
 
-	}
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("removeRoadBlockCard"));
+        }
+    }
 
-	public void addTPathCards() {
+    public void addRatInfestation() {
 
-		for(int i = 0; i<numPathCards; i++) {
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("ratInfestationCard"));
+        }
+    }
 
-			TPathCard tPathCard = new TPathCard(0);
-			Deck.getInstance().getDeck().push(tPathCard);
+    public void addRemoveRatInfestation() {
 
-		}
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("removeRatInfestationCard"));
+        }
+    }
 
-	}
+    public void Shuffle() {
 
-	public void addEndPathCards() {
+        Deck.getInstance().shuffle();
 
-		for(int i = 0; i<numPathCards; i++) {
+    }
 
-			EndPathCard endPathCard = new EndPathCard(0);
-			Deck.getInstance().getDeck().push(endPathCard);
+    public Stack<Card> getDeck() {
 
-		}
+        Deck.getInstance();
+        return Deck.getDeck();
 
-	}
+    }
 
-	public void addHeistCards() {
+    public void clearDeck() {
 
-		for(int i = 0; i<numPersonalCards; i++) {
+        Deck.getInstance().clearDeck();
 
-			HeistCard heistCard = new HeistCard();
-			Deck.getInstance().getDeck().push(heistCard);
-
-		}
-
-	}
-
-	public void addExposeCard() {
-
-		for(int i = 0; i<numPersonalCards; i++) {
-
-			ExposeCard exposeCard = new ExposeCard();
-			Deck.getInstance().getDeck().push(exposeCard);
-
-		}
-
-	}
-
-	public void addSuperToolCard() {
-
-		for(int i = 0; i<numPersonalCards; i++) {
-
-			PowerToolCard superToolCard = new PowerToolCard();
-			Deck.getInstance().getDeck().push(superToolCard);
-
-		}
-
-	}
-
-	public void addRoadBlockCard() {
-
-		for (int i = 0; i < numPersonalCards; i++) {
-
-			RoadBlockCard floodCard = new RoadBlockCard();
-			Deck.getInstance().getDeck().push(floodCard);
-
-		}
-	}
-
-	public void addRemoveRoadBlockCard() {
-
-		for (int i = 0; i < numPersonalCards; i++) {
-
-			RemoveRoadBlock removeFlood = new RemoveRoadBlock();
-			Deck.getInstance().getDeck().push(removeFlood);
-
-		}
-	}
-
-	public void addRatInfestation() {
-
-		for (int i = 0; i < numPersonalCards; i++) {
-
-			RatInfestation ratInfestation = new RatInfestation();
-			Deck.getInstance().getDeck().push(ratInfestation);
-
-		}
-	}
-
-	public void addRemoveRatInfestation() {
-
-		for (int i = 0; i < numPersonalCards; i++) {
-
-			RemoveRatInfestation removeRatInfestation = new RemoveRatInfestation();
-			Deck.getInstance().getDeck().push(removeRatInfestation);
-
-		}
-	}
-
-	public void Shuffle() {
-
-		Deck.getInstance().shuffle();
-
-	}
-
-	public Stack<Card> getDeck() {
-
-		return Deck.getInstance().getDeck();
-
-	}
-
-	public void clearDeck() {
-
-		Deck.getInstance().clearDeck();
-
-	}
+    }
 
 }

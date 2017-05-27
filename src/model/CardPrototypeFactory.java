@@ -22,6 +22,10 @@ import model.cards.StraightPathCard;
 import model.cards.TPathCard;
 import model.cards.ToxicCard;
 import model.cards.XPathCard;
+import model.cards.RoadBlockCard;
+import model.cards.RemoveRoadBlock;
+import model.cards.RatInfestation;
+import model.cards.RemoveRatInfestation;
 
 public class CardPrototypeFactory {
     private static final Map<String, Card> prototypes = new HashMap<>();
@@ -35,10 +39,10 @@ public class CardPrototypeFactory {
 
 
     private CardPrototypeFactory() {
-        prototypes.put("lPCard", new LPathCard(0));
+        prototypes.put("lCard", new LPathCard(0));
         prototypes.put("xCard", new XPathCard(0));
         prototypes.put("straightCard", new StraightPathCard(0));
-        prototypes.put("tPathCard", new TPathCard(0));
+        prototypes.put("tCard", new TPathCard(0));
         prototypes.put("endCard", new EndPathCard(0));
 
         prototypes.put("toxicCard", new ToxicCard());
@@ -56,6 +60,12 @@ public class CardPrototypeFactory {
         prototypes.put("destroyToolsCard", new DestroyToolsCard());
         prototypes.put("bombCard", new BombCard());
         prototypes.put("blockPathCard", new BlockPathCard(0));
+        
+        prototypes.put("roadBlockCard", new RoadBlockCard());
+        prototypes.put("removeRoadBlockCard", new RemoveRoadBlock());
+        prototypes.put("ratInfestationCard", new RatInfestation());
+        prototypes.put("removeRatInfestationCard", new RemoveRatInfestation());
+        
 
         /*
          * LPathCard lPCard = new LPathCard(0); XPathCard xCard = new
