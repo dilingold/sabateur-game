@@ -5,7 +5,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+
+import controller.DragCardListener;
+import controller.DropListener;
+import controller.GameEngine;
+import controller.PlayGameListener;
+
 import controller.*;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,10 +43,14 @@ public class  GameView implements Observer{
 
 	private Stage stage;
 	private Text playerText = null;
+	
 	private Player currentPlayer;
-	private ImageView[][] imageViews;
+	//made static for access to reset view
+	private static ImageView[][] imageViews;
+
 	private int draggedCardIndex;
 	private Button roleBtn;
+	private Button undoTurnBtn;
 	private HBox hbCards;
 	private VBox vbCards;
 	private List<Label> playerLabels;
@@ -67,6 +78,9 @@ public class  GameView implements Observer{
 		//PlayGameListener.stopTime();
 	}
 
+	//T - accessible for refresh script
+	private GridPane boardGrid;
+	
 	/*
 	 * this view is the game view which includes all the components required to play the game
 	 * including the board, players, current player's hand and a discard pile
@@ -112,7 +126,8 @@ public class  GameView implements Observer{
 		vbBoard.getChildren().add(boardText);
 		vbBoard.getChildren().add(timeLabel);
 
-		GridPane boardGrid = new GridPane();
+		//T - making accessible for refresh board
+		boardGrid = new GridPane();
 
 		//display the board in the centre of the screen
 		//get the board and populate it with the start card, the goal cards and blank cards
@@ -164,7 +179,30 @@ public class  GameView implements Observer{
 						startPic.setImage(startImage);
 						boardGrid.add(startPic, i, k);
 						imageViews[k][i] = startPic;
-						
+					
+/*	
+ * For refresh view method:
+					default: //else
+						case "path":
+							String pathImageName = "/resources/images/cards/" + currentBoard.getCard(k, i).getName() + "-rotate"
+								+ ((PathCard) currentBoard.getCard(k, i)).getRotation() + ".png";
+							Image pathImage = new Image(pathImageName);
+							ImageView pathPic = new ImageView();
+							pathPic.setFitWidth(60);
+							pathPic.setFitHeight(60);
+							pathPic.setImage(pathImage);
+							boardGrid.add(pathPic, i, k);
+							imageViews[k][i] = pathPic;
+						case "action":
+							String actionImageName = "/resources/images/cards/"+currentBoard.getCard(k, i).getName() + ".png";
+							Image actionImage = new Image(actionImageName);
+							ImageView actionPic = new ImageView();
+							actionPic.setFitWidth(60);
+							actionPic.setFitHeight(60);
+							actionPic.setImage(actionImage);
+							boardGrid.add(actionPic, i, k);
+							imageViews[k][i] = actionPic;
+*/
 				}
 				
 			}
@@ -190,6 +228,11 @@ public class  GameView implements Observer{
 		roleBtn.setPrefWidth(70);
 		hbCards.getChildren().add(roleBtn);
 
+        undoTurnBtn = new Button("Undo Turn");
+		undoTurnBtn.setPrefHeight(80);
+		undoTurnBtn.setPrefWidth(70);
+		hbCards.getChildren().add(undoTurnBtn);
+
 		//placeholder: a card to reveal the player's role
 		roleBtn.setOnAction(event ->  {
 			
@@ -207,6 +250,13 @@ public class  GameView implements Observer{
 			}
 			
 		});
+		//when undo turn button pressed
+		undoTurnBtn.setOnAction(event ->  {
+            if(GameEngine.getTurn() > 1){
+                GameEngine.getGameStates().loadState(1);
+                undoTurnBtn.setDisable(true);
+            }
+        });
 		
 		displayHand();
 
@@ -280,6 +330,7 @@ public class  GameView implements Observer{
 		HBox hb = new HBox(10);
 		hb.setAlignment(Pos.TOP_CENTER);
 		hb.getChildren().add(roleBtn);
+		hb.getChildren().add(undoTurnBtn);
 		
 		Hand hand = currentPlayer.getHand();
 		for (int i = 0; i < hand.cardCount(); i++) {
@@ -362,17 +413,14 @@ public class  GameView implements Observer{
 		DropListener dropListener = new DropListener(this);
 		
 		target.setOnDragOver(event ->  {
-			
 			dropListener.dragOver(event, target);
 			
 		});
-		
 		target.setOnDragDropped(event ->  {
-			
+
 			Node source = (Node) event.getSource();
 			
 			if (dropLocation == "board") {
-				
 				Integer rowIndex = GridPane.getRowIndex(source);
 				Integer colIndex = GridPane.getColumnIndex(source);
 				if(dropListener.drop(stage, event, currentPlayer, draggedCardIndex, target,
@@ -492,5 +540,34 @@ public class  GameView implements Observer{
 		target.setGraphic(playerImageView);
 		
 	}
+	
+	
+	
+	public void setImage(int row, int col, String imageName){
+		/*		ImageView playerImageView = new ImageView();
+		playerImageView.setImage(image);
+		playerImageView.setFitWidth(60);
+		playerImageView.setFitHeight(60);
+		target.setGraphic(playerImageView);
+		*/
+		Image image = new Image(getClass().getResourceAsStream(imageName));
+
+		ImageView card = new ImageView();
+		card.setFitWidth(60);
+		card.setFitHeight(60);
+		card.setImage(image);
+		//boardGrid.add(coalPic, i, k);
+		//imageViews[row][col] = card;
+		//boardGrid.add(pic, i, k);
+		makeDroppable(card, "board");
+		boardGrid.add(card, row, col);
+		//imageViews[row][col].setImage(image);
+	}
+	
+	public void refreshHand(){
+	    vbCards.getChildren().remove(hbCards);
+	    displayHand();
+	}
+	
 
 }

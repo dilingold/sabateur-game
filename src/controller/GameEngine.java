@@ -7,6 +7,8 @@ public class GameEngine {
 	private MainView mainView;
 	private static PlayerController players;
 	private static int currentPlayerIndex;
+	private static int turn;
+	private static GameStateCaretaker gameStates;
 
 	//run game
 	public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class GameEngine {
 	}
 
 	public GameEngine() {
+	    gameStates = new GameStateCaretaker();
 
 		DeckFactory deck = new DeckFactory();
 		deck.addAllCards();
@@ -47,13 +50,15 @@ public class GameEngine {
 	public Player nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
-
+		    turn++;
 			currentPlayerIndex = 0;
-
+			System.out.println("New turn");
 		}
-
-		else currentPlayerIndex++;
-
+		else {
+		    currentPlayerIndex++;
+		}
+		//save game state for this part of this turn
+		GameStateCaretaker.saveState();
 		return getCurrentPlayer();
 
 	}
@@ -68,10 +73,16 @@ public class GameEngine {
 		return players.getPlayerByPosition(currentPlayerIndex);
 
 	}
+	public static int getPlayerSize(){
+	    System.out.println("Player Size = "+PlayerController.getPlayersSize());
+	    return PlayerController.getPlayersSize();
+	}
+	
 	
 	public static Player getNextPlayer() {
 
-		if (currentPlayerIndex == players.getPlayerList().size()-1) {
+		if (currentPlayerIndex == getPlayerSize()-1) {
+		    
 
 			return players.getPlayerByPosition(0);
 
@@ -80,6 +91,18 @@ public class GameEngine {
 		else return players.getPlayerByPosition(currentPlayerIndex+1);
 
 	}
+	
+	public static int getTurn(){
+	    return turn;
+	}
+
+    public static void setTurn(int oldTurn) {
+        turn = oldTurn;
+    }
+    public static GameStateCaretaker getGameStates(){
+        System.out.println("gameEng asking to load game state...");
+        return gameStates;
+    }
 
 
 }

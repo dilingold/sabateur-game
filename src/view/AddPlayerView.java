@@ -16,12 +16,16 @@ import java.util.ArrayList;
 //this view allows the user to add names for the selected number of players
 public class AddPlayerView {
 
-	private Stage stage;
+	private static Stage stage;
 
 	public AddPlayerView(Stage stage) {
 
 		this.stage = stage;
 
+	}
+	
+	public static Stage getStage(){
+	    return stage;
 	}
 
 	public void displayView(int totalPlayers) {

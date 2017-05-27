@@ -10,6 +10,7 @@ import model.cards.PathCard;
 
 public class ActionCardValidator {
 
+
 	/**
 	 * Validate path element
 	 * 
@@ -22,29 +23,30 @@ public class ActionCardValidator {
 	
 	public boolean checkMove(Card cardType, int row, int column) {
 
-		assert 0 < row;
-		assert row < Board.getInstance().getRows();
-		assert 0 <= column;
-		assert column < Board.getInstance().getCols();
-		
-		Boolean validated = false;
 
-		if (cardType.getType() == "path") {
+        assert 0 < row;
+        assert row < Board.getInstance().getRows();
+        assert 0 <= column;
+        assert column < Board.getInstance().getCols();
+        
+        Boolean validated = false;
 
-			validated = validatePath(cardType, row, column);
-			return validated;
+        if (cardType.getType() == "path") {
 
-		}
+            validated = validatePath(cardType, row, column);
+            return validated;
 
-		if (cardType.getType() == "action") {
-			
-			validated = validateAction((ActionCard) cardType, row, column);
+        }
 
-		}
+        if (cardType.getType() == "action") {
+            
+            validated = validateAction((ActionCard) cardType, row, column);
 
-		return validated;
+        }
 
-	}
+        return validated;
+
+    }
 
 	private Boolean validatePath(Card card, int row, int col) {
 
@@ -257,40 +259,46 @@ public class ActionCardValidator {
 		
 	}
 
-	private Boolean validateAction(ActionCard card, int row, int column) {
+    private Boolean validateAction(ActionCard card, int row, int column) {
 
-		Boolean validated = false;
-		
-		if (Board.getInstance().getCard(row, column).getType() != "path") {
-			
-			return false;
-			
-		}
-		PathCard boardLocation = (PathCard) Board.getInstance().getCard(row, column);
-		
-			if (card.getEffect() == "disable") {
-				
-				if (boardLocation.getIsToxic()) {
-				
-					return false;
+        Boolean validated = false;
+        
+        if (Board.getInstance().getCard(row, column).getType() != "path") {
+            
+            return false;
+            
+        }
+        PathCard boardLocation = (PathCard) Board.getInstance().getCard(row, column);
+        
+            if (card.getEffect() == "disable") {
+                
+                if (boardLocation.getIsToxic()) {
+                
+                    return false;
 
-				}
-				
-				else validated = true;
-				
-			}
+                }
+                
+                else validated = true;
+                
+            }
 
-			else if (card.getEffect() == "enable") {
-				if (!boardLocation.getIsToxic()) {
-					
-					return false;
-				
-				}
-				else validated = true;
+            else if (card.getEffect() == "enable") {
+                if (!boardLocation.getIsToxic()) {
+                    
+                    return false;
+                
+                }
+                else validated = true;
 
-			}
-			
-			return validated;
+            }
+            else if (card.getEffect() == "rewind"){
+                if(GameEngine.getTurn() > 1)
+                    GameEngine.getGameStates().loadState(1);
+                else
+                    return false;
+            }
+            
+            return validated;
 
 	}
 	

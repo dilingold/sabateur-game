@@ -2,7 +2,7 @@ package model.cards;
 
 import model.Board;
 
-public abstract class ActionCard implements Card {
+public abstract class ActionCard implements Card, Cloneable {
 	
 	protected String name;
 	public String type = "action";
@@ -32,6 +32,15 @@ public abstract class ActionCard implements Card {
 	public boolean[] getExits() {
 		
 		return null;
+	}
+	
+	public Card getCopy(){
+	    try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+	    return null;
 	}
 
 }

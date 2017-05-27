@@ -14,12 +14,14 @@ import view.GameView;
 //displays the GameView
 public class PlayGameListener {
 
+    //static GameView gameView;
+    static GameView observer;
 	private static EventObserver observable = new EventObserver(true);
 	private static final Integer SetTimer = 5; // Have this in options perhaps?
 	private static IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	protected static Timeline timeline = new Timeline();
 
-	public void changeScene(Stage stage) {
+	public static void changeScene(Stage stage) {
 		try {
 			observable.deleteObservers();
 		} catch (Exception e){
@@ -27,7 +29,7 @@ public class PlayGameListener {
 		}
 		PlayerController players = PlayerController.getInstance();
 		//GameView gameView = new GameView(stage);
-		GameView observer = new GameView(stage);
+		observer = new GameView(stage);
 		observable.addObserver(observer);
 		//observable.setTimerStatus(true);
 		observer.displayView(players.playerCount(), players.getPlayerList());
@@ -60,6 +62,9 @@ public class PlayGameListener {
 		observable.setTimerStatus(false);
 		System.out.println("play again screen said stop");
 
+	}
+	public static GameView getGameView(){
+		return observer;
 	}
 
 }

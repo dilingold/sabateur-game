@@ -34,9 +34,6 @@ Interface Segregation Principle
 Interface segregation can be demonstrated by the 3 abstract card classes (ActionCard, BoardCard and Personal Card 
 separating the methods and variables these classes use.
 
-Dependency Inversion Principle
-N/A
-
 GRASP Principals:
 
 Creator
@@ -91,8 +88,6 @@ fabrication to support high cohesion, low coupling, and reuse. We applied pure f
 Protected Variations
 All classes use getters and setters to change local variables, which are kept private.
 
-Indirection
-N/A
 
 Design by Contract principles:
 

@@ -2,7 +2,7 @@ package model.cards;
 
 import model.Player;
 
-public abstract class PersonalCard implements Card {
+public abstract class PersonalCard implements Card, Cloneable{
 		
 	protected String name;
 	private String type = "personal";
@@ -32,5 +32,15 @@ public abstract class PersonalCard implements Card {
 		return name;
 		
 	}
-			
+
+    @Override
+    public Card getCopy(){
+        try {
+            return (Card) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
 }

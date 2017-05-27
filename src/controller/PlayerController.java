@@ -5,6 +5,7 @@ import model.Hand;
 import model.Miner;
 import model.Player;
 import model.Sabateur;
+import model.cards.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +14,8 @@ import java.util.List;
 //This class is the creator and information expert on Players
 public class PlayerController {
 
-    private ArrayList<Player> players = null;
+
+    private static ArrayList<Player> players = null;
     private static PlayerController ourInstance = new PlayerController();
 
     public static PlayerController getInstance() {
@@ -119,6 +121,39 @@ public class PlayerController {
     		
     	}
     	
+    }
+    public static ArrayList<Player> getPlayers(){
+        return players;
+    }
+    public static ArrayList<ArrayList<Card>> getHands(){
+        ArrayList<ArrayList<Card>> handList = new ArrayList<ArrayList<Card>>();
+        for(int i = 0; i < players.size(); i++){
+            ArrayList<Card> handOfPlayer = new ArrayList<Card>();
+            for(int j = 0; j < (players.get(i).getHand().getHand().size()); j++){
+                handOfPlayer.add(players.get(i).getHand().getHand().get(j));
+            }
+            handList.add(handOfPlayer);
+        }
+        return handList;
+    }
+    public static void setHand(ArrayList<ArrayList<Card>> priorHandList){
+        for(int i = 0; i < players.size(); i++){
+                players.get(i).getHand().setHand(priorHandList.get(i));
+        }
+    }
+    
+    public static void setPlayers(ArrayList<Player> oldPlayers){
+        players = oldPlayers;
+    }
+    public static ArrayList<Player> copyPlayerList(){
+        ArrayList<Player> playersCopy = new ArrayList<Player>();
+        for(int i = 0; i < players.size(); i ++){
+            playersCopy.add(players.get(i));
+        }
+        return playersCopy;
+    }
+    public static int getPlayersSize(){
+        return players.size();
     }
 
 }

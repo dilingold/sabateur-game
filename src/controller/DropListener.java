@@ -62,7 +62,7 @@ public class DropListener {
 		validator = new ActionCardValidator();
 		
 		//for debugging
-		//System.out.println(currentPlayer.getHand().getCards().get(draggedCardIndex).getType());
+
 		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), row, col)) {
 
 			if (event.getGestureSource() != target) {

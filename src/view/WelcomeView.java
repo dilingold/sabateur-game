@@ -1,6 +1,5 @@
 package view;
 
-import controller.PlayerCountListener;
 import controller.ExitListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

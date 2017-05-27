@@ -13,7 +13,7 @@ public class Deck {
 		return ourInstance;
 	}
 
-	private Stack<Card> deck = new Stack<Card>();
+	private static Stack<Card> deck = new Stack<Card>();
 	
 	public void shuffle(){
 		
@@ -40,7 +40,7 @@ public class Deck {
 		}
 	}
 	
-	public Stack<Card> getDeck() {
+	public static Stack<Card> getDeck() {
 		
 		return deck;
 		
@@ -50,6 +50,17 @@ public class Deck {
 		
 		deck.clear();
 		
+	}
+	
+	public static void setDeck(Stack<Card> oldDeck){
+	    System.out.println("number of cards in deck: "+Deck.getDeckSize());
+	    deck = oldDeck;
+	    System.out.println("number of cards in deck after change: "+Deck.getDeckSize());
+	    System.out.println("number of cards in oldDeck: "+oldDeck.size());
+	    
+	}
+	public static int getDeckSize(){
+	    return deck.size();
 	}
 
 }
