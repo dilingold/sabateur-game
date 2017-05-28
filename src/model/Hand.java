@@ -53,15 +53,4 @@ public class Hand {
             cards.set(i, priorCards.get(i));
         }
     }
-   
-    public void print() {
-    	
-        for(Card x : cards) {
-        	
-            System.out.println(x);
-            
-        }
-        
-    }
-
 }

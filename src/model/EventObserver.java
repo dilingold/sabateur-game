@@ -3,8 +3,6 @@ package model;
 /**
  * Timer Status. Need to change name of file
  */
-import controller.PlayGameListener;
-import view.GameView;
 
 import java.util.Observable;
 

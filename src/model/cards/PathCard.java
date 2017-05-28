@@ -4,11 +4,8 @@ public abstract class PathCard implements Card, Cloneable{
 
     protected String type;
     protected String name;
-    protected int x;
-    protected int y;
     protected boolean[] exits = new boolean[4];
     protected int rotation = 0;
-    protected Boolean isDisabled = false;
     protected boolean isToxic = false;
     protected boolean isInfested = false;
     protected boolean isBlocked = false;
@@ -39,22 +36,6 @@ public abstract class PathCard implements Card, Cloneable{
         
     }
 
-    // takes two ints, x and y coordinate.
-    public void setPosition(int x, int y) {
-
-        this.x = x;
-        this.y = y;
-
-    }
-
-    // returns array of ints, x and y coordinate
-    public int[] getPosition() {
-
-        int[] position = { x, y };
-        return position;
-
-    }
-
     public int getRotation() {
 
         return rotation;
@@ -70,12 +51,6 @@ public abstract class PathCard implements Card, Cloneable{
             rotation = 0;
         else
             rotation++;
-
-    }
-
-    public Boolean disabled() {
-
-        return isDisabled;
 
     }
 

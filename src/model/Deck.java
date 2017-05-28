@@ -30,16 +30,7 @@ public class Deck {
 		}
 		return null;
 	}
-	
-	//print card name to console, for debugging:
-	public void printCards() {
-		System.out.println("cards2 stack printout: ");
-		Iterator<Card> deckIteration = deck.iterator();
-		while (deckIteration.hasNext()) {
-			System.out.println(deckIteration.next());
-		}
-	}
-	
+
 	public static Stack<Card> getDeck() {
 		
 		return deck;
@@ -55,9 +46,6 @@ public class Deck {
 	public static void setDeck(Stack<Card> oldDeck){
 	    deck = oldDeck;
 	    
-	}
-	public static int getDeckSize(){
-	    return deck.size();
 	}
 
 }
