@@ -76,34 +76,7 @@ public abstract class Player {
     	this.hand = hand;
     	
     }
-    
-    public String getStatus() {
-    	
-    	return status;
-    	
-    }
 
-    public void setStatus(String status) {
-    	
-    	this.status = status;
-    	
-    }
-    
-    public Boolean areToolsDamaged() {
-    	
-    	return toolsDamaged;
-    	
-    }
-    
-    public void changeToolsDamage() {
-    	
-    	if(toolsDamaged == true)
-    		toolsDamaged = false;
-    	else
-    		toolsDamaged = true;
-    	
-    }
-    
     public void givePowerTool() {
     	
     	hasPowerTool = true;

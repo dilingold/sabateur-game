@@ -29,7 +29,6 @@ public class CardPrototypeFactory {
         prototypes.put("stoneCard", new StoneCard());
         prototypes.put("startCard", new StartCard());
         prototypes.put("goldCard", new GoldCard());
-        // prototypes.put("switchTreasureCard", new switchTreasureCard());
         prototypes.put("emptyCard", new EmptyCard());
         prototypes.put("blockPathCard", new BlockPathCard(0));
         
@@ -51,7 +50,6 @@ public class CardPrototypeFactory {
             Card myCard = prototypes.get(type).getCopy();
             return myCard;
         } catch (NullPointerException ex) {
-            System.out.println("Prototype with name: " + type + ", doesn't exist");
             return null;
         }
     }

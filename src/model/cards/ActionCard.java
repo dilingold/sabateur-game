@@ -1,7 +1,5 @@
 package model.cards;
 
-import model.Board;
-
 public abstract class ActionCard implements Card, Cloneable {
 	
 	protected String name;
