@@ -63,6 +63,7 @@ public class  GameView implements Observer{
     private Text stateText = new Text("-");
     private EventObserver timerUpdate ;
     private static ArrayList<Integer> playersUsedUndo = new ArrayList<Integer>();
+    private String valueProperty;
     
 
     @Override
@@ -175,6 +176,7 @@ public class  GameView implements Observer{
         boardText.setFill(Color.WHITE);
         vbBoard.getChildren().add(boardText);
         vbBoard.getChildren().add(timeLabel);
+        vbBoard.getChildren().add(gameStateLabel);
         
         //added to list gamestate
         //vbBoard.getChildren().add(stateText);
@@ -578,6 +580,8 @@ public class  GameView implements Observer{
         vbCards.getChildren().remove(hbCards);
         displayHand();
         PlayGameListener.updateTime();
+        valueProperty = currentPlayer.getName();
+        gameStateLabel.textProperty().setValue(valueProperty);
 
     }
 
