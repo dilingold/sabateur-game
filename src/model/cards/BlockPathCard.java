@@ -1,6 +1,6 @@
 package model.cards;
 
-public class BlockPathCard extends PathCard {
+public class BlockPathCard extends PathCard {	
 	
 	/*
 	 * For exits:

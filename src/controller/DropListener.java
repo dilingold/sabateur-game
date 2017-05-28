@@ -126,13 +126,24 @@ public class DropListener {
 					Card boardCard = Board.getInstance().getCard(row, col);
 					String imageName;
 					if(((ActionCard) card).getEffect() == "enable") {
+						System.out.println("enable card");
 						imageName = "/resources/images/cards/" + boardCard.getName() 
 								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
 						((PathCard) boardCard).setIsToxic(false);
+						((PathCard) boardCard).setIsInfested(false);
+						((PathCard) boardCard).setIsBlocked(false);
 					}
 					else {
+						System.out.println("disable card");
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
-						((PathCard) boardCard).setIsToxic(true);
+						if (((ActionCard) card).getName() == "Toxic Card")
+							((PathCard) boardCard).setIsToxic(true);
+						if (((ActionCard) card).getName() == "Rat")
+							((PathCard) boardCard).setIsInfested(true);
+						if (((ActionCard) card).getName() == "Road Block") {
+							System.out.println("setting block path to true");
+							((PathCard) boardCard).setIsBlocked(true);
+						}
 					}
 					Image image = new Image(getClass().getResourceAsStream(imageName));
 					target.setImage(image);

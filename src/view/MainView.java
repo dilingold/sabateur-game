@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class MainView extends Application {
 	
-	public static int SCENE_WIDTH = 900;
+	public static int SCENE_WIDTH = 1200;
 	public static int SCENE_HEIGHT = 600;
 	
 	public static GameEngine gameEngine;

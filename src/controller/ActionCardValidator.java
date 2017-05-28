@@ -73,13 +73,17 @@ public class ActionCardValidator {
 		boolean attachedToPath = false;
 		
 		boolean squareDownIsPath = squareDown != null && squareDown.getType() == "path" 
-				&& !((PathCard)squareDown).getIsToxic();
+				&& !((PathCard)squareDown).getIsToxic() && !((PathCard)squareDown).getIsInfested()
+				&& !((PathCard)squareDown).getIsBlocked();
 		boolean squareRightIsPath = squareRight != null && squareRight.getType() == "path"
-				&& !((PathCard)squareRight).getIsToxic();
+				&& !((PathCard)squareRight).getIsToxic() && !((PathCard)squareRight).getIsInfested()
+				&& !((PathCard)squareRight).getIsBlocked();
 		boolean squareUpIsPath = squareUp != null && squareUp.getType() == "path"
-				&& !((PathCard)squareUp).getIsToxic();
+				&& !((PathCard)squareUp).getIsToxic() && !((PathCard)squareUp).getIsInfested()
+				&& !((PathCard)squareUp).getIsBlocked();
 		boolean squareLeftIsPath = squareLeft != null && squareLeft.getType() == "path"
-				&& !((PathCard)squareLeft).getIsToxic();
+				&& !((PathCard)squareLeft).getIsToxic() && !((PathCard)squareLeft).getIsInfested()
+				&& !((PathCard)squareLeft).getIsBlocked();
 		
 		boolean attachedToSquareDown = squareDownIsPath && checkExitsTrue(card, squareDown, 3);
 		boolean attachedToSquareRight = squareRightIsPath && checkExitsTrue(card, squareRight, 2);
@@ -161,8 +165,9 @@ public class ActionCardValidator {
 		else return false;
 		
 		// check if square is disabled
-		if (((PathCard)square).getIsToxic()) {
-			System.out.println("toxic - returning false");
+		if (((PathCard)square).getIsToxic() || ((PathCard)square).getIsInfested()
+				|| ((PathCard)square).getIsBlocked()) {
+			System.out.println("disabled - returning false");
 			return false;
 		}
 		
@@ -272,7 +277,8 @@ public class ActionCardValidator {
         
             if (card.getEffect() == "disable") {
                 
-                if (boardLocation.getIsToxic()) {
+                if (boardLocation.getIsToxic() || boardLocation.getIsInfested() 
+                		|| boardLocation.getIsBlocked()) {
                 
                     return false;
 
@@ -282,7 +288,7 @@ public class ActionCardValidator {
                 
             }
 
-            else if (card.getEffect() == "enable") {
+            else if (card.getName() == "Remove Toxic Card") {
                 if (!boardLocation.getIsToxic()) {
                     
                     return false;
@@ -291,6 +297,28 @@ public class ActionCardValidator {
                 else validated = true;
 
             }
+            
+            else if (card.getName() == "Remove Rat") {
+                if (!boardLocation.getIsInfested()) {
+                    
+                    return false;
+                
+                }
+                else validated = true;
+
+            }
+            
+            else if (card.getName() == "Road Unblock") {
+            	System.out.println("card" + card.getName() + boardLocation.getIsBlocked());
+                if (!boardLocation.getIsBlocked()) {
+                    
+                    return false;
+                
+                }
+                else validated = true;
+
+            }
+            
             else if (card.getEffect() == "rewind"){
                 if(GameEngine.getTurn() > 1)
                     GameEngine.getGameStates().loadState(1);

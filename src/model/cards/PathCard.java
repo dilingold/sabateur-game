@@ -10,6 +10,8 @@ public abstract class PathCard implements Card, Cloneable{
     protected int rotation = 0;
     protected Boolean isDisabled = false;
     protected boolean isToxic = false;
+    protected boolean isInfested = false;
+    protected boolean isBlocked = false;
 
 
     public PathCard() {
@@ -101,6 +103,30 @@ public abstract class PathCard implements Card, Cloneable{
     public void setIsToxic(boolean isToxic) {
 
         this.isToxic = isToxic;
+
+    }
+    
+    public boolean getIsInfested() {
+
+        return isInfested;
+
+    }
+
+    public void setIsInfested(boolean isInfested) {
+
+        this.isInfested = isInfested;
+
+    }
+    
+    public boolean getIsBlocked() {
+
+        return isBlocked;
+
+    }
+
+    public void setIsBlocked(boolean isBlocked) {
+
+        this.isBlocked = isBlocked;
 
     }
 
