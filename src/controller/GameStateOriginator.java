@@ -86,10 +86,8 @@ public class GameStateOriginator {
         for (int i = 0; i < ((turnsReverted * numberPlayers) - 1); i++) {
 
             String statediscarded = priorStates.pop();
-            // System.out.println("State discarded: " + statediscarded);
         }
         String stateID = priorStates.pop();
-        System.out.println("State to load generated: " + stateID);
         return stateID;
     }
 

@@ -10,7 +10,6 @@ public class GameEngine {
 	private static int turn;
 	private static GameStateOriginator gameStateOriginator;
 
-	//run game
 	public static void main(String[] args) {
 
 		new GameEngine();
@@ -45,8 +44,6 @@ public class GameEngine {
 		
 	}
 
-
-	//set the next player's turn
 	public Player nextPlayer() {
 
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {

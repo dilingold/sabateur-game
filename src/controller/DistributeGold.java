@@ -58,7 +58,6 @@ public class DistributeGold {
 		for (Player p : PlayerController.getInstance().getPlayerList()) {
 			
 			topDogHeist = p;
-			System.out.println(p.getName() + " heists:");
 			distributeHeistsRecursive(p);
 			
 		}
@@ -71,7 +70,6 @@ public class DistributeGold {
 		for (Player p : PlayerController.getInstance().getPlayerList()) {
 			
 			topDogExpose = p;
-			System.out.println(p.getName() + " exposed:");
 			distributeExposedSabRecursive(p);
 			
 		}
@@ -82,7 +80,6 @@ public class DistributeGold {
 		
 		for (Player p : player.getPlannedHeists()) {
 
-			System.out.println(p.getName());
 			if (p.getGold() > 0) {
 				
 				topDogHeist.addGold(1);
@@ -99,7 +96,6 @@ public class DistributeGold {
 		
 		for (Player p : player.getExposedSabateurs()) {
 
-			System.out.println(p.getName());
 			if (p.getGold() > 0) {
 				
 				topDogExpose.addGold(1);

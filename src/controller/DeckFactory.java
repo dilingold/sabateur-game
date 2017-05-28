@@ -183,10 +183,4 @@ public class DeckFactory implements Reset {
 
     }
 
-    public void clearDeck() {
-
-        Deck.getInstance().clearDeck();
-
-    }
-
 }
