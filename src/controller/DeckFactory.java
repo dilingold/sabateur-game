@@ -33,6 +33,7 @@ public class DeckFactory implements Reset {
         addRemoveRoadBlockCard();
         addRatInfestation();
         addRemoveRatInfestation();
+        addSearchTreasureCard();
     }
 
     public void addToxicCard() {
@@ -148,6 +149,14 @@ public class DeckFactory implements Reset {
         for (int i = 0; i < numPersonalCards; i++) {
             Deck.getInstance();
             Deck.getDeck().push(CardPrototypeFactory.getPrototype("removeRatInfestationCard"));
+        }
+    }
+
+    public void addSearchTreasureCard() {
+
+        for (int i = 0; i < numPersonalCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("searchTreasureCard"));
         }
     }
 

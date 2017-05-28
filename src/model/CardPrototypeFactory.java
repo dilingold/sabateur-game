@@ -3,29 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.cards.BlockPathCard;
-import model.cards.BombCard;
-import model.cards.Card;
-import model.cards.DestroyToolsCard;
-import model.cards.EmptyCard;
-import model.cards.EndPathCard;
-import model.cards.ExposeCard;
-import model.cards.FixToolsCard;
-import model.cards.GoldCard;
-import model.cards.HeistCard;
-import model.cards.LPathCard;
-import model.cards.PowerToolCard;
-import model.cards.RemoveToxicCard;
-import model.cards.StartCard;
-import model.cards.StoneCard;
-import model.cards.StraightPathCard;
-import model.cards.TPathCard;
-import model.cards.ToxicCard;
-import model.cards.XPathCard;
-import model.cards.RoadBlockCard;
-import model.cards.RemoveRoadBlock;
-import model.cards.RatInfestation;
-import model.cards.RemoveRatInfestation;
+import model.cards.*;
 
 public class CardPrototypeFactory {
     private static final Map<String, Card> prototypes = new HashMap<>();
@@ -65,6 +43,7 @@ public class CardPrototypeFactory {
         prototypes.put("removeRoadBlockCard", new RemoveRoadBlock());
         prototypes.put("ratInfestationCard", new RatInfestation());
         prototypes.put("removeRatInfestationCard", new RemoveRatInfestation());
+        prototypes.put("searchTreasureCard", new SearchTreasureCard());
         
 
         /*
