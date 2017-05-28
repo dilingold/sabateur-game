@@ -150,6 +150,7 @@ public class  GameView implements Observer{
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
 						goldPic.setImage(goldImage);
+						makeDroppable(goldPic, "board");
 						boardGrid.add(goldPic, i, k);
 						imageViews[k][i] = goldPic;
 						break;
@@ -159,6 +160,7 @@ public class  GameView implements Observer{
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
 						coalPic.setImage(coalimage);
+						makeDroppable(coalPic, "board");
 						boardGrid.add(coalPic, i, k);
 						imageViews[k][i] = coalPic;
 						break;

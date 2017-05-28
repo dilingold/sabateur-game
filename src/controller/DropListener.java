@@ -122,14 +122,13 @@ public class DropListener {
 					Card boardCard = Board.getInstance().getCard(row, col);
 					String imageName;
 					if(((ActionCard) card).getEffect() == "enable") {
-						imageName = "/resources/images/cards/" + boardCard.getName() 
+						imageName = "/resources/images/cards/" + boardCard.getName()
 								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
 						((PathCard) boardCard).setIsToxic(false);
 						System.out.println("fefdfdfd..........");
 					}
 					else if(((ActionCard) card).getEffect() == "search"){
-						imageName = "/resources/images/cards/" + boardCard.getName()
-								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
+						imageName = "/resources/images/cards/" + boardCard.getName() + ".png";
 						System.out.println("hi..........");
 
 					}
@@ -232,7 +231,7 @@ public class DropListener {
 
 			else if (card.getEffect() == "search") {
 
-				if()
+				//if stage.
 
 			}
 			currentPlayer.getHand().discardCard(draggedCardIndex);

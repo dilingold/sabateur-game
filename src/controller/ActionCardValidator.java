@@ -40,7 +40,8 @@ public class ActionCardValidator {
 
         if (cardType.getType() == "action") {
             
-            validated = validateAction((ActionCard) cardType, row, column);
+            System.out.println(cardType.getType());
+        	validated = validateAction((ActionCard) cardType, row, column);
 
         }
 
@@ -261,8 +262,21 @@ public class ActionCardValidator {
 
     private Boolean validateAction(ActionCard card, int row, int column) {
 
+		System.out.println("Card Name: " + card.getName());
         Boolean validated = false;
-        
+
+		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "gold")
+		{
+			System.out.println("ITS A GOLD");
+			return true;
+		}
+
+		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "stone")
+		{
+			System.out.println("ITS A COAL!");
+			return true;
+		}
+
         if (Board.getInstance().getCard(row, column).getType() != "path") {
             
             return false;
@@ -469,6 +483,13 @@ public class ActionCardValidator {
 		
 		return win;
 		
+	}
+
+	public Boolean checkGold(int row, int col) {
+		if(Board.getInstance().getCard(row, col).getName() == "Treasure Card"){
+			// show card
+		}
+		return true;
 	}
 
 }

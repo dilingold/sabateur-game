@@ -19,7 +19,7 @@ public class RefreshBoard {
 	    //refresh hand images
 	    PlayGameListener.getGameView().refreshHand();
 
-	    
+
 	    //refresh board images
 		for (int i = 0; i < Board.getInstance().getRows(); i++) {
 			for (int j = 0; j < Board.getInstance().getCols(); j++) {
