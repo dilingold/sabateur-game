@@ -11,6 +11,24 @@ To run the program run from controller.GameEngine
 Requirements:
 Java 1.8
 
+Requirements Assignment Two 
+
+Undo Feature
+We have successfully built an undo feature that will allow a play to undo previous turn to a maximum of 3 and limited to one per game. 
+
+Additional Personal Cards 
+We have introduced Heist Card, Expose Sabotuer Card, Power Tool card. The rules of these cards are specified in the game rules PDF. 
+
+We have specified which design patterns we used in the Pattern.pdf file. 
+
+Bonus Marks - Assignment Two 
+
+********BONUS MARKS Load state – Alternative Universes*****
+**********************************************************************************************************
+The game takes advantage of the state/ memento system and the persistent data structure to let players load any turn they’ve played and continue playing from there, even if they’ve loaded before. Each turn the previous turns State ID is displayed. If the player takes those three numbers and inputs them into the “Load State” menu bar option, they can go back to any previous state of the game.
+**********************************************************************************************************
+
+
 SOLID Principals:
 
 Single Responsibility Principle - SRP
@@ -33,6 +51,9 @@ can override the parent method. We have shown an example of this within the 'pat
 Interface Segregation Principle
 Interface segregation can be demonstrated by the 3 abstract card classes (ActionCard, BoardCard and Personal Card 
 separating the methods and variables these classes use.
+
+Dependency Inversion Principle
+N/A
 
 GRASP Principals:
 
@@ -88,6 +109,8 @@ fabrication to support high cohesion, low coupling, and reuse. We applied pure f
 Protected Variations
 All classes use getters and setters to change local variables, which are kept private.
 
+Indirection
+N/A
 
 Design by Contract principles:
 
