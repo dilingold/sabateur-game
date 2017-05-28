@@ -12,10 +12,7 @@ public class CardPrototypeFactory {
     public static CardPrototypeFactory getInstance() {
         return ourInstance;
     }
-
-    
-
-
+    //upon creation puts a prototype of each card into the map
     private CardPrototypeFactory() {
         prototypes.put("lCard", new LPathCard(0));
         prototypes.put("xCard", new XPathCard(0));
@@ -42,28 +39,13 @@ public class CardPrototypeFactory {
         prototypes.put("removeRatInfestationCard", new RemoveRatInfestation());
         prototypes.put("searchTreasureCard", new SearchTreasureCard());
         
-
-        /*
-         * LPathCard lPCard = new LPathCard(0); XPathCard xCard = new
-         * XPathCard(0); StraightPathCard straightCard = new
-         * StraightPathCard(0); TPathCard tPathCard = new TPathCard(0);
-         * EndPathCard endCard = new EndPathCard(0);
-         * 
-         * ToxicCard toxicCard = new ToxicCard(); ExposeCard exposeCard = new
-         * ExposeCard(); PowerToolCard superToolCard = new PowerToolCard();
-         * HeistCard heistCard = new HeistCard(); RemoveToxicCard
-         * removeToxicCard = new RemoveToxicCard();
-         * 
-         * StoneCard stoneCard = new StoneCard(); StartCard startCard = new
-         * StartCard(); GoldCard goldCard = new GoldCard(); //SwitchTreasureCard
-         * switchTreasureCard = new switchTreasureCard(); FixToolsCard
-         * fixToolsCard = new FixToolsCard(); EmptyCard emptyCard = new
-         * EmptyCard(); DestroyToolsCard destroyToolsCard = new
-         * DestroyToolsCard(); BombCard bombCard = new BombCard(); 
-         * BoardCard boardCard = new BoardCard(); 
-         * BlockPathCard blockPathCard = new BlockPathCard();
-         */
     }
+    /**
+     * Get a copy of a protoype card
+     * 
+     * @pre.condition type must be existing in prototype map
+     * @post.condition $return getType(Card)
+     */
     public static Card getPrototype(String type) {
         try {
             Card myCard = prototypes.get(type).getCopy();

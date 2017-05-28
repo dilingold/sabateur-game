@@ -9,9 +9,10 @@ public class GameStateOriginator {
     static Stack<String> priorStates = new Stack<String>();
     static String lastStateID = new String("-");
 
-    // save state:
-    // asks GameStateMemento to get most recent states of objects
-    // and sends them to the caretaker for saving.
+    /**
+     * save state: asks GameStateMemento to get most recent states of objects
+     * and sends them to the caretaker for saving.
+     */
     public static void saveState() {
         currentPlayerIndex = GameEngine.getCurrentPlayerIndex();
         String stateID = generateStateID();
@@ -24,9 +25,12 @@ public class GameStateOriginator {
 
     }
 
-    // loads state:
-    // gets the desired prior state from caretaker
-    // and sends it to memento, who update the relevant classes
+    /**
+     * load state: gets the desired prior state from caretaker and sends it to
+     * memento, who update the relevant classes
+     * 
+     * @pre.condition 0 < turnsReverted < 3
+     */
     public void loadState(int turnsReverted) {
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
         GameStateMemento.setTurn(oldTurn);
@@ -39,12 +43,16 @@ public class GameStateOriginator {
         numberOfRegressions++;
 
     }
-    //load specific state:
-    //takes a turn, player and number of regressions, loads
-    //state that matches these conditions.
-    public static void loadState(int turn, int player, int regressions){
-        String stateID = Integer.toString(turn) + ";" + Integer.toString(player) + ";"
-                + Integer.toString(regressions);
+
+    /**
+     * load specific state: takes a turn, player and number of regressions,
+     * loads state that matches these conditions.
+     * 
+     * @pre.condition turn, player and regression must match to preexisting
+     *                state
+     */
+    public static void loadState(int turn, int player, int regressions) {
+        String stateID = Integer.toString(turn) + ";" + Integer.toString(player) + ";" + Integer.toString(regressions);
         GameStateMemento.setTurn(turn);
         GameStateMemento.setDeckMemento(GameStateCaretaker.getDeckState(stateID));
         GameStateMemento.setPlayersMemento(GameStateCaretaker.getPlayerState(stateID));
@@ -53,10 +61,13 @@ public class GameStateOriginator {
         GameStateMemento.refreshView();
         numberOfRegressions++;
     }
-    
 
-    // generates relevant ID based off current turn, which player's going, and
-    // how many times undo turn has been used.
+    /**
+     * generates relevant ID based off current turn, which player's going, and
+     * how many times undo turn has been used.
+     * 
+     * @post.condition valid stateID
+     */
     private static String generateStateID() {
         String stateID = Integer.toString(GameEngine.getTurn()) + ";" + Integer.toString(currentPlayerIndex) + ";"
                 + Integer.toString(numberOfRegressions);
@@ -64,9 +75,12 @@ public class GameStateOriginator {
         return stateID;
     }
 
-    // generate state id for loading:
-    // takes in number of turns to go back, and takes states off the prior state
-    // stack until correct state is found, then returns that state's ID.
+    /**
+     * generate state id for loading: 
+     * takes in number of turns to go back, and
+     * takes states off the prior state stack until correct state is found, then
+     * returns that state's ID.
+     **/
     private static String generateStateID(int turnsReverted) {
         int numberPlayers = GameEngine.getPlayerSize();
         for (int i = 0; i < ((turnsReverted * numberPlayers) - 1); i++) {
