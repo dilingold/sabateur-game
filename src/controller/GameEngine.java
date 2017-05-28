@@ -74,7 +74,6 @@ public class GameEngine {
 
 	}
 	public static int getPlayerSize(){
-	    System.out.println("Player Size = "+PlayerController.getPlayersSize());
 	    return PlayerController.getPlayersSize();
 	}
 	

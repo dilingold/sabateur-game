@@ -28,13 +28,20 @@ public class RefreshBoard {
     					System.out.println("cardType = "+ card.getType());
     					String imageName;
     					if (card.getType() == "path" && card.getName() != "start") {
-    		                   if(!((PathCard) Board.getInstance().getCard(i, j)).getIsToxic()){
-            						imageName = "/resources/images/cards/" + card.getName() + "-rotate"
-            								+ ((PathCard) card).getRotation() + ".png";
-            						System.out.println("imageName = "+imageName+", image location = "+i+", "+j);
+    		                   if(((PathCard) Board.getInstance().getCard(i, j)).getIsToxic()){
+                                   imageName = "/resources/images/cards/Toxic Card.png";
+    		                   }
+    		                   else if(((PathCard) Board.getInstance().getCard(i, j)).getIsInfested()){
+    		                       imageName = "/resources/images/cards/Rat.png";
+    		                   }
+    		                   else if(((PathCard) Board.getInstance().getCard(i, j)).getIsBlocked()){
+    		                       imageName = "/resources/images/cards/Road Block.png";
     		                   }
     		                   else{
-    		                       imageName = "/resources/images/cards/Toxic Card.png";
+    		                       imageName = "/resources/images/cards/" + card.getName() + "-rotate"
+                                           + ((PathCard) card).getRotation() + ".png";
+                                   System.out.println("imageName = "+imageName+", image location = "+i+", "+j);
+
     		                   }
     					} else {
     						imageName = "/resources/images/cards/" + card.getName() + ".png";
