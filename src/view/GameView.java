@@ -589,51 +589,31 @@ public class  GameView implements Observer{
 
         Label target = playerLabels.get(player.getUID());
         String imageName = "/resources/images/players/a" + (player.getUID() + 1) + "-power.png";
-
-        Image image = new Image(getClass().getResourceAsStream(imageName));
-        target.setMinWidth(150.0);
-        ImageView playerImageView = new ImageView();
-        playerImageView.setImage(image);
-        playerImageView.setFitWidth(60);
-        playerImageView.setFitHeight(60);
-        target.setGraphic(playerImageView);
-
+        setAvatar(target, imageName);
     }
 
     public void setSuperPowerToolImage(Player player) {
 
         Label target = playerLabels.get(player.getUID());
         String imageName = "/resources/images/players/a" + (player.getUID() + 1) + "-super.png";
-
-        Image image = new Image(getClass().getResourceAsStream(imageName));
-        target.setMinWidth(150.0);
-        ImageView playerImageView = new ImageView();
-        playerImageView.setImage(image);
-        playerImageView.setFitWidth(60);
-        playerImageView.setFitHeight(60);
-        target.setGraphic(playerImageView);
-
+        setAvatar(target, imageName);
     }
 
     public void removePowerToolImage() {
 
         Label target = playerLabels.get(currentPlayer.getUID());
         String imageName = "/resources/images/players/a" + (currentPlayer.getUID() + 1) + ".png";
-
-        Image image = new Image(getClass().getResourceAsStream(imageName));
-        target.setMinWidth(150.0);
-        ImageView playerImageView = new ImageView();
-        playerImageView.setImage(image);
-        playerImageView.setFitWidth(60);
-        playerImageView.setFitHeight(60);
-        target.setGraphic(playerImageView);
-
+        setAvatar(target, imageName);
     }
 
     public void removeSuperPowerToolImage() {
 
         Label target = playerLabels.get(currentPlayer.getUID());
         String imageName = "/resources/images/players/a" + (currentPlayer.getUID() + 1) + ".png";
+        setAvatar(target, imageName);
+    }
+
+    public void setAvatar(Label target, String imageName){
 
         Image image = new Image(getClass().getResourceAsStream(imageName));
         target.setMinWidth(150.0);
