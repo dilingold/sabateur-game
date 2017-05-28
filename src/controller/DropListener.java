@@ -133,6 +133,10 @@ public class DropListener {
 						((PathCard) boardCard).setIsInfested(false);
 						((PathCard) boardCard).setIsBlocked(false);
 					}
+					else if(((ActionCard) card).getEffect() == "search") {
+						imageName = "/resources/images/cards/" + boardCard.getName() + ".png";
+						System.out.println("hi..........");
+					}
 					else {
 						System.out.println("disable card");
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
