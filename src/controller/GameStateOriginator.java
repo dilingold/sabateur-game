@@ -9,13 +9,14 @@ public class GameStateOriginator {
     static int currentPlayerIndex = 0;
     private static int numberOfRegressions = 0;
     static Stack<String> priorStates = new Stack<String>();
-    
+    static String lastStateID = new String("-");
     
  
     
     public static void saveState() {
         currentPlayerIndex = GameEngine.getCurrentPlayerIndex();
         String stateID = generateStateID();
+        lastStateID = stateID;
         priorStates.push(stateID);
         GameStateCaretaker.saveBoardState(stateID, GameStateMemento.getBoardState());
         GameStateCaretaker.savePlayerState(stateID, GameStateMemento.getPlayerState());
@@ -85,5 +86,8 @@ public class GameStateOriginator {
         String stateID = priorStates.pop();
         System.out.println("State to load generated: " + stateID);
         return stateID;
+    }
+    public static String getLastStateID(){
+        return lastStateID;
     }
 }

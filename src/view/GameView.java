@@ -8,6 +8,7 @@ import java.util.Observer;
 import controller.DragCardListener;
 import controller.DropListener;
 import controller.GameEngine;
+import controller.GameStateOriginator;
 import controller.PlayGameListener;
 
 import javafx.geometry.HPos;
@@ -53,12 +54,18 @@ public class  GameView implements Observer{
     private VBox vbCards;
     private List<Label> playerLabels;
     private Label timeLabel = new Label();
+    private Label gameStateLabel = new Label();
+    private Text stateText = new Text("-");
     private EventObserver timerUpdate ;
-    private ArrayList<Integer> playersUsedUndo = new ArrayList<Integer>();
+    private static ArrayList<Integer> playersUsedUndo = new ArrayList<Integer>();
+    
 
     @Override
     public void update(Observable observable, Object arg)
     {
+        //gameStateLabel.setText(GameStateOriginator.getLastStateID());
+        //stateText.setText(GameStateOriginator.getLastStateID());
+       
         timerUpdate = (EventObserver) observable;
         try {
             currentPlayer.getHand().discardCard(0);
@@ -112,6 +119,9 @@ public class  GameView implements Observer{
         boardText.setFill(Color.WHITE);
         vbBoard.getChildren().add(boardText);
         vbBoard.getChildren().add(timeLabel);
+        
+        //added to list gamestate
+        //vbBoard.getChildren().add(stateText);
 
         //T - making accessible for refresh board
         boardGrid = new GridPane();
@@ -244,11 +254,6 @@ public class  GameView implements Observer{
         // if not, it opens an option box for them to select how many turns
         // before calling the game state machine to revert back that many turns.
         undoTurnBtn.setOnAction(event -> {
-            System.out.println("Current player = "+GameEngine.getCurrentPlayerIndex());
-            System.out.println("pUU size = "+playersUsedUndo.size());
-            for(int i = 0; i < playersUsedUndo.size(); i++){
-                System.out.println(playersUsedUndo.get(i)+" has used an undo.");
-            }
             if (!playersUsedUndo.contains(GameEngine.getCurrentPlayerIndex())) {
 
                 final Stage dialog = new Stage();
