@@ -30,40 +30,5 @@ public class PersonalCardValidator {
 		return true;
 		
 	}
-	
-	public boolean checkMove(PersonalCard card, Player target) {
-		
-		Boolean validated = false;
-		if(card.getName() == "expose") {
-			
-			
-			
-		}
-		
-		if(card.getEffect() == "destroyTools") {
-				
-			if(target.areToolsDamaged() == false) {
-					
-				target.changeToolsDamage();
-				validated = true;
-					
-			}
-				
-			if(card.getEffect() == "fix") {
-				
-				if(target.areToolsDamaged() == true) {
-					
-					target.changeToolsDamage();
-					validated = true;
-					
-				}	
-				
-			}
-			
-		}
-			
-		return validated;
-		
-	}	
 
 }

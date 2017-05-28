@@ -1,19 +1,14 @@
 package view;
 
-import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JOptionPane;
-
 import controller.DragCardListener;
 import controller.DropListener;
 import controller.GameEngine;
 import controller.PlayGameListener;
-
-import controller.*;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -40,7 +35,6 @@ import model.EventObserver;
 import model.Hand;
 import model.Player;
 import model.cards.*;
-//import sun.applet.Main;
 
 public class  GameView implements Observer{
 
@@ -173,29 +167,6 @@ public class  GameView implements Observer{
 						boardGrid.add(startPic, i, k);
 						imageViews[k][i] = startPic;
 					
-/*	
- * For refresh view method:
-					default: //else
-						case "path":
-							String pathImageName = "/resources/images/cards/" + currentBoard.getCard(k, i).getName() + "-rotate"
-								+ ((PathCard) currentBoard.getCard(k, i)).getRotation() + ".png";
-							Image pathImage = new Image(pathImageName);
-							ImageView pathPic = new ImageView();
-							pathPic.setFitWidth(60);
-							pathPic.setFitHeight(60);
-							pathPic.setImage(pathImage);
-							boardGrid.add(pathPic, i, k);
-							imageViews[k][i] = pathPic;
-						case "action":
-							String actionImageName = "/resources/images/cards/"+currentBoard.getCard(k, i).getName() + ".png";
-							Image actionImage = new Image(actionImageName);
-							ImageView actionPic = new ImageView();
-							actionPic.setFitWidth(60);
-							actionPic.setFitHeight(60);
-							actionPic.setImage(actionImage);
-							boardGrid.add(actionPic, i, k);
-							imageViews[k][i] = actionPic;
-*/
 				}
 				
 			}
@@ -226,7 +197,7 @@ public class  GameView implements Observer{
 		undoTurnBtn.setPrefWidth(70);
 		hbCards.getChildren().add(undoTurnBtn);
 
-		//placeholder: a card to reveal the player's role
+		// a card to reveal the player's role
 		roleBtn.setOnAction(event ->  {
 			
 			if (roleBtn.getText() == "Role") {
@@ -285,13 +256,7 @@ public class  GameView implements Observer{
                     Scene dialogScene = new Scene(dialogVbox, 300, 200);
                     dialog.setScene(dialogScene);
                     dialog.show();
-		            //int turnsToRevert = Integer.parseInt(selectedValue.toString());
-		            /*if(GameEngine.getTurn() > turnsToRevert){
-		                GameEngine.getGameStates().loadState(turnsToRevert);
-		                undoTurnBtn.setDisable(true);
-		            }*/
 		  
-
         });
 		
 		displayHand();
@@ -495,7 +460,6 @@ public class  GameView implements Observer{
 		
 		target.setOnDragDropped(event ->  {
 			
-			Node source = (Node) event.getSource();	
 			if(dropListener.drop(stage, event, currentPlayer, player, draggedCardIndex, target)) {
 				
 				nextTurn();
@@ -580,24 +544,16 @@ public class  GameView implements Observer{
 	
 	
 	public void setImage(int row, int col, String imageName){
-		/*		ImageView playerImageView = new ImageView();
-		playerImageView.setImage(image);
-		playerImageView.setFitWidth(60);
-		playerImageView.setFitHeight(60);
-		target.setGraphic(playerImageView);
-		*/
+
 		Image image = new Image(getClass().getResourceAsStream(imageName));
 
 		ImageView card = new ImageView();
 		card.setFitWidth(60);
 		card.setFitHeight(60);
 		card.setImage(image);
-		//boardGrid.add(coalPic, i, k);
-		//imageViews[row][col] = card;
-		//boardGrid.add(pic, i, k);
+
 		makeDroppable(card, "board");
 		boardGrid.add(card, row, col);
-		//imageViews[row][col].setImage(image);
 	}
 	
 	public void refreshHand(){
@@ -606,7 +562,6 @@ public class  GameView implements Observer{
 	}
 	
 	private void revertTurn(int turns){
-        //int turnsToRevert = Integer.parseInt(selectedValue.toString());
         if(GameEngine.getTurn() > turns){
             GameEngine.getGameStates().loadState(turns);
         }
