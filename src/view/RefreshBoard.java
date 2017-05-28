@@ -40,8 +40,6 @@ public class RefreshBoard {
     		                   else{
     		                       imageName = "/resources/images/cards/" + card.getName() + "-rotate"
                                            + ((PathCard) card).getRotation() + ".png";
-                                   System.out.println("imageName = "+imageName+", image location = "+i+", "+j);
-
     		                   }
     					} else {
     						imageName = "/resources/images/cards/" + card.getName() + ".png";

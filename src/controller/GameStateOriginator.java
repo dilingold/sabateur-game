@@ -71,7 +71,6 @@ public class GameStateOriginator {
     private static String generateStateID() {
         String stateID = Integer.toString(GameEngine.getTurn()) + ";" + Integer.toString(currentPlayerIndex) + ";"
                 + Integer.toString(numberOfRegressions);
-        System.out.println("State generated: " + stateID);
         return stateID;
     }
 

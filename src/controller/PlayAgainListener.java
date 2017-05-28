@@ -6,12 +6,6 @@ import model.Player;
 public class PlayAgainListener {
 	
 	public void playAgain(Stage stage) {
-		
-		for(Player player : PlayerController.getInstance().getPlayerList()) {
-			
-			System.out.println(player.getName() + ": " + player.getGold());
-			
-		}
 
 		RestartGame restartGame = new RestartGame();
 

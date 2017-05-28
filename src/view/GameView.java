@@ -119,7 +119,6 @@ public class  GameView implements Observer{
 
         menuBar.setStyle("-fx-stroke: red;");
         menuItem1.setOnAction(event -> {
-            System.out.println("OPEN STATE");
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner(stage);
