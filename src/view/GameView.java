@@ -20,12 +20,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -98,7 +98,56 @@ public class  GameView implements Observer{
 	}
 
 	public void displayView(int totalPlayers, ArrayList<Player> playerNames) {
+		BorderPane root = new BorderPane();
+		final Menu menu1 = new Menu("File");
+		final Menu menu2 = new Menu("Options");
+		final Menu menu3 = new Menu("Help");
 
+		final MenuItem menuItem1 = new MenuItem("Load");
+
+		menu1.getItems().addAll(menuItem1);
+
+		MenuBar menuBar = new MenuBar();
+		menuBar.getMenus().addAll(menu1, menu2, menu3);
+
+		menuBar.setStyle("-fx-stroke: red;");
+
+		menuItem1.setOnAction(event -> {
+			System.out.println("OPEN STATE");
+			final Stage dialog = new Stage();
+			dialog.initModality(Modality.APPLICATION_MODAL);
+			dialog.initOwner(stage);
+			VBox dialogVbox = new VBox(20);
+			HBox hBox = new HBox(20);
+
+			TextField numberField1 = new TextField();
+			numberField1.setMaxWidth(40.0);
+
+			TextField numberField2 = new TextField();
+			numberField2.setMaxWidth(40.0);
+
+			TextField numberField3 = new TextField();
+			numberField3.setMaxWidth(40.0);
+
+			Button load = new Button("Load");
+
+			dialogVbox.getChildren().add(new Text("Enter Game State"));
+			hBox.getChildren().addAll(numberField1, numberField2, numberField3);
+
+			dialogVbox.getChildren().add(hBox);
+			dialogVbox.getChildren().add(load);
+
+
+			Scene dialogScene = new Scene(dialogVbox, 300, 200);
+			dialog.setScene(dialogScene);
+			dialog.show();
+
+			load.setOnAction(event1 -> {
+				System.out.println("PASSING BOX 1 2 and 3 and closing window here");
+				dialog.close();
+			});
+
+		});
 		currentPlayer = MainView.gameEngine.getCurrentPlayer();
 		stage.setTitle("Play Game");
 		GridPane gameGrid = new GridPane();
@@ -353,7 +402,10 @@ public class  GameView implements Observer{
 		gameGrid.add(vbPlayers, 2, 0, 1, 2);
 		gameGrid.add(vbDiscard, 2, 1, 1, 2);
 
-		Scene scene = new Scene(gameGrid, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
+
+		root.setTop(menuBar);
+		root.setCenter(gameGrid);
+		Scene scene = new Scene(root, MainView.SCENE_WIDTH, MainView.SCENE_HEIGHT);
 
 		stage.setScene(scene);
 		scene.getStylesheets().add(AddPlayerView.class.getResource("style.css").toExternalForm());
