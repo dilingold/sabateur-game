@@ -132,6 +132,10 @@ public class DropListener {
 						((PathCard) boardCard).setIsInfested(false);
 						((PathCard) boardCard).setIsBlocked(false);
 					}
+					else if(((ActionCard) card).getEffect() == "search") {
+						imageName = "/resources/images/cards/" + boardCard.getName() + ".png";
+						System.out.println("hi..........");
+					}
 					else {
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
 						if (((ActionCard) card).getName() == "Toxic Card")
