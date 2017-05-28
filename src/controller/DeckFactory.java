@@ -5,6 +5,11 @@ import java.util.Stack;
 import model.CardPrototypeFactory;
 import model.Deck;
 import model.cards.Card;
+import model.cards.EndPathCard;
+import model.cards.LPathCard;
+import model.cards.StraightPathCard;
+import model.cards.TPathCard;
+import model.cards.ToxicCard;
 
 public class DeckFactory implements Reset {
 
@@ -39,8 +44,9 @@ public class DeckFactory implements Reset {
     public void addToxicCard() {
 
         for (int i = 0; i < numActionCards; i++) {
+            ToxicCard toxicCard = (ToxicCard) CardPrototypeFactory.getPrototype("toxicCard");
             Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("toxicCard"));
+            Deck.getDeck().push(toxicCard);
         }
     }
 
@@ -49,49 +55,6 @@ public class DeckFactory implements Reset {
         for (int i = 0; i < numActionCards; i++) {
             Deck.getInstance();
             Deck.getDeck().push(CardPrototypeFactory.getPrototype("removeToxicCard"));
-        }
-    }
-
-    public void addLPathCards() {
-
-        for (int i = 0; i < numPathCards; i++) {
-            Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("lCard"));
-        }
-
-    }
-
-    public void addXPathCards() {
-
-        for (int i = 0; i < numPathCards; i++) {
-            Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("xCard"));
-        }
-
-    }
-
-    public void addStraighPathCards() {
-
-        for (int i = 0; i < numPathCards; i++) {
-            Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("straightCard"));
-        }
-
-    }
-
-    public void addTPathCards() {
-
-        for (int i = 0; i < numPathCards; i++) {
-            Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("tCard"));
-        }
-
-    }
-
-    public void addEndPathCards() {
-        for (int i = 0; i < numPathCards; i++) {
-            Deck.getInstance();
-            Deck.getDeck().push(CardPrototypeFactory.getPrototype("endCard"));
         }
     }
 
@@ -118,6 +81,53 @@ public class DeckFactory implements Reset {
             Deck.getDeck().push(CardPrototypeFactory.getPrototype("superToolCard"));
         }
 
+    }
+
+    public void addXPathCards() {
+
+        for (int i = 0; i < numPathCards; i++) {
+            Deck.getInstance();
+            Deck.getDeck().push(CardPrototypeFactory.getPrototype("xCard"));
+        }
+
+    }
+
+    public void addLPathCards() {
+
+        for (int i = 0; i < numPathCards; i++) {
+            LPathCard lPCard = new LPathCard(0);
+            Deck.getInstance();
+            Deck.getDeck().push(lPCard);
+        }
+
+    }
+
+    public void addStraighPathCards() {
+
+        for (int i = 0; i < numPathCards; i++) {
+            StraightPathCard StraightCard = new StraightPathCard(0);
+            Deck.getInstance();
+            Deck.getDeck().push(StraightCard);
+        }
+
+    }
+
+    public void addTPathCards() {
+
+        for (int i = 0; i < numPathCards; i++) {
+            TPathCard tCard = new TPathCard(0);
+            Deck.getInstance();
+            Deck.getDeck().push(tCard);
+        }
+
+    }
+
+    public void addEndPathCards() {
+        for (int i = 0; i < numPathCards; i++) {
+            EndPathCard endCard = new EndPathCard(0);
+            Deck.getInstance();
+            Deck.getDeck().push(endCard);
+        }
     }
 
     public void addRoadBlockCard() {
