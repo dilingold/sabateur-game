@@ -61,8 +61,7 @@ public class DropListener {
 		
 		validator = new ActionCardValidator();
 		
-		//for debugging
-
+		// if the move is valid, drop it on the board
 		if(validator.checkMove(currentPlayer.getHand().getCards().get(draggedCardIndex), row, col)) {
 
 			if (event.getGestureSource() != target) {
@@ -73,6 +72,7 @@ public class DropListener {
 				//if the dragged card is a path card, get the correct rotation and image
 				if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "path") {
 					
+					// if the player has the poser tool, the card played turns into a cross card
 					if (currentPlayer.hasPowerTool() && !currentPlayer.hasSuperPowerTool()) {
 						
 						card = new XPathCard(0);
@@ -83,6 +83,8 @@ public class DropListener {
 						minersWin = validator.checkMinersWin(row, col);
 					}
 					
+					// if the player has the super power tool, the card played turns into a cross card
+					// and board location above, below, right and left become cross cards if empty
 					else if(currentPlayer.hasSuperPowerTool()) {
 						
 						card = new XPathCard(0);
@@ -100,7 +102,7 @@ public class DropListener {
 						
 					}
 					
-					
+					// if gold is found, distribute gold and play again
 					if(minersWin) {
 						
 						DistributeGold.currentPlayer(currentPlayer);
@@ -109,6 +111,7 @@ public class DropListener {
 						
 					}
 					
+					// if sabateurs win, distribute gold and play again
 					else if(validator.checkSabateursWin()) {
 						
 						distributeGold("sabateurs");
@@ -120,6 +123,8 @@ public class DropListener {
 
 				}
 
+				// if playing an action card on the board, block the path if it is a disable card and remove
+				// blockage if it is an enable card
 				else if (currentPlayer.getHand().getCards().get(draggedCardIndex).getType() == "action") {
 					
 					card = (ActionCard) currentPlayer.getHand().getCards().get(draggedCardIndex);
@@ -134,7 +139,6 @@ public class DropListener {
 					}
 					else if(((ActionCard) card).getEffect() == "search") {
 						imageName = "/resources/images/cards/" + boardCard.getName() + ".png";
-						System.out.println("hi..........");
 					}
 					else {
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
@@ -143,7 +147,6 @@ public class DropListener {
 						if (((ActionCard) card).getName() == "Rat")
 							((PathCard) boardCard).setIsInfested(true);
 						if (((ActionCard) card).getName() == "Road Block") {
-							System.out.println("setting block path to true");
 							((PathCard) boardCard).setIsBlocked(true);
 						}
 					}
@@ -152,6 +155,7 @@ public class DropListener {
 					currentPlayer.getHand().discardCard(draggedCardIndex);
 					currentPlayer.drawCard();
 					
+					// if saboteurs win, distribute gold and play again
 					if(validator.checkSabateursWin()) {
 						
 						distributeGold("sabateurs");

@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Random;
-
 import model.Board;
 import model.cards.StartCard;
 
@@ -59,25 +57,6 @@ public class BoardBuilder implements Reset{
 	public void setTreasureSites() {
 		
 		Board.getInstance().setTreasure(Board.getInstance().getTreasureRows(), Board.getInstance().getTreasureCols());
-		
-	}
-	
-	public void setTreasureSites(int numTreasures) {
-		
-		Random rand = new Random();
-		
-		int[] randRows = new int[numTreasures];
-		int[] randCols = new int[numTreasures];
-		for (int i = 0; i < numTreasures; i++) {
-			
-			int randRow = rand.nextInt((maxRow-1 - 0) + 1) + 0;
-			int randCol = rand.nextInt((maxCol-1 - 0) + 1) + 0;
-			
-			randRows[i] = randRow;
-			randCols[i] = randCol;
-			
-		}
-		Board.getInstance().setTreasure(randRows, randCols);
 		
 	}
 	

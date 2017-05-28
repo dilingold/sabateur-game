@@ -9,6 +9,7 @@ public class DistributeGold {
 	private static Player topDogHeist;
 	private static Player topDogExpose;
 		
+	// if the player to find gold is a miner, give them 4 extra gold 
 	public static void currentPlayer(Player currentPlayer) {
 		
 		if(currentPlayer.getType() == "miner") {
@@ -19,6 +20,7 @@ public class DistributeGold {
 		
 	}
 	
+	// distributes 10 gold to each miner
 	public static void miners() {
 				
 		List<Player> players = PlayerController.getInstance().getPlayerList();
@@ -34,6 +36,7 @@ public class DistributeGold {
 		
 	}
 	
+	// distributes 10 gold to each saboteur
 	public static void sabateurs() {
 		
 		List<Player> players = PlayerController.getInstance().getPlayerList();
@@ -49,6 +52,7 @@ public class DistributeGold {
 		
 	}
 	
+	// distributes gold to players who successfully planned a heist on a miner
 	public static void heistedMiners() {
 		
 		for (Player p : PlayerController.getInstance().getPlayerList()) {
@@ -61,6 +65,7 @@ public class DistributeGold {
 		
 	}
 	
+	// distributes gold to players who successfully exposed a saboteur
 	public static void exposedSabateurs() {
 		
 		for (Player p : PlayerController.getInstance().getPlayerList()) {

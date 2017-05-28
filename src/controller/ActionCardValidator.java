@@ -50,12 +50,15 @@ public class ActionCardValidator {
 
 	private Boolean validatePath(Card card, int row, int col) {
 
-		Boolean validated = false;
 		visitedSquares = new ArrayList<Card>();
+		
 		//check that dropped card matches any neighboring cards and leads back to start
 		if (Board.getInstance().getCard(row, col).getType() == "path") {
+			
 			return false;
+			
 		}
+		
 		Card squareUp = null;
 		Card squareDown = null;
 		Card squareLeft = null;
@@ -167,18 +170,14 @@ public class ActionCardValidator {
 		// check if square is disabled
 		if (((PathCard)square).getIsToxic() || ((PathCard)square).getIsInfested()
 				|| ((PathCard)square).getIsBlocked()) {
-			System.out.println("disabled - returning false");
 			return false;
 		}
 		
 		// check square has not already been visited
 		for (Card square1: visitedSquares) {
 			
-			System.out.println("square " + square1.getName());
 			if (square.equals(square1)) {
 				
-				System.out.println("revisiting square at " + row + ", " + col);
-				System.out.println("revisited square " + square1.getName());
 				return false;
 				
 			}
@@ -186,12 +185,9 @@ public class ActionCardValidator {
 		}
 		
 		visitedSquares.add(square);
-		System.out.println("adding " + square.getName() + " at " + row + ", " + col + " to visited list");
 		
 		// return true if player reaches start position
-		System.out.println("checking if hit start position");
 		if (square != null && square.getName() == "start") {
-			System.out.println("hit start position - returning true");
 			
 			validated = true;
 			
@@ -214,26 +210,22 @@ public class ActionCardValidator {
 			
 			// check square below
 			if (squareDown != null && checkExitsTrue(square, squareDown, 3)) {
-				System.out.println("checking down");
 				validated = checkPathRecursive(row+1, col);
 			}
 				
 			// check square to right
 			if (!validated && squareRight != null && checkExitsTrue(square, squareRight, 2)) {
-				System.out.println("checking right");
 				validated = checkPathRecursive(row, col+1);
 			}
 			
 			// check square above
 			if (!validated && squareUp != null && checkExitsTrue(square, squareUp, 1)) {
-				System.out.println("checking up");
 				validated = checkPathRecursive(row-1, col);
 					
 			}
 			
 			// check square to left
 			if (!validated && squareLeft != null && checkExitsTrue(square, squareLeft, 0)){
-				System.out.println("checking left");
 				validated = checkPathRecursive(row, col-1);
 			}
 			
@@ -255,7 +247,6 @@ public class ActionCardValidator {
 		if(boardLocation.getName() == "stone" || boardLocation.getName() == "gold" 
 				|| boardLocation.getName() == "start") {
 			
-			System.out.println("returning false " + boardLocation.getName());
 			return false;
 			
 		}
@@ -270,13 +261,11 @@ public class ActionCardValidator {
 
 		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "gold")
 		{
-			System.out.println("ITS A GOLD");
 			return true;
 		}
 
 		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "stone")
 		{
-			System.out.println("ITS A COAL!");
 			return true;
 		}
         
@@ -321,7 +310,6 @@ public class ActionCardValidator {
             }
             
             else if (card.getName() == "Road Unblock") {
-            	System.out.println("card" + card.getName() + boardLocation.getIsBlocked());
                 if (!boardLocation.getIsBlocked()) {
                     
                     return false;
@@ -367,14 +355,10 @@ public class ActionCardValidator {
 			boardExit = exit - 2;
 		}
 		else boardExit = exit + 2;
-		//System.out.println("played card: " + playerCard.getExits()[0] + playerCard.getExits()[1] + playerCard.getExits()[2] + playerCard.getExits()[3]);
-		//System.out.println("board card: " + boardCard.getExits()[0] + boardCard.getExits()[1] + boardCard.getExits()[2] + boardCard.getExits()[3]);
 
 		boolean exitsTrue = playerCard.getExits()[exit] && boardCard.getExits()[boardExit];
-		//System.out.println("checking exit " + exit + "with exit " + boardExit + " " + playerCard.getExits()[exit] + " " + boardCard.getExits()[boardExit]);
 
 		if (exitsTrue) {
-			//System.out.println("returning true");
 			return true;
 		}
 		else return false;

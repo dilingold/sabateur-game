@@ -33,10 +33,7 @@ public class CardPrototypeFactory {
         prototypes.put("startCard", new StartCard());
         prototypes.put("goldCard", new GoldCard());
         // prototypes.put("switchTreasureCard", new switchTreasureCard());
-        prototypes.put("fixToolsCard", new FixToolsCard());
         prototypes.put("emptyCard", new EmptyCard());
-        prototypes.put("destroyToolsCard", new DestroyToolsCard());
-        prototypes.put("bombCard", new BombCard());
         prototypes.put("blockPathCard", new BlockPathCard(0));
         
         prototypes.put("roadBlockCard", new RoadBlockCard());
