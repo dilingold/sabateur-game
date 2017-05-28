@@ -18,7 +18,7 @@ public GameStateMemento(){
 
 
 
-public static Stack<Card> saveDeck(){
+public static Stack<Card> getDeckMemento(){
     Deck.getInstance();
     Stack<Card> deckInstance = Deck.getDeck();
     Stack<Card> savedDeck = new Stack<Card>();
@@ -28,13 +28,13 @@ public static Stack<Card> saveDeck(){
     return savedDeck;
 }
 
-public static ArrayList<Player> getPlayerState(){
+public static ArrayList<Player> getPlayersMemento(){
     return PlayerController.copyPlayerList();
 }
-public static ArrayList<ArrayList<Card>> getPlayerHands(){
+public static ArrayList<ArrayList<Card>> getHandlistMemento(){
     return PlayerController.getHands();
 }
-public static Board getBoardState(){
+public static Board getBoardMemento(){
     return Board.getBoardCopy();
 }
 public static void setTurn(int oldTurn){

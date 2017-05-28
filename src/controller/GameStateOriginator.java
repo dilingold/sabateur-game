@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Stack;
 
-import model.cards.Card;
-
 public class GameStateOriginator {
     static int turn = 0;
     static int currentPlayerIndex = 0;
@@ -18,10 +16,10 @@ public class GameStateOriginator {
         String stateID = generateStateID();
         lastStateID = stateID;
         priorStates.push(stateID);
-        GameStateCaretaker.saveBoardState(stateID, GameStateMemento.getBoardState());
-        GameStateCaretaker.savePlayerState(stateID, GameStateMemento.getPlayerState());
-        GameStateCaretaker.saveHandListState(stateID, GameStateMemento.getPlayerHands());
-        GameStateCaretaker.saveDeckState(stateID, GameStateMemento.saveDeck());
+        GameStateCaretaker.saveBoardState(stateID, GameStateMemento.getBoardMemento());
+        GameStateCaretaker.savePlayerState(stateID, GameStateMemento.getPlayersMemento());
+        GameStateCaretaker.saveHandListState(stateID, GameStateMemento.getHandlistMemento());
+        GameStateCaretaker.saveDeckState(stateID, GameStateMemento.getDeckMemento());
         // For debugging: printout of saved board state
        /* System.out.println("State " + stateID + " saved. BoardState: ");
         for (int r = 0; r < boardStates.get(stateID).getRows(); r++) {
@@ -39,8 +37,6 @@ public class GameStateOriginator {
     }
 
     public void loadState(int turnsReverted) {
-
-       
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
         GameStateMemento.setTurn(oldTurn);
         String oldStateID = generateStateID(turnsReverted);
