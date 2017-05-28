@@ -6,7 +6,7 @@ import java.util.Map;
 import model.cards.*;
 
 public class CardPrototypeFactory {
-    private static final Map<String, Card> prototypes = new HashMap<>();
+    private static  Map<String, Card> prototypes = new HashMap<>();
     private static CardPrototypeFactory ourInstance = new CardPrototypeFactory();
 
     public static CardPrototypeFactory getInstance() {
@@ -69,7 +69,8 @@ public class CardPrototypeFactory {
     }
     public static Card getPrototype(String type) {
         try {
-            return prototypes.get(type).getCopy();
+            Card myCard = prototypes.get(type).getCopy();
+            return myCard;
         } catch (NullPointerException ex) {
             System.out.println("Prototype with name: " + type + ", doesn't exist");
             return null;
