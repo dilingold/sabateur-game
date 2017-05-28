@@ -25,13 +25,11 @@ public class RefreshBoard {
 			for (int j = 0; j < Board.getInstance().getCols(); j++) {
 				Card card = Board.getInstance().getCard(i, j);
 				if (card.getType() != null && card.getType() != "board") {
-    					System.out.println("cardType = "+ card.getType());
     					String imageName;
     					if (card.getType() == "path" && card.getName() != "start") {
     		                   if(!((PathCard) Board.getInstance().getCard(i, j)).getIsToxic()){
             						imageName = "/resources/images/cards/" + card.getName() + "-rotate"
             								+ ((PathCard) card).getRotation() + ".png";
-            						System.out.println("imageName = "+imageName+", image location = "+i+", "+j);
     		                   }
     		                   else{
     		                       imageName = "/resources/images/cards/Toxic Card.png";

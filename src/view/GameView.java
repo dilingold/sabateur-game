@@ -61,8 +61,6 @@ public class  GameView implements Observer{
 	public void update(Observable observable, Object arg)
 	{
 		timerUpdate = (EventObserver) observable;
-		System.out.println("Timer Has Changed Status to "+timerUpdate.getTimerStatus());
-		System.out.println("Discarding Card position 0");
 		try {
 			currentPlayer.getHand().discardCard(0);
 			currentPlayer.drawCard();
@@ -71,7 +69,6 @@ public class  GameView implements Observer{
 		}
 
 		if(timerUpdate.getTimerStatus()) {
-			System.out.println("Next Turn!!!");
 			nextTurn();
 		}
 

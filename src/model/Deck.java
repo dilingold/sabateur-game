@@ -53,10 +53,7 @@ public class Deck {
 	}
 	
 	public static void setDeck(Stack<Card> oldDeck){
-	    System.out.println("number of cards in deck: "+Deck.getDeckSize());
 	    deck = oldDeck;
-	    System.out.println("number of cards in deck after change: "+Deck.getDeckSize());
-	    System.out.println("number of cards in oldDeck: "+oldDeck.size());
 	    
 	}
 	public static int getDeckSize(){

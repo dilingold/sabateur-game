@@ -52,7 +52,6 @@ public class GameEngine {
 		if (currentPlayerIndex == players.getPlayerList().size()-1) {
 		    turn++;
 			currentPlayerIndex = 0;
-			System.out.println("New turn");
 		}
 		else {
 		    currentPlayerIndex++;
@@ -74,7 +73,6 @@ public class GameEngine {
 
 	}
 	public static int getPlayerSize(){
-	    System.out.println("Player Size = "+PlayerController.getPlayersSize());
 	    return PlayerController.getPlayersSize();
 	}
 	
@@ -100,7 +98,6 @@ public class GameEngine {
         turn = oldTurn;
     }
     public static GameStateOriginator getGameStates(){
-        System.out.println("gameEng asking to load game state...");
         return gameStateOriginator;
     }
 

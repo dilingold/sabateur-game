@@ -17,7 +17,7 @@ public class PlayGameListener {
     //static GameView gameView;
     static GameView observer;
 	private static EventObserver observable = new EventObserver(true);
-	private static final Integer SetTimer = 15; // Have this in options perhaps?
+	private static final Integer SetTimer = 600; // Have this in options perhaps?
 	private static IntegerProperty STARTTIME = new SimpleIntegerProperty(SetTimer);
 	protected static Timeline timeline = new Timeline();
 
@@ -42,7 +42,6 @@ public class PlayGameListener {
 			STARTTIME.set(SetTimer);
 			timeline.getKeyFrames().add(
 					new KeyFrame(Duration.seconds(SetTimer+1), event -> {
-						System.out.println("Timer Ended: " + timeLabel.textProperty().getValue());
 						observable.setTimerStatus(true);
 					}, new KeyValue(STARTTIME, 0))
 			);
@@ -60,7 +59,6 @@ public class PlayGameListener {
 		timeline.stop();
 		timeline.setCycleCount(0);
 		observable.setTimerStatus(false);
-		System.out.println("play again screen said stop");
 
 	}
 	public static GameView getGameView(){
