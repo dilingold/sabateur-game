@@ -41,7 +41,6 @@ public class GameStateOriginator {
 
        
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
-        System.out.println("Rewinding turn: going to turn " + oldTurn);
         GameStateMemento.setTurn(oldTurn);
         String oldStateID = generateStateID(turnsReverted);
         GameStateMemento.setDeck(GameStateCaretaker.getDeckState(oldStateID));
@@ -79,6 +78,7 @@ public class GameStateOriginator {
         // Integer.toString(turn-turnsReverted)+Integer.toString(currentPlayerIndex)+Integer.toString(numberOfRegressions);
         int numberPlayers = GameEngine.getPlayerSize();
         for (int i = 0; i < ((turnsReverted * numberPlayers) - 1); i++) {
+
             String statediscarded = priorStates.pop();
             System.out.println("State discarded: " + statediscarded);
         }

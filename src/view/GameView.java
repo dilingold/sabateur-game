@@ -37,13 +37,13 @@ import model.Player;
 import model.cards.*;
 //import sun.applet.Main;
 
-public class GameView implements Observer {
+public class  GameView implements Observer{
 
     private Stage stage;
     private Text playerText = null;
-
+    
     private Player currentPlayer;
-    // made static for access to reset view
+    //made static for access to reset view
     private static ImageView[][] imageViews;
 
     private int draggedCardIndex;
@@ -53,36 +53,33 @@ public class GameView implements Observer {
     private VBox vbCards;
     private List<Label> playerLabels;
     private Label timeLabel = new Label();
-    private EventObserver timerUpdate;
+    private EventObserver timerUpdate ;
     private ArrayList<Integer> playersUsedUndo = new ArrayList<Integer>();
 
     @Override
-    public void update(Observable observable, Object arg) {
+    public void update(Observable observable, Object arg)
+    {
         timerUpdate = (EventObserver) observable;
-        System.out.println("Timer Has Changed Status to " + timerUpdate.getTimerStatus());
-        System.out.println("Discarding Card position 0");
         try {
             currentPlayer.getHand().discardCard(0);
             currentPlayer.drawCard();
-        } catch (Exception e) {
+        }catch (Exception e) {
             PlayGameListener.stopTime();
         }
 
-        if (timerUpdate.getTimerStatus()) {
-            System.out.println("Next Turn!!!");
+        if(timerUpdate.getTimerStatus()) {
             nextTurn();
         }
 
-        // PlayGameListener.stopTime();
+        //PlayGameListener.stopTime();
     }
 
-    // T - accessible for refresh script
+    //T - accessible for refresh script
     private GridPane boardGrid;
-
+    
     /*
-     * this view is the game view which includes all the components required to
-     * play the game including the board, players, current player's hand and a
-     * discard pile
+     * this view is the game view which includes all the components required to play the game
+     * including the board, players, current player's hand and a discard pile
      */
     public GameView(Stage stage) {
 
@@ -90,7 +87,7 @@ public class GameView implements Observer {
         PlayGameListener.startTimer(timeLabel);
         stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
             if (KeyCode.ESCAPE == event.getCode()) {
-                // code to add
+                //code to add
             }
         });
 
@@ -116,92 +113,94 @@ public class GameView implements Observer {
         vbBoard.getChildren().add(boardText);
         vbBoard.getChildren().add(timeLabel);
 
-        // T - making accessible for refresh board
+        //T - making accessible for refresh board
         boardGrid = new GridPane();
 
-        // display the board in the centre of the screen
-        // get the board and populate it with the start card, the goal cards and
-        // blank cards
-        // add appropriate images in correct positions
-        // make only the blank positions on the board droppable so player's path
-        // cards can be dropped on them
+        //display the board in the centre of the screen
+        //get the board and populate it with the start card, the goal cards and blank cards
+        //add appropriate images in correct positions
+        //make only the blank positions on the board droppable so player's path cards can be dropped on them
         Board currentBoard = Board.getInstance();
         int rows = currentBoard.getRows();
         int cols = currentBoard.getCols();
         imageViews = new ImageView[rows][cols];
-        for (int i = 0; i < cols; i++) {
+        for(int i = 0; i < cols; i++) {
 
-            for (int k = 0; k < rows; k++) {
+            for(int k = 0; k < rows; k++) {
 
                 switch (currentBoard.getCard(k, i).getName()) {
 
-                case "blank card":
-                    Image image = new Image("/resources/images/board/empty.png");
-                    ImageView pic = new ImageView();
-                    pic.setFitWidth(60);
-                    pic.setFitHeight(60);
-                    pic.setImage(image);
-                    makeDroppable(pic, "board");
-                    boardGrid.add(pic, i, k);
-                    imageViews[k][i] = pic;
-                    break;
-                case "gold":
-                    Image goldImage = new Image("/resources/images/board/backofCard.png");
-                    ImageView goldPic = new ImageView();
-                    goldPic.setFitWidth(60);
-                    goldPic.setFitHeight(60);
-                    goldPic.setImage(goldImage);
-                    makeDroppable(goldPic, "board");
-                    boardGrid.add(goldPic, i, k);
-                    imageViews[k][i] = goldPic;
-                    break;
-                case "stone":
-                    Image coalimage = new Image("/resources/images/board/backofCard.png");
-                    ImageView coalPic = new ImageView();
-                    coalPic.setFitWidth(60);
-                    coalPic.setFitHeight(60);
-                    coalPic.setImage(coalimage);
-                    makeDroppable(coalPic, "board");
-                    boardGrid.add(coalPic, i, k);
-                    imageViews[k][i] = coalPic;
-                    break;
-                case "start":
-                    Image startImage = new Image("/resources/images/cards/start.png");
-                    ImageView startPic = new ImageView();
-                    startPic.setFitWidth(60);
-                    startPic.setFitHeight(60);
-                    startPic.setImage(startImage);
-                    boardGrid.add(startPic, i, k);
-                    imageViews[k][i] = startPic;
-
-                    /*
-                     * For refresh view method: default: //else case "path":
-                     * String pathImageName = "/resources/images/cards/" +
-                     * currentBoard.getCard(k, i).getName() + "-rotate" +
-                     * ((PathCard) currentBoard.getCard(k, i)).getRotation() +
-                     * ".png"; Image pathImage = new Image(pathImageName);
-                     * ImageView pathPic = new ImageView();
-                     * pathPic.setFitWidth(60); pathPic.setFitHeight(60);
-                     * pathPic.setImage(pathImage); boardGrid.add(pathPic, i,
-                     * k); imageViews[k][i] = pathPic; case "action": String
-                     * actionImageName =
-                     * "/resources/images/cards/"+currentBoard.getCard(k,
-                     * i).getName() + ".png"; Image actionImage = new
-                     * Image(actionImageName); ImageView actionPic = new
-                     * ImageView(); actionPic.setFitWidth(60);
-                     * actionPic.setFitHeight(60);
-                     * actionPic.setImage(actionImage); boardGrid.add(actionPic,
-                     * i, k); imageViews[k][i] = actionPic;
-                     */
+                    case "blank card":
+                        Image image = new Image("/resources/images/board/empty.png");
+                        ImageView pic = new ImageView();
+                        pic.setFitWidth(60);
+                        pic.setFitHeight(60);
+                        pic.setImage(image);
+                        makeDroppable(pic, "board");
+                        boardGrid.add(pic, i, k);
+                        imageViews[k][i] = pic;
+                        break;
+                    case "gold":
+                        Image goldImage = new Image("/resources/images/board/backofCard.png");
+                        ImageView goldPic = new ImageView();
+                        goldPic.setFitWidth(60);
+                        goldPic.setFitHeight(60);
+                        goldPic.setImage(goldImage);
+                        makeDroppable(goldPic, "board");
+                        boardGrid.add(goldPic, i, k);
+                        imageViews[k][i] = goldPic;
+                        break;
+                    case "stone":
+                        Image coalimage = new Image("/resources/images/board/backofCard.png");
+                        ImageView coalPic = new ImageView();
+                        coalPic.setFitWidth(60);
+                        coalPic.setFitHeight(60);
+                        coalPic.setImage(coalimage);
+                        makeDroppable(coalPic, "board");
+                        boardGrid.add(coalPic, i, k);
+                        imageViews[k][i] = coalPic;
+                        break;
+                    case "start":
+                        Image startImage = new Image("/resources/images/cards/start.png");
+                        ImageView startPic = new ImageView();
+                        startPic.setFitWidth(60);
+                        startPic.setFitHeight(60);
+                        startPic.setImage(startImage);
+                        boardGrid.add(startPic, i, k);
+                        imageViews[k][i] = startPic;
+                    
+/*  
+ * For refresh view method:
+                    default: //else
+                        case "path":
+                            String pathImageName = "/resources/images/cards/" + currentBoard.getCard(k, i).getName() + "-rotate"
+                                + ((PathCard) currentBoard.getCard(k, i)).getRotation() + ".png";
+                            Image pathImage = new Image(pathImageName);
+                            ImageView pathPic = new ImageView();
+                            pathPic.setFitWidth(60);
+                            pathPic.setFitHeight(60);
+                            pathPic.setImage(pathImage);
+                            boardGrid.add(pathPic, i, k);
+                            imageViews[k][i] = pathPic;
+                        case "action":
+                            String actionImageName = "/resources/images/cards/"+currentBoard.getCard(k, i).getName() + ".png";
+                            Image actionImage = new Image(actionImageName);
+                            ImageView actionPic = new ImageView();
+                            actionPic.setFitWidth(60);
+                            actionPic.setFitHeight(60);
+                            actionPic.setImage(actionImage);
+                            boardGrid.add(actionPic, i, k);
+                            imageViews[k][i] = actionPic;
+*/
                 }
-
+                
             }
-
+            
         }
-
+        
         boardGrid.setAlignment(Pos.BOTTOM_CENTER);
         vbBoard.getChildren().add(boardGrid);
-
+        
         playerText = new Text(MainView.gameEngine.getCurrentPlayer().getName() + " Hand");
         playerText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         playerText.setFill(Color.WHITE);

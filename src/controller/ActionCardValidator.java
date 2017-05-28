@@ -367,10 +367,14 @@ public class ActionCardValidator {
 			boardExit = exit - 2;
 		}
 		else boardExit = exit + 2;
-		
+		System.out.println("played card: " + playerCard.getExits()[0] + playerCard.getExits()[1] + playerCard.getExits()[2] + playerCard.getExits()[3]);
+		System.out.println("board card: " + boardCard.getExits()[0] + boardCard.getExits()[1] + boardCard.getExits()[2] + boardCard.getExits()[3]);
+
 		boolean exitsTrue = playerCard.getExits()[exit] && boardCard.getExits()[boardExit];
+		System.out.println("checking exit " + exit + "with exit " + boardExit + " " + playerCard.getExits()[exit] + " " + boardCard.getExits()[boardExit]);
 
 		if (exitsTrue) {
+			System.out.println("returning true");
 			return true;
 		}
 		else return false;

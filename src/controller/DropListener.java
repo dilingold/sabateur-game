@@ -126,7 +126,6 @@ public class DropListener {
 					Card boardCard = Board.getInstance().getCard(row, col);
 					String imageName;
 					if(((ActionCard) card).getEffect() == "enable") {
-						System.out.println("enable card");
 						imageName = "/resources/images/cards/" + boardCard.getName() 
 								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
 						((PathCard) boardCard).setIsToxic(false);
@@ -138,7 +137,6 @@ public class DropListener {
 						System.out.println("hi..........");
 					}
 					else {
-						System.out.println("disable card");
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
 						if (((ActionCard) card).getName() == "Toxic Card")
 							((PathCard) boardCard).setIsToxic(true);

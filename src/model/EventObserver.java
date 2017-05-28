@@ -21,7 +21,6 @@ public class EventObserver extends Observable {
 
     public void setTimerStatus(Boolean status) {
         this.status = status;
-        System.out.println("OBSERVER: " + status);
         if(this.status){
             setChanged();
             notifyObservers();
