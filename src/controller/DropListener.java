@@ -8,13 +8,9 @@ import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 import model.Board;
 import model.Player;
-import model.cards.PathCard;
-import model.cards.PersonalCard;
-import model.cards.XPathCard;
+import model.cards.*;
 import view.GameView;
 import view.PlayAgainView;
-import model.cards.ActionCard;
-import model.cards.Card;
 
 //allows for one component to be dropped on another
 public class DropListener {
@@ -129,6 +125,13 @@ public class DropListener {
 						imageName = "/resources/images/cards/" + boardCard.getName() 
 								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
 						((PathCard) boardCard).setIsToxic(false);
+						System.out.println("fefdfdfd..........");
+					}
+					else if(((ActionCard) card).getEffect() == "search"){
+						imageName = "/resources/images/cards/" + boardCard.getName()
+								+ "-rotate" + ((PathCard)boardCard).getRotation() + ".png";
+						System.out.println("hi..........");
+
 					}
 					else {
 						imageName = "/resources/images/cards/" + card.getName() + ".png";
@@ -177,7 +180,7 @@ public class DropListener {
 		return true;
 
 	}
-	
+
 	// when a card is dropped on a player, if it is a personal card and a legal move,
 	// discard card, draw new card, check if sabateurs won and return true
 	public boolean drop(Stage stage, DragEvent event, Player currentPlayer, Player targetPlayer, int draggedCardIndex, Label target) {
@@ -222,11 +225,16 @@ public class DropListener {
 			}
 			
 			else if (card.getName() == "expose") {
-				
+
 				new ExposeSabateur().playCard(currentPlayer, targetPlayer);
-				
+
 			}
 
+			else if (card.getEffect() == "search") {
+
+				if()
+
+			}
 			currentPlayer.getHand().discardCard(draggedCardIndex);
 			currentPlayer.drawCard();
 			

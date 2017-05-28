@@ -145,7 +145,7 @@ public class  GameView implements Observer{
 						imageViews[k][i] = pic;
 						break;
 					case "gold":
-						Image goldImage = new Image("/resources/images/board/gold.png");
+						Image goldImage = new Image("/resources/images/board/backofCard.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
@@ -154,7 +154,7 @@ public class  GameView implements Observer{
 						imageViews[k][i] = goldPic;
 						break;
 					case "stone":
-						Image coalimage = new Image("/resources/images/board/coal.png");
+						Image coalimage = new Image("/resources/images/board/backofCard.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);

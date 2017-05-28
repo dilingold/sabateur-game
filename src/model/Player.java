@@ -20,6 +20,7 @@ public abstract class Player {
     private List<Player> heists = new ArrayList<Player>();
     private Player heistedBy = null;
     private Player exposedBy = null;
+    private Boolean hasSearchTreasureTool = false;
     
     public Player(String PlayerName, int UID) {
 
@@ -218,6 +219,23 @@ public abstract class Player {
     	
     	return heistedBy;
     	
+    }
+
+    public void giveSearchTreasureTool() {
+
+        hasSearchTreasureTool = true;
+
+    }
+
+    public void removePowerSearchTreasureTool() {
+
+        hasSearchTreasureTool = false;
+
+    }
+
+    public Boolean hasSearchTreasureTool(){
+
+        return hasSearchTreasureTool;
     }
     
 }
