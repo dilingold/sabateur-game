@@ -39,6 +39,21 @@ public class GameStateOriginator {
         numberOfRegressions++;
 
     }
+    //load specific state:
+    //takes a turn, player and number of regressions, loads
+    //state that matches these conditions.
+    public static void loadState(int turn, int player, int regressions){
+        String stateID = Integer.toString(turn) + ";" + Integer.toString(player) + ";"
+                + Integer.toString(regressions);
+        GameStateMemento.setTurn(turn);
+        GameStateMemento.setDeckMemento(GameStateCaretaker.getDeckState(stateID));
+        GameStateMemento.setPlayersMemento(GameStateCaretaker.getPlayerState(stateID));
+        GameStateMemento.setHandMemento(GameStateCaretaker.getHandListState(stateID));
+        GameStateMemento.setBoardMemento(GameStateCaretaker.getBoardState(stateID));
+        GameStateMemento.refreshView();
+        numberOfRegressions++;
+    }
+    
 
     // generates relevant ID based off current turn, which player's going, and
     // how many times undo turn has been used.

@@ -39,7 +39,10 @@
 .button:hover {
     -fx-background-color: linear-gradient(WHITE, GRAY);
 }
-
+.menu .label
+{
+    -fx-text-fill: black;
+}
 #title-test {
 	-fx-font-family: "TCCEB";
 	-fx-font-size: 30px;
