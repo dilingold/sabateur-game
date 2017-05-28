@@ -267,6 +267,18 @@ public class ActionCardValidator {
     private Boolean validateAction(ActionCard card, int row, int column) {
 
         Boolean validated = false;
+
+		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "gold")
+		{
+			System.out.println("ITS A GOLD");
+			return true;
+		}
+
+		if (card.getName() == "Treasure Card" && Board.getInstance().getCard( row, column).getName() == "stone")
+		{
+			System.out.println("ITS A COAL!");
+			return true;
+		}
         
         if (Board.getInstance().getCard(row, column).getType() != "path") {
             

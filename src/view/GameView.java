@@ -148,20 +148,22 @@ public class  GameView implements Observer{
 						imageViews[k][i] = pic;
 						break;
 					case "gold":
-						Image goldImage = new Image("/resources/images/board/gold.png");
+						Image goldImage = new Image("/resources/images/board/backofCard.png");
 						ImageView goldPic = new ImageView();
 						goldPic.setFitWidth(60);
 						goldPic.setFitHeight(60);
 						goldPic.setImage(goldImage);
+						makeDroppable(goldPic, "board");
 						boardGrid.add(goldPic, i, k);
 						imageViews[k][i] = goldPic;
 						break;
 					case "stone":
-						Image coalimage = new Image("/resources/images/board/coal.png");
+						Image coalimage = new Image("/resources/images/board/backofCard.png");
 						ImageView coalPic = new ImageView();
 						coalPic.setFitWidth(60);
 						coalPic.setFitHeight(60);
 						coalPic.setImage(coalimage);
+						makeDroppable(coalPic, "board");
 						boardGrid.add(coalPic, i, k);
 						imageViews[k][i] = coalPic;
 						break;
