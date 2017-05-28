@@ -580,7 +580,7 @@ public class  GameView implements Observer{
         vbCards.getChildren().remove(hbCards);
         displayHand();
         PlayGameListener.updateTime();
-        valueProperty = currentPlayer.getName();
+        valueProperty = "Last game state: "+GameStateOriginator.getLastStateID();
         gameStateLabel.textProperty().setValue(valueProperty);
 
     }
