@@ -8,14 +8,14 @@ public class GameStateOriginator {
     static int turn = 0;
     static int currentPlayerIndex = 0;
     private static int numberOfRegressions = 0;
-    static Stack<Integer> priorStates = new Stack<Integer>();
+    static Stack<String> priorStates = new Stack<String>();
     
     
  
     
     public static void saveState() {
         currentPlayerIndex = GameEngine.getCurrentPlayerIndex();
-        int stateID = generateStateID();
+        String stateID = generateStateID();
         priorStates.push(stateID);
         GameStateCaretaker.saveBoardState(stateID, GameStateMemento.getBoardState());
         GameStateCaretaker.savePlayerState(stateID, GameStateMemento.getPlayerState());
@@ -43,7 +43,7 @@ public class GameStateOriginator {
         int oldTurn = (GameEngine.getTurn() - turnsReverted);
         System.out.println("Rewinding turn: going to turn " + oldTurn);
         GameStateMemento.setTurn(oldTurn);
-        int oldStateID = generateStateID(turnsReverted);
+        String oldStateID = generateStateID(turnsReverted);
         GameStateMemento.setDeck(GameStateCaretaker.getDeckState(oldStateID));
         GameStateMemento.setPlayers(GameStateCaretaker.getPlayerState(oldStateID));
         GameStateMemento.setHand(GameStateCaretaker.getHandListState(oldStateID));
@@ -65,25 +65,25 @@ public class GameStateOriginator {
         }*/
     }
 
-    private static int generateStateID() {
+    private static String generateStateID() {
        // System.out.println(
        //        "turn: " + GameEngine.getTurn() + " Player: " + currentPlayerIndex + " numReg: " + numberOfRegressions);
-        String stateID = Integer.toString(GameEngine.getTurn()) + Integer.toString(currentPlayerIndex)
-                + Integer.toString(numberOfRegressions);
+        String stateID = Integer.toString(GameEngine.getTurn()) +";"+ Integer.toString(currentPlayerIndex)
+                +";"+ Integer.toString(numberOfRegressions);
         System.out.println("State generated: " + stateID);
-        return Integer.parseInt(stateID);
+        return stateID;
     }
 
-    private static int generateStateID(int turnsReverted) {
+    private static String generateStateID(int turnsReverted) {
         // String stateID =
         // Integer.toString(turn-turnsReverted)+Integer.toString(currentPlayerIndex)+Integer.toString(numberOfRegressions);
         int numberPlayers = GameEngine.getPlayerSize();
         for (int i = 0; i < ((turnsReverted * numberPlayers) - 1); i++) {
-            int statediscarded = priorStates.pop();
+            String statediscarded = priorStates.pop();
             System.out.println("State discarded: " + statediscarded);
         }
-        String stateID = Integer.toString(priorStates.pop());
+        String stateID = priorStates.pop();
         System.out.println("State to load generated: " + stateID);
-        return Integer.parseInt(stateID);
+        return stateID;
     }
 }

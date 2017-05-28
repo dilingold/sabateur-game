@@ -1,10 +1,12 @@
 package view;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
 
 import controller.DragCardListener;
 import controller.DropListener;
@@ -31,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Board;
 import model.EventObserver;
@@ -243,10 +246,53 @@ public class  GameView implements Observer{
 		});
 		//when undo turn button pressed
 		undoTurnBtn.setOnAction(event ->  {
-            if(GameEngine.getTurn() > 1){
-                GameEngine.getGameStates().loadState(1);
-                undoTurnBtn.setDisable(true);
-            }
+		            
+        		    final Stage dialog = new Stage();
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    dialog.initOwner(stage);
+                    VBox dialogVbox = new VBox(20);
+                    
+                    dialogVbox.getChildren().add(new Text("Choose how many turns to revert by"));
+
+                    Button buttonTypeOne = new Button("One");
+                    Button buttonTypeTwo = new Button("Two");
+                    Button buttonTypeThree = new Button("Three");
+                    Button buttonTypeCancel = new Button("Cancel");
+                    buttonTypeCancel.setOnAction(e -> dialog.close());
+                    buttonTypeOne.setOnAction(e ->{
+                        if(GameEngine.getTurn() > 1){
+                            revertTurn(1);
+                            dialog.close();
+                        }
+                    });
+                    buttonTypeTwo.setOnAction(e ->{
+                        if(GameEngine.getTurn() > 2){
+                            revertTurn(2);
+                            dialog.close();
+                        }
+                    });
+                    buttonTypeThree.setOnAction(e ->{
+                        if(GameEngine.getTurn() > 3){
+                            revertTurn(3);
+                            dialog.close();
+                        }
+                    });
+                    
+                    dialogVbox.getChildren().addAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeCancel);
+     
+                    
+                    
+
+                    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                    dialog.setScene(dialogScene);
+                    dialog.show();
+		            //int turnsToRevert = Integer.parseInt(selectedValue.toString());
+		            /*if(GameEngine.getTurn() > turnsToRevert){
+		                GameEngine.getGameStates().loadState(turnsToRevert);
+		                undoTurnBtn.setDisable(true);
+		            }*/
+		  
+
         });
 		
 		displayHand();
@@ -558,6 +604,13 @@ public class  GameView implements Observer{
 	public void refreshHand(){
 	    vbCards.getChildren().remove(hbCards);
 	    displayHand();
+	}
+	
+	private void revertTurn(int turns){
+        //int turnsToRevert = Integer.parseInt(selectedValue.toString());
+        if(GameEngine.getTurn() > turns){
+            GameEngine.getGameStates().loadState(turns);
+        }
 	}
 	
 

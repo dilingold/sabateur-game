@@ -11,37 +11,37 @@ import model.cards.Card;
 
 public class GameStateCaretaker {
 
-    static Map<Integer, Stack<Card>> deckStates = new HashMap<Integer, Stack<Card>>();
-    static Map<Integer, Board> boardStates = new HashMap<Integer, Board>();
-    static Map<Integer, ArrayList<Player>> playerStates = new HashMap<Integer, ArrayList<Player>>();
-    static Map<Integer, ArrayList<ArrayList<Card>>> handStates = new HashMap<Integer, ArrayList<ArrayList<Card>>>();
+    static Map<String, Stack<Card>> deckStates = new HashMap<String, Stack<Card>>();
+    static Map<String, Board> boardStates = new HashMap<String, Board>();
+    static Map<String, ArrayList<Player>> playerStates = new HashMap<String, ArrayList<Player>>();
+    static Map<String, ArrayList<ArrayList<Card>>> handStates = new HashMap<String, ArrayList<ArrayList<Card>>>();
 
 
 
     public GameStateCaretaker() {
     }
-    public static void saveDeckState(int stateID, Stack<Card> deckState){
+    public static void saveDeckState(String stateID, Stack<Card> deckState){
         deckStates.put(stateID, deckState);
     }
-    public static Stack<Card> getDeckState(int oldStateID){
+    public static Stack<Card> getDeckState(String oldStateID){
         return deckStates.get(oldStateID);
     }
-    public static void savePlayerState(int stateID, ArrayList<Player> playerState){
+    public static void savePlayerState(String stateID, ArrayList<Player> playerState){
         playerStates.put(stateID, playerState);
     }
-    public static ArrayList<Player> getPlayerState(int oldStateID){
+    public static ArrayList<Player> getPlayerState(String oldStateID){
         return playerStates.get(oldStateID);
     }
-    public static void saveBoardState(int stateID, Board boardState){
+    public static void saveBoardState(String stateID, Board boardState){
         boardStates.put(stateID, boardState);
     }
-    public static Board getBoardState(int oldStateID){
+    public static Board getBoardState(String oldStateID){
         return boardStates.get(oldStateID);
     }
-    public static void saveHandListState(int stateID, ArrayList<ArrayList<Card>> handState){
+    public static void saveHandListState(String stateID, ArrayList<ArrayList<Card>> handState){
         handStates.put(stateID, handState);
     }
-    public static ArrayList<ArrayList<Card>> getHandListState(int oldStateID){
+    public static ArrayList<ArrayList<Card>> getHandListState(String oldStateID){
         return handStates.get(oldStateID);
     }
     
